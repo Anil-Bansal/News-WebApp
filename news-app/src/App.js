@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 //import  {getNews}  from './news';
-import Head from './head'
-import Post from './Post';
-import ClipLoader from 'react-spinners/ClipLoader';
+import Display from './Display';
+import Head from './head';
 
 class App extends Component{
 
@@ -22,15 +21,28 @@ class App extends Component{
     this.fetchnews();
   }
 
+  componentWillMount(){
+    window.addEventListener('scroll', function() {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        console.log("you're at the bottom of the page");
+         //show loading spinner and make fetch request to api
+        this.setState({page: this.state.page+1});
+        this.setState({is_loading: true});
+        this.fetchnews(); 
+      }
+   });
+  }
+
   fetchnews(){
     const url=`https://newsapi.org/v2/top-headlines?country=${this.state.country}&apiKey=ad23c45e8dbf4c418fc72871384d9ec5`;
     fetch(url)
-    .then(response =>  response.json())
+    .then(response=> response.json())
     .then(result=> result.articles)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
       this.setState({page: this.state.page+1});
       this.setState({is_loading: false});
+      //console.log(articles.length);
     })
     .catch(error=>{
       console.log(error);
@@ -39,16 +51,10 @@ class App extends Component{
   }
 
   render(){
-    const loading=this.state.is_loading;
-    let posts=this.state.articles.map(post=>{
-      return <Post title={post.title} imageurl={post.urlToImage} description={post.description}/>
-    });
-
     return (
       <div>
-        <Head/>
-        {loading ? <ClipLoader /> : {posts}}
-
+        <Head />
+        <Display loading={this.state.is_loading} array={this.state.articles} /> 
       </div>
     );
   }

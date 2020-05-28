@@ -6,9 +6,10 @@ function Head(){
     return (
         <div>
             <div className='Head'>
-                <h1 > Simple News ki App</h1>
+                <h1 > Simple News App</h1>
             </div>
             <div className='Select'>
+              <ButtonCountry country="World"/>
               <ButtonCountry country="Australia" code="AU"/>
               <ButtonCountry country="Belgium" code="BE"/>
               <ButtonCountry country="China" code="CN"/>
@@ -21,7 +22,7 @@ function Head(){
               <ButtonCountry country="Mexico" code="MX"/>
               <ButtonCountry country="Monaco" code="MC"/>
               <ButtonCountry country="Pakistan" code="PK"/>
-              <ButtonCountry country="Russian" code="RU"/>
+              <ButtonCountry country="Russia" code="RU"/>
               <ButtonCountry country="Sweden" code="SE"/>
               <ButtonCountry country="Switzerland" code="CH"/>
               <ButtonCountry country="UK" code="GB"/>

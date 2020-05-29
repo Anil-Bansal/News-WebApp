@@ -24,8 +24,12 @@ class App extends Component{
   changeCountry = (code)=>
   {
     this.setState({
-      country: code
+      is_loading:true,
+      country: code,
+      articles: [],
+      page: 1
     });
+    this.fetchnews(code);
   }
 
   componentWillMount(){
@@ -40,8 +44,9 @@ class App extends Component{
    });
   }
 
-  fetchnews(){
-    getNews(this.state.country)
+  fetchnews(country=this.state.country){
+    console.log(country)
+    getNews(country)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
       this.setState({page: this.state.page+1});

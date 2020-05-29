@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 
-const post=(props)=>(
+const Post=(props)=>(
     <Card style={{ width: '20rem' ,display: 'flex'}}>
         <Card.Img variant="top" src={props.imageurl} />
         <Card.Body>
@@ -11,4 +11,4 @@ const post=(props)=>(
     </Card>
 );
 
-export default post;
+export default Post;

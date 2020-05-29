@@ -1,8 +1,11 @@
 import React from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
+// eslint-disable-next-line
 import Post from './Post';
-// import Card from 'react-bootstrap/Card';
-
+// eslint-disable-next-line
+import Card from 'react-bootstrap/Card';
+// eslint-disable-next-line
+import CardColumns from 'react-bootstrap/CardColumns';
 
 const Display=(props)=>{
     const array=props.array;
@@ -10,21 +13,16 @@ const Display=(props)=>{
         return <ClipLoader />;
     else{
     return(     
-            array.map(post=>{ 
-                    return <Post title={post.title} imageurl={post.urlToImage} description={post.description} />
-                })
-        )
-        // <Card.Group> 
-        // {array.map((card) => (
-        //     <Card
-        //     // key={card.id} // Make sure you use a unique key identifier for React
-        //     image={card.urlToImage} 
-        //     title={card.title}
-        //     description={card.description}
-        //     />
-        // ))}
-        // </Card.Group>
+        //     array.map(post=>{ 
+        //             return <Post title={post.title} imageurl={post.urlToImage} description={post.description} />
+        //         })
         // )
+        <CardColumns align="center"> 
+        {array.map((post) => (
+            <Post title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} />
+        ))}
+        </CardColumns>
+        )
     }
 }
 

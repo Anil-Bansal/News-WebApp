@@ -11,7 +11,7 @@ class App extends Component{
     this.state={
         is_loading: true,
         page: 1,
-        country: 'us',
+        country: 'in',
         articles:[]    
     };
     this.fetchnews=this.fetchnews.bind(this);

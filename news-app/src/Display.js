@@ -13,10 +13,6 @@ const Display=(props)=>{
         return <ClipLoader />;
     else{
     return(     
-        //     array.map(post=>{ 
-        //             return <Post title={post.title} imageurl={post.urlToImage} description={post.description} />
-        //         })
-        // )
         <CardColumns align="center"> 
         {array.map((post) => (
             <Post title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} />

@@ -3,6 +3,7 @@ import './App.css';
 import  {getNews}  from './news';
 import Display from './Display';
 import Head from './head';
+import {getNews2} from './news2';
 
 class App extends Component{
 
@@ -31,6 +32,16 @@ class App extends Component{
     });
     this.fetchnews(code);
   }
+  searchNews = (search)=>
+  {
+    this.setState({
+      is_loading:true,
+      country: "",
+      articles: [],
+      page: 1
+    });
+    this.fetchnews2(search);
+  }
 
   componentWillMount(){
     window.addEventListener('scroll', function() {
@@ -45,8 +56,20 @@ class App extends Component{
   }
 
   fetchnews(country=this.state.country){
-    console.log(country)
     getNews(country)
+    .then(articles=> {
+      this.setState({articles: [...this.state.articles,...articles]});
+      this.setState({page: this.state.page+1});
+      this.setState({is_loading: false});
+    })
+    .catch(error=>{
+      console.log(error);
+      this.setState({is_loading: false});
+    })
+  }
+
+  fetchnews2(search){
+    getNews2(search)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
       this.setState({page: this.state.page+1});
@@ -61,7 +84,7 @@ class App extends Component{
   render(){
     return (
       <div>
-        <Head currentCode={this.state.country} onChange={this.changeCountry} />
+        <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
         <Display loading={this.state.is_loading} array={this.state.articles} /> 
       </div>
     );

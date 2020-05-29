@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 
 const post=(props)=>(
-    <Card>
+    <Card style={{ width: '20rem' ,display: 'flex'}}>
         <Card.Img variant="top" src={props.imageurl} />
         <Card.Body>
             <Card.Title>{props.title}</Card.Title>

@@ -21,6 +21,13 @@ class App extends Component{
     this.fetchnews();
   }
 
+  changeCountry = (code)=>
+  {
+    this.setState({
+      country: code
+    });
+  }
+
   componentWillMount(){
     window.addEventListener('scroll', function() {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -53,7 +60,7 @@ class App extends Component{
   render(){
     return (
       <div>
-        <Head />
+        <Head currentCode={this.state.country} onChange={this.changeCountry} />
         <Display loading={this.state.is_loading} array={this.state.articles} /> 
       </div>
     );

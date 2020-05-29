@@ -4,7 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ButtonCountry(props){
     return (
-        <Button variant="light">
+        
+        <Button variant= {(props.currentCode === props.code) ? "dark" : "light"} onClick={()=>props.onChange(props.code)}>
+            {/* {console.log(props.currentCode, props.code)} */}
             {props.country}
         </ Button>
     )

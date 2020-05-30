@@ -4,6 +4,7 @@ import  {getNews}  from './news';
 import Display from './Display';
 import Head from './head';
 import {getNews2} from './news2';
+import debounce from 'lodash.debounce';
 
 class App extends Component{
 
@@ -16,10 +17,35 @@ class App extends Component{
         articles:[]    
     };
     this.fetchnews=this.fetchnews.bind(this);
+    this.update=this.update.bind(this);
+
+    window.onscroll = debounce(() => {
+      const {
+        update,
+        state: {
+          page,
+          is_loading,
+          country,
+        },
+      } = this;
+
+      // Checks that the page has scrolled to the bottom
+      if (window.innerHeight + document.documentElement.scrollTop=== document.documentElement.offsetHeight) {
+        update();
+      }
+    }, 100);
+
   }
 
   componentDidMount(){
-    this.fetchnews();
+      this.fetchnews();
+  }
+
+
+  update(){
+    this.setState({page: this.state.page+1});
+    this.setState({is_loading: true});
+    this.fetchnews(); 
   }
 
   changeCountry = (code)=>
@@ -43,20 +69,8 @@ class App extends Component{
     this.fetchnews2(search);
   }
 
-  componentWillMount(){
-    window.addEventListener('scroll', function() {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        console.log("you're at the bottom of the page");
-         //show loading spinner and make fetch request to api
-        this.setState({page: this.state.page+1});
-        this.setState({is_loading: true});
-        this.fetchnews(); 
-      }
-   });
-  }
-
   fetchnews(country=this.state.country){
-    getNews(country)
+    getNews(country,this.state.page)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
       this.setState({page: this.state.page+1});

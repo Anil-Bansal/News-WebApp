@@ -6,7 +6,6 @@ import Head from './head';
 import {getNews2} from './news2';
 //import debounce from 'lodash.debounce';
 import BottomScrollListener from 'react-bottom-scroll-listener';
-import BottomLoader  from './Loader';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 
@@ -48,14 +47,13 @@ class App extends Component{
       is_loading:true,
       country: "",
       articles: [],
-      page: 1
+      page: 1,
+      news_end: false
     });
-    this.fetchnews2(search);
+    this.fetchNewsSearch(search,this.state.page);
   }
 
   fetchnews(country=this.state.country,page=this.state.page+1){
-    //if(this.state.news_end)
-      //return;
     getNews(country,page)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
@@ -76,11 +74,14 @@ class App extends Component{
     });
   }
 
-  fetchnews2(search){
-    getNews2(search)
+  fetchNewsSearch(search,page){
+    getNews2(search,page)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
       this.setState({is_loading: false});
+      this.setState({page: this.state.page+1});
+      this.setState({news_end: true});
+
     })
     .catch(error=>{
       console.log(error);
@@ -97,10 +98,17 @@ class App extends Component{
   render(){
     return (
       <div>
-        <BottomScrollListener debounce={100} onBottom={this.fetchnews}>
+        <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
           <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
           <Display loading={this.state.is_loading} array={this.state.articles} /> 
-        </BottomScrollListener>
+        <div align='center'>
+        <ClipLoader 
+          color={"#123abc"}
+          size={50}
+          loading={!this.state.news_end}
+        />
+        </div>
+
 
       </div>
     );

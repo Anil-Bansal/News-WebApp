@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 
 class Head extends React.Component{
     handleSubmit = event => {
-        // event.preventDefault();
+        event.preventDefault();
         this.props.search(this.input.value)
       };
 

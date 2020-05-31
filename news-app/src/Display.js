@@ -1,17 +1,16 @@
 import React from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
+// import ClipLoader from 'react-spinners/ClipLoader';
 // eslint-disable-next-line
 import Post from './Post';
 // eslint-disable-next-line
 import Card from 'react-bootstrap/Card';
 // eslint-disable-next-line
 import CardColumns from 'react-bootstrap/CardColumns';
-import  BottomLoader from './Loader';
 
 const Display=(props)=>{
     const array=props.array;
     if(props.loading)
-        return <ClipLoader />;
+        return <div></div>;
     else{
     return(     
         <CardColumns align="center"> 

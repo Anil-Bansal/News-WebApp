@@ -1,6 +1,6 @@
 import React from 'react'
 import './head.css'
-import ButtonCountry from "./ButtonCountry"
+import ButtonCountry from "../Buttons/ButtonCountry"
 // import MaterialUIForm from 'react-material-ui-form'
 import Button from 'react-bootstrap/Button'
 

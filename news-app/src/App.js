@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import  {getNews}  from './news';
-import Display from './Display';
-import Head from './head';
-import {getNews2} from './news2';
+import  {getNews}  from './components/NewsFetch/news';
+import Display from './components/MainBody/Display';
+import Head from './components/Header/head';
+import {getNews2} from './components/NewsFetch/news2';
 //import debounce from 'lodash.debounce';
 import BottomScrollListener from 'react-bottom-scroll-listener';
 import ClipLoader from 'react-spinners/ClipLoader';

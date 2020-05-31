@@ -1,7 +1,7 @@
 import React from 'react';
 // import ClipLoader from 'react-spinners/ClipLoader';
 // eslint-disable-next-line
-import Post from './Post';
+import Post from '../Card/Post';
 // eslint-disable-next-line
 import Card from 'react-bootstrap/Card';
 // eslint-disable-next-line

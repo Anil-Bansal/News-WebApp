@@ -14,8 +14,8 @@ const Display=(props)=>{
     else{
     return(     
         <CardColumns align="center"> 
-        {array.map((post) => (
-            <Post title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} />
+        {array.map((post,idx) => (
+            <Post key={idx}  title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} />
         ))}
         </CardColumns>
         )

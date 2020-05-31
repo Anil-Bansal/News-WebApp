@@ -4,8 +4,11 @@ import  {getNews}  from './news';
 import Display from './Display';
 import Head from './head';
 import {getNews2} from './news2';
-// import debounce from 'lodash.debounce';
+//import debounce from 'lodash.debounce';
 import BottomScrollListener from 'react-bottom-scroll-listener';
+import BottomLoader  from './Loader';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 class App extends Component{
 
@@ -15,11 +18,11 @@ class App extends Component{
         is_loading: true,
         page: 0,
         country: 'in',
-        articles:[]    
+        articles:[],
+        news_end: false    
     };
     this.fetchnews=this.fetchnews.bind(this);
     // this.update=this.update.bind(this);
-
   }
 
   componentDidMount(){
@@ -28,11 +31,14 @@ class App extends Component{
 
   changeCountry = (code)=>
   {
-    this.setState({
-      is_loading:true,
-      country: code,
-      articles: [],
-      page: 1
+    this.setState((prevstate,props)=>{
+      return{
+        is_loading:true,
+        country: code,
+        articles: [],
+        page: 1,
+        news_end: false,
+      }
     });
     this.fetchnews(code,1);
   }
@@ -48,43 +54,54 @@ class App extends Component{
   }
 
   fetchnews(country=this.state.country,page=this.state.page+1){
+    //if(this.state.news_end)
+      //return;
     getNews(country,page)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
-      this.setState({page: this.state.page+1});
       this.setState({is_loading: false});
+      if(articles.length<10){
+        this.setState({news_end : true})
+      }
     })
     .catch(error=>{
       console.log(error);
       this.setState({is_loading: false});
     })
+
+    this.setState((prevstate,props)=>{
+      return {
+        page: prevstate.page+1
+      }
+    });
   }
 
   fetchnews2(search){
     getNews2(search)
     .then(articles=> {
       this.setState({articles: [...this.state.articles,...articles]});
-      this.setState({page: this.state.page+1});
       this.setState({is_loading: false});
     })
     .catch(error=>{
       console.log(error);
       this.setState({is_loading: false});
     })
-  }
 
-  funct = () =>
-   {
-     console.log("Hello")
+    this.setState((prevstate,props)=>{
+      return {
+        page: prevstate.page+1
+      }
+    });
   }
 
   render(){
     return (
       <div>
-        <BottomScrollListener debounce={700} onBottom={this.fetchnews}>
+        <BottomScrollListener debounce={100} onBottom={this.fetchnews}>
           <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
           <Display loading={this.state.is_loading} array={this.state.articles} /> 
         </BottomScrollListener>
+
       </div>
     );
   }

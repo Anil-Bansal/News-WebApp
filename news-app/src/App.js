@@ -50,7 +50,6 @@ class App extends Component{
   fetchnews(country=this.state.country,page=this.state.page+1){
     getNews(country,page)
     .then(articles=> {
-      console.log("hello")
       this.setState({articles: [...this.state.articles,...articles]});
       this.setState({page: this.state.page+1});
       this.setState({is_loading: false});
@@ -82,10 +81,10 @@ class App extends Component{
   render(){
     return (
       <div>
-        {console.log(this.state.page)}
-        <BottomScrollListener onBottom={this.fetchnews}/>
-        <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
-        <Display loading={this.state.is_loading} array={this.state.articles} /> 
+        <BottomScrollListener debounce={500} onBottom={this.fetchnews}>
+          <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
+          <Display loading={this.state.is_loading} array={this.state.articles} /> 
+        </BottomScrollListener>
       </div>
     );
   }

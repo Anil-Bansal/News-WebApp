@@ -14,7 +14,22 @@ class Head extends React.Component{
         return (
             <div>
                 <div className='Head'>
-                    <h1 > Simple News App</h1>
+                    <div className='column'>
+                        <h1 align="center"> Simple News App</h1>
+                    </div>
+                    <div className='Search' align = "center">
+                        <form onSubmit={this.handleSubmit}>
+                        <label htmlFor="search">Search News :  </label>
+                        <input
+                            type="text"
+                            name="search"
+                            ref={(input) => this.input = input}
+                        />
+                        <input 
+                            type='submit'
+                        />
+                        </form>
+                    </div>
                 </div>
                 <div className='Select'>
                 <ButtonCountry currentCode={this.props.currentCode} onChange={this.props.onChange} country="Australia" code="au"/>
@@ -36,16 +51,7 @@ class Head extends React.Component{
                 <ButtonCountry currentCode={this.props.currentCode} onChange={this.props.onChange} country="UK" code="gb"/>
                 <ButtonCountry currentCode={this.props.currentCode} onChange={this.props.onChange} country="USA" code="us"/>
                 </div>
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="search">Search News:</label>
-                    <input
-                        type="text"
-                        name="search"
-                        ref={(input) => this.input = input}
-                    />
-                    </form>
-                </div>
+                
             </div>
         )
     }

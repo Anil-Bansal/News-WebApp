@@ -4,7 +4,8 @@ import  {getNews}  from './news';
 import Display from './Display';
 import Head from './head';
 import {getNews2} from './news2';
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
+import BottomScrollListener from 'react-bottom-scroll-listener';
 
 class App extends Component{
 
@@ -12,40 +13,17 @@ class App extends Component{
     super(props);
     this.state={
         is_loading: true,
-        page: 1,
+        page: 0,
         country: 'in',
         articles:[]    
     };
     this.fetchnews=this.fetchnews.bind(this);
-    this.update=this.update.bind(this);
-
-    window.onscroll = debounce(() => {
-      const {
-        update,
-        state: {
-          page,
-          is_loading,
-          country,
-        },
-      } = this;
-
-      // Checks that the page has scrolled to the bottom
-      if (window.innerHeight + document.documentElement.scrollTop=== document.documentElement.offsetHeight) {
-        update();
-      }
-    }, 100);
+    // this.update=this.update.bind(this);
 
   }
 
   componentDidMount(){
       this.fetchnews();
-  }
-
-
-  update(){
-    this.setState({page: this.state.page+1});
-    this.setState({is_loading: true});
-    this.fetchnews(); 
   }
 
   changeCountry = (code)=>
@@ -56,7 +34,7 @@ class App extends Component{
       articles: [],
       page: 1
     });
-    this.fetchnews(code);
+    this.fetchnews(code,1);
   }
   searchNews = (search)=>
   {
@@ -69,9 +47,10 @@ class App extends Component{
     this.fetchnews2(search);
   }
 
-  fetchnews(country=this.state.country){
-    getNews(country,this.state.page)
+  fetchnews(country=this.state.country,page=this.state.page+1){
+    getNews(country,page)
     .then(articles=> {
+      console.log("hello")
       this.setState({articles: [...this.state.articles,...articles]});
       this.setState({page: this.state.page+1});
       this.setState({is_loading: false});
@@ -95,9 +74,16 @@ class App extends Component{
     })
   }
 
+  funct = () =>
+   {
+     console.log("Hello")
+  }
+
   render(){
     return (
       <div>
+        {console.log(this.state.page)}
+        <BottomScrollListener onBottom={this.fetchnews}/>
         <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
         <Display loading={this.state.is_loading} array={this.state.articles} /> 
       </div>

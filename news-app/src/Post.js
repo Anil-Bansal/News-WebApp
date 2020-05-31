@@ -1,18 +1,5 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-// import "./Post.css"
-// const styles = {
-//     myStyle: {
-//             '& a': {
-//                 border: 'dark',
-//                 width:'20rem'
-//             },
-//             '& a:hover': {
-//             border: 'danger',
-//             width: '20rem'
-//         },
-//     }
-// };
 
 const Post=(props)=>(
     <div>

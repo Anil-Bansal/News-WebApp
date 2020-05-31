@@ -6,6 +6,7 @@ import Post from './Post';
 import Card from 'react-bootstrap/Card';
 // eslint-disable-next-line
 import CardColumns from 'react-bootstrap/CardColumns';
+import  BottomLoader from './Loader';
 
 const Display=(props)=>{
     const array=props.array;

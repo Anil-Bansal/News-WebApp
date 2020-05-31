@@ -6,6 +6,9 @@ import Head from './head';
 import {getNews2} from './news2';
 //import debounce from 'lodash.debounce';
 import BottomScrollListener from 'react-bottom-scroll-listener';
+import BottomLoader  from './Loader';
+import ClipLoader from 'react-spinners/ClipLoader';
+
 
 class App extends Component{
 
@@ -97,6 +100,7 @@ class App extends Component{
         <BottomScrollListener debounce={3000} onBottom={this.fetchnews} />
         <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
         <Display loading={this.state.is_loading} array={this.state.articles} /> 
+        <ClipLoader />
       </div>
     );
   }

@@ -1,12 +1,15 @@
 import React from 'react'
 import './head.css'
 import ButtonCountry from "./ButtonCountry"
+// import MaterialUIForm from 'react-material-ui-form'
+import Button from 'react-bootstrap/Button'
+
 
 
 
 class Head extends React.Component{
     handleSubmit = event => {
-        event.preventDefault();
+        // event.preventDefault();
         this.props.search(this.input.value)
       };
 
@@ -19,15 +22,17 @@ class Head extends React.Component{
                     </div>
                     <div className='Search' align = "center">
                         <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="search">Search News :  </label>
+                        <label htmlFor="search">Search for News :  </label>
                         <input
                             type="text"
                             name="search"
                             ref={(input) => this.input = input}
                         />
-                        <input 
+                        <Button variant='outline-light'
                             type='submit'
-                        />
+                        >
+                            Submit 
+                        </Button>
                         </form>
                     </div>
                 </div>

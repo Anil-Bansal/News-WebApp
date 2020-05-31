@@ -81,7 +81,7 @@ class App extends Component{
   render(){
     return (
       <div>
-        <BottomScrollListener debounce={500} onBottom={this.fetchnews}>
+        <BottomScrollListener debounce={700} onBottom={this.fetchnews}>
           <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
           <Display loading={this.state.is_loading} array={this.state.articles} /> 
         </BottomScrollListener>

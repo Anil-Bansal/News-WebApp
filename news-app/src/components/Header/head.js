@@ -10,7 +10,8 @@ import Button from 'react-bootstrap/Button'
 class Head extends React.Component{
     handleSubmit = event => {
         event.preventDefault();
-        this.props.search(this.input.value)
+        this.props.search(this.input.value);
+        event.target.reset();
       };
 
     render(){
@@ -21,7 +22,7 @@ class Head extends React.Component{
                         <h1 align="center"> Simple News App</h1>
                     </div>
                     <div className='Search' align = "center">
-                        <form onSubmit={this.handleSubmit}>
+                        <form id="Search-form" onSubmit={this.handleSubmit}>
                         <label htmlFor="search">Search for News :  </label>
                         <input
                             type="text"

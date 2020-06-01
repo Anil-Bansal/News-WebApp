@@ -6,7 +6,8 @@ import Head from './components/Header/head';
 import {getNews2} from './components/NewsFetch/news2';
 //import debounce from 'lodash.debounce';
 import BottomScrollListener from 'react-bottom-scroll-listener';
-import ClipLoader from 'react-spinners/ClipLoader';
+import Loader from './components/Loader/Loader'
+import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 
 
 class App extends Component{
@@ -18,7 +19,8 @@ class App extends Component{
         page: 0,
         country: 'in',
         articles:[],
-        news_end: false    
+        news_end: false,
+        error_exist: false,    
     };
     this.fetchnews=this.fetchnews.bind(this);
     // this.update=this.update.bind(this);
@@ -37,6 +39,7 @@ class App extends Component{
         articles: [],
         page: 1,
         news_end: false,
+        error_exist: false,
       }
     });
     this.fetchnews(code,1);
@@ -48,7 +51,8 @@ class App extends Component{
       country: "",
       articles: [],
       page: 1,
-      news_end: false
+      news_end: false,
+      error_exist: false,
     });
     this.fetchNewsSearch(search,this.state.page);
   }
@@ -65,6 +69,7 @@ class App extends Component{
     .catch(error=>{
       console.log(error);
       this.setState({is_loading: false});
+      this.setState({error_exist: true});
     })
 
     this.setState((prevstate,props)=>{
@@ -86,6 +91,7 @@ class App extends Component{
     .catch(error=>{
       console.log(error);
       this.setState({is_loading: false});
+      this.setState({error_exist: true});
     })
 
     this.setState((prevstate,props)=>{
@@ -95,21 +101,25 @@ class App extends Component{
     });
   }
 
+  SelectiveDisplay(){
+    if(this.state.error_exist)
+      return <ErrorHandler />
+    else{
+      return(
+        <div>
+          <Display loading={this.state.is_loading} array={this.state.articles} /> 
+          <Loader news_end={this.state.news_end}/>
+        </div>
+      );
+    }
+  }
+
   render(){
     return (
       <div>
         <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
-          <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
-          <Display loading={this.state.is_loading} array={this.state.articles} /> 
-        <div align='center'>
-        <ClipLoader 
-          color={"#123abc"}
-          size={50}
-          loading={!this.state.news_end}
-        />
-        </div>
-
-
+        <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
+        {this.SelectiveDisplay()}
       </div>
     );
   }

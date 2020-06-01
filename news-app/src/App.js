@@ -8,6 +8,8 @@ import {getNews2} from './components/NewsFetch/news2';
 import BottomScrollListener from 'react-bottom-scroll-listener';
 import Loader from './components/Loader/Loader'
 import ErrorHandler from './components/ErrorHandler/ErrorHandler';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Sources from './components/Sources/Sources';
 
 
 class App extends Component{
@@ -116,11 +118,13 @@ class App extends Component{
 
   render(){
     return (
-      <div>
-        <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
-        <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
-        {this.SelectiveDisplay()}
-      </div>
+      <BrowserRouter>
+        <div>
+          <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
+          <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
+          {this.SelectiveDisplay()}
+        </div>
+      </BrowserRouter>
     );
   }
 }

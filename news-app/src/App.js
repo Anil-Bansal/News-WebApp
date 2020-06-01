@@ -10,6 +10,7 @@ import Loader from './components/Loader/Loader'
 import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
+import {connect} from 'react-redux;'
 
 
 class App extends Component{
@@ -129,4 +130,21 @@ class App extends Component{
   }
 }
 
-export default App;
+const mapStateToProps=state=>{
+  return{
+    is_loading: state.is_loading,
+    page: state.page,
+    country: state.country ,
+    articles: state.articles,
+    news_end: state.news_end,
+    error_exist: state.error_exist,
+  };
+}
+
+const mapDispatchToProps=dispatch=>{
+  return{
+    : ()=>dispatch({type: ''})
+  };
+}
+
+export default connect(mapStateToProps )(App);

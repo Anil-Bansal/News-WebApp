@@ -10,7 +10,9 @@ import Loader from './components/Loader/Loader'
 import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
-import {connect} from 'react-redux;'
+import {connect} from 'react-redux';
+import * as actiontypes from './components/Redux/Actions';
+
 
 
 class App extends Component{
@@ -35,83 +37,69 @@ class App extends Component{
 
   changeCountry = (code)=>
   {
-    this.setState((prevstate,props)=>{
-      return{
-        is_loading:true,
-        country: code,
-        articles: [],
-        page: 1,
-        news_end: false,
-        error_exist: false,
-      }
-    });
+    this.props.setloading(true);
+    this.props.setcountry(code);
+    this.props.setarticles([]);
+    this.props.setpage(1);
+    this.props.setnewsend(false);
+    this.props.seterrorexist(false);
     this.fetchnews(code,1);
   }
+  
   searchNews = (search)=>
   {
-    this.setState({
-      is_loading:true,
-      country: "",
-      articles: [],
-      page: 1,
-      news_end: false,
-      error_exist: false,
-    });
-    this.fetchNewsSearch(search,this.state.page);
+    this.props.setloading(true);
+    this.props.setcountry("");
+    this.props.setarticles([]);
+    this.props.setpage(1);
+    this.props.setnewsend(false);
+    this.props.seterrorexist(false);
+    this.fetchNewsSearch(search,this.props.page);
   }
 
-  fetchnews(country=this.state.country,page=this.state.page+1){
+  fetchnews(country=this.props.country,page=this.props.page+1){
     getNews(country,page)
     .then(articles=> {
-      this.setState({articles: [...this.state.articles,...articles]});
-      this.setState({is_loading: false});
+      const new_articles=[...this.props.articles,...articles];
+      this.props.setarticles(new_articles);
+      this.props.setloading(false);
       if(articles.length<10){
-        this.setState({news_end : true})
+        this.props.setnewsend(true);
       }
     })
     .catch(error=>{
       console.log(error);
-      this.setState({is_loading: false});
-      this.setState({error_exist: true});
+      this.props.setloading(false);
+      this.props.seterrorexist(true);
     })
 
-    this.setState((prevstate,props)=>{
-      return {
-        page: prevstate.page+1
-      }
-    });
+    this.props.setpage(this.props.page+1);
   }
 
   fetchNewsSearch(search,page){
     getNews2(search,page)
     .then(articles=> {
-      this.setState({articles: [...this.state.articles,...articles]});
-      this.setState({is_loading: false});
-      this.setState({page: this.state.page+1});
-      this.setState({news_end: true});
-
+      const new_articles=[...this.props.articles,...articles];
+      this.props.setarticles(new_articles);
+      this.props.setloading(false);
+      this.props.setnewsend(true);
+      this.props.setpage(this.props.page+1);
     })
     .catch(error=>{
       console.log(error);
-      this.setState({is_loading: false});
-      this.setState({error_exist: true});
+      this.props.setloading(false);
+      this.props.seterrorexist(true);
     })
-
-    this.setState((prevstate,props)=>{
-      return {
-        page: prevstate.page+1
-      }
-    });
   }
 
   SelectiveDisplay(){
-    if(this.state.error_exist)
+    if(this.props.error_exist)
       return <ErrorHandler />
     else{
       return(
         <div>
-          <Display loading={this.state.is_loading} array={this.state.articles} /> 
-          <Loader news_end={this.state.news_end}/>
+          <Display loading={this.props.is_loading} array={this.props.articles} /> 
+          <Loader news_end={this.props.news_end}/>
         </div>
       );
     }
@@ -122,7 +110,7 @@ class App extends Component{
       <BrowserRouter>
         <div>
           <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
-          <Head currentCode={this.state.country} onChange={this.changeCountry} search={this.searchNews} />
+          <Head currentCode={this.props.country} onChange={this.changeCountry} search={this.searchNews} />
           {this.SelectiveDisplay()}
         </div>
       </BrowserRouter>
@@ -143,8 +131,13 @@ const mapStateToProps=state=>{
 
 const mapDispatchToProps=dispatch=>{
   return{
-    : ()=>dispatch({type: ''})
+    setloading: (val)=>dispatch(actiontypes.setloading(val)),
+    setnewsend: (val)=>dispatch(actiontypes.setnewsend(val)),
+    setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
+    seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
+    setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
+    setpage: (val)=>dispatch(actiontypes.setpage(val))
   };
 }
 
-export default connect(mapStateToProps )(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);

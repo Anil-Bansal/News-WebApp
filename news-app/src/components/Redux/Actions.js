@@ -1,22 +1,31 @@
 export const CHANGE_COUNTRY = 'CHANGE_COUNTRY'
-export const ADD_NEW_PAGE = 'ADD_NEW_PAGE'
-export const RESET_ARTICLES = 'RESET_ARTICLES'
+export const CUR_PAGE = 'CUR_PAGE'
+export const SET_ARTICLES = 'SET_ARTICLES'
 export const LOADING = 'LOADING'
+export const SET_NEWS_END='SET_NEWS_END'
+export const SET_ERROR_EXIST='SET_ERROR_EXIST'
 
-export function changeCountry(newCode) {
-  return { type: CHANGE_COUNTRY, newCode }
+
+export function setcountry(newCode) {
+  return { type: CHANGE_COUNTRY, val: newCode }
 }
 
-export function addNewPage(articles) {
-  return { type: ADD_NEW_PAGE, articles }
+export function setpage(page) {
+  return { type: CUR_PAGE, val: page }
 }
 
-export function resetArticles(articles) {
-  return { type: RESET_ARTICLES, articles }
+export function setarticles(articles) {
+  return { type: SET_ARTICLES, val: articles }
 }
 
-export function loading(status) {
-    return { type: LOADING, status }
+export function setloading(status) {
+    return { type: LOADING, val: status }
 }
-  
 
+export function setnewsend(status) {
+  return { type: SET_NEWS_END, val: status }
+}
+
+export function seterrorexist(status) {
+  return { type: SET_ERROR_EXIST, val: status }
+}

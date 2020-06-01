@@ -1,4 +1,4 @@
-import {CHANGE_COUNTRY,ADD_NEW_PAGE,RESET_ARTICLES,LOADING } from './Actions.js'
+import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END } from './Actions.js'
 // import { combineReducers } from 'redux'
 
 const initialState ={
@@ -20,22 +20,23 @@ function newsApp(state = initialState, action) {
             return Object.assign({}, state,{
                 country: action.newCode,
             })
-        case ADD_NEW_PAGE:
+        case SET_NEWS_END:
             return Object.assign({}, state,{
-                page: state.page+1,
-                articles: [
-                    ...state.articles,
-                    action.articles
-                ],
-                news_end: action.articles.length < 10 ? true:false
+                news_end: action.status
             })
-        case RESET_ARTICLES:
+        case SET_ARTICLES:
             return Object.assign({}, state,{
-                country: '',
                 articles: [
                     action.articles
                 ],
-                news_end: true
+            })
+        case CUR_PAGE:
+            return Object.assign({}, state,{
+                page: action.page,
+            })
+        case SET_ERROR_EXIST:
+            return Object.assign({}, state,{
+                error_exist: action.status,
             })
         default:
           return state

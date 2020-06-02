@@ -33,6 +33,8 @@ class App extends Component{
         error_exist: false,    
     };
     this.fetchnews=this.fetchnews.bind(this);
+    this.searchNews=this.searchNews.bind(this);
+    this.fetchNewsSearch=this.fetchNewsSearch.bind(this);
     // this.update=this.update.bind(this);
   }
 

@@ -4,16 +4,16 @@ import ButtonCountry from "../Buttons/ButtonCountry"
 // import MaterialUIForm from 'react-material-ui-form'
 import Button from 'react-bootstrap/Button'
 // eslint-disable-next-line
-import {getNews} from '../NewsFetch/news'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
+import {fetchNews} from '../NewsFetch/Fetch.js';
 
 class Head extends React.Component{
 
     constructor(props){
       super(props);
       this.onChange=this.onChange.bind(this);
-      this.fetchnews=this.fetchnews.bind(this);
+      this.fetchnews=fetchNews.bind(this);
     }
 
     handleSubmit = event => {
@@ -37,26 +37,6 @@ class Head extends React.Component{
         await this.props.setnewsend(false);
         await this.props.seterrorexist(false);
         this.fetchnews();
-      }
-      fetchnews() {
-        getNews(this.props.country,this.props.page)
-        .then(articles=> {
-          const new_articles=[...this.props.articles,...articles];
-          this.props.setarticles(new_articles);
-          console.log(this.props.articles.length);
-          this.props.setloading(false);
-          console.log(this.props.is_loading);
-          if(articles.length<10){
-            this.props.setnewsend(true);
-          }
-        })
-        .catch(error=>{
-          console.log(error);
-          this.props.setloading(false);
-          this.props.seterrorexist(true);
-        })
-    
-        this.props.setpage(this.props.page+1);
       }
 
     render(){

@@ -4,7 +4,7 @@ import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_EN
 import React from 'react';
 
 const initialState ={
-    is_loading: false,
+    is_loading: true,
     page: 1,
     country: 'in',
     articles:[],
@@ -34,11 +34,11 @@ function newsApp(state = initialState, action) {
             })
         case CUR_PAGE:
             return Object.assign({}, state,{
-                page: action.page,
+                page: action.val,
             })
         case SET_ERROR_EXIST:
             return Object.assign({}, state,{
-                error_exist: action.status,
+                error_exist: action.val,
             })
         default:
           return state

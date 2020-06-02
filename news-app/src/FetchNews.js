@@ -34,16 +34,16 @@ const mapStateToProps=state=>{
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
-    return{
-      setloading: (val)=>dispatch(actiontypes.setloading(val)),
-      setnewsend: (val)=>dispatch(actiontypes.setnewsend(val)),
-      setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
-      seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
-      setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
-      setpage: (val)=>dispatch(actiontypes.setpage(val))
-    };
-  }
+const mapDispatchToProps=dispatch=>{
+  return{
+    setloading: (val)=>dispatch(actiontypes.setloading(val)),
+    setnewsend: (val)=>dispatch(actiontypes.setnewsend(val)),
+    setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
+    seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
+    setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
+    setpage: (val)=>dispatch(actiontypes.setpage(val))
+  };
+}
   
   export default connect(mapStateToProps,mapDispatchToProps)(Fetchnews);
 

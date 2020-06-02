@@ -10,15 +10,9 @@ import CardColumns from 'react-bootstrap/CardColumns';
 class Display extends React.Component{
     render(){
         const array = this.props.array;
-        console.log("load "+this.props.array)
-        if(this.props.loading || array===undefined)
-        {
-            console.log('display1')
-
+        if(this.props.loading || array===undefined){
             return <div></div>;
         }
-        else{
-            console.log('display2')
 
         return(     
             <CardColumns align="center"> 
@@ -28,7 +22,6 @@ class Display extends React.Component{
             </CardColumns>
             )
         }
-    }
 }
 
 export default Display;

@@ -16,6 +16,7 @@ class Display extends React.Component{
             return <div></div>;
         }
         else{
+
         return(     
             <CardColumns align="center"> 
             {array.map((post,idx) => (
@@ -24,7 +25,6 @@ class Display extends React.Component{
             </CardColumns>
             )
         }
-    }
 }
 
 export default Display;

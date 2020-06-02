@@ -69,9 +69,9 @@ class App extends Component{
     .then(articles=> {
       const new_articles=[...this.props.articles,...articles];
       this.props.setarticles(new_articles);
-      console.log(this.props.articles.length);
+      //console.log(this.props.articles.length);
       this.props.setloading(false);
-      console.log(this.props.is_loading);
+      //console.log(this.props.is_loading);
       if(articles.length<10){
         this.props.setnewsend(true);
       }
@@ -107,7 +107,6 @@ class App extends Component{
     else{
       return(
         <div>
-          {console.log('hello '+this.props.articles[0])}
           <Display loading={this.props.is_loading} array={this.props.articles} /> 
           <Loader news_end={this.props.news_end}/>
         </div>
@@ -119,7 +118,6 @@ class App extends Component{
     return (
       <BrowserRouter>
         <div>
-          {console.log(this.props.articles)}
           <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
           <Head currentCode={this.props.country} onChange={this.changeCountry} search={this.searchNews} />
           {this.SelectiveDisplay()}

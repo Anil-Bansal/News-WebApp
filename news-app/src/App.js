@@ -40,6 +40,8 @@ class App extends Component{
       this.fetchnews();
   }
 
+  hello= ()=>{console.log('hello')}
+
   async changeCountry(code)
   {
     await this.props.setloading(true);
@@ -81,7 +83,8 @@ class App extends Component{
     })
 
     this.props.setpage(this.props.page+1);
-}
+  }
+
   fetchNewsSearch(search,page){
     getNews2(search,page)
     .then(articles=> {

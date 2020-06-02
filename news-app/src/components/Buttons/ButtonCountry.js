@@ -1,15 +1,25 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {connect} from 'react-redux';
 
-function ButtonCountry(props){
-    return (
-        
-        <Button variant= {(props.currentCode === props.code) ? "dark" : "light"} onClick={()=>props.onChange(props.code)}>
-            {/* {console.log(props.currentCode, props.code)} */}
-            {props.country}
-        </ Button>
-    )
+class ButtonCountry extends React.Component{
+    render(){
+        return (
+            
+            <Button variant= {(this.props.currentCountry === this.props.code) ? "dark" : "light"} onClick={()=>this.props.onChange(this.props.code)}>
+                {/* {console.log(props.currentCode, props.code)} */}
+                {this.props.country}
+            </ Button>
+        )
+        }
 }
 
-export default ButtonCountry;
+const mapStateToProps=state=>{
+    return{
+      currentCountry: state.country ,
+    };
+  }
+  
+export default connect(mapStateToProps,)(ButtonCountry);
+  

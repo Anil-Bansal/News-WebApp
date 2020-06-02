@@ -1,9 +1,10 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END } from './Actions.js'
 // import { combineReducers } from 'redux'
+// eslint-disable-next-line
 import React from 'react';
 
 const initialState ={
-    is_loading: true,
+    is_loading: false,
     page: 1,
     country: 'in',
     articles:[],

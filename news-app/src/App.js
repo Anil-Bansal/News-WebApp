@@ -3,6 +3,8 @@ import './App.css';
 // import  {getNews}  from './components/NewsFetch/news';
 import Display from './components/MainBody/Display';
 import Head from './components/Header/head';
+import {getNews} from './components/NewsFetch/news';
+
 import {getNews2} from './components/NewsFetch/news2';
 //import debounce from 'lodash.debounce';
 import BottomScrollListener from 'react-bottom-scroll-listener';
@@ -14,6 +16,7 @@ import {BrowserRouter} from 'react-router-dom';
 // import Sources from './components/Sources/Sources';
 import {connect} from 'react-redux';
 import * as actiontypes from './components/Redux/Actions';
+// eslint-disable-next-line
 import FetchNews from './FetchNews'
 
 
@@ -101,6 +104,7 @@ class App extends Component{
     else{
       return(
         <div>
+          {console.log('hello '+this.props.articles[0])}
           <Display loading={this.props.is_loading} array={this.props.articles} /> 
           <Loader news_end={this.props.news_end}/>
         </div>
@@ -112,6 +116,7 @@ class App extends Component{
     return (
       <BrowserRouter>
         <div>
+          {console.log(this.props.articles)}
           <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
           <Head currentCode={this.props.country} onChange={this.changeCountry} search={this.searchNews} />
           {this.SelectiveDisplay()}

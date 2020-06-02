@@ -10,7 +10,7 @@ import CardColumns from 'react-bootstrap/CardColumns';
 class Display extends React.Component{
     render(){
         const array = this.props.articles;
-        if(this.props.loading)
+        if(this.props.loading || array===undefined)
             return <div></div>;
         else{
         return(     

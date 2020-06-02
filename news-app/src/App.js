@@ -34,7 +34,7 @@ class App extends Component{
   }
 
   componentDidMount(){
-      FetchNews();
+      this.fetchnews();
   }
 
   async changeCountry(code)
@@ -45,7 +45,7 @@ class App extends Component{
     await this.props.setpage(1);
     await this.props.setnewsend(false);
     await this.props.seterrorexist(false);
-    FetchNews();
+    this.fetchnews();
   }
   
   async searchNews (search)
@@ -58,6 +58,27 @@ class App extends Component{
     await this.props.seterrorexist(false);
     this.fetchNewsSearch(search,this.props.page);
   }
+
+  fetchnews() {
+    getNews(this.props.country,this.props.page)
+    .then(articles=> {
+      const new_articles=[...this.props.articles,...articles];
+      this.props.setarticles(new_articles);
+      console.log(this.props.articles.length);
+      this.props.setloading(false);
+      console.log(this.props.is_loading);
+      if(articles.length<10){
+        this.props.setnewsend(true);
+      }
+    })
+    .catch(error=>{
+      console.log(error);
+      this.props.setloading(false);
+      this.props.seterrorexist(true);
+    })
+
+    this.props.setpage(this.props.page+1);
+}
   fetchNewsSearch(search,page){
     getNews2(search,page)
     .then(articles=> {
@@ -91,7 +112,7 @@ class App extends Component{
     return (
       <BrowserRouter>
         <div>
-          <BottomScrollListener debounce={3000} offset={10} onBottom={FetchNews}/>
+          <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
           <Head currentCode={this.props.country} onChange={this.changeCountry} search={this.searchNews} />
           {this.SelectiveDisplay()}
         </div>

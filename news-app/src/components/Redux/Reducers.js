@@ -1,5 +1,6 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END } from './Actions.js'
 // import { combineReducers } from 'redux'
+import React from 'react';
 
 const initialState ={
     is_loading: true,
@@ -11,24 +12,24 @@ const initialState ={
 }
 
 function newsApp(state = initialState, action) {
+    //if(action.type===LOADING)
+    //    console.log(action.val);
     switch (action.type) {
         case LOADING:
             return Object.assign({}, state,{
-                isLoading: action.status,
+                is_loading: action.val,
             })
         case CHANGE_COUNTRY:
             return Object.assign({}, state,{
-                country: action.newCode,
+                country: action.val,
             })
         case SET_NEWS_END:
             return Object.assign({}, state,{
-                news_end: action.status
+                news_end: action.val
             })
         case SET_ARTICLES:
             return Object.assign({}, state,{
-                articles: [
-                    action.articles
-                ],
+                articles: action.val,
             })
         case CUR_PAGE:
             return Object.assign({}, state,{

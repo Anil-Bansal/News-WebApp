@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import  {getNews}  from './components/NewsFetch/news';
+// import  {getNews}  from './components/NewsFetch/news';
 import Display from './components/MainBody/Display';
 import Head from './components/Header/head';
 import {getNews2} from './components/NewsFetch/news2';
@@ -8,11 +8,13 @@ import {getNews2} from './components/NewsFetch/news2';
 import BottomScrollListener from 'react-bottom-scroll-listener';
 import Loader from './components/Loader/Loader'
 import ErrorHandler from './components/ErrorHandler/ErrorHandler';
-import {BrowserRouter, Route} from 'react-router-dom';
-import Sources from './components/Sources/Sources';
+import {BrowserRouter} from 'react-router-dom';
+// import {BrowserRouter, Route} from 'react-router-dom';
+
+// import Sources from './components/Sources/Sources';
 import {connect} from 'react-redux';
 import * as actiontypes from './components/Redux/Actions';
-import {FetchNews} from './FetchNews'
+import FetchNews from './FetchNews'
 
 
 class App extends Component{

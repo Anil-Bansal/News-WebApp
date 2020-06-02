@@ -1,5 +1,5 @@
 import  {getNews}  from './components/NewsFetch/news';
-import React from 'react';
+// import React from 'react';
 import {connect} from 'react-redux';
 import * as actiontypes from './components/Redux/Actions';
 
@@ -45,5 +45,5 @@ const mapStateToProps=state=>{
     };
   }
   
-  export default connect(mapStateToProps,mapDispatchToProps)({Fetchnews});
+  export default connect(mapStateToProps,mapDispatchToProps)(Fetchnews);
 

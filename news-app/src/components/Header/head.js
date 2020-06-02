@@ -3,8 +3,8 @@ import './head.css'
 import ButtonCountry from "../Buttons/ButtonCountry"
 // import MaterialUIForm from 'react-material-ui-form'
 import Button from 'react-bootstrap/Button'
-import {getNews} from '../NewsFetch/news'
-import * as actiontypes from './components/Redux/Actions';
+// import {getNews} from '../NewsFetch/news'
+import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 
 class Head extends React.Component{

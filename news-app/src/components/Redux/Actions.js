@@ -19,6 +19,7 @@ export function setarticles(articles) {
 }
 
 export function setloading(status) {
+    //console.log("In Loading "+status);
     return { type: LOADING, val: status }
 }
 

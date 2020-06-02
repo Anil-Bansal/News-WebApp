@@ -45,5 +45,5 @@ const mapStateToProps=state=>{
     };
   }
   
-  export default connect(mapStateToProps,mapDispatchToProps)({Fetchnews});
+  export default connect(mapStateToProps,mapDispatchToProps)(Fetchnews);
 

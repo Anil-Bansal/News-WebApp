@@ -9,15 +9,27 @@ import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 
 class Head extends React.Component{
+
+    constructor(props){
+      super(props);
+      this.onChange=this.onChange.bind(this);
+      this.fetchnews=this.fetchnews.bind(this);
+    }
+
     handleSubmit = event => {
         event.preventDefault();
         this.props.search(this.input.value);
         event.target.reset();
       };
+
+      componentDidMount(){
+        console.log("In Head.js");
+      }
     
       async onChange(code)
       {
         console.log('head-async')
+        console.log(this);
         await this.props.setloading(true);
         await this.props.setcountry(code);
         await this.props.setarticles([]);
@@ -98,6 +110,7 @@ class Head extends React.Component{
 
 const mapStateToProps=state=>{
     return{
+      is_loading: state.is_loading,
       country: state.country ,
       error_exist: state.error_exist,
       articles: state.articles,

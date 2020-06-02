@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 // eslint-disable-next-line
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
-import {fetchNews} from '../NewsFetch/Fetch.js';
+import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch.js';
 
 class Head extends React.Component{
 
@@ -14,11 +14,25 @@ class Head extends React.Component{
       super(props);
       this.onChange=this.onChange.bind(this);
       this.fetchnews=fetchNews.bind(this);
+      this.fetchNewsSearch=fetchNewsSearch.bind(this);
+
+      this.searchNews=this.searchNews.bind(this);
     }
+
+    async searchNews (search)
+      {
+        await this.props.setloading(true);
+        await this.props.setcountry("");
+        await this.props.setarticles([]);
+        await this.props.setpage(1);
+        await this.props.setnewsend(false);
+        await this.props.seterrorexist(false);
+        this.fetchNewsSearch(search,this.props.page);
+      }
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.search(this.input.value);
+        this.searchNews(this.input.value);
         event.target.reset();
       };
 

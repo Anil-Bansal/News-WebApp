@@ -1,5 +1,6 @@
 import ClipLoader from 'react-spinners/ClipLoader';
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Loader extends React.Component{
     render(){
@@ -11,4 +12,12 @@ class Loader extends React.Component{
     }
 }
 
-export default Loader;
+const mapStateToProps=state=>{
+    return{
+      is_loading: state.is_loading,
+      news_end: state.news_end,
+      error_exist: state.error_exist,
+    };
+  }
+  
+  export default connect(mapStateToProps)(Loader);

@@ -9,14 +9,6 @@ class App extends Component{
 
   constructor(props){
     super(props);
-    this.state={
-        is_loading: true,
-        page: 0,
-        country: 'in',
-        articles:[],
-        news_end: false,
-        error_exist: false,    
-    };
     this.fetchnews=fetchNews.bind(this);
   }
 

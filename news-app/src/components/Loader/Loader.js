@@ -14,9 +14,7 @@ class Loader extends React.Component{
 
 const mapStateToProps=state=>{
     return{
-      is_loading: state.is_loading,
       news_end: state.news_end,
-      error_exist: state.error_exist,
     };
   }
   

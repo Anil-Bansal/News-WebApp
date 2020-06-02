@@ -35,15 +35,9 @@ class Head extends React.Component{
         this.searchNews(this.input.value);
         event.target.reset();
       };
-
-      componentDidMount(){
-        console.log("In Head.js");
-      }
     
       async onChange(code)
       {
-        console.log('head-async')
-        console.log(this);
         await this.props.setloading(true);
         await this.props.setcountry(code);
         await this.props.setarticles([]);

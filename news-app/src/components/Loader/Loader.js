@@ -1,6 +1,5 @@
 import ClipLoader from 'react-spinners/ClipLoader';
 import React from 'react';
-import {connect} from 'react-redux';
 
 class Loader extends React.Component{
     render(){
@@ -12,10 +11,4 @@ class Loader extends React.Component{
     }
 }
 
-
-const mapStateToProps=state=>{
-    return{
-      news_end: state.news_end ,
-    };
-  }
-export default connect(mapStateToProps,)(Loader);
+export default Loader;

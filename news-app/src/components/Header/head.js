@@ -14,33 +14,6 @@ class Head extends React.Component{
         event.target.reset();
       };
     
-    fetchnews(country=this.props.country,page=this.props.page+1){
-    getNews(country,page)
-    .then(articles=> {
-        const new_articles=[...this.props.articles,...articles];
-        this.props.setarticles(new_articles);
-        this.props.setloading(false);
-        this.props.setpage(this.state.page+1);
-        if(articles.length<10){
-            this.props.setnewsend(true);
-        }
-    })
-    .catch(error=>{
-        console.log(error);
-        this.props.setloading(false);
-        this.props.seterrorexist(true);
-    })  
-    }
-
-    onChange = (code) =>{
-        this.props.setloading(true);
-        this.props.setcountry(code);
-        this.props.setpage(0);
-        this.props.setnewsend(false);
-        this.fetchnews();
-        this.props.setpage(this.props.page+1);
-    }
-
     render(){
         return (
             <div>

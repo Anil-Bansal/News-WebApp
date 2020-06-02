@@ -12,7 +12,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
 import {connect} from 'react-redux';
 import * as actiontypes from './components/Redux/Actions';
-
+import {FetchNews} from './FetchNews'
 
 
 class App extends Component{
@@ -32,50 +32,30 @@ class App extends Component{
   }
 
   componentDidMount(){
-      this.fetchnews();
+      FetchNews();
   }
 
-  changeCountry = (code)=>
+  async changeCountry(code)
   {
-    this.props.setloading(true);
-    this.props.setcountry(code);
-    this.props.setarticles([]);
-    this.props.setpage(1);
-    this.props.setnewsend(false);
-    this.props.seterrorexist(false);
-    this.fetchnews(code,1);
+    await this.props.setloading(true);
+    await this.props.setcountry(code);
+    await this.props.setarticles([]);
+    await this.props.setpage(1);
+    await this.props.setnewsend(false);
+    await this.props.seterrorexist(false);
+    FetchNews();
   }
   
-  searchNews = (search)=>
+  async searchNews (search)
   {
-    this.props.setloading(true);
-    this.props.setcountry("");
-    this.props.setarticles([]);
-    this.props.setpage(1);
-    this.props.setnewsend(false);
-    this.props.seterrorexist(false);
+    await this.props.setloading(true);
+    await this.props.setcountry("");
+    await this.props.setarticles([]);
+    await this.props.setpage(1);
+    await this.props.setnewsend(false);
+    await this.props.seterrorexist(false);
     this.fetchNewsSearch(search,this.props.page);
   }
-
-  fetchnews(country=this.props.country,page=this.props.page+1){
-    getNews(country,page)
-    .then(articles=> {
-      const new_articles=[...this.props.articles,...articles];
-      this.props.setarticles(new_articles);
-      this.props.setloading(false);
-      if(articles.length<10){
-        this.props.setnewsend(true);
-      }
-    })
-    .catch(error=>{
-      console.log(error);
-      this.props.setloading(false);
-      this.props.seterrorexist(true);
-    })
-
-    this.props.setpage(this.props.page+1);
-  }
-
   fetchNewsSearch(search,page){
     getNews2(search,page)
     .then(articles=> {
@@ -109,7 +89,7 @@ class App extends Component{
     return (
       <BrowserRouter>
         <div>
-          <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
+          <BottomScrollListener debounce={3000} offset={10} onBottom={FetchNews}/>
           <Head currentCode={this.props.country} onChange={this.changeCountry} search={this.searchNews} />
           {this.SelectiveDisplay()}
         </div>

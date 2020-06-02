@@ -12,4 +12,4 @@ function ButtonCountry(props){
     )
 }
 
-export default ButtonCountry
+export default ButtonCountry;

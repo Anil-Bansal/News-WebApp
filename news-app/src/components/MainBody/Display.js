@@ -6,7 +6,6 @@ import Post from '../Card/Post';
 import Card from 'react-bootstrap/Card';
 // eslint-disable-next-line
 import CardColumns from 'react-bootstrap/CardColumns';
-import {connect} from 'react-redux';
 
 class Display extends React.Component{
     render(){
@@ -24,9 +23,5 @@ class Display extends React.Component{
         }
     }
 }
-const mapStateToProps=state=>{
-    return{
-      loading: state.loading ,
-    };
-  }
-export default connect(mapStateToProps,)(Display);
+
+export default Display;

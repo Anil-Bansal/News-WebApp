@@ -2,6 +2,29 @@
   text-align: center;
 }
 
+.Top {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: Center;
+  padding:0em;
+  margin-bottom: 0em;
+  background-color: rgb(17, 120, 180);
+  color: #fff;
+}
+
+.Route{
+  color: #fff;
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
+.Route:hover {
+  color: white;
+  font-weight: bolder  ;
+
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -36,3 +59,4 @@
     transform: rotate(360deg);
   }
 }
+

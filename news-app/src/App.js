@@ -17,12 +17,13 @@ class App extends Component{
   render(){
     return(
       <BrowserRouter>
-        <div>
-          <Link to="/Main">News Fetch</Link>
-          <Link to="/Sources">Sources</Link>
-
+      <div>
+        <div className='Top'>
+          <Link to="/" className='Route'>News Fetch  </Link>
+          <Link to="/Sources" className='Route'>Sources</Link>
+        </div>
           <Switch>
-            <Route exact path="/Main" component={Main}></Route>
+            <Route exact path="/" component={Main}></Route>
             <Route exact path="/Sources" component={Sources}></Route>
           </Switch>
 

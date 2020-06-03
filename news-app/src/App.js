@@ -6,6 +6,7 @@ import {fetchNews} from './components/NewsFetch/Fetch'
 import Main from './components/MainBody/Main'
 import {BrowserRouter,Link,Route, Switch} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
+import Info from './TeamInfo';
 
 class App extends Component{
 
@@ -21,10 +22,12 @@ class App extends Component{
         <div className='Top'>
           <Link to="/" className='Route'>News Fetch  </Link>
           <Link to="/Sources" className='Route'>Sources</Link>
+          <Link to="/Team" className='Route'>Team Info</Link>
         </div>
           <Switch>
             <Route exact path="/" component={Main}></Route>
             <Route exact path="/Sources" component={Sources}></Route>
+            <Route exact path="/Team" component={Info}></Route>
           </Switch>
 
         </div>

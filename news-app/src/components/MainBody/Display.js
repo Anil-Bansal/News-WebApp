@@ -15,7 +15,7 @@ class Display extends React.Component{
         return(     
             <CardColumns align="center"> 
             {array.map((post,idx) => (
-                <Post key={idx}  title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} />
+                <Post key={idx}  title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} content={post.content}/>
             ))}
             </CardColumns>
             )

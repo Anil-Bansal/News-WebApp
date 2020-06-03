@@ -14,16 +14,19 @@ class Popup extends React.Component{
             >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                Modal heading
+                <div align = 'center'>
+                    {this.props.cardData.title}
+                </div>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div align='center'>
-                    <h4>{this.props.cardData.title}</h4>
-                </div>
+                    <img alt='' style={{height:250, marginBottom:10}} src={this.props.cardData.imageurl}/>
+                
                 <p>
-                {this.props.cardData.description}
+                    {this.props.cardData.content ? this.props.cardData.content : this.props.cardData.description}
                 </p>
+                </div>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={this.props.onHide}>Close</Button>

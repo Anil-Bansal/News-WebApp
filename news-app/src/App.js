@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import * as actiontypes from './components/Redux/Actions';
 import {fetchNews} from './components/NewsFetch/Fetch'
 import Main from './components/MainBody/Main'
+import {BrowserRouter,Link,Route, Switch} from 'react-router-dom';
+import Sources from './components/Sources/Sources';
 
 class App extends Component{
 
@@ -11,14 +13,21 @@ class App extends Component{
     super(props);
     this.fetchnews=fetchNews.bind(this);
   }
-
-  componentDidMount(){
-      this.fetchnews();
-  }
  
   render(){
     return(
-      <Main />
+      <BrowserRouter>
+        <div>
+          <Link to="/Main">News Fetch</Link>
+          <Link to="/Sources">Sources</Link>
+
+          <Switch>
+            <Route exact path="/Main" component={Main}></Route>
+            <Route exact path="/Sources" component={Sources}></Route>
+          </Switch>
+
+        </div>
+      </BrowserRouter>
     )
   }
 }

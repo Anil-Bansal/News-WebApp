@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Loader from 'react-spinners/ClipLoader';
 import DisplaySources from './DisplaySources';
+import {connect} from 'react-redux';
 
 class Sources extends Component{
     constructor(props){
@@ -14,7 +15,7 @@ class Sources extends Component{
     }
 
     fetchsources(){
-        const url=`https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country=${this.props.match.param.country}`;
+        const url=`https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country=${this.props.country}`;
         fetch(url)
         .then(response=>response.json())
         .then(result=>result.sources)
@@ -38,10 +39,16 @@ class Sources extends Component{
         return(
             <div>
                 <DisplaySources loading={this.state.is_loading} array={this.state.sources} />
-                <Loader news_end={this.state.news_end} />
             </div>
         );
     }
 
 }
-export default Sources;
+
+const mapStateToProps=state=>{
+    return{
+        country: state.country
+    };
+}
+
+export default connect(mapStateToProps)(Sources);

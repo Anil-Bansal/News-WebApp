@@ -17,6 +17,15 @@ class Main extends React.Component{
         this.fetchNewsSearch=fetchNewsSearch.bind(this);
       }
 
+    
+    async componentDidMount(){
+      console.log("In Main.js");
+      await this.props.setcountry('in');
+      await this.props.setpage(1);
+      await this.props.setarticles([]);
+      this.fetchnews();
+    }
+
     SelectiveDisplay(){
         if(this.props.error_exist)
           return <ErrorHandler />

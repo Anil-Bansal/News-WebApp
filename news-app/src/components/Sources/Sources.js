@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import DisplaySources from './DisplaySources';
 import {connect} from 'react-redux';
 import Head from '../Header/head'
+import ClipLoader from 'react-spinners/ClipLoader';
+
 class Sources extends Component{
     constructor(props){
         super(props);
@@ -37,7 +39,11 @@ class Sources extends Component{
     shouldComponentUpdate(nextProps) {
         console.log(this.props.country, nextProps.country)
         if( this.props.country !== nextProps.country)
-        {   this.fetchsources(nextProps.country)}
+        {   
+            this.setState({is_loading: true})
+            this.setState({sources: []})
+            this.fetchsources(nextProps.country)
+        }
         return true ;
     }
 
@@ -46,6 +52,10 @@ class Sources extends Component{
             <div>
                 <Head/>
                 <DisplaySources loading={this.state.is_loading} array={this.state.sources} />
+                <div align='center'>
+                    <ClipLoader color={"#123abc"} size={50} loading={this.state.is_loading}/>
+                </div>
+
             </div>
         );
     }

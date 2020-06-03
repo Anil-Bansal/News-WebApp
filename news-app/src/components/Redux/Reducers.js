@@ -21,7 +21,6 @@ function newsApp(state = initialState, action) {
                 is_loading: action.val,
             })
         case CHANGE_COUNTRY:
-            console.log('hell2o')
             return Object.assign({}, state,{
                 country: action.val,
             })

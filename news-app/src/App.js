@@ -6,7 +6,7 @@ import {fetchNews} from './components/NewsFetch/Fetch'
 import Main from './components/MainBody/Main'
 import {BrowserRouter,Link,Route, Switch} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
-import Info from './TeamInfo';
+import Info from './components/TeamPage/TeamInfo';
 
 class App extends Component{
 

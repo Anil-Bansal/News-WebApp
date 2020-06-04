@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from  'react-bootstrap/Modal'
 import Button from  'react-bootstrap/Button'
 import * as Icon from 'react-feather';
-
+import { FacebookShareButton, FacebookIcon } from "react-share";
 class Popup extends React.Component{
 
     handleFacebookClick(){
@@ -43,7 +43,11 @@ class Popup extends React.Component{
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Icon.Facebook onClick={()=>this.handleFacebookClick()} />
+                <FacebookShareButton
+                    url="http://www.facebook.com"
+                    quote={this.props.carddata.title}>
+                    <FacebookIcon logoFillColor="white" />
+                </FacebookShareButton>
                 <Icon.Instagram onClick={()=>this.handleInstagramClick()} />    
                 <Button onClick={()=>this.goToUrl(this.props.carddata.url)}>Go To News</Button>
                 <Button onClick={this.props.onHide}>Close</Button>

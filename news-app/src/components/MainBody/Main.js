@@ -16,6 +16,10 @@ class Main extends React.Component{
         super(props);
         this.fetchnews=fetchNews.bind(this);
         this.fetchNewsSearch=fetchNewsSearch.bind(this);
+        if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
+        {
+          (this.props.cookies).set('testing',[],{path: '/'})
+        }
       }
 
     

@@ -42,7 +42,7 @@ class Post extends React.Component{
             </Card>
             <Popup show={this.state.modalShow} 
                     onHide={()=> this.setState({modalShow: false})}
-                    cardData={this.props}/>
+                    carddata={this.props}/>
         </div>    
     )}
 }

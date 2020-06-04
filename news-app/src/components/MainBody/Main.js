@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 
 
 class Main extends React.Component{
+
     constructor(props){
         super(props);
         this.fetchnews=fetchNews.bind(this);
@@ -41,6 +42,10 @@ class Main extends React.Component{
     
 
     render(){
+      const { cookies } = this.props;
+
+      console.log(cookies.get('testing',['first','second'],{path: '/'}))
+
     if(this.props.news_end){
         return(
             <BrowserRouter>
@@ -62,13 +67,14 @@ class Main extends React.Component{
         )}
     }
 }
-const mapStateToProps=state=>{
+const mapStateToProps=(state,ownProps)=>{
     return{
       page: state.page,
       country: state.country ,
       articles: state.articles,
       news_end: state.news_end,
       error_exist: state.error_exist,
+      cookies: ownProps.cookies,
     };
   }
   

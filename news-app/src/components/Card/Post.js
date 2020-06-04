@@ -49,7 +49,7 @@ class Post extends React.Component{
                     <Card.Text>{this.props.description}</Card.Text>
                 </Card.Body>   
                 <Card.Footer>
-                    <div class='row'>
+                    <div className='row'>
                         <div align='left' style={{marginLeft:30}}>
                             <Icon.Heart />
                         </div>

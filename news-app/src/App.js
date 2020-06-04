@@ -7,6 +7,7 @@ import Main from './components/MainBody/Main'
 import {BrowserRouter,Link,Route, Switch} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
 import Info from './components/TeamPage/TeamInfo';
+import { withCookies } from 'react-cookie';
 
 class App extends Component{
 
@@ -25,9 +26,9 @@ class App extends Component{
           <Link to="/Team" className='Route'>Team Info</Link>
         </div>
           <Switch>
-            <Route exact path="/" component={Main}></Route>
-            <Route exact path="/Sources" component={Sources}></Route>
-            <Route exact path="/Team" component={Info}></Route>
+            <Route exact path="/" render={() => (<Main cookies={this.props.cookies}/>)}/>
+            <Route exact path="/Sources" component={Sources}/>
+            <Route exact path="/Team" component={Info}/>
           </Switch>
 
         </div>
@@ -58,4 +59,4 @@ const mapDispatchToProps=dispatch=>{
   };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default withCookies(connect(mapStateToProps,mapDispatchToProps)(App));

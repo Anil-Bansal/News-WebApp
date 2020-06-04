@@ -6,15 +6,19 @@ import * as serviceWorker from './serviceWorker';
 import {createStore} from 'redux';
 import newsApp from './components/Redux/Reducers.js';
 import  {Provider} from 'react-redux';
+import { CookiesProvider } from 'react-cookie';
 
 const store=createStore(newsApp);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <CookiesProvider>
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  </CookiesProvider>,
+
   document.getElementById('root')
 );
 

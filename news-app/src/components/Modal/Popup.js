@@ -4,6 +4,7 @@ import Button from  'react-bootstrap/Button'
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from "react-share";
 import {FaFacebookF,FaTwitter, FaLinkedin} from 'react-icons/fa';
 
+
 class Popup extends React.Component{
 
     goToUrl(url){
@@ -61,6 +62,7 @@ class Popup extends React.Component{
                     <Button  onClick={()=>this.goToUrl(this.props.cardData.url)}>Go To News</Button>
                 </div>
                 <Button variant='danger' onClick={this.props.onHide}>Close</Button>
+
             </Modal.Footer>
             </Modal>
         )

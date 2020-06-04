@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 
-class SourceCard extends React.Component{
-    constructor(props) {
+class SourceCard extends React.Component<any,any>{
+    constructor(props: any) {
         super(props);
         this.state = {
           backg: "light",

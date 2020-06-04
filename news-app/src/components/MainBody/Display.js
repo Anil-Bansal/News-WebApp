@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import CardColumns from 'react-bootstrap/CardColumns';
 
 class Display extends React.Component{
+    
     render(){
         const array = this.props.articles;
         if(this.props.is_loading || array===undefined)
@@ -13,9 +14,10 @@ class Display extends React.Component{
         else{
 
         return(     
+            
             <CardColumns align="center"> 
             {array.map((post,idx) => (
-                <Post key={idx}  title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} content={post.content}/>
+                <Post key={idx}  title={post.title} imageurl={post.urlToImage} description={post.description} url={post.url} content={post.content} cookies={this.props.cookies}/>
             ))}
             </CardColumns>
             )

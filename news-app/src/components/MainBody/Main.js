@@ -33,7 +33,7 @@ class Main extends React.Component{
         else{
           return(
             <div>
-              <Display /> 
+              <Display cookies={this.props.cookies}/> 
               <Loader />
             </div>
           );
@@ -42,10 +42,6 @@ class Main extends React.Component{
     
 
     render(){
-      const { cookies } = this.props;
-
-      console.log(cookies.get('testing',['first','second'],{path: '/'}))
-
     if(this.props.news_end){
         return(
             <BrowserRouter>

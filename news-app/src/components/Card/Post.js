@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Popup from '../Modal/Popup'
 import Button from  'react-bootstrap/Button'
-import * as Icon from 'react-feather';
+import {MdFavoriteBorder,MdFavorite} from 'react-icons/md'
 
 class Post extends React.Component{
     constructor(props) {
@@ -10,7 +10,8 @@ class Post extends React.Component{
         this.state = {
           backg: "light",
           textColor: 'dark',
-          modalShow: false
+          modalShow: false,
+          isLiked: ((this.props.cookies).get('testing')).includes(this.props.url)
         };
       }
 
@@ -29,6 +30,12 @@ class Post extends React.Component{
     goToUrl(url){
         window.open(url,'_blank');
     }
+    setCookie = () => {
+        (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url])
+        this.setState({
+            isLiked: true
+        })
+    }
 
     render(){
     return(
@@ -36,22 +43,26 @@ class Post extends React.Component{
             <Card bg={this.state.backg}
                 style={{width: '24rem', }}
                 text={this.state.textColor}
-                onClick={()=>this.setState({modalShow: true})  }>
+                >
                 <Card.Img 
                     onMouseEnter={this.enter}
                     onMouseLeave={this.leave}
                     variant="top" 
-                    src={this.props.imageurl} />
+                    src={this.props.imageurl}
+                    onClick={()=>this.setState({modalShow: true})} />
                 <Card.Body 
                     onMouseEnter={this.enter}
-                    onMouseLeave={this.leave}>
+                    onMouseLeave={this.leave}
+                    onClick={()=>this.setState({modalShow: true})}>
                     <Card.Title>{this.props.title}</Card.Title>
                     <Card.Text>{this.props.description}</Card.Text>
                 </Card.Body>   
                 <Card.Footer>
                     <div className='row'>
                         <div align='left' style={{marginLeft:30}}>
-                            <Icon.Heart />
+                            {this.state.isLiked ? <MdFavorite size={30} />: <MdFavoriteBorder size={30} onClick={()=> this.setCookie()}/> }
+                            
+
                         </div>
                         <div align='right' style={{marginLeft:180}}>
                             <Button variant='danger' onClick={()=>this.goToUrl(this.props.url)}>Go To News</Button>

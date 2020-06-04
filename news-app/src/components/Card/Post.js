@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Popup from '../Modal/Popup'
+import Button from  'react-bootstrap/Button'
+import * as Icon from 'react-feather';
 
 class Post extends React.Component{
     constructor(props) {
@@ -24,21 +26,39 @@ class Post extends React.Component{
             textColor: 'dark'
         })
     }
+    goToUrl(url){
+        window.open(url,'_blank');
+    }
 
     render(){
     return(
         <div>
             <Card bg={this.state.backg}
-                onMouseEnter={this.enter}
-                onMouseLeave={this.leave}
-                style={{width: '24rem'}}
+                style={{width: '24rem', }}
                 text={this.state.textColor}
                 onClick={()=>this.setState({modalShow: true})  }>
-                <Card.Img variant="top" src={this.props.imageurl} />
-                <Card.Body>
+                <Card.Img 
+                    onMouseEnter={this.enter}
+                    onMouseLeave={this.leave}
+                    variant="top" 
+                    src={this.props.imageurl} />
+                <Card.Body 
+                    onMouseEnter={this.enter}
+                    onMouseLeave={this.leave}>
                     <Card.Title>{this.props.title}</Card.Title>
                     <Card.Text>{this.props.description}</Card.Text>
-                </Card.Body>    
+                </Card.Body>   
+                <Card.Footer>
+                    <div class='row'>
+                        <div align='left' style={{marginLeft:30}}>
+                            <Icon.Heart />
+                        </div>
+                        <div align='right' style={{marginLeft:180}}>
+                            <Button variant='danger' onClick={()=>this.goToUrl(this.props.url)}>Go To News</Button>
+                        </div>
+                    </div>
+                </Card.Footer> 
+
             </Card>
             <Popup show={this.state.modalShow} 
                     onHide={()=> this.setState({modalShow: false})}

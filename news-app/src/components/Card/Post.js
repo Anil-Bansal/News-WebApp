@@ -83,7 +83,7 @@ class Post extends React.Component{
             </Card>
             <Popup show={this.state.modalShow} 
                     onHide={()=> this.setState({modalShow: false})}
-                    carddata={this.props}/>
+                    cardData={this.props}/>
         </div>    
     )}
 }

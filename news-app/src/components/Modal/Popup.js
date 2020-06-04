@@ -1,9 +1,18 @@
 import React from 'react'
 import Modal from  'react-bootstrap/Modal'
 import Button from  'react-bootstrap/Button'
-
+import * as Icon from 'react-feather';
 
 class Popup extends React.Component{
+
+    handleFacebookClick(){
+        window.open('http://www.facebook.com','_blank');
+    }
+
+    handleInstagramClick(){
+        window.open('http://www.instagram.com','_blank');
+    }
+
     render(){
         return(
             <Modal
@@ -29,6 +38,8 @@ class Popup extends React.Component{
                 </div>
             </Modal.Body>
             <Modal.Footer>
+                <Icon.Facebook onClick={()=>this.handleFacebookClick()} />
+                <Icon.Instagram onClick={()=>this.handleInstagramClick()} />    
                 <Button onClick={this.props.onHide}>Close</Button>
             </Modal.Footer>
             </Modal>

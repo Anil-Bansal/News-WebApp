@@ -30,10 +30,21 @@ class Post extends React.Component{
     goToUrl(url){
         window.open(url,'_blank');
     }
-    setCookie = () => {
+    likePost = () => {
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url])
         this.setState({
             isLiked: true
+        })
+    }
+    unlikePost = () => {
+        var likedPosts = (this.props.cookies).get('testing')
+        const index = likedPosts.indexOf(this.props.url);
+        if (index > -1) {
+            likedPosts.splice(index, 1);
+        }
+        (this.props.cookies).set('testing',likedPosts)
+        this.setState({
+            isLiked: false
         })
     }
 
@@ -60,9 +71,8 @@ class Post extends React.Component{
                 <Card.Footer>
                     <div className='row'>
                         <div align='left' style={{marginLeft:30}}>
-                            {this.state.isLiked ? <MdFavorite size={30} />: <MdFavoriteBorder size={30} onClick={()=> this.setCookie()}/> }
-                            
-
+                            {this.state.isLiked ? <MdFavorite size={30} onClick={()=> this.unlikePost()}/>: 
+                                                <MdFavoriteBorder size={30} onClick={()=> this.likePost()}/> }
                         </div>
                         <div align='right' style={{marginLeft:180}}>
                             <Button variant='danger' onClick={()=>this.goToUrl(this.props.url)}>Go To News</Button>

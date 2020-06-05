@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import CardColumns from 'react-bootstrap/CardColumns';
 
 class Display extends React.Component{
-    
+	public props: any;
+
     render(){
         const array = this.props.articles;
         if(this.props.is_loading || array===undefined)

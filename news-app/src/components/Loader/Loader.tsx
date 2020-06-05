@@ -3,6 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 class Loader extends React.Component{
+	public props: any;
+
     render(){
         return (
             <div align='center'>

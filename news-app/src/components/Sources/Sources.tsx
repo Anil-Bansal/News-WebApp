@@ -5,6 +5,10 @@ import Head from '../Header/head'
 import ClipLoader from 'react-spinners/ClipLoader';
 
 class Sources extends Component{
+	public state: any;
+	public props: any;
+	public setState: any;
+
     constructor(props){
         super(props);
         this.state={

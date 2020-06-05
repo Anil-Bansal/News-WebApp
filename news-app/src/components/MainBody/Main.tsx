@@ -11,6 +11,9 @@ import {connect} from 'react-redux';
 
 
 class Main extends React.Component{
+	public fetchnews: any;
+	public fetchNewsSearch: any;
+	public props: any;
 
     constructor(props){
         super(props);

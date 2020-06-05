@@ -8,6 +8,10 @@ import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch.js';
 
 class Head extends React.Component{
+	public fetchnews: any;
+	public fetchNewsSearch: any;
+	public props: any;
+	public input: any;
 
     constructor(props){
       super(props);

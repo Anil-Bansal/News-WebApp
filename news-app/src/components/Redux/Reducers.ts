@@ -12,7 +12,7 @@ const initialState ={
     error_exist: false, 
 }
 
-function newsApp(state = initialState, action) {
+function newsApp(state = initialState, action?) {
     //if(action.type===LOADING)
     //    console.log(action.val);
     switch (action.type) {

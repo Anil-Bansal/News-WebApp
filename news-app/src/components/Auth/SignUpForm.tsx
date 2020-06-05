@@ -12,6 +12,14 @@ const INITIAL_STATE = {
   };
 
 class SignUpForm extends Component {
+	public state: any;
+	public INITIAL_STATE: any;
+	public props: any;
+	public email: any;
+	public passwordOne: any;
+	public passwordTwo: any;
+	public error: any;
+
     constructor(props) {
       super(props);
       this.state={...this.INITIAL_STATE};

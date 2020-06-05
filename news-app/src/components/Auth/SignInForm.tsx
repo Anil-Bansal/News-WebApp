@@ -11,6 +11,12 @@ const INITIAL_STATE = {
   };
 
 class SignInForm extends Component {
+	public state: any;
+	public props: any;
+	public email: any;
+	public password: any;
+	public error: any;
+
     constructor(props) {
       super(props);
       this.login=this.login.bind(this)

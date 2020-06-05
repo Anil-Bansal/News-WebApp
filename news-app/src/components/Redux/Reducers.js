@@ -10,7 +10,7 @@ const initialState ={
     articles:[],
     news_end: false,
     error_exist: false, 
-    isLoggedIn: false,
+    isLoggedIn: true,
 }
 
 function newsApp(state = initialState, action) {

@@ -8,8 +8,8 @@ import {BrowserRouter,Link,Route, Switch} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
 import Info from './components/TeamPage/TeamInfo';
 import { withCookies } from 'react-cookie';
-import {SignUpForm} from './SignUp'
-import { SignInForm } from './SignIn';
+import SignUpPage from './components/Auth/SignUpPage'
+import  SignInPage from './components/Auth/SignInPage';
 
 class App extends Component{
 
@@ -30,10 +30,10 @@ class App extends Component{
           <Link to="/Team" className='Route'>Team Info</Link>
         </div>
           <Switch>
-            <Route exact path="/" component={SignUpForm}/>
+            <Route exact path="/" component={SignUpPage}/>
+            <Route exact path="/SignIn" component={SignInPage}/>
             {this.props.isLoggedIn && (
               <div>
-                <Route exact path="/SignIn" component={SignInForm}/>
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
                 <Route exact path="/Sources" component={Sources}/>
                 <Route exact path="/Team" component={Info}/>

@@ -6,8 +6,6 @@ export const SET_NEWS_END='SET_NEWS_END'
 export const SET_ERROR_EXIST='SET_ERROR_EXIST'
 export const SET_LOGIN='SET_LOGIN'
 
-
-
 export function setcountry(newCode) {
   return { type: CHANGE_COUNTRY, val: newCode }
 }

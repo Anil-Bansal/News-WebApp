@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from 'react-redux';
 
 class ButtonCountry extends React.Component{
-	public props: any;
+	public props: Object;
 
     render(){
         return (
@@ -17,7 +17,7 @@ class ButtonCountry extends React.Component{
         }
 }
 
-const mapStateToProps=state=>{
+const mapStateToProps= (state:Object) =>{
     return{
       currentCountry: state.country ,
     };

@@ -8,21 +8,21 @@ import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
 
 class Head extends React.Component{
-	public fetchnews: any;
-	public fetchNewsSearch: any;
+	public fetchNews: void;
+	public fetchNewsSearch: void;
 	public props: any;
 	public input: any;
 
     constructor(props){
       super(props);
       this.onChange=this.onChange.bind(this);
-      this.fetchnews=fetchNews.bind(this);
+      this.fetchNews=fetchNews.bind(this);
       this.fetchNewsSearch=fetchNewsSearch.bind(this);
 
       this.searchNews=this.searchNews.bind(this);
     }
 
-    async searchNews (search)
+    async searchNews (search: String)
       {
         await this.props.setloading(true);
         await this.props.setcountry("");
@@ -39,7 +39,7 @@ class Head extends React.Component{
         event.target.reset();
       };
     
-      async onChange(code)
+      async onChange(code: String)
       {
         await this.props.setloading(true);
         await this.props.setcountry(code);
@@ -47,7 +47,7 @@ class Head extends React.Component{
         await this.props.setpage(1);
         await this.props.setnewsend(false);
         await this.props.seterrorexist(false);
-        this.fetchnews();
+        this.fetchNews();
       }
 
     render(){
@@ -99,7 +99,7 @@ class Head extends React.Component{
     }
 }
 
-const mapStateToProps=state=>{
+const mapStateToProps=(state: Object)=>{
     return{
       is_loading: state.is_loading,
       country: state.country ,

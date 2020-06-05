@@ -3,6 +3,7 @@ import Person from './Person';
 import Vinayak from '../../assets/Vinayak.jpeg';
 import Anil from '../../assets/Anil.jpg';
 import './Team.css'
+
 const Info = (props) => {
     return (
         <div>

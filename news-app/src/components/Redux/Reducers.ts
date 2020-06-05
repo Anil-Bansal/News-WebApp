@@ -1,7 +1,4 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END } from './Actions'
-// import { combineReducers } from 'redux'
-// eslint-disable-next-line
-import React from 'react';
 
 const initialState ={
     is_loading: true,
@@ -13,8 +10,7 @@ const initialState ={
 }
 
 function newsApp(state = initialState, action?) {
-    //if(action.type===LOADING)
-    //    console.log(action.val);
+
     switch (action.type) {
         case LOADING:
             return Object.assign({}, state,{

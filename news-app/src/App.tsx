@@ -10,12 +10,12 @@ import Info from './components/TeamPage/TeamInfo';
 import { withCookies } from 'react-cookie';
 
 class App extends Component{
-	public fetchnews: any;
+	public fetchNews: any;
 	public props: any;
 
   constructor(props){
     super(props);
-    this.fetchnews=fetchNews.bind(this);
+    this.fetchNews=fetchNews.bind(this);
   }
  
   render(){

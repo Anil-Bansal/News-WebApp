@@ -11,10 +11,12 @@ import {connect} from 'react-redux';
 
 
 class Main extends React.Component{
-
+	public fetchNews: void;
+	public fetchNewsSearch: void;
+	
     constructor(props){
         super(props);
-        this.fetchnews=fetchNews.bind(this);
+        this.fetchNews=fetchNews.bind(this);
         this.fetchNewsSearch=fetchNewsSearch.bind(this);
         if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
         {
@@ -28,7 +30,7 @@ class Main extends React.Component{
       await this.props.setcountry('in');
       await this.props.setpage(1);
       await this.props.setarticles([]);
-      this.fetchnews();
+      this.fetchNews();
     }
 
     SelectiveDisplay(){
@@ -46,28 +48,28 @@ class Main extends React.Component{
     
 
     render(){
-    if(this.props.news_end){
-        return(
-            <BrowserRouter>
-            <div>
-                <Head />
-                {this.SelectiveDisplay()}
-            </div>
-            </BrowserRouter>
-        )}
-    else{
-        return(
-            <BrowserRouter>
-            <div>
-                <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchnews}/>
-                <Head />
-                {this.SelectiveDisplay()}
-            </div>
-            </BrowserRouter>
-        )}
-    }
+      if(this.props.news_end){
+          return(
+              <BrowserRouter>
+              <div>
+                  <Head />
+                  {this.SelectiveDisplay()}
+              </div>
+              </BrowserRouter>
+          )}
+      else{
+          return(
+              <BrowserRouter>
+              <div>
+                  <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>
+                  <Head />
+                  {this.SelectiveDisplay()}
+              </div>
+              </BrowserRouter>
+          )}
+      }
 }
-const mapStateToProps=(state,ownProps)=>{
+const mapStateToProps=(state: Object,ownProps: Object)=>{
     return{
       page: state.page,
       country: state.country ,

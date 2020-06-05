@@ -12,10 +12,12 @@ import SignUpPage from './components/Auth/SignUpPage'
 import  SignInPage from './components/Auth/SignInPage';
 
 class App extends Component{
+	public fetchNews: any;
+	public props: any;
 
   constructor(props){
     super(props);
-    this.fetchnews=fetchNews.bind(this);
+    this.fetchNews=fetchNews.bind(this);
   }
  
   render(){

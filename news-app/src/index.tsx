@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {createStore} from 'redux';
-import newsApp from './components/Redux/Reducers.js';
+import newsApp from './components/Redux/Reducers';
 import  {Provider} from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
 import Firebase, { FirebaseContext } from './components/Firebase';

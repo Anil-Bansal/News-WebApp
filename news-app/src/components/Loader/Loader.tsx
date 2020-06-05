@@ -3,6 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 class Loader extends React.Component{
+	public props: Object;
+
     render(){
         return (
             <div align='center'>
@@ -12,7 +14,7 @@ class Loader extends React.Component{
     }
 }
 
-const mapStateToProps=state=>{
+const mapStateToProps=(state: Object)=>{
     return{
       news_end: state.news_end,
     };

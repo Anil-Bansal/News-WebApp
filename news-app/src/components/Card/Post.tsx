@@ -5,6 +5,8 @@ import Button from  'react-bootstrap/Button'
 import {MdFavoriteBorder,MdFavorite} from 'react-icons/md'
 
 class Post extends React.Component{
+    public state: Object;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -37,8 +39,8 @@ class Post extends React.Component{
         })
     }
     unlikePost = () => {
-        var likedPosts = (this.props.cookies).get('testing')
-        const index = likedPosts.indexOf(this.props.url);
+        var likedPosts: Array<string> = (this.props.cookies).get('testing')
+        const index: number = likedPosts.indexOf(this.props.url);
         if (index > -1) {
             likedPosts.splice(index, 1);
         }

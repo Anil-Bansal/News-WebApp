@@ -18,7 +18,7 @@ export function fetchNews() {
     this.props.setpage(this.props.page+1);
 };
 
-export function fetchNewsSearch(search,page){
+export function fetchNewsSearch(search,page?){
     getNews2(search,page)
     .then(articles=> {
       const new_articles=articles;

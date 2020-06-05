@@ -5,6 +5,9 @@ import Head from '../Header/head'
 import ClipLoader from 'react-spinners/ClipLoader';
 
 class Sources extends Component{
+	public state: Object;
+	public props: Object;
+
     constructor(props){
         super(props);
         this.state={
@@ -12,11 +15,11 @@ class Sources extends Component{
             sources: [],
             news_end: false
         }
-        this.fetchsources=this.fetchsources.bind(this);
+        this.fetchSources=this.fetchSources.bind(this);
     }
 
-    fetchsources(country=this.props.country){
-        const url=`https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country=${country}`;
+    fetchSources(country=this.props.country){
+        const url: String=`https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country=${country}`;
         fetch(url)
         .then(response=>response.json())
         .then(result=>result.sources)
@@ -33,16 +36,15 @@ class Sources extends Component{
     }
 
     componentDidMount(){
-        this.fetchsources();
+        this.fetchSources();
     }
 
     shouldComponentUpdate(nextProps) {
-        console.log(this.props.country, nextProps.country)
         if( this.props.country !== nextProps.country)
         {   
             this.setState({is_loading: true})
             this.setState({sources: []})
-            this.fetchsources(nextProps.country)
+            this.fetchSources(nextProps.country)
         }
         return true ;
     }

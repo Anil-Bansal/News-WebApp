@@ -1,7 +1,4 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END,SET_LOGIN } from './Actions.js'
-// import { combineReducers } from 'redux'
-// eslint-disable-next-line
-import React from 'react';
 
 const initialState ={
     is_loading: true,
@@ -13,7 +10,7 @@ const initialState ={
     isLoggedIn: false,
 }
 
-function newsApp(state = initialState, action) {
+function newsApp(state = initialState, action?) {
 
     switch (action.type) {
         case LOADING:

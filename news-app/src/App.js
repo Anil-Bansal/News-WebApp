@@ -9,6 +9,7 @@ import Sources from './components/Sources/Sources';
 import Info from './components/TeamPage/TeamInfo';
 import { withCookies } from 'react-cookie';
 import {SignUpForm} from './SignUp'
+import { SignInForm } from './SignIn';
 
 class App extends Component{
 
@@ -23,6 +24,7 @@ class App extends Component{
       <div>
         <div className='Top'>
           <Link to="/" className='Route'>SignUp  </Link>
+          <Link to="/SignIn" className='Route'>Sign In</Link>
           <Link to="/Main" className='Route'>NewsFetch</Link>
           <Link to="/Sources" className='Route'>Sources</Link>
           <Link to="/Team" className='Route'>Team Info</Link>
@@ -31,6 +33,7 @@ class App extends Component{
             <Route exact path="/" component={SignUpForm}/>
             {this.props.isLoggedIn && (
               <div>
+                <Route exact path="/SignIn" component={SignInForm}/>
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
                 <Route exact path="/Sources" component={Sources}/>
                 <Route exact path="/Team" component={Info}/>

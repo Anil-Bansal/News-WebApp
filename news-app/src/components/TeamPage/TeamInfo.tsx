@@ -1,5 +1,5 @@
 import React from 'react';
-import Person from './Person.js';
+import Person from './Person';
 import Vinayak from '../../assets/Vinayak.jpeg';
 import Anil from '../../assets/Anil.jpg';
 import './Team.css'

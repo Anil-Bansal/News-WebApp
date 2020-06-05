@@ -1,4 +1,4 @@
-import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END } from './Actions.js'
+import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END } from './Actions'
 // import { combineReducers } from 'redux'
 // eslint-disable-next-line
 import React from 'react';

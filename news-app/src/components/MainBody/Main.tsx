@@ -11,14 +11,15 @@ import {connect} from 'react-redux';
 
 
 class Main extends React.Component{
-	public fetchnews: any;
-	public fetchNewsSearch: any;
-	public props: any;
+	// public fetchnews: any;
+	// public fetchNewsSearch: any;
+	// public props: any;
 
     constructor(props){
         super(props);
         this.fetchnews=fetchNews.bind(this);
         this.fetchNewsSearch=fetchNewsSearch.bind(this);
+        console.log(this.props)
         if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
         {
           (this.props.cookies).set('testing',[],{path: '/'})

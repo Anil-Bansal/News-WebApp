@@ -5,9 +5,9 @@ import Button from  'react-bootstrap/Button'
 import {MdFavoriteBorder,MdFavorite} from 'react-icons/md'
 
 class Post extends React.Component{
-	public state: any;
-	public props: any;
-	public setState: any;
+	// public state: any;
+	// public props: any;
+	// public setState: any;
 
     constructor(props) {
         super(props);

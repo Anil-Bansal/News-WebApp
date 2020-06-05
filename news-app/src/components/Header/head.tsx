@@ -5,13 +5,13 @@ import Button from 'react-bootstrap/Button'
 // eslint-disable-next-line
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
-import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch.js';
+import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
 
 class Head extends React.Component{
-	public fetchnews: any;
-	public fetchNewsSearch: any;
-	public props: any;
-	public input: any;
+	// public fetchnews: any;
+	// public fetchNewsSearch: any;
+	// public props: any;
+	// public input: any;
 
     constructor(props){
       super(props);

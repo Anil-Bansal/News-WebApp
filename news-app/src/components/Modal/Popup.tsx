@@ -6,7 +6,7 @@ import {FaFacebookF,FaTwitter, FaLinkedin} from 'react-icons/fa';
 
 
 class Popup extends React.Component{
-	public props: any;
+	// public props: any;
 
     goToUrl(url){
         window.open(url,'_blank');

@@ -8,6 +8,7 @@ import {BrowserRouter,Link,Route, Switch} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
 import Info from './components/TeamPage/TeamInfo';
 import { withCookies } from 'react-cookie';
+import {SignUpForm} from './SignUp'
 
 class App extends Component{
 
@@ -21,12 +22,14 @@ class App extends Component{
       <BrowserRouter>
       <div>
         <div className='Top'>
-          <Link to="/" className='Route'>News Fetch  </Link>
+          <Link to="/" className='Route'>SignUp  </Link>
+          <Link to="/Main" className='Route'>NewsFetch</Link>
           <Link to="/Sources" className='Route'>Sources</Link>
           <Link to="/Team" className='Route'>Team Info</Link>
         </div>
           <Switch>
-            <Route exact path="/" render={() => (<Main cookies={this.props.cookies}/>)}/>
+            <Route exact path="/" component={SignUpForm}/>
+            <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
             <Route exact path="/Sources" component={Sources}/>
             <Route exact path="/Team" component={Info}/>
           </Switch>

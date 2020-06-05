@@ -2,7 +2,7 @@ import app from 'firebase/app';
 import 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
+    apiKey: "",
     authDomain: "news-app-21a45.firebaseapp.com",
     databaseURL: "https://news-app-21a45.firebaseio.com",
     projectId: "news-app-21a45",
@@ -17,6 +17,14 @@ class Firebase {
       app.initializeApp(firebaseConfig);
       this.auth=app.auth();
     }
+
+    doCreateUserWithEmailAndPassword = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+
+    doSignInWithEmailAndPassword = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+
+    doSignOut = () => this.auth.signOut();
 }
    
-  export default Firebase;
+export default Firebase;

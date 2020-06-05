@@ -27,7 +27,29 @@
     <title>React App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
+        authDomain: "news-app-21a45.firebaseapp.com",
+        databaseURL: "https://news-app-21a45.firebaseio.com",
+        projectId: "news-app-21a45",
+        storageBucket: "news-app-21a45.appspot.com",
+        messagingSenderId: "570938653373",
+        appId: "1:570938653373:web:f22ce001cfb58a5e3595d4",
+        measurementId: "G-4HVVFZVBF3"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

@@ -7,17 +7,20 @@ import {createStore} from 'redux';
 import newsApp from './components/Redux/Reducers.js';
 import  {Provider} from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
+import Firebase, { FirebaseContext } from './components/Firebase';
 
 const store=createStore(newsApp);
 
 ReactDOM.render(
-  <CookiesProvider>
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>
-  </CookiesProvider>,
+  <FirebaseContext.Provider value={new Firebase()}>
+    <CookiesProvider>
+      <React.StrictMode>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </React.StrictMode>
+    </CookiesProvider>
+  </FirebaseContext.Provider>,
 
   document.getElementById('root')
 );

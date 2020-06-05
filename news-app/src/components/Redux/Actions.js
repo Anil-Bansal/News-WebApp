@@ -4,6 +4,8 @@ export const SET_ARTICLES = 'SET_ARTICLES'
 export const LOADING = 'LOADING'
 export const SET_NEWS_END='SET_NEWS_END'
 export const SET_ERROR_EXIST='SET_ERROR_EXIST'
+export const SET_LOGIN='SET_LOGIN'
+
 
 
 export function setcountry(newCode) {
@@ -30,3 +32,8 @@ export function setnewsend(status) {
 export function seterrorexist(status) {
   return { type: SET_ERROR_EXIST, val: status }
 }
+
+export function setLoginStatus(status) {
+  return { type: SET_LOGIN, val: status }
+}
+

@@ -1,4 +1,4 @@
-import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END } from './Actions.js'
+import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END,SET_LOGIN } from './Actions.js'
 // import { combineReducers } from 'redux'
 // eslint-disable-next-line
 import React from 'react';
@@ -10,6 +10,7 @@ const initialState ={
     articles:[],
     news_end: false,
     error_exist: false, 
+    isLoggedIn: false,
 }
 
 function newsApp(state = initialState, action) {
@@ -39,6 +40,10 @@ function newsApp(state = initialState, action) {
         case SET_ERROR_EXIST:
             return Object.assign({}, state,{
                 error_exist: action.val,
+            })
+        case SET_LOGIN:
+            return Object.assign({}, state,{
+                isLoggedIn: action.val,
             })
         default:
           return state

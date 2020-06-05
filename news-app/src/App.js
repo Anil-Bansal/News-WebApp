@@ -29,9 +29,14 @@ class App extends Component{
         </div>
           <Switch>
             <Route exact path="/" component={SignUpForm}/>
-            <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
-            <Route exact path="/Sources" component={Sources}/>
-            <Route exact path="/Team" component={Info}/>
+            {this.props.isLoggedIn && (
+              <div>
+                <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
+                <Route exact path="/Sources" component={Sources}/>
+                <Route exact path="/Team" component={Info}/>
+              </div>)
+            } 
+
           </Switch>
 
         </div>
@@ -48,6 +53,7 @@ const mapStateToProps=state=>{
     articles: state.articles,
     news_end: state.news_end,
     error_exist: state.error_exist,
+    isLoggedIn: state.isLoggedIn
   };
 }
 
@@ -58,7 +64,8 @@ const mapDispatchToProps=dispatch=>{
     setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
     seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
     setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
-    setpage: (val)=>dispatch(actiontypes.setpage(val))
+    setpage: (val)=>dispatch(actiontypes.setpage(val)),
+    setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val))
   };
 }
 

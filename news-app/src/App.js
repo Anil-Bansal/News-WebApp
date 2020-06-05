@@ -36,7 +36,6 @@ class App extends Component{
             <Route exact path="/Sources" component={Sources}/>
             <Route exact path="/Team" component={Info}/>
           </Switch>
-
         </div>
       </BrowserRouter>
     )

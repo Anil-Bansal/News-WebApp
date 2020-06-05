@@ -3,6 +3,16 @@ import {withFirebase} from '../Firebase';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 const INITIAL_STATE = {
     email: '',
@@ -65,34 +75,45 @@ class SignUpForm extends Component {
         email === '';
   
       return (
+      <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div align='center'>
+        <Avatar >
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
         <div>
           <form onSubmit={this.onSubmit}>
-              <input
+              <TextField
                   name="email"
                   value={email}
                   onChange={this.onChange}
                   type="text"
                   placeholder="Email Address"
               />
-              <input
+              <TextField
                   name="passwordOne"
                   value={passwordOne}
                   onChange={this.onChange}
                   type="password"
                   placeholder="Password"
               />
-              <input
+              <TextField
                   name="passwordTwo"
                   value={passwordTwo}
                   onChange={this.onChange}
                   type="password"
                   placeholder="Confirm Password"
               />
-              <button disabled={isInvalid} type="submit">Sign Up</button>
+              <Button fullWidth variant="contained" color="primary" disabled={isInvalid} type="submit">Sign Up</Button>
   
               {error && <p>{error.message}</p>}
           </form>
-        </div>
+        </div></div>
+        </Container>
+
       );
     }
   }

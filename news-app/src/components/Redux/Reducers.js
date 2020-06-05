@@ -10,12 +10,11 @@ const initialState ={
     articles:[],
     news_end: false,
     error_exist: false, 
-    isLoggedIn: true,
+    isLoggedIn: false,
 }
 
 function newsApp(state = initialState, action) {
-    //if(action.type===LOADING)
-    //    console.log(action.val);
+
     switch (action.type) {
         case LOADING:
             return Object.assign({}, state,{

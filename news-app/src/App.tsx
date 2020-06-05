@@ -10,8 +10,8 @@ import Info from './components/TeamPage/TeamInfo';
 import { withCookies } from 'react-cookie';
 
 class App extends Component{
-	// public fetchnews: any;
-	// public props: any;
+	public fetchnews: any;
+	public props: any;
 
   constructor(props){
     super(props);

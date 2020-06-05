@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from 'react-redux';
 
 class ButtonCountry extends React.Component{
-	// public props: any;
+	public props: any;
 
     render(){
         return (

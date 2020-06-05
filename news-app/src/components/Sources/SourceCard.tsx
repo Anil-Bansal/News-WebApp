@@ -2,9 +2,9 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 
 class SourceCard extends React.Component{
-	// public state: any;
+	public state: any;
 	// public setState: any;
-	// public props: any;
+	public props: any;
 
     constructor(props) {
         super(props);

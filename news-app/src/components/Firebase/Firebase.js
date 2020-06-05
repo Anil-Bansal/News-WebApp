@@ -2,7 +2,7 @@ import app from 'firebase/app';
 import 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "",
+    apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
     authDomain: "news-app-21a45.firebaseapp.com",
     databaseURL: "https://news-app-21a45.firebaseio.com",
     projectId: "news-app-21a45",

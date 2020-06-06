@@ -35,11 +35,9 @@ class Post extends React.Component{
         window.open(url,'_blank');
     }
     likePost = () => {
-        (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url])
-        this.setState({
-            isLiked: true
-        })
-        this.props.firebase.addCookieToDatabase(this.props.uid,[...(this.props.cookies).get('testing'),this.props.url])
+        (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
+        this.setState({isLiked: true});
+        this.props.firebase.addCookieToDatabase(this.props.uid,(this.props.cookies).get('testing'));
     }
     unlikePost = () => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
@@ -49,9 +47,7 @@ class Post extends React.Component{
         }
         (this.props.cookies).set('testing',likedPosts)
         this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts)
-        this.setState({
-            isLiked: false
-        })
+        this.setState({isLiked: false})
     }
 
     render(){
@@ -103,10 +99,10 @@ const mapStateToProps=state=>{
   }
   
 const mapDispatchToProps=dispatch=>{
-return{
-    setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-    setUserId: (val)=>dispatch(actiontypes.setUserId(val))
-};
+    return{
+        setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
+        setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+    };
 }
   
 export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Post))

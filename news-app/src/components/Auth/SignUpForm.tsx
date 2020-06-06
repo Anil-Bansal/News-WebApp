@@ -49,7 +49,6 @@ class SignUpForm extends Component {
           this.login(true);
           this.setState({ ...INITIAL_STATE });
           this.props.firebase.addNewUser(this.props.firebase.getUID());
-          this.props.setlikedurl([]);
           this.props.history.push('/Main');
         })
         .catch(error => {
@@ -138,7 +137,6 @@ class SignUpForm extends Component {
   const mapDispatchToProps=dispatch=>{
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setlikedurl: (val)=>dispatch(actiontypes.setlikedurl(val)),
       setUserId: (val)=>dispatch(actiontypes.setUserId(val))
     };
   }

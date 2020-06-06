@@ -1,4 +1,4 @@
-import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END,SET_LOGIN,SET_UID,SET_LIKED_URL } from './Actions.ts'
+import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END,SET_LOGIN,SET_UID } from './Actions.ts'
 
 const initialState ={
     is_loading: true,
@@ -9,7 +9,6 @@ const initialState ={
     error_exist: false, 
     isLoggedIn: false,
     uid: "",
-    liked_urls: []
 }
 
 function newsApp(state = initialState, action?) {
@@ -46,10 +45,6 @@ function newsApp(state = initialState, action?) {
         case SET_UID:
             return Object.assign({}, state,{
                 uid: action.val,
-            })
-        case SET_LIKED_URL:
-            return Object.assign({},state,{
-                liked_urls: action.val,
             })
         default:
           return state

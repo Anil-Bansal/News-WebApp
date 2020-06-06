@@ -36,17 +36,8 @@ class Firebase {
     addCookieToDatabase = (uid,cookie=[]) =>
     {
       this.database.collection('users').doc(uid).set({
-        name: 'vinayak',
-        cookie: ['first','second',"test"]
-      }).then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch(function(error) {
         cookie: cookie
       })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-      });
     }
 
     getDatabase = () =>

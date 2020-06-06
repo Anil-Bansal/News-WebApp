@@ -45,8 +45,6 @@ class SignInForm extends Component {
           this.login();
           let uid=this.props.firebase.getUID()
           this.props.setUserId(uid);
-          console.log(uid);
-          this.props.firebase.getUserLikedUrl(uid);
           this.setState({ ...INITIAL_STATE });
           this.props.history.push('/Main');
         })
@@ -122,8 +120,7 @@ class SignInForm extends Component {
   const mapDispatchToProps=dispatch=>{
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-      setlikedurl: (val)=>dispatch(actiontypes.setlikedurl(val))
+      setUserId: (val)=>dispatch(actiontypes.setUserId(val))
     };
   }
   

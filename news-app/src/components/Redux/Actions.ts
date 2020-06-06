@@ -41,8 +41,3 @@ export function setLoginStatus(status) {
 export function setUserId(uid) {
   return { type: SET_UID, val: uid }
 }
-
-export function setlikedurl(urls) {
-  return { type: SET_UID, val: urls }
-}
-

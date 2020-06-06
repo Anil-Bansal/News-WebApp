@@ -1,4 +1,4 @@
-import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END,SET_LOGIN } from './Actions.ts'
+import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END,SET_LOGIN,SET_UID } from './Actions.ts'
 
 const initialState ={
     is_loading: true,
@@ -8,6 +8,7 @@ const initialState ={
     news_end: false,
     error_exist: false, 
     isLoggedIn: false,
+    uid: ""
 }
 
 function newsApp(state = initialState, action?) {
@@ -40,6 +41,10 @@ function newsApp(state = initialState, action?) {
         case SET_LOGIN:
             return Object.assign({}, state,{
                 isLoggedIn: action.val,
+            })
+        case SET_UID:
+            return Object.assign({}, state,{
+                uid: action.val,
             })
         default:
           return state

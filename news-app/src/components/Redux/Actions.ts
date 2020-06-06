@@ -5,6 +5,8 @@ export const LOADING = 'LOADING'
 export const SET_NEWS_END='SET_NEWS_END'
 export const SET_ERROR_EXIST='SET_ERROR_EXIST'
 export const SET_LOGIN='SET_LOGIN'
+export const SET_UID='SET_UID'
+
 
 export function setcountry(newCode) {
   return { type: CHANGE_COUNTRY, val: newCode }
@@ -33,5 +35,9 @@ export function seterrorexist(status) {
 
 export function setLoginStatus(status) {
   return { type: SET_LOGIN, val: status }
+}
+
+export function setUserId(uid) {
+  return { type: SET_UID, val: uid }
 }
 

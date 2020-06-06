@@ -3,8 +3,6 @@ import {withFirebase} from '../Firebase';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -43,6 +41,10 @@ class SignInForm extends Component {
       const { email, password } = this.state;
    
       this.props.firebase
+        .addCookieToDatabase()
+        
+
+      this.props.firebase
         .doSignInWithEmailAndPassword(email, password)
         .then(() => {
           this.login();
@@ -53,6 +55,9 @@ class SignInForm extends Component {
           this.setState({ error });
         });
    
+      this.props.firebase.getDatabase()
+
+
       event.preventDefault();
     };
    

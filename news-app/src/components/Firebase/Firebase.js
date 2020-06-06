@@ -1,5 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
@@ -16,6 +18,7 @@ class Firebase {
     constructor() {
       app.initializeApp(firebaseConfig);
       this.auth=app.auth();
+      this.database=app.firestore();
     }
 
     doCreateUserWithEmailAndPassword = (email, password) =>
@@ -25,6 +28,29 @@ class Firebase {
     this.auth.signInWithEmailAndPassword(email, password);
 
     doSignOut = () => this.auth.signOut();
+
+    addCookieToDatabase = () =>
+    {
+      this.database.collection('users').doc('user1').set({
+        name: 'vinayak',
+        // cookie: ['firsr','second']
+      }).then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+    }
+
+    getDatabase = () =>
+    {
+    this.database.collection("users").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data()}`);
+      });
+      });
+    }
+
 }
    
 export default Firebase;

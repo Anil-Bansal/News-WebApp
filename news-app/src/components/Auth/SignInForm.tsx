@@ -40,10 +40,11 @@ class SignInForm extends Component {
    
     async signInSync ()
       {
-        await var uid=this.props.firebase.getUID()
+        var uid = await this.props.firebase.getUID()
         await this.props.setUserId(uid);
-        await var cookies = this.props.firebase.getCookieFromDatabase(uid)
-        this.props.cookies.set(cookies);
+        var cookies = await this.props.firebase.getCookieFromDatabase(uid)
+        await console.log(cookies)
+        await this.props.cookies.set(cookies);
       }
 
     onSubmit = event => {

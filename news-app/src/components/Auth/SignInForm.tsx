@@ -29,22 +29,30 @@ class SignInForm extends Component {
     constructor(props) {
       super(props);
       this.login=this.login.bind(this)
+      this.signInSync=this.signInSync.bind(this)
+
       this.state = { ...INITIAL_STATE };
     }
   
     login () {
-      console.log('test')
      this.props.setLoginStatus(true);
     }
    
+    async signInSync ()
+      {
+        await var uid=this.props.firebase.getUID()
+        await this.props.setUserId(uid);
+        await var cookies = this.props.firebase.getCookieFromDatabase(uid)
+        this.props.cookies.set(cookies);
+      }
+
     onSubmit = event => {
       const { email, password } = this.state;    
       this.props.firebase
         .doSignInWithEmailAndPassword(email, password)
         .then(() => {
           this.login();
-          let uid=this.props.firebase.getUID()
-          this.props.setUserId(uid);
+          this.signInSync( )
           this.setState({ ...INITIAL_STATE });
           this.props.history.push('/Main');
         })
@@ -110,10 +118,10 @@ class SignInForm extends Component {
     }
   }
 
-  const mapStateToProps=state=>{
+  const mapStateToProps=(state: Object)=>{
     return{
       isLoggedIn: state.isLoggedIn,
-      uid: state.uid
+      uid: state.uid,
     };
   }
   

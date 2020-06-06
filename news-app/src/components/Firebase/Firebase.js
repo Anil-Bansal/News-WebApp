@@ -3,14 +3,14 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
-    authDomain: "news-app-21a45.firebaseapp.com",
-    databaseURL: "https://news-app-21a45.firebaseio.com",
-    projectId: "news-app-21a45",
-    storageBucket: "news-app-21a45.appspot.com",
-    messagingSenderId: "570938653373",
-    appId: "1:570938653373:web:f22ce001cfb58a5e3595d4",
-    measurementId: "G-4HVVFZVBF3"
+  apiKey: "AIzaSyDbNhjNKBuikvh9_tTGhwBwQ6XeXCFpMeo",
+  authDomain: "news-fk-40403.firebaseapp.com",
+  databaseURL: "https://news-fk-40403.firebaseio.com",
+  projectId: "news-fk-40403",
+  storageBucket: "news-fk-40403.appspot.com",
+  messagingSenderId: "1007711628928",
+  appId: "1:1007711628928:web:ff5ce48bc28b53fee6c065",
+  measurementId: "G-XG648Q3ZWW"
 };
 
 class Firebase {
@@ -40,27 +40,16 @@ class Firebase {
       })
     }
 
-    getDatabase = () =>
-    {
-      this.database.collection("users").get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data()}`);
-        });
-      });
-    }
-
     addNewUser=(uid)=>{
       this.database.collection("users").doc(uid).set({
         cookie: []
       })
     }
 
-    getUserLikedUrl=(uid)=>{
-      console.log(uid);
+    getCookieFromDatabase=(uid)=>{
       this.database.collection("users").doc(uid).get()
       .then((curdoc)=>{
-        console.log(curdoc.data());
+        console.log(curdoc.data().cookie)
         return curdoc.data().cookie;
       })
     }
@@ -69,5 +58,3 @@ class Firebase {
 
   
 export default Firebase;
-
-// export default Firebase

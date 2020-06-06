@@ -33,7 +33,7 @@ class App extends Component{
         </div>
           <Switch>
             <Route exact path="/" component={SignUpPage}/>
-            <Route exact path="/SignIn" component={SignInPage}/>
+            <Route exact path="/SignIn" render={() => (<SignInPage cookies={this.props.cookies}/>)}/>
             {this.props.isLoggedIn && (
               <div>
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>

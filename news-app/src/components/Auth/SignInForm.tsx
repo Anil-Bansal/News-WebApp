@@ -68,22 +68,24 @@ class SignInForm extends Component {
       return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div align='center'>
+        <div align='center' style={{marginTop:50}}>
           <Avatar >
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+          <Typography component="h1" variant="h4" style={{marginBottom:30}}>
+            Sign In
           </Typography>
           <form onSubmit={this.onSubmit}>
-          <div className='row' stle={{marginBottom:20}}>
+          <div  align='center'>
             <TextField
               name="email"
               value={email}
               onChange={this.onChange}
               type="text"
               placeholder="Email Address"
-              style={{marginRight:10}}
+              style={{marginBottom:20}}
+              variant="outlined"
+                  
             />
             <TextField
               name="password"
@@ -91,16 +93,17 @@ class SignInForm extends Component {
               onChange={this.onChange}
               type="password"
               placeholder="Password"
+              variant="outlined"
+                  style={{marginBottom:20}}
             />
           </div>
               {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"/> */}
-            <p></p>
             <Button fullWidth variant="contained" color="primary" disabled={isInvalid} type="submit">
               Sign In
             </Button>
-            {error && <p>{error.message}</p>}
+            {error && <h4>{error.message}</h4>}
           </form>
         </div>
         </Container>

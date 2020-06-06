@@ -7,11 +7,10 @@ class SignUpPage extends React.Component{
     render(){
         return(
             <div>
-                <h1>SignUp</h1>
                 <SignUpForm />
-                <p>
-                Already have an account? <Link to='/Signin'>Sign IN</Link>
-                </p>
+                <h5 align='center' style={{marginTop:30}}>
+                Already have an account? <Link to='/Signin'>Sign In</Link>
+                </h5>
             </div>
         )
     }

@@ -69,20 +69,20 @@ class SignUpForm extends Component {
           error,
       } = this.state;
   
-      const isInvalid =
+      var isInvalid =
         passwordOne !== passwordTwo ||
         passwordOne === '' ||
         email === '';
   
       return (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style={{marginTop:50}}>
       <CssBaseline />
       <div align='center'>
         <Avatar >
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography component="h1" variant="h4" style={{marginBottom:20}}>
+          Sign Up
         </Typography>
         <div>
           <form onSubmit={this.onSubmit}>
@@ -92,6 +92,8 @@ class SignUpForm extends Component {
                   onChange={this.onChange}
                   type="text"
                   placeholder="Email Address"
+                  variant="outlined"
+                  style={{marginBottom:20}}
               />
               <TextField
                   name="passwordOne"
@@ -99,6 +101,8 @@ class SignUpForm extends Component {
                   onChange={this.onChange}
                   type="password"
                   placeholder="Password"
+                  variant="outlined"
+                  style={{marginBottom:20}}
               />
               <TextField
                   name="passwordTwo"
@@ -106,10 +110,12 @@ class SignUpForm extends Component {
                   onChange={this.onChange}
                   type="password"
                   placeholder="Confirm Password"
+                  variant="outlined"
+                  style={{marginBottom:20}}
               />
               <Button fullWidth variant="contained" color="primary" disabled={isInvalid} type="submit">Sign Up</Button>
   
-              {error && <p>{error.message}</p>}
+              {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
           </form>
         </div></div>
         </Container>

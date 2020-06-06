@@ -38,16 +38,15 @@ class SignInForm extends Component {
     }
    
     onSubmit = event => {
-      const { email, password } = this.state;
-   
-    
-        
+      const { email, password } = this.state;    
       this.props.firebase
         .doSignInWithEmailAndPassword(email, password)
         .then(() => {
           this.login();
-          this.props.firebase.addCookieToDatabase(this.props.firebase.getUID())
-          this.props.setUserId(this.props.firebase.getUID());
+          let uid=this.props.firebase.getUID()
+          this.props.setUserId(uid);
+          console.log(uid);
+          this.props.firebase.getUserLikedUrl(uid);
           this.setState({ ...INITIAL_STATE });
           this.props.history.push('/Main');
         })
@@ -123,7 +122,8 @@ class SignInForm extends Component {
   const mapDispatchToProps=dispatch=>{
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+      setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
+      setlikedurl: (val)=>dispatch(actiontypes.setlikedurl(val))
     };
   }
   

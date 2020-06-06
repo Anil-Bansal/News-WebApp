@@ -43,19 +43,35 @@ class Firebase {
         cookie: ['first','second',"test"]
       }).then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
+      })
+      .catch(function(error) {
         console.error("Error adding document: ", error);
-    });
+      });
     }
 
     getDatabase = () =>
     {
-    this.database.collection("users").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
+      this.database.collection("users").get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
           console.log(`${doc.id} => ${doc.data()}`);
+        });
       });
-      });
+    }
+
+    addNewUser=(uid)=>{
+      this.database.collection("users").doc(uid).set({
+        cookie: []
+      })
+    }
+
+    getUserLikedUrl=(uid)=>{
+      console.log(uid);
+      this.database.collection("users").doc(uid).get()
+      .then((curdoc)=>{
+        console.log(curdoc.data());
+        return curdoc.data().cookie;
+      })
     }
 
 }

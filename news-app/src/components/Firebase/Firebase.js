@@ -1,9 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { withCookies } from 'react-cookie';
-import {connect} from 'react-redux';
-import * as actiontypes from '../Redux/Actions';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
@@ -36,14 +33,12 @@ class Firebase {
 
     doSignOut = () => this.auth.signOut();
 
-    addCookieToDatabase = (uid) =>
+    addCookieToDatabase = (uid,cookie=[]) =>
     {
       this.database.collection('users').doc(uid).set({
         name: 'vinayak',
-        cookie: ['first','second',"test"]
-      }).then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    })
+        cookie: cookie
+      })
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });

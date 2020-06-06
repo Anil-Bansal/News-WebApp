@@ -3,6 +3,8 @@ import Card from 'react-bootstrap/Card';
 import Popup from '../Modal/Popup'
 import Button from  'react-bootstrap/Button'
 import {MdFavoriteBorder,MdFavorite} from 'react-icons/md'
+import {withFirebase} from '../Firebase';
+import {connect} from 'react-redux';
 
 class Post extends React.Component{
     public state: Object;
@@ -37,6 +39,7 @@ class Post extends React.Component{
         this.setState({
             isLiked: true
         })
+        this.props.firebase.addCookieToDatabase(this.props.uid,[...(this.props.cookies).get('testing'),this.props.url])
     }
     unlikePost = () => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
@@ -45,6 +48,7 @@ class Post extends React.Component{
             likedPosts.splice(index, 1);
         }
         (this.props.cookies).set('testing',likedPosts)
+        this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts)
         this.setState({
             isLiked: false
         })
@@ -90,4 +94,19 @@ class Post extends React.Component{
     )}
 }
 
-export default Post;
+
+const mapStateToProps=state=>{
+    return{
+      isLoggedIn: state.isLoggedIn,
+      uid: state.uid
+    };
+  }
+  
+const mapDispatchToProps=dispatch=>{
+return{
+    setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
+    setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+};
+}
+  
+export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Post))

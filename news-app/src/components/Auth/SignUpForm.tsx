@@ -125,15 +125,18 @@ class SignUpForm extends Component {
   }
 
 
+
   const mapStateToProps=state=>{
     return{
-      isLoggedIn: state.isLoggedIn
+      isLoggedIn: state.isLoggedIn,
+      uid: state.uid
     };
   }
   
   const mapDispatchToProps=dispatch=>{
     return{
-      setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val))
+      setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
+      setUserId: (val)=>dispatch(actiontypes.setUserId(val))
     };
   }
   

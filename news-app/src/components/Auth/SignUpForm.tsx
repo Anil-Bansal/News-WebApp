@@ -48,6 +48,7 @@ class SignUpForm extends Component {
         .then(authUser => {
           this.login(true);
           this.setState({ ...INITIAL_STATE });
+          this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
           this.props.history.push('/Main');
         })

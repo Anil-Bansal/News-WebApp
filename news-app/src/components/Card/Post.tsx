@@ -35,8 +35,8 @@ class Post extends React.Component{
         window.open(url,'_blank');
     }
     likePost = () => {
-        this.props.firebase.addCookieToDatabase(this.props.uid,(this.props.cookies).get('testing'));
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
+        this.props.firebase.addCookieToDatabase(this.props.uid,(this.props.cookies).get('testing'));
         this.setState({isLiked: true});
     }
     unlikePost = () => {

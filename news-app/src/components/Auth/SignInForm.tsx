@@ -43,7 +43,6 @@ class SignInForm extends Component {
         var uid = await this.props.firebase.getUID()
         await this.props.setUserId(uid);
         var cookies = await this.props.firebase.getCookieFromDatabase(uid)
-        await console.log(cookies)
         await this.props.cookies.set(cookies);
       }
 
@@ -53,9 +52,11 @@ class SignInForm extends Component {
         .doSignInWithEmailAndPassword(email, password)
         .then(() => {
           this.login();
-          this.signInSync( )
           this.setState({ ...INITIAL_STATE });
-          this.props.history.push('/Main');
+          this.signInSync( )
+          .then(()=>{
+            this.props.history.push('/Main');
+          })
         })
         .catch(error => {
           this.setState({ error });

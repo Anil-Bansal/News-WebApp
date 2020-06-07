@@ -33,12 +33,40 @@ class SignUpForm extends Component {
     constructor(props) {
       super(props);
       this.state={...this.INITIAL_STATE};
+      this.googleSignIn=this.googleSignIn.bind(this);
+      this.login=this.login.bind(this);
+      this.signInSync=this.signInSync.bind(this);
     }
 
     login () {
         console.log('tesd')
         this.props.setLoginStatus(true);
        }
+
+       async signInSync ()
+      {
+        var uid = await this.props.firebase.getUID()
+        console.log(uid)
+        this.props.setUserId(uid);
+        var cookies = await this.props.firebase.getCookieFromDatabase(uid)
+        this.props.cookies.set('testing',cookies,{path: '/'});
+        this.props.setCookieLoad(true)
+      }
+
+       googleSignIn = () => {
+        this.props.firebase.doGoogleSignIn()
+        .then(() => {
+          this.login();
+          this.setState({ ...INITIAL_STATE });
+          this.signInSync()
+          .then(()=>{
+            this.props.history.push('/Main');
+          })
+        })
+        .catch(error => {
+          this.setState({ error });
+        });
+      }
 
     onSubmit = event => {
       const { email, passwordOne } = this.state;
@@ -120,6 +148,9 @@ class SignUpForm extends Component {
   
               {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
           </form>
+          <Button variant="contained" color="red" onClick={() => this.googleSignIn()}>
+              Sign In with Google
+          </Button>
         </div></div>
         </Container>
 
@@ -139,7 +170,8 @@ class SignUpForm extends Component {
   const mapDispatchToProps=dispatch=>{
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+      setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
+      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val))
     };
   }
   

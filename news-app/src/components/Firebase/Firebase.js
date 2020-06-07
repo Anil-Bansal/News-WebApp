@@ -33,7 +33,7 @@ class Firebase {
 
     doSignOut = () => {
       this.auth.signOut();
-      console.log("out")}
+    }
 
     addCookieToDatabase = (uid,cookie=[]) =>
     {

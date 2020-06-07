@@ -60,7 +60,6 @@ class Head extends React.Component{
                         <h1 align="center"> Simple News App</h1>
                     </div>
                     
-                    <SignOutButton/>
                   </div>
                     <div className='Search' align = "center">
                         <form id="Search-form" onSubmit={this.handleSubmit}>
@@ -75,6 +74,7 @@ class Head extends React.Component{
                         >
                             Submit 
                         </Button>
+                        <SignOutButton />
                         </form>
                     </div>
                 </div>

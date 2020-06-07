@@ -4,7 +4,6 @@ import Head from '../Header/head';
 import BottomScrollListener from 'react-bottom-scroll-listener';
 import Loader from '../Loader/Loader'
 import ErrorHandler from '../ErrorHandler/ErrorHandler';
-import {BrowserRouter} from 'react-router-dom';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
@@ -50,22 +49,18 @@ class Main extends React.Component{
     render(){
       if(this.props.news_end){
           return(
-              <BrowserRouter>
               <div>
                   <Head />
                   {this.SelectiveDisplay()}
               </div>
-              </BrowserRouter>
           )}
       else{
           return(
-              <BrowserRouter>
               <div>
                   <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>
                   <Head />
                   {this.SelectiveDisplay()}
               </div>
-              </BrowserRouter>
           )}
       }
 }

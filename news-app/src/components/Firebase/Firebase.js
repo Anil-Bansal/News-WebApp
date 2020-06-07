@@ -31,7 +31,9 @@ class Firebase {
       return user.uid
     }
 
-    doSignOut = () => this.auth.signOut();
+    doSignOut = () => {
+      this.auth.signOut();
+      console.log("out")}
 
     addCookieToDatabase = (uid,cookie=[]) =>
     {

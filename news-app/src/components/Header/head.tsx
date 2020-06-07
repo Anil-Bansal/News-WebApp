@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
+import SignOutButton from '../Auth/Signout';
 
 class Head extends React.Component{
 	public fetchNews: void;
@@ -54,9 +55,13 @@ class Head extends React.Component{
         return (
             <div>
                 <div className='Head'>
+                  <div className='row'>
                     <div className='column'>
                         <h1 align="center"> Simple News App</h1>
                     </div>
+                    
+                    <SignOutButton/>
+                  </div>
                     <div className='Search' align = "center">
                         <form id="Search-form" onSubmit={this.handleSubmit}>
                         <label htmlFor="search">Search for News :  </label>

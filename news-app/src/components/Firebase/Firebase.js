@@ -26,6 +26,9 @@ class Firebase {
     doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
+    doGuestSignIn = () =>
+    this.auth.signInAnonymously()
+
     getUID = () =>{
       const user=this.auth.currentUser
       return user.uid

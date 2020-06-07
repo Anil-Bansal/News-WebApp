@@ -30,7 +30,8 @@ class SignInForm extends Component {
       super(props);
       this.login=this.login.bind(this)
       this.signInSync=this.signInSync.bind(this)
-
+      this.guestSignIn=this.guestSignIn.bind(this)
+      this.guestLogin=this.guestLogin.bind(this)
       this.state = { ...INITIAL_STATE };
     }
   
@@ -47,6 +48,31 @@ class SignInForm extends Component {
         this.props.cookies.set('testing',cookies,{path: '/'});
         this.props.setCookieLoad(true)
       }
+
+    async guestLogin()
+    {
+      var uid = await this.props.firebase.getUID()
+      this.props.setUserId(uid);
+      // var cookies = await this.props.firebase.getCookieFromDatabase(uid)
+      // this.props.cookies.set('testing',cookies,{path: '/'});
+      this.props.setCookieLoad(true)
+    }
+
+
+    guestSignIn = () => {
+      this.props.firebase.doGuestSignIn()
+      .then(() => {
+        this.login();
+        this.setState({ ...INITIAL_STATE });
+        this.guestLogin()
+        .then(()=>{
+          this.props.history.push('/Main');
+        })
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+    }
 
     onSubmit = event => {
       const { email, password } = this.state;    
@@ -116,6 +142,9 @@ class SignInForm extends Component {
             </Button>
             {error && <h4>{error.message}</h4>}
           </form>
+          <Button variant="contained" color="info" onClick={() => this.guestSignIn()}>
+              Sign In as Guest
+          </Button>
         </div>
         </Container>
       );

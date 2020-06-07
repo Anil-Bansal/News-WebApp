@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import Button from 'react-bootstrap/Button'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
 
@@ -23,7 +23,6 @@ const INITIAL_STATE = {
 
 class SignUpForm extends Component {
 	public state: any;
-	public INITIAL_STATE: any;
 	public props: any;
 	public email: any;
 	public passwordOne: any;
@@ -32,14 +31,16 @@ class SignUpForm extends Component {
 
     constructor(props) {
       super(props);
-      this.state={...this.INITIAL_STATE};
+      
       this.googleSignIn=this.googleSignIn.bind(this);
       this.login=this.login.bind(this);
       this.signInSync=this.signInSync.bind(this);
+      this.guestSignIn=this.guestSignIn.bind(this)
+      this.guestLogin=this.guestLogin.bind(this)
+      this.state = {...INITIAL_STATE};
     }
 
     login () {
-        console.log('tesd')
         this.props.setLoginStatus(true);
        }
 
@@ -50,6 +51,28 @@ class SignUpForm extends Component {
         this.props.setUserId(uid);
         var cookies = await this.props.firebase.getCookieFromDatabase(uid)
         this.props.cookies.set('testing',cookies,{path: '/'});
+        this.props.setCookieLoad(true)
+      }
+
+      guestSignIn = () => {
+        this.props.firebase.doGuestSignIn()
+        .then(() => {
+          this.login();
+          this.setState({ ...INITIAL_STATE });
+          this.guestLogin()
+          .then(()=>{
+            this.props.history.push('/Main');
+          })
+        })
+        .catch(error => {
+          this.setState({ error });
+        });
+      }
+
+      async guestLogin()
+      {
+        var uid = await this.props.firebase.getUID()
+        this.props.setUserId(uid);
         this.props.setCookieLoad(true)
       }
 
@@ -100,10 +123,10 @@ class SignUpForm extends Component {
           error,
       } = this.state;
   
-      var isInvalid =
-        passwordOne !== passwordTwo ||
-        passwordOne === '' ||
-        email === '';
+      const isInvalid = 
+              passwordOne !== passwordTwo || 
+              passwordOne === '' || 
+              email === '';
   
       return (
       <Container component="main" maxWidth="xs" style={{marginTop:50}}>
@@ -117,6 +140,7 @@ class SignUpForm extends Component {
         </Typography>
         <div>
           <form onSubmit={this.onSubmit}>
+            <div align='center'>
               <TextField
                   name="email"
                   value={email}
@@ -144,10 +168,18 @@ class SignUpForm extends Component {
                   variant="outlined"
                   style={{marginBottom:20}}
               />
-              <Button fullWidth variant="contained" color="primary" disabled={isInvalid} type="submit">Sign Up</Button>
+              </div>
+            {isInvalid ? 
+                <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Register</Button>
+              : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Register</Button>
+            }
   
               {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
           </form>
+
+          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" onClick={() => this.guestSignIn()}>
+              Sign Up as Guest
+          </Button>
           <GoogleButton onClick={this.googleSignIn} />
         </div></div>
         </Container>

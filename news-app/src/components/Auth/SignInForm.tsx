@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import Button from 'react-bootstrap/Button'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
 
@@ -153,15 +153,15 @@ class SignInForm extends Component {
                   style={{marginBottom:20}}
             />
           </div>
-              {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"/> */}
-            <Button fullWidth variant="contained" color="primary" disabled={isInvalid} type="submit">
-              Sign In
-            </Button>
+             
+            {isInvalid ? 
+                <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Login</Button>
+              : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Login</Button>
+            }
+                         
             {error && <h4>{error.message}</h4>}
           </form>
-          <Button variant="contained" color="info" onClick={() => this.guestSignIn()}>
+          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" onClick={() => this.guestSignIn()}>
               Sign In as Guest
           </Button>
           <GoogleButton onClick={this.googleSignIn} />

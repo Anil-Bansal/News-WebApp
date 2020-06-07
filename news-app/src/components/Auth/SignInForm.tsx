@@ -32,6 +32,8 @@ class SignInForm extends Component {
       this.signInSync=this.signInSync.bind(this)
       this.guestSignIn=this.guestSignIn.bind(this)
       this.guestLogin=this.guestLogin.bind(this)
+      this.googleSignIn=this.googleSignIn.bind(this)
+
       this.state = { ...INITIAL_STATE };
     }
   
@@ -65,6 +67,21 @@ class SignInForm extends Component {
         this.login();
         this.setState({ ...INITIAL_STATE });
         this.guestLogin()
+        .then(()=>{
+          this.props.history.push('/Main');
+        })
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+    }
+
+    googleSignIn = () => {
+      this.props.firebase.doGoogleSignIn()
+      .then(() => {
+        this.login();
+        this.setState({ ...INITIAL_STATE });
+        this.signInSync()
         .then(()=>{
           this.props.history.push('/Main');
         })
@@ -144,6 +161,9 @@ class SignInForm extends Component {
           </form>
           <Button variant="contained" color="info" onClick={() => this.guestSignIn()}>
               Sign In as Guest
+          </Button>
+          <Button variant="contained" color="red" onClick={() => this.googleSignIn()}>
+              Sign In with Google
           </Button>
         </div>
         </Container>

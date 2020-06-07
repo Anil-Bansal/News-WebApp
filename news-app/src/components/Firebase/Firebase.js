@@ -18,6 +18,7 @@ class Firebase {
       app.initializeApp(firebaseConfig);
       this.auth=app.auth();
       this.database=app.firestore();
+      this.prov = new app.auth.GoogleAuthProvider();
     }
 
     doCreateUserWithEmailAndPassword = (email, password) =>
@@ -28,6 +29,9 @@ class Firebase {
 
     doGuestSignIn = () =>
     this.auth.signInAnonymously()
+
+    doGoogleSignIn = () =>
+      this.auth.signInWithPopup(this.prov)
 
     getUID = () =>{
       const user=this.auth.currentUser
@@ -54,7 +58,11 @@ class Firebase {
     async getCookieFromDatabase(uid)
     {
       var curdoc = await this.database.collection("users").doc(uid).get()
-      return Promise.resolve(curdoc.data().cookie);
+      if(curdoc.exists)
+        return Promise.resolve(curdoc.data().cookie);
+      else
+        return Promise.resolve([])
+
     }
 
 }

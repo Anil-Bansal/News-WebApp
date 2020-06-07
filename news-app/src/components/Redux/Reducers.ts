@@ -7,9 +7,9 @@ const initialState ={
     articles:[],
     news_end: false,
     error_exist: false, 
-    isLoggedIn: true,
+    isLoggedIn: false,
     uid: "",
-    cookieLoaded: true
+    cookieLoaded: false
 }
 
 function newsApp(state = initialState, action?) {

@@ -63,7 +63,7 @@ class Head extends React.Component{
                   </div>
                     <div className='Search' align = "center">
                         <form id="Search-form" onSubmit={this.handleSubmit}>
-                        <label htmlFor="search">Search for News :  </label>
+                        <label htmlFor="search"><h6>Search for News : </h6> </label>
                         <input
                             type="text"
                             name="search"

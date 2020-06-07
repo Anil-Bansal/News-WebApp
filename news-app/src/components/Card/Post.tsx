@@ -5,6 +5,7 @@ import Button from  'react-bootstrap/Button'
 import {MdFavoriteBorder,MdFavorite} from 'react-icons/md'
 import {withFirebase} from '../Firebase';
 import {connect} from 'react-redux';
+import './Post.css';
 
 class Post extends React.Component{
     public state: Object;
@@ -57,6 +58,7 @@ class Post extends React.Component{
             <Card bg={this.state.backg}
                 style={{width: '24rem', }}
                 text={this.state.textColor}
+                className='Card'
                 >
                 <Card.Img 
                     onMouseEnter={this.enter}

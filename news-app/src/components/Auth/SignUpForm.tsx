@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import GoogleButton from 'react-google-button';
 
 const INITIAL_STATE = {
     email: '',
@@ -148,9 +148,7 @@ class SignUpForm extends Component {
   
               {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
           </form>
-          <Button variant="contained" color="red" onClick={() => this.googleSignIn()}>
-              Sign In with Google
-          </Button>
+          <GoogleButton onClick={this.googleSignIn} />
         </div></div>
         </Container>
 

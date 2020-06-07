@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import GoogleButton from 'react-google-button';
+
 
 const INITIAL_STATE = {
     email: '',
@@ -162,9 +164,7 @@ class SignInForm extends Component {
           <Button variant="contained" color="info" onClick={() => this.guestSignIn()}>
               Sign In as Guest
           </Button>
-          <Button variant="contained" color="red" onClick={() => this.googleSignIn()}>
-              Sign In with Google
-          </Button>
+          <GoogleButton onClick={this.googleSignIn} />
         </div>
         </Container>
       );

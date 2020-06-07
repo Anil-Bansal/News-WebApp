@@ -46,12 +46,10 @@ class Firebase {
       })
     }
 
-    getCookieFromDatabase=(uid)=>{
-      this.database.collection("users").doc(uid).get()
-      .then((curdoc)=>{
-        console.log("FETCHED",curdoc.data().cookie)
-        return curdoc.data().cookie;
-      })
+    async getCookieFromDatabase(uid)
+    {
+      var curdoc = await this.database.collection("users").doc(uid).get()
+      return Promise.resolve(curdoc.data().cookie);
     }
 
 }

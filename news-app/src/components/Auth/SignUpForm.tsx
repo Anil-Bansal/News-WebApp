@@ -50,6 +50,7 @@ class SignUpForm extends Component {
           this.setState({ ...INITIAL_STATE });
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
+          this.props.cookies.set('testing',[],{path: '/'});
           this.props.history.push('/Main');
         })
         .catch(error => {

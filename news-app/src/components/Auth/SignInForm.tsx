@@ -43,7 +43,9 @@ class SignInForm extends Component {
         var uid = await this.props.firebase.getUID()
         await this.props.setUserId(uid);
         var cookies = await this.props.firebase.getCookieFromDatabase(uid)
-        await this.props.cookies.set(cookies);
+        await this.props.cookies.set('testing',cookies,{path: '/'});
+        await this.props.setCookieLoad(true)
+        await console.log("HERE",this.props.cookies)
       }
 
     onSubmit = event => {
@@ -124,13 +126,15 @@ class SignInForm extends Component {
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
+
     };
   }
   
   const mapDispatchToProps=dispatch=>{
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+      setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
+      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val))
     };
   }
   

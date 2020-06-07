@@ -15,7 +15,7 @@ class Post extends React.Component{
           backg: "light",
           textColor: 'dark',
           modalShow: false,
-          isLiked: ((this.props.cookies).get('testing')).includes(this.props.url)
+          isLiked: ((this.props.cookies).get('testing')).includes(this.props.url),
         };
       }
 
@@ -34,9 +34,10 @@ class Post extends React.Component{
     goToUrl(url){
         window.open(url,'_blank');
     }
+
     likePost = () => {
+        this.props.firebase.addCookieToDatabase(this.props.uid,[...(this.props.cookies).get('testing'),this.props.url]);
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
-        this.props.firebase.addCookieToDatabase(this.props.uid,(this.props.cookies).get('testing'));
         this.setState({isLiked: true});
     }
     unlikePost = () => {

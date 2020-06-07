@@ -76,6 +76,7 @@ const mapStateToProps=(state: Object,ownProps: Object)=>{
       articles: state.articles,
       news_end: state.news_end,
       error_exist: state.error_exist,
+      cookieLoaded: state.cookieLoaded,
       cookies: ownProps.cookies,
     };
   }

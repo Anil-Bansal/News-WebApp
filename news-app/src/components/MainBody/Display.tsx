@@ -8,7 +8,7 @@ class Display extends React.Component{
 
     render(){
         const array: Array<Object> = this.props.articles;
-        if(this.props.is_loading || array===undefined)
+        if(this.props.is_loading || !this.props.cookieLoaded || array===undefined)
         {
             return <div></div>;
         }
@@ -29,6 +29,7 @@ const mapStateToProps=(state: Object)=>{
     return{
       is_loading: state.is_loading,
       articles: state.articles,
+      cookieLoaded: state.cookieLoaded
     };
   }
     

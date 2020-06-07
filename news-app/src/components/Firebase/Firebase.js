@@ -41,7 +41,6 @@ class Firebase {
     }
 
     addNewUser=(uid)=>{
-      console.log(uid);
       this.database.collection("users").doc(uid).set({
         cookie: []
       })
@@ -50,7 +49,7 @@ class Firebase {
     getCookieFromDatabase=(uid)=>{
       this.database.collection("users").doc(uid).get()
       .then((curdoc)=>{
-        console.log(curdoc.data().cookie)
+        console.log("FETCHED",curdoc.data().cookie)
         return curdoc.data().cookie;
       })
     }

@@ -77,6 +77,7 @@ const mapStateToProps=(state: Object,ownProps: Object)=>{
       news_end: state.news_end,
       error_exist: state.error_exist,
       cookies: ownProps.cookies,
+      likedurl: state.likedurl
     };
   }
   
@@ -87,7 +88,8 @@ const mapStateToProps=(state: Object,ownProps: Object)=>{
       setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
       seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
       setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
-      setpage: (val)=>dispatch(actiontypes.setpage(val))
+      setpage: (val)=>dispatch(actiontypes.setpage(val)),
+      setlikedurl: (val)=>dispatch(actiontypes.setlikedurl(val)),
     };
   }
   

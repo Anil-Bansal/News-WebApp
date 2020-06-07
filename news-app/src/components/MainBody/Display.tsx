@@ -29,6 +29,7 @@ const mapStateToProps=(state: Object)=>{
     return{
       is_loading: state.is_loading,
       articles: state.articles,
+      likedurl: state.likedurl,
     };
   }
     

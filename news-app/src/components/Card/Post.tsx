@@ -5,6 +5,7 @@ import Button from  'react-bootstrap/Button'
 import {MdFavoriteBorder,MdFavorite} from 'react-icons/md'
 import {withFirebase} from '../Firebase';
 import {connect} from 'react-redux';
+import * as actiontypes from '../Redux/Actions';
 
 class Post extends React.Component{
     public state: Object;
@@ -15,7 +16,7 @@ class Post extends React.Component{
           backg: "light",
           textColor: 'dark',
           modalShow: false,
-          isLiked: ((this.props.cookies).get('testing')).includes(this.props.url)
+          isLiked: (this.props.likedurl==undefined)?false:this.props.likedurl.include(this.props.url)
         };
       }
 
@@ -35,17 +36,17 @@ class Post extends React.Component{
         window.open(url,'_blank');
     }
     likePost = () => {
-        (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
-        this.props.firebase.addCookieToDatabase(this.props.uid,(this.props.cookies).get('testing'));
+        this.props.setlikedurl([...this.props.likedurl,this.props.url]);
+        this.props.firebase.addCookieToDatabase(this.props.uid,[...this.props.likedurl,this.props.url]);
         this.setState({isLiked: true});
     }
     unlikePost = () => {
-        var likedPosts: Array<string> = (this.props.cookies).get('testing')
+        var likedPosts: Array<string> = this.props.likedurl
         const index: number = likedPosts.indexOf(this.props.url);
         if (index > -1) {
             likedPosts.splice(index, 1);
         }
-        (this.props.cookies).set('testing',likedPosts)
+        this.props.setlikedurl(likedPosts);
         this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts)
         this.setState({isLiked: false})
     }
@@ -94,14 +95,16 @@ class Post extends React.Component{
 const mapStateToProps=state=>{
     return{
       isLoggedIn: state.isLoggedIn,
-      uid: state.uid
+      uid: state.uid,
+      likedurl: state.likedurl
     };
   }
   
 const mapDispatchToProps=dispatch=>{
     return{
         setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-        setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+        setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
+        setlikedurl: (val)=>dispatch(actiontypes.setlikedurl(val))
     };
 }
   

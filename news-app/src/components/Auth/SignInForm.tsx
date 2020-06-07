@@ -18,7 +18,6 @@ const INITIAL_STATE = {
   };
 
 
-
 class SignInForm extends Component {
 	public state: any;
 	public props: any;
@@ -33,6 +32,10 @@ class SignInForm extends Component {
 
       this.state = { ...INITIAL_STATE };
     }
+
+    componentDidMount(){
+      this.props.setlikedurl([]);
+    }
   
     login () {
      this.props.setLoginStatus(true);
@@ -43,7 +46,7 @@ class SignInForm extends Component {
         var uid = await this.props.firebase.getUID()
         await this.props.setUserId(uid);
         var cookies = await this.props.firebase.getCookieFromDatabase(uid)
-        await this.props.cookies.set(cookies);
+        await this.props.setlikedurl(cookies);
       }
 
     onSubmit = event => {
@@ -124,13 +127,15 @@ class SignInForm extends Component {
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
+      likedurl: state.likedurl,
     };
   }
   
   const mapDispatchToProps=dispatch=>{
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+      setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
+      setlikedurl: (val)=>dispatch(actiontypes.setlikedurl(val))
     };
   }
   

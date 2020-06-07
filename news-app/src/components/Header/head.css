@@ -9,13 +9,13 @@
     color: #fff;
   }
 
-  .Select {
-    box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 0em;
-    margin-bottom: 2em;
+.Select {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0em;
+  margin-bottom: 0em;
 }
 
 .Search {
@@ -24,6 +24,6 @@
 
   justify-content: right;
   padding-top: 0.5em;
-  margin-left: 33em;
+  margin-left: 28em;
   padding-left: 5em;
 }

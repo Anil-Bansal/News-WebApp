@@ -1,6 +1,6 @@
 import React from 'react';
 import { withFirebase } from '../Firebase';
-import {withRouter,useHistory} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import Button from  'react-bootstrap/Button';
 import {connect} from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
@@ -21,7 +21,7 @@ class SignOutButton extends React.Component{
 
   render(){
     return (
-      <Button variant='danger'
+      <Button variant='danger' style={{marginLeft: 10}}
         type='submit' onClick={this.signOut}>
           Sign Out
       </Button>

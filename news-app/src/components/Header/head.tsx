@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
+import SignOutButton from '../Auth/Signout';
 
 class Head extends React.Component{
 	public fetchNews: void;
@@ -71,6 +72,7 @@ class Head extends React.Component{
                             Submit 
                         </Button>
                         </form>
+                        <SignOutButton />
                     </div>
                 </div>
                 <div className='Select'>

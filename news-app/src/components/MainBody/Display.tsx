@@ -7,6 +7,7 @@ class Display extends React.Component{
 
     render(){
         const array: Array<Object> = this.props.articles;
+        console.log('dis',array)
         let content:Array = [];
         array.forEach((post: Object,idx: number) => {
             content.push(

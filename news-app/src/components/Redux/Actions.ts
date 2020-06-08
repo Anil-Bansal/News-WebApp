@@ -1,6 +1,7 @@
 export const CHANGE_COUNTRY = 'CHANGE_COUNTRY'
 export const CUR_PAGE = 'CUR_PAGE'
 export const SET_ARTICLES = 'SET_ARTICLES'
+export const SET_LIKED = 'SET_LIKED'
 export const LOADING = 'LOADING'
 export const SET_NEWSEND='SET_NEWSEND'
 export const SET_ERROREXIST='SET_ERROREXIST'
@@ -20,6 +21,11 @@ export function setPage(page: Number) {
 
 export function setArticles(articles: Array<Object>) {
   return { type: SET_ARTICLES, val: articles }
+}
+
+export function setLiked(articles) {
+  console.log('art',articles)
+  return { type: SET_LIKED, val: articles }
 }
 
 export function setLoading(status: Boolean) {

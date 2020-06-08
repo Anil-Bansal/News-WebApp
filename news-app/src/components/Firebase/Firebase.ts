@@ -46,12 +46,21 @@ class Firebase {
       this.auth.signOut();
     }
 
-    addCookieToDatabase = (uid: string,cookie=[]) =>
+    addCookieToDatabase = (uid: string,cookie=[],data=[]) =>
     {
+      console.log(uid,"FF",data)
       this.database.collection('users').doc(uid).set({
-        cookie: cookie
+        cookie: cookie,
+        data: data
       })
     }
+
+    // addDataToDatabase = (uid: string,data=[]) =>
+    // {
+    //   this.database.collection('users').doc(uid).set({
+    //     cookie: data
+    //   })
+    // }
 
     addNewUser=(uid: string)=>{
       this.database.collection("users").doc(uid).set({
@@ -68,6 +77,14 @@ class Firebase {
         return Promise.resolve([])
     }
 
+    async getDataFromDatabase(uid: string)
+    {
+      var curdoc = await this.database.collection("users").doc(uid).get()
+      if(curdoc.exists)
+        return Promise.resolve([...curdoc.data().data]);
+      else
+        return Promise.resolve([])
+    }
 }
 
   

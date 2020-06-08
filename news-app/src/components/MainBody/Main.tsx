@@ -4,9 +4,10 @@ import Head from '../Header/head';
 import BottomScrollListener from 'react-bottom-scroll-listener';
 import Loader from '../Loader/Loader'
 import ErrorHandler from '../ErrorHandler/ErrorHandler';
-import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch'
+import {fetchNews,fetchNewsSearch,fetchLiked} from '../NewsFetch/Fetch'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
+import {withFirebase} from '../Firebase'
 
 class Main extends React.Component{
 	public fetchNews: void;
@@ -15,18 +16,19 @@ class Main extends React.Component{
     constructor(props:any ){
         super(props);
         this.fetchNews=fetchNews.bind(this);
-        this.fetchNewsSearch=fetchNewsSearch.bind(this);
+        this.fetchLiked=fetchLiked.bind(this);
         if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
         {
         	(this.props.cookies).set('testing',[],{path: '/'})
         }
-      }
-    
+      }    
+
     async componentDidMount(){
-		await this.props.setCountry('in');
-		await this.props.setPage(1);
-		await this.props.setArticles([]);
-		this.fetchNews();
+      await this.props.setCountry('in');
+      await this.props.setPage(1);
+      await this.props.setArticles([]);
+      this.fetchNews();
+      this.fetchLiked();
     }
 
     SelectiveDisplay(){
@@ -70,6 +72,8 @@ const mapStateToProps=(state: Object,ownProps: Object)=>{
       errorExist: state.errorExist,
       cookieLoaded: state.cookieLoaded,
       cookies: ownProps.cookies,
+      uid: state.uid,
+      liked: state.liked
     };
   }
   
@@ -80,9 +84,10 @@ const mapDispatchToProps=dispatch=>{
     setArticles: (val: Array<Object>)=>dispatch(actiontypes.setArticles(val)),
     setErrorExist: (val: Boolean)=>dispatch(actiontypes.setErrorExist(val)),
     setCountry: (val: String)=>dispatch(actiontypes.setCountry(val)),
-    setPage: (val: Number)=>dispatch(actiontypes.setPage(val))
+    setPage: (val: Number)=>dispatch(actiontypes.setPage(val)),
+    setLiked: (val: Number)=>dispatch(actiontypes.setLiked(val))
   };
 }
   
-  export default connect(mapStateToProps,mapDispatchToProps)(Main);
+  export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Main));
   

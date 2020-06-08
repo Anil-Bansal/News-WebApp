@@ -31,3 +31,12 @@ export function fetchNewsSearch(search: String){
       this.props.setErrorExist(true);
     })
 }
+
+ export function fetchLiked(){
+        this.props.firebase.getDataFromDatabase(this.props.uid)
+        .then((response:Object)=>this.props.setLiked(response))
+        .then(()=>console.log("YIYI",this.props.liked))  
+        .catch(error=>{
+          console.log(error);
+        })
+      }

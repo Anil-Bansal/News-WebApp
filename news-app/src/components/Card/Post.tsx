@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 import './Post.css';
 import * as actiontypes from '../Redux/Actions';
 
+
+
 class Post extends React.Component{
     public state: Object;
 
@@ -34,9 +36,22 @@ class Post extends React.Component{
     }
 
     likePost = () => {
-        this.props.firebase.addCookieToDatabase(this.props.uid,[...(this.props.cookies).get('testing'),this.props.url]);
+
+        var dataObject={
+            title: this.props.title,
+            description: this.props.description,
+            imageurl: this.props.imageurl,
+            url: this.props.url
+        };
+        console.log('fooo')
+        this.props.firebase.addCookieToDatabase(this.props.uid,
+                                            [...(this.props.cookies).get('testing'),this.props.url],
+                                            [...(this.props.liked),dataObject]);
+        // this.props.firebase.addCookieToDatabase(this.props.uid,
+        //     [...(this.props.cookies).get('testing'),this.props.url])
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
+        this.props.setLiked([...this.props.liked,dataObject])
     }
 
     unlikePost = () => {
@@ -48,6 +63,7 @@ class Post extends React.Component{
         (this.props.cookies).set('testing',likedPosts)
         this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts)
         this.setState({isLiked: false})
+        
     }
 
     render(){
@@ -96,14 +112,16 @@ class Post extends React.Component{
 const mapStateToProps=(state: any)=>{
     return{
       isLoggedIn: state.isLoggedIn,
-      uid: state.uid
+      uid: state.uid,
+      liked: state.liked
     };
   }
   
 const mapDispatchToProps=dispatch=>{
     return{
         setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-        setUserId: (val)=>dispatch(actiontypes.setUserId(val))
+        setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
+        setLiked: (val)=>dispatch(actiontypes.setLiked(val))
     };
 }
   

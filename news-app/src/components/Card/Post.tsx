@@ -23,7 +23,7 @@ class Post extends React.Component{
           postData:{
                 title: this.props.title,
                 description: this.props.description,
-                imageurl: this.props.urlToImage,
+                urlToImage: this.props.imageurl,
                 url: this.props.url
                 }
         };

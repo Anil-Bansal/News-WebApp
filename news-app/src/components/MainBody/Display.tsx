@@ -8,7 +8,7 @@ class Display extends React.Component{
     render(){
         const array: Array<Object> = this.props.articles;
         let content:Array = [];
-        array.forEach((post: Object,idx: Number) => {
+        array.forEach((post: Object,idx: number) => {
             content.push(
                 <div className="col-sm py-3" key={idx}>
                     <Post key={idx} 
@@ -20,7 +20,7 @@ class Display extends React.Component{
                         cookies={this.props.cookies}/>
                 </div>
             )
-            if ((idx+1)%3===0) {content.push(<div className="w-100"></div>)}
+            if ((idx+1)%3===0) {content.push(<div key={array.length+idx} className="w-100"></div>)}
         })
 
         if(this.props.isLoading || array===undefined)

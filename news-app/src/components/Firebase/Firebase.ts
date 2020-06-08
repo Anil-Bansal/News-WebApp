@@ -55,16 +55,10 @@ class Firebase {
       })
     }
 
-    // addDataToDatabase = (uid: string,data=[]) =>
-    // {
-    //   this.database.collection('users').doc(uid).set({
-    //     cookie: data
-    //   })
-    // }
-
     addNewUser=(uid: string)=>{
       this.database.collection("users").doc(uid).set({
-        cookie: []
+        cookie: [],
+        data: []
       })
     }
 

@@ -31,7 +31,7 @@ class App extends Component{
           <Link to="/Main" className='Route'>NewsFetch</Link>
           <Link to="/Sources" className='Route'>Sources</Link>
           <Link to="/Team" className='Route'>Team Info</Link>
-          <Link to="/Profile" className='Route'>My Profile</Link>
+          <Link to="/Profile" className='Route'>Favourites</Link>
 
         </div>
           <Switch>
@@ -42,10 +42,7 @@ class App extends Component{
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
                 <Route exact path="/Sources" component={Sources}/>
                 <Route exact path="/Team" component={Info}/>
-                <Route exact path="/Profile" render={() => (<Profile content='likedOnly' cookies={this.props.cookies}/> 
-)}/>
-
-
+                <Route exact path="/Profile" render={() => (<Profile content='likedOnly' cookies={this.props.cookies}/> )}/>
               </div>)
             } 
 

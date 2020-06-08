@@ -18,9 +18,7 @@ class Main extends React.Component{
         this.fetchNews=fetchNews.bind(this);
         this.fetchLiked=fetchLiked.bind(this);
         if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
-        {
         	(this.props.cookies).set('testing',[],{path: '/'})
-        }
       }    
 
     async componentDidMount(){

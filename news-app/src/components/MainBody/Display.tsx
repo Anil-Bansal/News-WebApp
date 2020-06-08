@@ -25,9 +25,7 @@ class Display extends React.Component{
         })
 
         if(this.props.isLoading || array===undefined)
-        {
             return <div></div>;
-        }
         else{
             return(     
                 <div className='row' align='center'>

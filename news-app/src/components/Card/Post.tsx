@@ -20,14 +20,15 @@ class Post extends React.Component{
           textColor: 'dark',
           modalShow: false,
           isLiked: ((this.props.cookies).get('testing')).includes(this.props.url),
-          postData:{
-                title: this.props.title,
-                description: this.props.description,
-                urlToImage: this.props.imageurl,
-                url: this.props.url
-                }
+          postData: {
+            title: this.props.title,
+            description: this.props.description,
+            urlToImage: this.props.imageurl,
+            url: this.props.url
+          }
         };
-      }
+    }
+
     enter = () =>{
         this.setState({backg: "info",textColor: 'white'})
     }  
@@ -42,8 +43,7 @@ class Post extends React.Component{
 
     likePost = () => {
         this.props.firebase.addCookieToDatabase(this.props.uid,
-                                            [...(this.props.cookies).get('testing'),this.props.url],
-                                            [...(this.props.liked),this.state.postData]);
+                    [...(this.props.cookies).get('testing'),this.props.url],[...(this.props.liked),this.state.postData]);
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
         this.props.setLiked([...this.props.liked,this.state.postData])

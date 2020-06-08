@@ -112,6 +112,17 @@ class SignInForm extends Component {
     onChange = event => {
       this.setState({ [event.target.name]: event.target.value });
     };
+
+    showPassword = (event) => {
+      var x = document.getElementById('pass');
+
+      if(x.type === 'password') {
+          x.type = 'text';
+      }
+      else if(x.type === 'text') {
+          x.type = 'password';
+      }
+  }
    
     render() {
       const { email, password, error } = this.state;
@@ -147,6 +158,7 @@ class SignInForm extends Component {
               type="password"
               placeholder="Password"
               variant="outlined"
+              id='pass'
                   style={{marginBottom:20}}
             />
           </div>
@@ -155,6 +167,9 @@ class SignInForm extends Component {
                 <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Login</Button>
               : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Login</Button>
             }
+            <br />
+
+            <input type="checkbox" onClick={this.showPassword}/><span> Show Password</span>
                          
             {error && <h4>{error.message}</h4>}
           </form>

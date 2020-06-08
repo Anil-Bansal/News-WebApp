@@ -8,7 +8,7 @@ class Loader extends React.Component{
     render(){
         return (
             <div align='center'>
-                <ClipLoader color={"#123abc"} size={50} loading={!this.props.news_end}/>
+                <ClipLoader color={"#123abc"} size={50} loading={!this.props.newsEnd}/>
             </div>
         );
     }
@@ -16,8 +16,8 @@ class Loader extends React.Component{
 
 const mapStateToProps=(state: Object)=>{
     return{
-      news_end: state.news_end,
+      newsEnd: state.newsEnd,
     };
   }
   
-  export default connect(mapStateToProps)(Loader);
+export default connect(mapStateToProps)(Loader);

@@ -3,3 +3,9 @@ export async function getNews(country: String,page_num: Number){
     let result=await fetch(url).then(response=> response.json());
     return result.articles;
 }
+
+export async function getNewsSearch(search: String){
+    const url=`https://newsapi.org/v2/everything?q=${search}&apiKey=ed670e2fd04f475fa4b296d2085be2e3`;
+    let result=await fetch(url).then(response=> response.json());
+    return result.articles;
+}

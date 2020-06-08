@@ -2,7 +2,7 @@ import React from 'react';
 import CardColumns from 'react-bootstrap/CardColumns';
 import SourceCard from './SourceCard';
 
-const DisplaySources=(props)=>{
+const DisplaySources=(props: any )=>{
     const array: Array<Object> =props.array;
     if(props.loading)
         return <div></div>;

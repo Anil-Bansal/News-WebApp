@@ -51,24 +51,24 @@ class App extends Component{
 
 const mapStateToProps=state=>{
   return{
-    is_loading: state.is_loading,
+    isLoading: state.isLoading,
     page: state.page,
     country: state.country ,
     articles: state.articles,
-    news_end: state.news_end,
-    error_exist: state.error_exist,
+    newsEnd: state.newsEnd,
+    errorExist: state.errorExist,
     isLoggedIn: state.isLoggedIn
   };
 }
 
 const mapDispatchToProps=dispatch=>{
   return{
-    setloading: (val)=>dispatch(actiontypes.setloading(val)),
-    setnewsend: (val)=>dispatch(actiontypes.setnewsend(val)),
-    setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
-    seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
-    setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
-    setpage: (val)=>dispatch(actiontypes.setpage(val)),
+    setLoading: (val)=>dispatch(actiontypes.setLoading(val)),
+    setNewsEnd: (val)=>dispatch(actiontypes.setNewsEnd(val)),
+    setArticles: (val)=>dispatch(actiontypes.setArticles(val)),
+    setErrorExist: (val)=>dispatch(actiontypes.setErrorExist(val)),
+    setCountry: (val)=>dispatch(actiontypes.setCountry(val)),
+    setPage: (val)=>dispatch(actiontypes.setPage(val)),
     setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val))
   };
 }

@@ -25,12 +25,12 @@ class Head extends React.Component{
 
     async searchNews (search: String)
       {
-        await this.props.setloading(true);
-        await this.props.setcountry("");
-        await this.props.setarticles([]);
-        await this.props.setpage(1);
-        await this.props.setnewsend(false);
-        await this.props.seterrorexist(false);
+        await this.props.setLoading(true);
+        await this.props.setCountry("");
+        await this.props.setArticles([]);
+        await this.props.setPage(1);
+        await this.props.setNewsEnd(false);
+        await this.props.setErrorExist(false);
         this.fetchNewsSearch(search,this.props.page);
       }
 
@@ -42,12 +42,12 @@ class Head extends React.Component{
     
       async onChange(code: String)
       {
-        await this.props.setloading(true);
-        await this.props.setcountry(code);
-        await this.props.setarticles([]);
-        await this.props.setpage(1);
-        await this.props.setnewsend(false);
-        await this.props.seterrorexist(false);
+        await this.props.setLoading(true);
+        await this.props.setCountry(code);
+        await this.props.setArticles([]);
+        await this.props.setPage(1);
+        await this.props.setNewsEnd(false);
+        await this.props.setErrorExist(false);
         this.fetchNews();
       }
 
@@ -106,9 +106,9 @@ class Head extends React.Component{
 
 const mapStateToProps=(state: Object)=>{
     return{
-      is_loading: state.is_loading,
+      isLoading: state.isLoading,
       country: state.country ,
-      error_exist: state.error_exist,
+      errorExist: state.errorExist,
       articles: state.articles,
       page: state.page
     };
@@ -116,12 +116,12 @@ const mapStateToProps=(state: Object)=>{
   
   const mapDispatchToProps=dispatch=>{
     return{
-      setloading: (val)=>dispatch(actiontypes.setloading(val)),
-      setnewsend: (val)=>dispatch(actiontypes.setnewsend(val)),
-      setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
-      seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
-      setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
-      setpage: (val)=>dispatch(actiontypes.setpage(val))
+      setLoading: (val)=>dispatch(actiontypes.setLoading(val)),
+      setNewsEnd: (val)=>dispatch(actiontypes.setNewsEnd(val)),
+      setArticles: (val)=>dispatch(actiontypes.setArticles(val)),
+      setErrorExist: (val)=>dispatch(actiontypes.setErrorExist(val)),
+      setCountry: (val)=>dispatch(actiontypes.setCountry(val)),
+      setPage: (val)=>dispatch(actiontypes.setPage(val))
     };
   }
   

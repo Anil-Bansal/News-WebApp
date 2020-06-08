@@ -6,14 +6,17 @@ import ClipLoader from 'react-spinners/ClipLoader';
 
 class Sources extends Component{
 	public state: Object;
-	public props: Object;
+	public props: any;
+    props : {
+        country: String
+    }
 
-    constructor(props){
+    constructor(props: any){
         super(props);
         this.state={
-            is_loading: true,
+            isLoading: true,
             sources: [],
-            news_end: false
+            newsEnd: false
         }
         this.fetchSources=this.fetchSources.bind(this);
     }
@@ -21,17 +24,17 @@ class Sources extends Component{
     fetchSources(country=this.props.country){
         const url: String=`https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country=${country}`;
         fetch(url)
-        .then(response=>response.json())
-        .then(result=>result.sources)
-        .then(sources=> {
+        .then((response:Object)=>response.json())
+        .then((result:Object)=>result.sources)
+        .then((sources: Object)=> {
           this.setState({sources: sources});
-          this.setState({is_loading: false});
-          this.setState({news_end: true});
+          this.setState({isLoading: false});
+          this.setState({newsEnd: true});
         })
         .catch(error=>{
           console.log(error);
-          this.setState({is_loading: false});
-          this.setState({news_end: true});
+          this.setState({isLoading: false});
+          this.setState({newsEnd: true});
         })
     }
 
@@ -39,10 +42,10 @@ class Sources extends Component{
         this.fetchSources();
     }
 
-    shouldComponentUpdate(nextProps) {
+    shouldComponentUpdate(nextProps: any) {
         if( this.props.country !== nextProps.country)
         {   
-            this.setState({is_loading: true})
+            this.setState({isLoading: true})
             this.setState({sources: []})
             this.fetchSources(nextProps.country)
         }
@@ -52,19 +55,18 @@ class Sources extends Component{
     render(){
         return(
             <div>
-                <Head/>
-                <DisplaySources loading={this.state.is_loading} array={this.state.sources} />
+                <Head /><br/>
+                <DisplaySources loading={this.state.isLoading} array={this.state.sources} />
                 <div align='center'>
-                    <ClipLoader color={"#123abc"} size={50} loading={this.state.is_loading}/>
+                    <ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>
                 </div>
 
             </div>
         );
     }
-
 }
 
-const mapStateToProps=state=>{
+const mapStateToProps=(state: Object)=>{
     return{
         country: state.country
     };

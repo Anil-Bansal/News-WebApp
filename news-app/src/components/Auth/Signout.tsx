@@ -22,7 +22,7 @@ class SignOutButton extends React.Component{
   render(){
     return (
       <Button variant='danger' style={{marginLeft: 10}}
-        type='submit' onClick={this.signOut}>
+        type='button' onClick={this.signOut}>
           Sign Out
       </Button>
     )

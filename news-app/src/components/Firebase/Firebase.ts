@@ -25,10 +25,10 @@ class Firebase {
       this.prov = new app.auth.GoogleAuthProvider();
     }
 
-    doCreateUserWithEmailAndPassword = (email, password) =>
+    doCreateUserWithEmailAndPassword = (email: string, password: string) =>
     this.auth.createUserWithEmailAndPassword(email, password);
 
-    doSignInWithEmailAndPassword = (email, password) =>
+    doSignInWithEmailAndPassword = (email: string, password: string) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
     doGuestSignIn = () =>
@@ -44,29 +44,28 @@ class Firebase {
 
     doSignOut = () => {
       this.auth.signOut();
-      console.log("out")}
+    }
 
-    addCookieToDatabase = (uid,cookie=[]) =>
+    addCookieToDatabase = (uid: string,cookie=[]) =>
     {
       this.database.collection('users').doc(uid).set({
         cookie: cookie
       })
     }
 
-    addNewUser=(uid)=>{
+    addNewUser=(uid: string)=>{
       this.database.collection("users").doc(uid).set({
         cookie: []
       })
     }
 
-    async getCookieFromDatabase(uid)
+    async getCookieFromDatabase(uid: string)
     {
       var curdoc = await this.database.collection("users").doc(uid).get()
       if(curdoc.exists)
         return Promise.resolve(curdoc.data().cookie);
       else
         return Promise.resolve([])
-
     }
 
 }

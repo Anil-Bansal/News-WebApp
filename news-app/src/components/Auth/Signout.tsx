@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
 
 class SignOutButton extends React.Component{
-  constructor(props){
+  constructor(props: any){
     super(props);
     this.signOut=this.signOut.bind(this);
   }

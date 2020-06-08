@@ -29,7 +29,7 @@ class SignUpForm extends Component {
 	public passwordTwo: any;
 	public error: any;
 
-    constructor(props) {
+    constructor(props: any) {
       super(props);
       
       this.googleSignIn=this.googleSignIn.bind(this);
@@ -46,10 +46,9 @@ class SignUpForm extends Component {
 
        async signInSync ()
       {
-        var uid = await this.props.firebase.getUID()
-        console.log(uid)
+        var uid: string = await this.props.firebase.getUID()
         this.props.setUserId(uid);
-        var cookies = await this.props.firebase.getCookieFromDatabase(uid)
+        var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
         this.props.cookies.set('testing',cookies,{path: '/'});
         this.props.setCookieLoad(true)
       }
@@ -71,7 +70,7 @@ class SignUpForm extends Component {
 
       async guestLogin()
       {
-        var uid = await this.props.firebase.getUID()
+        var uid: string = await this.props.firebase.getUID()
         this.props.setUserId(uid);
         this.props.setCookieLoad(true)
       }
@@ -97,7 +96,7 @@ class SignUpForm extends Component {
       this.props.firebase
         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(authUser => {
-          this.login(true);
+          this.login();
           this.setState({ ...INITIAL_STATE });
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
@@ -123,7 +122,7 @@ class SignUpForm extends Component {
           error,
       } = this.state;
   
-      const isInvalid = 
+      const IS_INVALID = 
               passwordOne !== passwordTwo || 
               passwordOne === '' || 
               email === '';
@@ -169,7 +168,7 @@ class SignUpForm extends Component {
                   style={{marginBottom:20}}
               />
               </div>
-            {isInvalid ? 
+            {IS_INVALID ? 
                 <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Register</Button>
               : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Register</Button>
             }
@@ -177,7 +176,8 @@ class SignUpForm extends Component {
               {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
           </form>
 
-          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" onClick={() => this.guestSignIn()}>
+          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
+          onClick={() => this.guestSignIn()}>
               Sign Up as Guest
           </Button>
           <GoogleButton onClick={this.googleSignIn} />
@@ -190,7 +190,7 @@ class SignUpForm extends Component {
 
 
 
-  const mapStateToProps=state=>{
+  const mapStateToProps=(state: any)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid

@@ -10,7 +10,7 @@ class SignInPage extends React.Component{
             <div>
                 <SignInForm cookies={this.props.cookies}/>
                 <h5 align='center' style={{marginTop:30}}>
-                Dont have an account? <Link to='/'>Sign Up</Link>
+                    Dont have an account? <Link to='/'>Sign Up</Link>
                 </h5>
             </div>
         )

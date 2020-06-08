@@ -6,11 +6,12 @@ import {MdFavoriteBorder,MdFavorite} from 'react-icons/md'
 import {withFirebase} from '../Firebase';
 import {connect} from 'react-redux';
 import './Post.css';
+import * as actiontypes from '../Redux/Actions';
 
 class Post extends React.Component{
     public state: Object;
 
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.state = {
           backg: "light",
@@ -21,17 +22,13 @@ class Post extends React.Component{
       }
 
     enter = () =>{
-        this.setState({
-            backg: "info",
-            textColor: 'white'
-    })
+        this.setState({backg: "info",textColor: 'white'})
     }  
+    
     leave = () =>{
-        this.setState({
-            backg: "light",
-            textColor: 'dark'
-        })
+        this.setState({backg: "light",textColor: 'dark'})
     }
+
     goToUrl(url){
         window.open(url,'_blank');
     }
@@ -41,6 +38,7 @@ class Post extends React.Component{
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
     }
+
     unlikePost = () => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
         const index: number = likedPosts.indexOf(this.props.url);
@@ -94,7 +92,7 @@ class Post extends React.Component{
 }
 
 
-const mapStateToProps=state=>{
+const mapStateToProps=(state: any)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid

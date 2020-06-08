@@ -28,7 +28,7 @@ class SignInForm extends Component {
 	public password: any;
 	public error: any;
 
-    constructor(props) {
+    constructor(props: any) {
       super(props);
       this.login=this.login.bind(this)
       this.signInSync=this.signInSync.bind(this)
@@ -45,20 +45,17 @@ class SignInForm extends Component {
    
     async signInSync ()
       {
-        var uid = await this.props.firebase.getUID()
-        console.log(uid)
+        var uid: string = await this.props.firebase.getUID()
         this.props.setUserId(uid);
-        var cookies = await this.props.firebase.getCookieFromDatabase(uid)
+        var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
         this.props.cookies.set('testing',cookies,{path: '/'});
         this.props.setCookieLoad(true)
       }
 
     async guestLogin()
     {
-      var uid = await this.props.firebase.getUID()
+      var uid: string = await this.props.firebase.getUID()
       this.props.setUserId(uid);
-      // var cookies = await this.props.firebase.getCookieFromDatabase(uid)
-      // this.props.cookies.set('testing',cookies,{path: '/'});
       this.props.setCookieLoad(true)
     }
 
@@ -119,7 +116,7 @@ class SignInForm extends Component {
     render() {
       const { email, password, error } = this.state;
    
-      const isInvalid = password === '' || email === '';
+      const IS_Invalid = password === '' || email === '';
    
       return (
         <Container component="main" maxWidth="xs">
@@ -154,14 +151,15 @@ class SignInForm extends Component {
             />
           </div>
              
-            {isInvalid ? 
+            {IS_Invalid ? 
                 <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Login</Button>
               : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Login</Button>
             }
                          
             {error && <h4>{error.message}</h4>}
           </form>
-          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" onClick={() => this.guestSignIn()}>
+          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
+            onClick={() => this.guestSignIn()}>
               Sign In as Guest
           </Button>
           <GoogleButton onClick={this.googleSignIn} />
@@ -171,7 +169,7 @@ class SignInForm extends Component {
     }
   }
 
-  const mapStateToProps=(state: Object)=>{
+  const mapStateToProps=(state: any)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,

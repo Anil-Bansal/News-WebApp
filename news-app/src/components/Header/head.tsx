@@ -2,7 +2,6 @@ import React from 'react'
 import './head.css'
 import ButtonCountry from "../Buttons/ButtonCountry"
 import Button from 'react-bootstrap/Button'
-// eslint-disable-next-line
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
@@ -14,7 +13,7 @@ class Head extends React.Component{
 	public props: any;
 	public input: any;
 
-    constructor(props){
+    constructor(props: any){
       super(props);
       this.onChange=this.onChange.bind(this);
       this.fetchNews=fetchNews.bind(this);
@@ -70,8 +69,7 @@ class Head extends React.Component{
                             ref={(input) => this.input = input}
                         />
                         <Button variant='outline-light'
-                            type='submit'
-                        >
+                            type='submit'>
                             Submit 
                         </Button>
                         <SignOutButton />
@@ -104,7 +102,7 @@ class Head extends React.Component{
     }
 }
 
-const mapStateToProps=(state: Object)=>{
+const mapStateToProps=(state: any)=>{
     return{
       is_loading: state.is_loading,
       country: state.country ,

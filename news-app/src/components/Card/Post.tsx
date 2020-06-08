@@ -20,9 +20,14 @@ class Post extends React.Component{
           textColor: 'dark',
           modalShow: false,
           isLiked: ((this.props.cookies).get('testing')).includes(this.props.url),
+          postData:{
+                title: this.props.title,
+                description: this.props.description,
+                imageurl: this.props.urlToImage,
+                url: this.props.url
+                }
         };
       }
-
     enter = () =>{
         this.setState({backg: "info",textColor: 'white'})
     }  
@@ -36,34 +41,25 @@ class Post extends React.Component{
     }
 
     likePost = () => {
-
-        var dataObject={
-            title: this.props.title,
-            description: this.props.description,
-            imageurl: this.props.imageurl,
-            url: this.props.url
-        };
-        console.log('fooo')
         this.props.firebase.addCookieToDatabase(this.props.uid,
                                             [...(this.props.cookies).get('testing'),this.props.url],
-                                            [...(this.props.liked),dataObject]);
-        // this.props.firebase.addCookieToDatabase(this.props.uid,
-        //     [...(this.props.cookies).get('testing'),this.props.url])
+                                            [...(this.props.liked),this.state.postData]);
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
-        this.props.setLiked([...this.props.liked,dataObject])
+        this.props.setLiked([...this.props.liked,this.state.postData])
     }
 
     unlikePost = () => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
+        var likedPostsComplete = this.props.liked
         const index: number = likedPosts.indexOf(this.props.url);
         if (index > -1) {
             likedPosts.splice(index, 1);
+            likedPostsComplete.splice(index, 1);
         }
         (this.props.cookies).set('testing',likedPosts)
-        this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts)
-        this.setState({isLiked: false})
-        
+        this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts,likedPostsComplete)
+        this.setState({isLiked: false})        
     }
 
     render(){

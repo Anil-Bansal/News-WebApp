@@ -37,7 +37,7 @@ class Main extends React.Component{
         else{
           return(
             <div>
-              <Display cookies={this.props.cookies}/> 
+              <Display content='all' cookies={this.props.cookies}/> 
               <Loader />
             </div>
           );

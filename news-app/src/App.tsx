@@ -10,6 +10,7 @@ import Info from './components/TeamPage/TeamInfo';
 import { withCookies } from 'react-cookie';
 import SignUpPage from './components/Auth/SignUpPage'
 import  SignInPage from './components/Auth/SignInPage';
+import Profile from './components/UserPage/Profile'
 
 class App extends Component{
 	public fetchNews: any;
@@ -30,6 +31,8 @@ class App extends Component{
           <Link to="/Main" className='Route'>NewsFetch</Link>
           <Link to="/Sources" className='Route'>Sources</Link>
           <Link to="/Team" className='Route'>Team Info</Link>
+          <Link to="/Profile" className='Route'>My Profile</Link>
+
         </div>
           <Switch>
             <Route exact path="/" render={() => (<SignUpPage cookies={this.props.cookies}/>)}/>
@@ -39,6 +42,10 @@ class App extends Component{
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
                 <Route exact path="/Sources" component={Sources}/>
                 <Route exact path="/Team" component={Info}/>
+                <Route exact path="/Profile" render={() => (<Profile content='likedOnly' cookies={this.props.cookies}/> 
+)}/>
+
+
               </div>)
             } 
 

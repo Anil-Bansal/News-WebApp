@@ -6,7 +6,7 @@ class Display extends React.Component{
 	public props: any;
 
     render(){
-        const array: Array<Object> = this.props.articles;
+        const array: Array<Object> = this.props.show==='likedOnly' ? this.props.liked : this.props.articles;
         console.log('dis',array)
         let content:Array = [];
         array.forEach((post: Object,idx: number) => {
@@ -40,6 +40,7 @@ const mapStateToProps=(state: Object)=>{
     return{
       isLoading: state.isLoading,
       articles: state.articles,
+      liked: state.liked
     };
   }
     

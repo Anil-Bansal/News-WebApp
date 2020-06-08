@@ -1,36 +1,25 @@
 import React from 'react';
 import { withFirebase } from './components/Firebase';
+import Post from './components/Card/Post';
 
 
 class Profile extends React.Component{
-    constructor(props: any){
-        super(props);
-        this.state={
-            likedUrl: []
-        };
-    }
-
-    async componentDidMount(){
-        var uid=await this.props.firebase.getUID();
-        var array=await this.props.firebase.getCookieFromDatabase(uid);
-        await this.setState({likedUrl: array});
-    }
-
-    goToUrl(url: string){
-        window.open(url,'_blank');
-    }
-
     render(){
-        console.log(this.state.likedUrl.length);
+        const array = (this.props.cookies).get('data');
         let content: any = [];
-        const array: Array<string> =this.state.likedUrl;
-        [...array].forEach((url: string,idx: number) => {
+        array.forEach((post: Object,idx: number) => {
             content.push(
-                <div key={idx}>
-                    <h5 onClick={()=>this.goToUrl(url)}>{url}</h5>
-                    <br></br>
+                <div className="col-sm py-3" key={idx}>
+                    <Post key={idx} 
+                        title={post.title} 
+                        imageurl={post.imageurl} 
+                        description={post.description} 
+                        url={post.url} 
+                        content={null} 
+                        cookies={this.props.cookies}/>
                 </div>
             )
+            if ((idx+1)%3===0) {content.push(<div key={array.length+idx} className="w-100"></div>)}
         })
 
         return(

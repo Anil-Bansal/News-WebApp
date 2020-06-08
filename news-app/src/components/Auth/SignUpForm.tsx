@@ -51,6 +51,8 @@ class SignUpForm extends Component {
         var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
         this.props.cookies.set('testing',cookies,{path: '/'});
         this.props.setCookieLoad(true)
+        var data=await this.props.firebase.getUserLikedData(uid);
+        this.props.cookies.set('data',data,{path: '/'});
       }
 
       guestSignIn = () => {
@@ -101,6 +103,7 @@ class SignUpForm extends Component {
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
           this.props.cookies.set('testing',[],{path: '/'});
+          this.props.cookies.set('data',[],{path: '/'});
           this.props.history.push('/Main');
         })
         .catch(error => {

@@ -41,7 +41,7 @@ class App extends Component{
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
                 <Route exact path="/Sources" component={Sources}/>
                 <Route exact path="/Team" component={Info}/>
-                <Route exact path="/Profile" component={Profile}/>
+                <Route exact path="/Profile" render={() => (<Profile cookies={this.props.cookies}/>)}/>
               </div>)
             } 
 

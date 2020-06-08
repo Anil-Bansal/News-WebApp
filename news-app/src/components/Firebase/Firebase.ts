@@ -48,14 +48,15 @@ class Firebase {
 
     addCookieToDatabase = (uid: string,cookie=[]) =>
     {
-      this.database.collection('users').doc(uid).set({
+      this.database.collection('users').doc(uid).update({
         cookie: cookie
       })
     }
 
     addNewUser=(uid: string)=>{
       this.database.collection("users").doc(uid).set({
-        cookie: []
+        cookie: [],
+        data: []
       })
     }
 
@@ -66,6 +67,21 @@ class Firebase {
         return Promise.resolve(curdoc.data().cookie);
       else
         return Promise.resolve([])
+    }
+
+    async getUserLikedData(uid: string)
+    {
+      var curdoc = await this.database.collection("users").doc(uid).get()
+      if(curdoc.exists)
+        return Promise.resolve(curdoc.data().data);
+      else
+        return Promise.resolve([])
+    }
+
+    addDataToDatabase=(uid: string,data=[])=>{
+      this.database.collection("users").doc(uid).update({
+        data: data
+      })
     }
 
 }

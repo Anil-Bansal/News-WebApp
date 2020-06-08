@@ -49,7 +49,9 @@ class SignInForm extends Component {
         this.props.setUserId(uid);
         var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
         this.props.cookies.set('testing',cookies,{path: '/'});
-        this.props.setCookieLoad(true)
+        this.props.setCookieLoad(true);
+        var data=await this.props.firebase.getUserLikedData(uid);
+        this.props.cookies.set('data',data,{path: '/'});
       }
 
     async guestLogin()

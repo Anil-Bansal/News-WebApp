@@ -37,6 +37,16 @@ class Post extends React.Component{
         this.props.firebase.addCookieToDatabase(this.props.uid,[...(this.props.cookies).get('testing'),this.props.url]);
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
+
+        let obj={
+            title: this.props.title,
+            imageurl: this.props.imageurl,
+            description: this.props.description,
+            url: this.props.url
+        };
+
+        this.props.firebase.addDataToDatabase(this.props.uid,[...(this.props.cookies).get('data'),obj]);
+        (this.props.cookies).set('data',[...(this.props.cookies).get('data'),obj]);
     }
 
     unlikePost = () => {
@@ -47,6 +57,24 @@ class Post extends React.Component{
         }
         (this.props.cookies).set('testing',likedPosts)
         this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts)
+
+        let obj={
+            title: this.props.title,
+            imageurl: this.props.imageurl,
+            description: this.props.description,
+            url: this.props.url
+        };
+
+        var likedData=(this.props.cookies).get('data');
+        const val: number = likedData.indexOf(obj);
+        if (val > -1) {
+            likedData.splice(val, 1);
+        }
+
+        console.log(val);
+
+        (this.props.cookies).set('data',likedData)
+        this.props.firebase.addDataToDatabase(this.props.uid,likedData)
         this.setState({isLiked: false})
     }
 

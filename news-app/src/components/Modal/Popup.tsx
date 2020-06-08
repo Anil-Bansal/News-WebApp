@@ -4,22 +4,20 @@ import Button from  'react-bootstrap/Button'
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from "react-share";
 import {FaFacebookF,FaTwitter, FaLinkedin} from 'react-icons/fa';
 
-
 class Popup extends React.Component{
-	public props: Object;
+	public props: any;
 
-    goToUrl(url): void{
+    goToUrl(url: String): void{
         window.open(url,'_blank');
     }
 
     render(){
         return(
             <Modal
-            {...this.props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            >
+                {...this.props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                 <div align = 'center'>
@@ -30,10 +28,9 @@ class Popup extends React.Component{
             <Modal.Body>
                 <div align='center'>
                     <img alt='' style={{height:250, marginBottom:10}} src={this.props.cardData.imageurl}/>
-                
-                <p>
-                    {this.props.cardData.content ? this.props.cardData.content : this.props.cardData.description}
-                </p>
+                    <p>
+                        {this.props.cardData.content ? this.props.cardData.content : this.props.cardData.description}
+                    </p>
                 </div>
             </Modal.Body>
             <Modal.Footer>
@@ -63,11 +60,10 @@ class Popup extends React.Component{
                     <Button  onClick={()=>this.goToUrl(this.props.cardData.url)}>Go To News</Button>
                 </div>
                 <Button variant='danger' onClick={this.props.onHide}>Close</Button>
-
             </Modal.Footer>
             </Modal>
         )
     }
 }
 
-export default Popup
+export default Popup;

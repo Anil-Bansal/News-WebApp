@@ -74,8 +74,9 @@ class Post extends React.Component{
                 <Card.Footer>
                     <div className='row'>
                         <div align='left' style={{marginLeft:30}}>
-                            {this.state.isLiked ? <MdFavorite size={30} onClick={()=> this.unlikePost()}/>: 
-                                                <MdFavoriteBorder size={30} onClick={()=> this.likePost()}/> }
+                            {this.state.isLiked ? 
+                                    <MdFavorite color='#C70039' size={30} onClick={()=> this.unlikePost()}/> : 
+                                    <MdFavoriteBorder color='#C70039' size={30} onClick={()=> this.likePost()}/> }
                         </div>
                         <div align='right' style={{marginLeft:180}}>
                             <Button variant='danger' onClick={()=>this.goToUrl(this.props.url)}>Go To News</Button>

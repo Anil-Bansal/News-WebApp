@@ -1,31 +1,30 @@
-import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROR_EXIST,SET_NEWS_END,SET_LOGIN,SET_UID,SET_COOKIE_LOAD } from './Actions.ts'
+import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,SET_LOGIN,SET_UID,SET_COOKIE_LOAD } from './Actions.ts'
 
 const initialState ={
-    is_loading: true,
+    isLoading: true,
     page: 1,
     country: 'in',
     articles:[],
-    news_end: false,
-    error_exist: false, 
+    newsEnd: false,
+    errorExist: false, 
     isLoggedIn: false,
     uid: "",
     cookieLoaded: false
 }
 
-function newsApp(state = initialState, action?) {
-
+function newsApp(state: Object = initialState, action: Object) {
     switch (action.type) {
         case LOADING:
             return Object.assign({}, state,{
-                is_loading: action.val,
+                isLoading: action.val,
             })
         case CHANGE_COUNTRY:
             return Object.assign({}, state,{
                 country: action.val,
             })
-        case SET_NEWS_END:
+        case SET_NEWSEND:
             return Object.assign({}, state,{
-                news_end: action.val
+                newsEnd: action.val
             })
         case SET_ARTICLES:
             return Object.assign({}, state,{
@@ -35,9 +34,9 @@ function newsApp(state = initialState, action?) {
             return Object.assign({}, state,{
                 page: action.val,
             })
-        case SET_ERROR_EXIST:
+        case SET_ERROREXIST:
             return Object.assign({}, state,{
-                error_exist: action.val,
+                errorExist: action.val,
             })
         case SET_LOGIN:
             return Object.assign({}, state,{

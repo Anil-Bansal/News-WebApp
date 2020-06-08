@@ -8,32 +8,29 @@ import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 
-
 class Main extends React.Component{
 	public fetchNews: void;
 	public fetchNewsSearch: void;
 	
-    constructor(props){
+    constructor(props:any ){
         super(props);
         this.fetchNews=fetchNews.bind(this);
         this.fetchNewsSearch=fetchNewsSearch.bind(this);
         if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
         {
-          (this.props.cookies).set('testing',[],{path: '/'})
+        	(this.props.cookies).set('testing',[],{path: '/'})
         }
       }
-
     
     async componentDidMount(){
-      console.log("In Main.js");
-      await this.props.setcountry('in');
-      await this.props.setpage(1);
-      await this.props.setarticles([]);
-      this.fetchNews();
+		await this.props.setCountry('in');
+		await this.props.setPage(1);
+		await this.props.setArticles([]);
+		this.fetchNews();
     }
 
     SelectiveDisplay(){
-        if(this.props.error_exist)
+        if(this.props.errorExist)
           return <ErrorHandler />
         else{
           return(
@@ -44,48 +41,48 @@ class Main extends React.Component{
           );
         }
       }
-    
 
     render(){
-      if(this.props.news_end){
-          return(
-              <div>
-                  <Head />
-                  {this.SelectiveDisplay()}
-              </div>
-          )}
-      else{
-          return(
-              <div>
-                  <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>
-                  <Head />
-                  {this.SelectiveDisplay()}
-              </div>
-          )}
+      	if(this.props.newsEnd){
+            return(
+                <div>
+                    <Head />
+                    {this.SelectiveDisplay()}
+                </div>
+            )}
+      	else{
+            return(
+                <div>
+                    <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>
+                    <Head />
+                    {this.SelectiveDisplay()}
+                </div>
+            )}
       }
 }
+
 const mapStateToProps=(state: Object,ownProps: Object)=>{
     return{
       page: state.page,
       country: state.country ,
       articles: state.articles,
-      news_end: state.news_end,
-      error_exist: state.error_exist,
+      newsEnd: state.newsEnd,
+      errorExist: state.errorExist,
       cookieLoaded: state.cookieLoaded,
       cookies: ownProps.cookies,
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
-    return{
-      setloading: (val)=>dispatch(actiontypes.setloading(val)),
-      setnewsend: (val)=>dispatch(actiontypes.setnewsend(val)),
-      setarticles: (val)=>dispatch(actiontypes.setarticles(val)),
-      seterrorexist: (val)=>dispatch(actiontypes.seterrorexist(val)),
-      setcountry: (val)=>dispatch(actiontypes.setcountry(val)),
-      setpage: (val)=>dispatch(actiontypes.setpage(val))
-    };
-  }
+const mapDispatchToProps=dispatch=>{
+  return{
+    setLoading: (val: Boolean)=>dispatch(actiontypes.setLoading(val)),
+    setNewsEnd: (val: Boolean)=>dispatch(actiontypes.setNewsEnd(val)),
+    setArticles: (val: Array<Object>)=>dispatch(actiontypes.setArticles(val)),
+    setErrorExist: (val: Boolean)=>dispatch(actiontypes.setErrorExist(val)),
+    setCountry: (val: String)=>dispatch(actiontypes.setCountry(val)),
+    setPage: (val: Number)=>dispatch(actiontypes.setPage(val))
+  };
+}
   
   export default connect(mapStateToProps,mapDispatchToProps)(Main);
   

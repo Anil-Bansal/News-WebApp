@@ -1,7 +1,6 @@
 import React from 'react'
 
-
-const Person = (props) => {
+const Person = (props: any) => {
     return (
         <div>
             <div style ={{marginLeft:150, marginTop:50}}>

@@ -4,13 +4,12 @@ import Vinayak from '../../assets/Vinayak.jpeg';
 import Anil from '../../assets/Anil.jpg';
 import './Team.css'
 
-const Info = (props) => {
+const Info = () => {
     return (
         <div>
             <div className="container">
                 <h1 style={{marginTop: 10}}>Alone We Can Do So Little, Together We Can Do So Much.</h1>
-                <div  className='row'  >
-                    
+                <div  className='row'  >        
                     <Person  name='Anil Bansal' imageSrc = {Anil} title='SDE Intern'/>
                     <Person name='Vinayak Aggarwal' imageSrc = {Vinayak} title='SDE Intern'/>
                 </div>

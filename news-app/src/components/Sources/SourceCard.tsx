@@ -3,32 +3,32 @@ import Card from 'react-bootstrap/Card';
 
 class SourceCard extends React.Component{
 	public state: Object;
-	public props: Object;
+	public props: any;
 
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.state = {
-          backg: "light",
+          BackgroundColor: "light",
           textColor: 'dark'
         };
       }
 
     enter = () =>{
         this.setState({
-            backg: "info",
+            BackgroundColor: "info",
             textColor: 'white'
     })
     }  
     leave = () =>{
         this.setState({
-            backg: "light",
+            BackgroundColor: "light",
             textColor: 'dark'
         })
     }  
     render(){
         return(
             <div>
-                <Card bg={this.state.backg}
+                <Card bg={this.state.BackgroundColor}
                     onMouseEnter={this.enter}
                     onMouseLeave={this.leave}
                     style={{width: '24rem'}}

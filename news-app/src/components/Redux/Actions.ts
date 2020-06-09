@@ -24,7 +24,6 @@ export function setArticles(articles: Array<Object>) {
 }
 
 export function setLiked(articles) {
-  console.log('art',articles)
   return { type: SET_LIKED, val: articles }
 }
 

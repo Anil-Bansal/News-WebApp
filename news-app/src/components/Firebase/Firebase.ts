@@ -48,7 +48,6 @@ class Firebase {
 
     addCookieToDatabase = (uid: string,cookie=[],data=[]) =>
     {
-      console.log(uid,"FF",data)
       this.database.collection('users').doc(uid).set({
         cookie: cookie,
         data: data

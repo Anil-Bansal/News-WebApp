@@ -12,7 +12,6 @@ import Button from 'react-bootstrap/Button'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
 
-
 const INITIAL_STATE = {
     email: '',
     password: '',
@@ -115,20 +114,20 @@ class SignInForm extends Component {
 
     showPassword = (event) => {
       var x = document.getElementById('pass');
-
       if(x.type === 'password') {
           x.type = 'text';
       }
       else if(x.type === 'text') {
           x.type = 'password';
       }
-  }
+    }
    
     render() {
       const { email, password, error } = this.state;
    
       const IS_Invalid = password === '' || email === '';
-   
+
+
       return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />

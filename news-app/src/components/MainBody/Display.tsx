@@ -7,7 +7,6 @@ class Display extends React.Component{
 
     render(){
         const array: Array<Object> = this.props.show==='likedOnly' ? this.props.liked : this.props.articles;
-        console.log('dis',array)
         let content:Array = [];
         array.forEach((post: Object,idx: number) => {
             content.push(

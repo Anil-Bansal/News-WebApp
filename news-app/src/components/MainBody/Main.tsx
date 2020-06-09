@@ -4,14 +4,13 @@ import Head from '../Header/head';
 import BottomScrollListener from 'react-bottom-scroll-listener';
 import Loader from '../Loader/Loader'
 import ErrorHandler from '../ErrorHandler/ErrorHandler';
-import {fetchNews,fetchNewsSearch,fetchLiked} from '../NewsFetch/Fetch'
+import {fetchNews,fetchLiked} from '../NewsFetch/Fetch'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import {withFirebase} from '../Firebase'
 
 class Main extends React.Component{
 	public fetchNews: void;
-	public fetchNewsSearch: void;
 	
     constructor(props:any ){
         super(props);

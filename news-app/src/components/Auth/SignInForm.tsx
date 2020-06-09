@@ -11,6 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from 'react-bootstrap/Button'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 const INITIAL_STATE = {
     email: '',
@@ -90,6 +91,7 @@ class SignInForm extends Component {
     }
 
     onSubmit = event => {
+      this.props.setLoading(true)
       const { email, password } = this.state;    
       this.props.firebase
         .doSignInWithEmailAndPassword(email, password)
@@ -102,6 +104,7 @@ class SignInForm extends Component {
           })
         })
         .catch(error => {
+          this.props.setLoading(false)
           this.setState({ error });
         });
       
@@ -135,10 +138,11 @@ class SignInForm extends Component {
           <Avatar >
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h4" style={{marginBottom:30}}>
+          <Typography component="h1" variant="h4" style={{marginBottom:20}}>
             Sign In
           </Typography>
-          <form onSubmit={this.onSubmit}>
+            <BeatLoader color={"#123abc"} size={20} loading={this.props.isLoading} />
+          <form onSubmit={this.onSubmit} style={{marginTop:10}}>
           <div  align='center'>
             <TextField
               name="email"
@@ -177,6 +181,7 @@ class SignInForm extends Component {
               Sign In as Guest
           </Button>
           <GoogleButton onClick={this.googleSignIn} />
+          
         </div>
         </Container>
       );
@@ -187,7 +192,7 @@ class SignInForm extends Component {
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
-
+      isLoading: state.isLoading
     };
   }
   
@@ -195,7 +200,9 @@ class SignInForm extends Component {
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
       setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val))
+      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val)),
+      setLoading: (val)=>dispatch(actiontypes.setLoading(val)),
+
     };
   }
   

@@ -1,7 +1,7 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED } from './Actions.ts'
 
 const initialState ={
-    isLoading: true,
+    isLoading: false,
     page: 1,
     country: 'in',
     articles:[],

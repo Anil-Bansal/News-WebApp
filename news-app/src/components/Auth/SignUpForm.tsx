@@ -116,6 +116,24 @@ class SignUpForm extends Component {
     onChange = event => {
       this.setState({ [event.target.name]: event.target.value });
     };
+
+    showPassword = () => {
+      var passwordComponent = document.getElementById('password');
+      if(passwordComponent.type === 'password') {
+        passwordComponent.type = 'text';
+      }
+      else if(passwordComponent.type === 'text') {
+        passwordComponent.type = 'password';
+      }
+
+      var confirmpasswordComponent=document.getElementById('confirmpassword');
+      if(confirmpasswordComponent.type === 'password') {
+        confirmpasswordComponent.type = 'text';
+      }
+      else if(confirmpasswordComponent.type === 'text') {
+        confirmpasswordComponent.type = 'password';
+      }
+    }
    
     render() {
       const {
@@ -162,6 +180,7 @@ class SignUpForm extends Component {
                     placeholder="Password"
                     variant="outlined"
                     style={{marginBottom:20}}
+                    id="password"
                 />
                 <TextField
                     name="passwordTwo"
@@ -171,8 +190,13 @@ class SignUpForm extends Component {
                     placeholder="Confirm Password"
                     variant="outlined"
                     style={{marginBottom:20}}
+                    id="confirmpassword"
                 />
                 </div>
+
+                <input type="checkbox" onClick={this.showPassword} style={{marginBottom:20}}/>
+                <span> Show Password</span><br/>
+
               {isInvalid ? 
                   <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Register</Button>
                 : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Register</Button>

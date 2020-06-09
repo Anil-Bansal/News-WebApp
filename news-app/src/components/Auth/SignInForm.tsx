@@ -19,8 +19,6 @@ const INITIAL_STATE = {
     error: null,
   };
 
-
-
 class SignInForm extends Component {
 	public state: any;
 	public props: any;
@@ -59,8 +57,8 @@ class SignInForm extends Component {
       this.props.setCookieLoad(true)
     }
 
-
     guestSignIn = () => {
+      this.props.setLoading(true)
       this.props.firebase.doGuestSignIn()
       .then(() => {
         this.login();
@@ -71,11 +69,13 @@ class SignInForm extends Component {
         })
       })
       .catch(error => {
+        this.props.setLoading(false)
         this.setState({ error });
       });
     }
 
     googleSignIn = () => {
+      this.props.setLoading(true)
       this.props.firebase.doGoogleSignIn()
       .then(() => {
         this.login();
@@ -86,6 +86,7 @@ class SignInForm extends Component {
         })
       })
       .catch(error => {
+        this.props.setLoading(false)
         this.setState({ error });
       });
     }
@@ -115,21 +116,19 @@ class SignInForm extends Component {
       this.setState({ [event.target.name]: event.target.value });
     };
 
-    showPassword = (event) => {
-      var x = document.getElementById('pass');
-      if(x.type === 'password') {
-          x.type = 'text';
+    showPassword = () => {
+      var passwordComponent = document.getElementById('pass');
+      if(passwordComponent.type === 'password') {
+        passwordComponent.type = 'text';
       }
-      else if(x.type === 'text') {
-          x.type = 'password';
+      else if(passwordComponent.type === 'text') {
+        passwordComponent.type = 'password';
       }
     }
    
     render() {
       const { email, password, error } = this.state;
-   
-      const IS_Invalid = password === '' || email === '';
-
+      const isInvalid = password === '' || email === '';
 
       return (
         <Container component="main" maxWidth="xs">
@@ -162,26 +161,24 @@ class SignInForm extends Component {
               placeholder="Password"
               variant="outlined"
               id='pass'
-                  style={{marginBottom:20}}
+                  style={{marginBottom:15}}
             />
           </div>
+            <input type="checkbox" onClick={this.showPassword} style={{marginBottom:20}}/>
+            <span> Show Password</span><br/>
              
-            {IS_Invalid ? 
+            {isInvalid ? 
                 <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Login</Button>
               : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Login</Button>
             }
-            <br />
-
-            <input type="checkbox" onClick={this.showPassword}/><span> Show Password</span>
-                         
+                                    
             {error && <h4>{error.message}</h4>}
           </form>
           <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
             onClick={() => this.guestSignIn()}>
               Sign In as Guest
           </Button>
-          <GoogleButton onClick={this.googleSignIn} />
-          
+          <GoogleButton onClick={this.googleSignIn} /> 
         </div>
         </Container>
       );

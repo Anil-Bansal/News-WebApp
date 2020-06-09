@@ -3,8 +3,7 @@ import {withFirebase} from '../Firebase';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Grid from '@material-ui/core/Grid';
+import BeatLoader from 'react-spinners/BeatLoader';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -31,7 +30,6 @@ class SignUpForm extends Component {
 
     constructor(props: any) {
       super(props);
-      
       this.googleSignIn=this.googleSignIn.bind(this);
       this.login=this.login.bind(this);
       this.signInSync=this.signInSync.bind(this);
@@ -44,55 +42,59 @@ class SignUpForm extends Component {
         this.props.setLoginStatus(true);
        }
 
-       async signInSync ()
-      {
-        var uid: string = await this.props.firebase.getUID()
-        this.props.setUserId(uid);
-        var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
-        this.props.cookies.set('testing',cookies,{path: '/'});
-        this.props.setCookieLoad(true)
-      }
+      async signInSync ()
+    {
+      var uid: string = await this.props.firebase.getUID()
+      this.props.setUserId(uid);
+      var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
+      this.props.cookies.set('testing',cookies,{path: '/'});
+      this.props.setCookieLoad(true)
+    }
 
-      guestSignIn = () => {
-        this.props.firebase.doGuestSignIn()
-        .then(() => {
-          this.login();
-          this.setState({ ...INITIAL_STATE });
-          this.guestLogin()
-          .then(()=>{
-            this.props.history.push('/Main');
-          })
+    guestSignIn = () => {
+      this.props.setLoading(true) 
+      this.props.firebase.doGuestSignIn()
+      .then(() => {
+        this.login();
+        this.setState({ ...INITIAL_STATE });
+        this.guestLogin()
+        .then(()=>{
+          this.props.history.push('/Main');
         })
-        .catch(error => {
-          this.setState({ error });
-        });
-      }
+      })
+      .catch(error => {
+        this.props.setLoading(false)
+        this.setState({ error });
+      });
+    }
 
-      async guestLogin()
-      {
-        var uid: string = await this.props.firebase.getUID()
-        this.props.setUserId(uid);
-        this.props.setCookieLoad(true)
-      }
+    async guestLogin()
+    {
+      var uid: string = await this.props.firebase.getUID()
+      this.props.setUserId(uid);
+      this.props.setCookieLoad(true)
+    }
 
-       googleSignIn = () => {
-        this.props.firebase.doGoogleSignIn()
-        .then(() => {
-          this.login();
-          this.setState({ ...INITIAL_STATE });
-          this.signInSync()
-          .then(()=>{
-            this.props.history.push('/Main');
-          })
+      googleSignIn = () => {
+      this.props.setLoading(true)
+      this.props.firebase.doGoogleSignIn()
+      .then(() => {
+        this.login();
+        this.setState({ ...INITIAL_STATE });
+        this.signInSync()
+        .then(()=>{
+          this.props.history.push('/Main');
         })
-        .catch(error => {
-          this.setState({ error });
-        });
-      }
+      })
+      .catch(error => {
+        this.props.setLoading(false)
+        this.setState({ error });
+      });
+    }
 
     onSubmit = event => {
       const { email, passwordOne } = this.state;
-   
+      this.props.setLoading(true)
       this.props.firebase
         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(authUser => {
@@ -104,6 +106,7 @@ class SignUpForm extends Component {
           this.props.history.push('/Main');
         })
         .catch(error => {
+          this.props.setLoading(false)
           this.setState({ error });
         });
    
@@ -122,68 +125,69 @@ class SignUpForm extends Component {
           error,
       } = this.state;
   
-      const IS_INVALID = 
+      const isInvalid = 
               passwordOne !== passwordTwo || 
               passwordOne === '' || 
               email === '';
   
-      return (
-      <Container component="main" maxWidth="xs" style={{marginTop:50}}>
-      <CssBaseline />
-      <div align='center'>
-        <Avatar >
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h4" style={{marginBottom:20}}>
-          Sign Up
-        </Typography>
-        <div>
-          <form onSubmit={this.onSubmit}>
-            <div align='center'>
-              <TextField
-                  name="email"
-                  value={email}
-                  onChange={this.onChange}
-                  type="text"
-                  placeholder="Email Address"
-                  variant="outlined"
-                  style={{marginBottom:20}}
-              />
-              <TextField
-                  name="passwordOne"
-                  value={passwordOne}
-                  onChange={this.onChange}
-                  type="password"
-                  placeholder="Password"
-                  variant="outlined"
-                  style={{marginBottom:20}}
-              />
-              <TextField
-                  name="passwordTwo"
-                  value={passwordTwo}
-                  onChange={this.onChange}
-                  type="password"
-                  placeholder="Confirm Password"
-                  variant="outlined"
-                  style={{marginBottom:20}}
-              />
-              </div>
-            {IS_INVALID ? 
-                <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Register</Button>
-              : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Register</Button>
-            }
-  
-              {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
-          </form>
+        return (
+        <Container component="main" maxWidth="xs" style={{marginTop:50}}>
+        <CssBaseline />
+        <div align='center'>
+          <Avatar >
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h4" style={{marginBottom:20}}>
+            Sign Up
+          </Typography>
+          <BeatLoader color={"#123abc"} size={20} loading={this.props.isLoading} />
 
-          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
-          onClick={() => this.guestSignIn()}>
-              Sign Up as Guest
-          </Button>
-          <GoogleButton onClick={this.googleSignIn} />
-        </div></div>
-        </Container>
+          <div>
+            <form onSubmit={this.onSubmit}>
+              <div align='center'>
+                <TextField
+                    name="email"
+                    value={email}
+                    onChange={this.onChange}
+                    type="text"
+                    placeholder="Email Address"
+                    variant="outlined"
+                    style={{marginBottom:20}}
+                />
+                <TextField
+                    name="passwordOne"
+                    value={passwordOne}
+                    onChange={this.onChange}
+                    type="password"
+                    placeholder="Password"
+                    variant="outlined"
+                    style={{marginBottom:20}}
+                />
+                <TextField
+                    name="passwordTwo"
+                    value={passwordTwo}
+                    onChange={this.onChange}
+                    type="password"
+                    placeholder="Confirm Password"
+                    variant="outlined"
+                    style={{marginBottom:20}}
+                />
+                </div>
+              {isInvalid ? 
+                  <Button style={{marginBottom:20}} size='lg' variant="secondary" disabled>Register</Button>
+                : <Button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Register</Button>
+              }
+    
+                {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
+            </form>
 
+            <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
+            onClick={() => this.guestSignIn()}>
+                Sign Up as Guest
+            </Button>
+            <GoogleButton onClick={this.googleSignIn} />
+          </div></div>
+          </Container>
       );
     }
   }
@@ -193,7 +197,8 @@ class SignUpForm extends Component {
   const mapStateToProps=(state: any)=>{
     return{
       isLoggedIn: state.isLoggedIn,
-      uid: state.uid
+      uid: state.uid,
+      isLoading: state.isLoading
     };
   }
   
@@ -201,7 +206,8 @@ class SignUpForm extends Component {
     return{
       setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
       setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val))
+      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val)),
+      setLoading: (val)=>dispatch(actiontypes.setLoading(val))
     };
   }
   

@@ -91,7 +91,6 @@ class Firebase {
           userName: 'user1',
           message: message,
         }
-        console.log('sending',message)
         this.messageReference.push(newMessage);
       }
     }

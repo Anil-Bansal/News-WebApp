@@ -16,22 +16,21 @@ class Send extends React.Component{
       }
 
     onSubmit = (event: any) => {
-        console.log(this.state.message)
         this.props.firebase.sendMessage(this.state.message)
         event.preventDefault();
       };
 
     onChange = (event: any) => {
-    this.setState({ [event.target.name]: event.target.value });
+      this.setState({ [event.target.name]: event.target.value });
     };
 
     render(){
       const{ message } = this.state;
-        console.log('b')
         return(
         <div>
-            <form onSubmit={this.onSubmit}>
+            <form id="form" onSubmit={this.onSubmit}>
                 <TextField
+                    id="text-field"
                     name="message"
                     value={message}
                     onChange={this.onChange}
@@ -56,12 +55,11 @@ const mapStateToProps=(state:StateTypes)=>{
       uid: state.uid,
     };
   }
-  
+
 const mapDispatchToProps=(dispatch: any)=>{
   return{
     setMessages: (val: Array<string>)=>dispatch(actiontypes.setMessages(val))
   };
 }
-  
+
 export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Send));
-  

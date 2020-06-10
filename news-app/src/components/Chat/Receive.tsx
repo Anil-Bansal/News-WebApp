@@ -3,15 +3,47 @@ import { withFirebase } from "../Firebase";
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import { StateTypes } from "../Redux/Reducers";
-
+import {List,ListItemText,ListItem} from '@material-ui/core';
 
 class Receive extends React.Component{
+
+    constructor(props){
+      super(props);
+      this.state={
+        messages: []
+      }
+    }
+
+    componentDidMount(){
+      this.getMessages()
+    }
+
+    getMessages=()=>{
+      var ref=this.props.firebase.realDatabase.ref().child('messages').limitToLast(20);
+      ref.on('value',snapshot=>{
+        let newmessages=[]
+        snapshot.forEach(child=>{
+          var cur=child.val()
+          newmessages.push(cur.message)
+        })
+        this.setState({messages: newmessages});
+      })
+    }
+
+    rendermessages=()=>{
+      return this.state.messages.map(message=>(
+        <ListItem>
+          <ListItemText style={{wordBreak: "break-word"}} primary={message}></ListItemText>
+        </ListItem>
+      ))
+    }
 
     render(){
         return(
         <div>
-            {this.props.firebase.listenMessages(this.props.setMessages)}
-            {console.log('a',this.props.messages)}
+            <List>
+              {this.rendermessages()}
+            </List>
         </div>
         )
     }

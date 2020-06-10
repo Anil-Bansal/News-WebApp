@@ -12,6 +12,7 @@ import Button from 'react-bootstrap/Button'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
 import BeatLoader from 'react-spinners/BeatLoader';
+import {StateTypes} from '../Redux/Reducers';
 
 const INITIAL_STATE = {
     email: '',
@@ -19,14 +20,24 @@ const INITIAL_STATE = {
     error: null,
   };
 
-class SignInForm extends Component {
+interface Props{
+  setLoginStatus: Function,
+  setUserId: Function,
+  setCookieLoad: Function,
+  setLoading: Function,
+  firebase: any,
+  history: any,
+  cookies: Object
+}
+
+class SignInForm extends Component<Props> {
 	public state: any;
-	public props: any;
-	public email: any;
-	public password: any;
+	public props: Props;
+	public email: string;
+	public password: string;
 	public error: any;
 
-    constructor(props: any) {
+    constructor(props: Props) {
       super(props);
       this.login=this.login.bind(this)
       this.signInSync=this.signInSync.bind(this)
@@ -68,7 +79,7 @@ class SignInForm extends Component {
           this.props.history.push('/Main');
         })
       })
-      .catch(error => {
+      .catch((error: any) => {
         this.props.setLoading(false)
         this.setState({ error });
       });
@@ -85,13 +96,13 @@ class SignInForm extends Component {
           this.props.history.push('/Main');
         })
       })
-      .catch(error => {
+      .catch((error: any) => {
         this.props.setLoading(false)
         this.setState({ error });
       });
     }
 
-    onSubmit = event => {
+    onSubmit = (event: any) => {
       this.props.setLoading(true)
       const { email, password } = this.state;    
       this.props.firebase
@@ -104,7 +115,7 @@ class SignInForm extends Component {
             this.props.history.push('/Main');
           })
         })
-        .catch(error => {
+        .catch((error: any) => {
           this.props.setLoading(false)
           this.setState({ error });
         });
@@ -112,7 +123,7 @@ class SignInForm extends Component {
       event.preventDefault();
     };
    
-    onChange = event => {
+    onChange = (event: any) => {
       this.setState({ [event.target.name]: event.target.value });
     };
 
@@ -185,7 +196,7 @@ class SignInForm extends Component {
     }
   }
 
-  const mapStateToProps=(state: any)=>{
+  const mapStateToProps=(state: StateTypes)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
@@ -195,10 +206,10 @@ class SignInForm extends Component {
   
   const mapDispatchToProps=dispatch=>{
     return{
-      setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val)),
-      setLoading: (val)=>dispatch(actiontypes.setLoading(val)),
+      setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
+      setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
+      setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
+      setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
 
     };
   }

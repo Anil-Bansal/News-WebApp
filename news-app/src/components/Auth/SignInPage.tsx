@@ -2,8 +2,17 @@ import React from 'react';
 import SignInForm from './SignInForm'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { StateTypes } from '../Redux/Reducers';
 
-class SignInPage extends React.Component{
+interface Props{
+    cookies: Object
+}
+
+interface OwnProps{
+    cookies: Object
+}
+
+class SignInPage extends React.Component<Props>{
 
     render(){
         return(
@@ -17,10 +26,10 @@ class SignInPage extends React.Component{
     }
 }
 
-const mapStateToProps=(state: Object,ownProps: Object)=>{
+const mapStateToProps=(state: StateTypes,ownProps: OwnProps)=>{
     return{
      cookies: ownProps.cookies,
     };
-  }
+}
   
 export default connect(mapStateToProps)(SignInPage);

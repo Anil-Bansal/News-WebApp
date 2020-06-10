@@ -2,9 +2,17 @@ import React from 'react';
 import SignUpForm from './SignUpForm'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { StateTypes } from '../Redux/Reducers';
 
+interface Props{
+    cookies: Object
+}
 
-class SignUpPage extends React.Component{
+interface OwnProps{
+    cookies: Object
+}
+
+class SignUpPage extends React.Component<Props>{
 
     render(){
         return(
@@ -18,7 +26,7 @@ class SignUpPage extends React.Component{
     }
 }
 
-const mapStateToProps=(state: Object,ownProps: Object)=>{
+const mapStateToProps=(state: StateTypes,ownProps: OwnProps)=>{
     return{
      cookies: ownProps.cookies,
     };

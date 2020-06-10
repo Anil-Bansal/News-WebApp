@@ -12,6 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from 'react-bootstrap/Button'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
+import {StateTypes} from '../Redux/Reducers'
 
 const INITIAL_STATE = {
     email: '',
@@ -20,15 +21,26 @@ const INITIAL_STATE = {
     error: null,
   };
 
-class SignUpForm extends Component {
+interface Props{
+  setLoginStatus: Function,
+  setUserId: Function,
+  setCookieLoad: Function,
+  setLoading: Function,
+  cookies: Object,
+  history: any,
+  firebase: any,
+  isLoading: boolean
+}
+
+class SignUpForm extends Component<Props> {
 	public state: any;
-	public props: any;
-	public email: any;
-	public passwordOne: any;
-	public passwordTwo: any;
+	public props: Props;
+	public email: string;
+	public passwordOne: string;
+	public passwordTwo: string;
 	public error: any;
 
-    constructor(props: any) {
+    constructor(props: Props) {
       super(props);
       this.googleSignIn=this.googleSignIn.bind(this);
       this.login=this.login.bind(this);
@@ -39,10 +51,10 @@ class SignUpForm extends Component {
     }
 
     login () {
-        this.props.setLoginStatus(true);
-       }
+      this.props.setLoginStatus(true);
+    }
 
-      async signInSync ()
+    async signInSync ()
     {
       var uid: string = await this.props.firebase.getUID()
       this.props.setUserId(uid);
@@ -62,7 +74,7 @@ class SignUpForm extends Component {
           this.props.history.push('/Main');
         })
       })
-      .catch(error => {
+      .catch((error: any) => {
         this.props.setLoading(false)
         this.setState({ error });
       });
@@ -86,18 +98,18 @@ class SignUpForm extends Component {
           this.props.history.push('/Main');
         })
       })
-      .catch(error => {
+      .catch((error: any) => {
         this.props.setLoading(false)
         this.setState({ error });
       });
     }
 
-    onSubmit = event => {
+    onSubmit = (event: any) => {
       const { email, passwordOne } = this.state;
       this.props.setLoading(true)
       this.props.firebase
         .doCreateUserWithEmailAndPassword(email, passwordOne)
-        .then(authUser => {
+        .then(() => {
           this.login();
           this.setState({ ...INITIAL_STATE });
           this.props.setUserId(this.props.firebase.getUID());
@@ -105,7 +117,7 @@ class SignUpForm extends Component {
           this.props.cookies.set('testing',[],{path: '/'});
           this.props.history.push('/Main');
         })
-        .catch(error => {
+        .catch((error: any) => {
           this.props.setLoading(false)
           this.setState({ error });
         });
@@ -113,7 +125,7 @@ class SignUpForm extends Component {
       event.preventDefault();
     }
    
-    onChange = event => {
+    onChange = (event: any) => {
       this.setState({ [event.target.name]: event.target.value });
     };
 
@@ -218,7 +230,7 @@ class SignUpForm extends Component {
 
 
 
-  const mapStateToProps=(state: any)=>{
+  const mapStateToProps=(state: StateTypes)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
@@ -228,10 +240,10 @@ class SignUpForm extends Component {
   
   const mapDispatchToProps=dispatch=>{
     return{
-      setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-      setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-      setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val)),
-      setLoading: (val)=>dispatch(actiontypes.setLoading(val))
+      setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
+      setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
+      setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
+      setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val))
     };
   }
   

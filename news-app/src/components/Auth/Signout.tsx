@@ -4,9 +4,19 @@ import {withRouter} from 'react-router-dom';
 import Button from  'react-bootstrap/Button';
 import {connect} from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
+import { StateTypes } from '../Redux/Reducers';
 
-class SignOutButton extends React.Component{
-  constructor(props: any){
+
+interface Props{
+  setLoginStatus: Function,
+  setUserId: Function,
+  setCookieLoad: Function,
+  history: any,
+  firebase: any
+}
+
+class SignOutButton extends React.Component<Props>{
+  constructor(props: Props){
     super(props);
     this.signOut=this.signOut.bind(this);
   }
@@ -31,7 +41,7 @@ class SignOutButton extends React.Component{
 }
 
 
-const mapStateToProps=(state: Object)=>{
+const mapStateToProps=(state: StateTypes)=>{
   return{
     isLoggedIn: state.isLoggedIn,
     uid: state.uid,
@@ -40,9 +50,9 @@ const mapStateToProps=(state: Object)=>{
 
 const mapDispatchToProps=dispatch=>{
   return{
-    setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-    setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-    setCookieLoad: (val)=>dispatch(actiontypes.setCookieLoad(val))
+    setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
+    setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
+    setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val))
   };
 }
  

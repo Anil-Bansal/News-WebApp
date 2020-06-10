@@ -8,11 +8,14 @@ import {fetchNews,fetchLiked} from '../NewsFetch/Fetch'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import {withFirebase} from '../Firebase'
+import {StateTypes} from '../Redux/Reducers'
 
-class Main extends React.Component{
-	public fetchNews: void;
-	
-    constructor(props:any ){
+interface MainProps{
+  cookies: Object;
+}
+
+class Main extends React.Component<MainProps>{
+    constructor(props:MainProps ){
         super(props);
         this.fetchNews=fetchNews.bind(this);
         this.fetchLiked=fetchLiked.bind(this);
@@ -34,7 +37,7 @@ class Main extends React.Component{
         else{
           return(
             <div>
-              <Display content='all' cookies={this.props.cookies}/> 
+              <Display show='all' cookies={this.props.cookies}/> 
               <Loader />
             </div>
           );
@@ -60,7 +63,7 @@ class Main extends React.Component{
       }
 }
 
-const mapStateToProps=(state: Object,ownProps: Object)=>{
+const mapStateToProps=(state:StateTypes,ownProps: Object)=>{
     return{
       page: state.page,
       country: state.country ,
@@ -80,7 +83,7 @@ const mapDispatchToProps=dispatch=>{
     setNewsEnd: (val: Boolean)=>dispatch(actiontypes.setNewsEnd(val)),
     setArticles: (val: Array<Object>)=>dispatch(actiontypes.setArticles(val)),
     setErrorExist: (val: Boolean)=>dispatch(actiontypes.setErrorExist(val)),
-    setCountry: (val: String)=>dispatch(actiontypes.setCountry(val)),
+    setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
     setPage: (val: Number)=>dispatch(actiontypes.setPage(val)),
     setLiked: (val: Number)=>dispatch(actiontypes.setLiked(val))
   };

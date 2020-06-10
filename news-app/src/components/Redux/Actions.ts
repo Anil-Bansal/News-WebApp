@@ -10,8 +10,7 @@ export const SET_UID='SET_UID'
 export const SET_LIKED_URL='SET_LIKED_URL'
 export const SET_COOKIE_LOAD='SET_COOKIE_LOAD'
 
-
-export function setCountry(newCode:String) {
+export function setCountry(newCode:string) {
   return { type: CHANGE_COUNTRY, val: newCode }
 }
 
@@ -23,7 +22,7 @@ export function setArticles(articles: Array<Object>) {
   return { type: SET_ARTICLES, val: articles }
 }
 
-export function setLiked(articles) {
+export function setLiked(articles: Array<Object>) {
   return { type: SET_LIKED, val: articles }
 }
 
@@ -43,7 +42,7 @@ export function setLoginStatus(status: Boolean) {
   return { type: SET_LOGIN, val: status }
 }
 
-export function setUserId(uid: String) {
+export function setUserId(uid: string) {
   return { type: SET_UID, val: uid }
 }
 

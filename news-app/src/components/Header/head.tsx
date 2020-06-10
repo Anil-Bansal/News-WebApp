@@ -22,7 +22,7 @@ class Head extends React.Component{
       this.searchNews=this.searchNews.bind(this);
     }
 
-    async searchNews (search: String)
+    async searchNews (search: string)
       {
         await this.props.setLoading(true);
         await this.props.setCountry("");
@@ -39,7 +39,7 @@ class Head extends React.Component{
         event.target.reset();
       };
     
-      async onChange(code: String)
+      async onChange(code: string)
       {
         await this.props.setLoading(true);
         await this.props.setCountry(code);

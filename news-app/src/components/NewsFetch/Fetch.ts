@@ -3,6 +3,7 @@ import {getNews,getNewsSearch} from './news';
 export function fetchNews() {
     getNews(this.props.country,this.props.page)
     .then((articles: Array<Object>)=> {
+      console.log(articles)
       this.props.setArticles([...this.props.articles,...articles]);
       this.props.setLoading(false);
       if(articles.length<10){
@@ -10,14 +11,14 @@ export function fetchNews() {
       }
     })
     .catch(error=>{
-      console.log(error);
+      console.log("ERROR",error);
       this.props.setLoading(false);
       this.props.setErrorExist(true);
     })
     this.props.setPage(this.props.page+1);
 };
 
-export function fetchNewsSearch(search: String){
+export function fetchNewsSearch(search: string){
     getNewsSearch(search)
     .then((articles: Array<Object>)=> {
       this.props.setArticles(articles);

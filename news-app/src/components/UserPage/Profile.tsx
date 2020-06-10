@@ -1,7 +1,11 @@
 import React from 'react';
 import Display from '../MainBody/Display'
 
-class Profile extends React.Component{
+interface ProfileProps{
+    cookies: Object
+}
+
+class Profile extends React.Component<ProfileProps>{
     render(){
         return(
             <Display show='likedOnly' cookies={this.props.cookies}/>

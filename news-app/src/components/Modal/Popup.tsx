@@ -4,10 +4,22 @@ import Button from  'react-bootstrap/Button'
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from "react-share";
 import {FaFacebookF,FaTwitter, FaLinkedin} from 'react-icons/fa';
 
-class Popup extends React.Component{
-	public props: any;
+interface CardData{
+    url: string;
+    imageurl : string;
+    title: string;
+    content: string;
+    description: string;
+}
 
-    goToUrl(url: String): void{
+interface PopupProps{
+    cardData: CardData;
+    onHide: () => void;
+}  
+
+class Popup extends React.Component<PopupProps>{
+
+    goToUrl(url: string): void{
         window.open(url,'_blank');
     }
 

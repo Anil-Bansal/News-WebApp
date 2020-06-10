@@ -1,6 +1,12 @@
 import React from 'react'
 
-const Person = (props: any) => {
+interface PersonProps{
+    name: string;
+    title: string;
+    imageSrc: string;
+}
+
+const Person:React.FC<PersonProps> = (props: PersonProps) => {
     return (
         <div>
             <div style ={{marginLeft:150, marginTop:50}}>

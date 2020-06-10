@@ -8,9 +8,17 @@ import {connect} from 'react-redux';
 import './Post.css';
 import * as actiontypes from '../Redux/Actions';
 
+export interface NewsPost{
+    title: string;
+    urlToImage: string;
+    description: string;
+    url: string;
+    cookies: Object;
+    content: string;
+    name: string;
+}
 
-
-class Post extends React.Component{
+class Post extends React.Component<NewsPost>{
     public state: Object;
 
     constructor(props: any) {

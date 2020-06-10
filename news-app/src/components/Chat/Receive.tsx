@@ -11,14 +11,11 @@ class Receive extends React.Component{
         return(
         <div>
             {this.props.firebase.listenMessages(this.props.setMessages)}
-            {console.log(this.props.messages)}
+            {console.log('a',this.props.messages)}
         </div>
         )
     }
 }
-
-
-
 
 
 const mapStateToProps=(state:StateTypes)=>{

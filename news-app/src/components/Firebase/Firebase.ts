@@ -91,13 +91,14 @@ class Firebase {
           userName: 'user1',
           message: message,
         }
-        this.messageRef.push(newMessage);
+        console.log('sending',message)
+        this.messageReference.push(newMessage);
       }
     }
 
     listenMessages(setMessage) {
-      this.messageRef
-        .limitToLast(10)
+      this.messageReference
+        .limitToLast(50)
         .on('value', message => setMessage(message))
     }
 

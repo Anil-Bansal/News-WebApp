@@ -11,7 +11,7 @@ import { withCookies } from 'react-cookie';
 import SignUpPage from './components/Auth/SignUpPage'
 import  SignInPage from './components/Auth/SignInPage';
 import Profile from './components/UserPage/Profile'
-// import Chatbot from '../Chatbot'
+import ChatBox from './components/Chat/ChatBox';
 
 class App extends Component{
 	public fetchNews: any;
@@ -45,7 +45,7 @@ class App extends Component{
                 <Route exact path="/Sources" component={Sources}/>
                 <Route exact path="/Team" component={Info}/>
                 <Route exact path="/Profile" render={() => (<Profile content='likedOnly' cookies={this.props.cookies}/> )}/>
-                {/* <Route exact path="/Chat" component={ChatBot}/> */}
+                <Route exact path="/Chat" component={ChatBox}/>
               </div>)
             } 
 

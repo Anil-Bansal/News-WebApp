@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import { NewsPost } from '../Card/Post';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
@@ -14,9 +15,9 @@ const firebaseConfig = {
 };
 
 class Firebase {
-	public auth: any;
-	public database: any;
-	public prov: any;
+	  public auth: any;
+	  public database: any;
+	  public prov: any;
 
     constructor() {
       app.initializeApp(firebaseConfig);
@@ -46,7 +47,7 @@ class Firebase {
       this.auth.signOut();
     }
 
-    addCookieToDatabase = (uid: string,cookie=[],data=[]) =>
+    addCookieToDatabase = (uid: string,cookie: Array<string>=[],data: Array<NewsPost>=[]) =>
     {
       this.database.collection('users').doc(uid).set({
         cookie: cookie,

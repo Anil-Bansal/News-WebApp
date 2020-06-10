@@ -4,15 +4,14 @@ import {connect} from 'react-redux';
 import Head from '../Header/head'
 import ClipLoader from 'react-spinners/ClipLoader';
 import {StateTypes} from '../Redux/Reducers'
-
+import {NewsPost} from '../Card/Post'
 interface SourcesProps{
     country: string;
 }
 
 class Sources extends Component<SourcesProps>{
-	public state: Object;
 
-    constructor(props: any){
+    constructor(props: SourcesProps){
         super(props);
         this.state={
             isLoading: true,

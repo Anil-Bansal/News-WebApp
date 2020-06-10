@@ -7,6 +7,7 @@ import {withFirebase} from '../Firebase';
 import {connect} from 'react-redux';
 import './Post.css';
 import * as actiontypes from '../Redux/Actions';
+import { StateTypes } from '../Redux/Reducers';
 
 export interface NewsPost{
     title: string;
@@ -15,16 +16,28 @@ export interface NewsPost{
     url: string;
     cookies: Object;
     content: string;
+    imageurl: String
     name: string;
 }
 
-class Post extends React.Component<NewsPost>{
+interface Props{
+    cookies: Object,
+    url: string,
+    title: string,
+    description: string,
+    imageurl: string,
+    uid: string,
+    liked: Array<NewsPost>,
+    setLiked: Function
+}
+
+class Post extends React.Component<Props>{
     public state: Object;
 
     constructor(props: any) {
         super(props);
         this.state = {
-          backg: "light",
+          backgroundColor: "light",
           textColor: 'dark',
           modalShow: false,
           isLiked: ((this.props.cookies).get('testing')).includes(this.props.url),
@@ -38,14 +51,14 @@ class Post extends React.Component<NewsPost>{
     }
 
     enter = () =>{
-        this.setState({backg: "info",textColor: 'white'})
+        this.setState({backgroundColor: "info",textColor: 'white'})
     }  
     
     leave = () =>{
-        this.setState({backg: "light",textColor: 'dark'})
+        this.setState({backgroundColor: "light",textColor: 'dark'})
     }
 
-    goToUrl(url){
+    goToUrl(url: string){
         window.open(url,'_blank');
     }
 
@@ -73,7 +86,7 @@ class Post extends React.Component<NewsPost>{
     render(){
     return(
         <div>
-            <Card bg={this.state.backg}
+            <Card bg={this.state.backgroundColor}
                 style={{width: '24rem', }}
                 text={this.state.textColor}
                 className='Card'
@@ -113,7 +126,7 @@ class Post extends React.Component<NewsPost>{
 }
 
 
-const mapStateToProps=(state: any)=>{
+const mapStateToProps=(state: StateTypes)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
@@ -123,9 +136,9 @@ const mapStateToProps=(state: any)=>{
   
 const mapDispatchToProps=dispatch=>{
     return{
-        setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-        setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-        setLiked: (val)=>dispatch(actiontypes.setLiked(val))
+        setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
+        setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
+        setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val))
     };
 }
   

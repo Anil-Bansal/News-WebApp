@@ -6,14 +6,25 @@ import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
 import SignOutButton from '../Auth/Signout';
+import { StateTypes } from '../Redux/Reducers';
 
-class Head extends React.Component{
-	public fetchNews: void;
-	public fetchNewsSearch: void;
-	public props: any;
-	public input: any;
+interface Props{
+  setLoading: Function,
+  setCountry: Function,
+  setArticles: Function,
+  setPage: Function,
+  setNewsEnd: Function,
+  setErrorExist: Function,
+  page: number
+}
 
-    constructor(props: any){
+class Head extends React.Component<Props>{
+	  public fetchNews: Function;
+	  public fetchNewsSearch: Function;
+	  public props: Props;
+	  public input: any;
+
+    constructor(props: Props){
       super(props);
       this.onChange=this.onChange.bind(this);
       this.fetchNews=fetchNews.bind(this);
@@ -23,32 +34,34 @@ class Head extends React.Component{
     }
 
     async searchNews (search: string)
-      {
-        await this.props.setLoading(true);
-        await this.props.setCountry("");
-        await this.props.setArticles([]);
-        await this.props.setPage(1);
-        await this.props.setNewsEnd(false);
-        await this.props.setErrorExist(false);
-        this.fetchNewsSearch(search,this.props.page);
-      }
+    {
+      await this.props.setLoading(true);
+      await this.props.setCountry("");
+      await this.props.setArticles([]);
+      await this.props.setPage(1);
+      await this.props.setNewsEnd(false);
+      await this.props.setErrorExist(false);
+      this.fetchNewsSearch(search,this.props.page);
+    }
 
-    handleSubmit = event => {
-        event.preventDefault();
-        this.searchNews(this.input.value);
-        event.target.reset();
-      };
+
+    handleSubmit = (event: any) => {
+      event.preventDefault();
+      this.searchNews(this.input.value);
+      event.target.reset();
+    };
     
-      async onChange(code: string)
-      {
-        await this.props.setLoading(true);
-        await this.props.setCountry(code);
-        await this.props.setArticles([]);
-        await this.props.setPage(1);
-        await this.props.setNewsEnd(false);
-        await this.props.setErrorExist(false);
-        this.fetchNews();
-      }
+
+    async onChange(code: string)
+    {
+      await this.props.setLoading(true);
+      await this.props.setCountry(code);
+      await this.props.setArticles([]);
+      await this.props.setPage(1);
+      await this.props.setNewsEnd(false);
+      await this.props.setErrorExist(false);
+      this.fetchNews();
+    }
 
     render(){
         return (
@@ -62,39 +75,39 @@ class Head extends React.Component{
                   </div>
                     <div className='Search' align = "center">
                         <form id="Search-form" onSubmit={this.handleSubmit}>
-                        <label htmlFor="search"><h6>Search for News : </h6> </label>
-                        <input
+                          <label htmlFor="search"><h6>Search for News : </h6> </label>
+                          <input
                             type="text"
                             name="search"
                             ref={(input) => this.input = input}
-                        />
-                        <Button variant='outline-light'
+                          />
+                          <Button variant='outline-light'
                             type='submit'>
                             Submit 
-                        </Button>
-                        <SignOutButton />
+                          </Button>
+                          <SignOutButton />
                         </form>
                     </div>
                 </div>
                 <div className='Select'>
-                <ButtonCountry  onChange={this.onChange} country="Australia" code="au"/>
-                <ButtonCountry  onChange={this.onChange} country="Argentina" code="ar"/>
-                <ButtonCountry  onChange={this.onChange} country="Belgium" code="be"/>
-                <ButtonCountry  onChange={this.onChange} country="Canada" code="ca"/>
-                <ButtonCountry  onChange={this.onChange} country="China" code="cn"/>
-                <ButtonCountry  onChange={this.onChange} country="Egypt" code="eg"/>
-                <ButtonCountry  onChange={this.onChange} country="France" code="fr"/>
-                <ButtonCountry  onChange={this.onChange} country="Germany" code="de"/>
-                <ButtonCountry  onChange={this.onChange} country="Italy" code="it"/>
-                <ButtonCountry  onChange={this.onChange} country="India" code="in"/>
-                <ButtonCountry  onChange={this.onChange} country="Japan" code="jp"/>
-                <ButtonCountry  onChange={this.onChange} country="Malaysia" code="my"/> 
-                <ButtonCountry  onChange={this.onChange} country="Mexico" code="mx"/>
-                <ButtonCountry  onChange={this.onChange} country="Russia" code="ru"/>
-                <ButtonCountry  onChange={this.onChange} country="Sweden" code="se"/>
-                <ButtonCountry  onChange={this.onChange} country="Switzerland" code="ch"/>
-                <ButtonCountry  onChange={this.onChange} country="UK" code="gb"/>
-                <ButtonCountry  onChange={this.onChange} country="USA" code="us"/>
+                  <ButtonCountry  onChange={this.onChange} country="Australia" code="au"/>
+                  <ButtonCountry  onChange={this.onChange} country="Argentina" code="ar"/>
+                  <ButtonCountry  onChange={this.onChange} country="Belgium" code="be"/>
+                  <ButtonCountry  onChange={this.onChange} country="Canada" code="ca"/>
+                  <ButtonCountry  onChange={this.onChange} country="China" code="cn"/>
+                  <ButtonCountry  onChange={this.onChange} country="Egypt" code="eg"/>
+                  <ButtonCountry  onChange={this.onChange} country="France" code="fr"/>
+                  <ButtonCountry  onChange={this.onChange} country="Germany" code="de"/>
+                  <ButtonCountry  onChange={this.onChange} country="Italy" code="it"/>
+                  <ButtonCountry  onChange={this.onChange} country="India" code="in"/>
+                  <ButtonCountry  onChange={this.onChange} country="Japan" code="jp"/>
+                  <ButtonCountry  onChange={this.onChange} country="Malaysia" code="my"/> 
+                  <ButtonCountry  onChange={this.onChange} country="Mexico" code="mx"/>
+                  <ButtonCountry  onChange={this.onChange} country="Russia" code="ru"/>
+                  <ButtonCountry  onChange={this.onChange} country="Sweden" code="se"/>
+                  <ButtonCountry  onChange={this.onChange} country="Switzerland" code="ch"/>
+                  <ButtonCountry  onChange={this.onChange} country="UK" code="gb"/>
+                  <ButtonCountry  onChange={this.onChange} country="USA" code="us"/>
                 </div>
                 
             </div>
@@ -102,7 +115,7 @@ class Head extends React.Component{
     }
 }
 
-const mapStateToProps=(state: any)=>{
+const mapStateToProps=(state: StateTypes)=>{
     return{
       isLoading: state.isLoading,
       country: state.country ,
@@ -114,12 +127,12 @@ const mapStateToProps=(state: any)=>{
   
   const mapDispatchToProps=dispatch=>{
     return{
-      setLoading: (val)=>dispatch(actiontypes.setLoading(val)),
-      setNewsEnd: (val)=>dispatch(actiontypes.setNewsEnd(val)),
-      setArticles: (val)=>dispatch(actiontypes.setArticles(val)),
-      setErrorExist: (val)=>dispatch(actiontypes.setErrorExist(val)),
-      setCountry: (val)=>dispatch(actiontypes.setCountry(val)),
-      setPage: (val)=>dispatch(actiontypes.setPage(val))
+      setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
+      setNewsEnd: (val: boolean)=>dispatch(actiontypes.setNewsEnd(val)),
+      setArticles: (val: Array<string>)=>dispatch(actiontypes.setArticles(val)),
+      setErrorExist: (val: boolean)=>dispatch(actiontypes.setErrorExist(val)),
+      setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
+      setPage: (val: number)=>dispatch(actiontypes.setPage(val))
     };
   }
   

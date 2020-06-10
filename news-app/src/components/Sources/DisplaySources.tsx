@@ -5,6 +5,7 @@ import {NewsPost} from '../Card/Post'
 
 interface SourcesProps{
     array: Array<NewsPost>
+    loading: boolean
 }
 
 const DisplaySources:React.FC<SourcesProps> =(props: SourcesProps )=>{

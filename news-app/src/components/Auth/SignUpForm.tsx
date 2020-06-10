@@ -109,9 +109,10 @@ class SignUpForm extends Component<Props> {
       const { name, email, passwordOne } = this.state;
       this.props.setLoading(true)
       this.props.firebase
-        .doCreateUserWithEmailAndPassword(name, email, passwordOne)
+        .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(() => {
           this.login();
+          this.props.firebase.addName(name);
           this.setState({ ...INITIAL_STATE });
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());

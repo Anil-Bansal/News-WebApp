@@ -26,12 +26,8 @@ class Firebase {
       this.prov = new app.auth.GoogleAuthProvider();
     }
 
-    doCreateUserWithEmailAndPassword = (name: string, email: string, password: string) =>{
-      console.log(name,email,password);
+    doCreateUserWithEmailAndPassword =  (email: string, password: string) =>
       this.auth.createUserWithEmailAndPassword(email, password);
-      var user=this.auth.currentUser;
-      user.updateProfile({displayName: name})
-    }
 
     doSignInWithEmailAndPassword = (email: string, password: string) =>
     this.auth.signInWithEmailAndPassword(email, password);
@@ -41,6 +37,24 @@ class Firebase {
 
     doGoogleSignIn = () =>
       this.auth.signInWithPopup(this.prov)
+
+    addName = (name) =>
+    {
+      var user = this.auth.currentUser;
+      console.log(user)
+      user.updateProfile({
+        displayName: name
+      })
+      user = this.auth.currentUser;
+
+      if (user != null) {
+        user.providerData.forEach(function (profile) {
+          console.log("  Provider-specific UID: " + profile.uid);
+          console.log("  Name: " + profile.displayName);
+          console.log("  Email: " + profile.email);
+        });
+      }
+    }
 
     getUID = () =>{
       const user=this.auth.currentUser

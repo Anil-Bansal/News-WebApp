@@ -26,8 +26,12 @@ class Firebase {
       this.prov = new app.auth.GoogleAuthProvider();
     }
 
-    doCreateUserWithEmailAndPassword = (email: string, password: string) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
+    doCreateUserWithEmailAndPassword = (name: string, email: string, password: string) =>{
+      console.log(name,email,password);
+      this.auth.createUserWithEmailAndPassword(email, password);
+      var user=this.auth.currentUser;
+      user.updateProfile({displayName: name})
+    }
 
     doSignInWithEmailAndPassword = (email: string, password: string) =>
     this.auth.signInWithEmailAndPassword(email, password);

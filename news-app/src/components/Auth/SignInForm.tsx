@@ -55,7 +55,7 @@ class SignInForm extends Component<Props> {
     async signInSync ()
       {
         var uid: string = await this.props.firebase.getUID()
-        this.props.setUserId(uid);
+        await this.props.setUserId(uid);
         var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
         this.props.cookies.set('testing',cookies,{path: '/'});
         this.props.setCookieLoad(true)

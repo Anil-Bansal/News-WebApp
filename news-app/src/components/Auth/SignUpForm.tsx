@@ -15,6 +15,7 @@ import GoogleButton from 'react-google-button';
 import {StateTypes} from '../Redux/Reducers'
 
 const INITIAL_STATE = {
+    name: '',
     email: '',
     passwordOne: '',
     passwordTwo: '',
@@ -105,10 +106,10 @@ class SignUpForm extends Component<Props> {
     }
 
     onSubmit = (event: any) => {
-      const { email, passwordOne } = this.state;
+      const { name, email, passwordOne } = this.state;
       this.props.setLoading(true)
       this.props.firebase
-        .doCreateUserWithEmailAndPassword(email, passwordOne)
+        .doCreateUserWithEmailAndPassword(name, email, passwordOne)
         .then(() => {
           this.login();
           this.setState({ ...INITIAL_STATE });
@@ -149,6 +150,7 @@ class SignUpForm extends Component<Props> {
    
     render() {
       const {
+          name,
           email,
           passwordOne,
           passwordTwo,
@@ -175,6 +177,15 @@ class SignUpForm extends Component<Props> {
           <div>
             <form onSubmit={this.onSubmit}>
               <div align='center'>
+                <TextField
+                    name="name"
+                    value={name}
+                    onChange={this.onChange}
+                    type="text"
+                    placeholder="Name"
+                    variant="outlined"
+                    style={{marginBottom:20}}
+                />
                 <TextField
                     name="email"
                     value={email}

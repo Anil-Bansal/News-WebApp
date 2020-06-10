@@ -1,6 +1,20 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED } from './Actions.ts'
+import { NewsPost } from '../Card/Post'
 
-const initialState ={
+export interface StateTypes{
+    isLoading: Boolean
+    page: number
+    country: string
+    articles: Array<NewsPost>
+    liked: Array<NewsPost>
+    newsEnd: Boolean
+    errorExist: Boolean
+    isLoggedIn: Boolean
+    uid: string
+    cookieLoaded: Boolean
+}
+
+const initialState: StateTypes ={
     isLoading: false,
     page: 1,
     country: 'in',
@@ -13,7 +27,7 @@ const initialState ={
     cookieLoaded: false
 }
 
-function newsApp(state: Object = initialState, action: Object) {
+function newsApp(state: StateTypes = initialState, action: any) {
     switch (action.type) {
         case LOADING:
             return Object.assign({}, state,{

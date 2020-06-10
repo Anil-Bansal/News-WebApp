@@ -7,10 +7,31 @@ import {withFirebase} from '../Firebase';
 import {connect} from 'react-redux';
 import './Post.css';
 import * as actiontypes from '../Redux/Actions';
+import { StateTypes } from '../Redux/Reducers';
+
+export interface NewsPost{
+    title: string;
+    urlToImage: string;
+    description: string;
+    url: string;
+    cookies: Object;
+    content: string;
+    name: string;
+}
+
+interface Props{
+    cookies: Object,
+    url: string,
+    title: string,
+    description: string,
+    imageurl: string,
+    uid: string,
+    liked: Array<NewsPost>,
+    setLiked: Function
+}
 
 
-
-class Post extends React.Component{
+class Post extends React.Component<Props>{
     public state: Object;
 
     constructor(props: any) {
@@ -37,7 +58,7 @@ class Post extends React.Component{
         this.setState({backg: "light",textColor: 'dark'})
     }
 
-    goToUrl(url){
+    goToUrl(url: string){
         window.open(url,'_blank');
     }
 
@@ -105,7 +126,7 @@ class Post extends React.Component{
 }
 
 
-const mapStateToProps=(state: any)=>{
+const mapStateToProps=(state: StateTypes)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
@@ -115,9 +136,9 @@ const mapStateToProps=(state: any)=>{
   
 const mapDispatchToProps=dispatch=>{
     return{
-        setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
-        setUserId: (val)=>dispatch(actiontypes.setUserId(val)),
-        setLiked: (val)=>dispatch(actiontypes.setLiked(val))
+        setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
+        setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
+        setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val))
     };
 }
   

@@ -1,7 +1,11 @@
 import ClipLoader from 'react-spinners/ClipLoader';
 import React from 'react';
 import {connect} from 'react-redux';
+import { StateTypes } from '../Redux/Reducers';
 
+interface Props{
+    newsEnd: boolean;
+}
 class Loader extends React.Component{
 	public props: Object;
 
@@ -14,7 +18,7 @@ class Loader extends React.Component{
     }
 }
 
-const mapStateToProps=(state: Object)=>{
+const mapStateToProps=(state: StateTypes)=>{
     return{
       newsEnd: state.newsEnd,
     };

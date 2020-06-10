@@ -87,12 +87,11 @@ class Firebase {
 
     sendMessage(message: string) {
       if (message) {
-        var newItem = {
+        var newMessage = {
           userName: 'user1',
           message: message,
         }
-        this.messageRef.push(newItem);
-        this.setState({ message: '' });
+        this.messageRef.push(newMessage);
       }
     }
 

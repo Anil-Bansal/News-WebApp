@@ -1,7 +1,10 @@
 import app from 'firebase/app';
+import firebase from 'firebase'
 import 'firebase/auth';
 import 'firebase/firestore';
 import { NewsPost } from '../Card/Post';
+import {connect} from 'react-redux';
+import * as actiontypes from '../Redux/Actions';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",
@@ -24,6 +27,8 @@ class Firebase {
       this.auth=app.auth();
       this.database=app.firestore();
       this.prov = new app.auth.GoogleAuthProvider();
+      this.realDatabase=firebase.database(app);
+      this.messageReference=this.realDatabase.ref().child('messages')
     }
 
     doCreateUserWithEmailAndPassword = (email: string, password: string) =>
@@ -79,7 +84,25 @@ class Firebase {
       else
         return Promise.resolve([])
     }
+
+    sendMessage(message: string) {
+      if (message) {
+        var newItem = {
+          userName: 'user1',
+          message: message,
+        }
+        this.messageRef.push(newItem);
+        this.setState({ message: '' });
+      }
+    }
+
+    listenMessages(setMessage) {
+      this.messageRef
+        .limitToLast(10)
+        .on('value', message => setMessage(message))
+    }
+
+
 }
 
-  
-export default Firebase;
+export default Firebase

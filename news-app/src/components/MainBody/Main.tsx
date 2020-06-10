@@ -16,8 +16,8 @@ interface MainProps extends DispatchTypes,StateTypes{
 }
 
 class Main extends React.Component<MainProps>{
-    public fetchNews: () => void
-    public fetchLiked: () => void
+    // public fetchNews: () => void
+    // public fetchLiked: () => void
     
     constructor(props:MainProps ){
         super(props);
@@ -76,6 +76,8 @@ const mapStateToProps=(state:StateTypes,ownProps: {cookies: {get: Function, set:
       cookies: ownProps.cookies,
       isLoading: state.isLoading,
       articles: state.articles,
+      uid: state.uid,
+
     };
   }
   

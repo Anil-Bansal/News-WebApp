@@ -2,17 +2,32 @@ import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,
 import {NewsPost} from '../Card/Post'
 
 export interface StateTypes{
-    isLoading: Boolean
-    page: number
-    country: string
+    isLoading?: Boolean
+    page?: number
+    country?: string
     articles: Array<NewsPost>
     liked: Array<NewsPost>
-    newsEnd: Boolean
-    errorExist: Boolean
-    isLoggedIn: Boolean
-    uid: string
-    cookieLoaded: Boolean
+    newsEnd?: Boolean
+    errorExist?: Boolean
+    isLoggedIn?: Boolean
+    uid?: string
+    cookieLoaded?: Boolean
+    
 }
+
+export interface DispatchTypes{
+    setCountry? : Function
+    setPage? : Function
+    setArticles? : Function
+    setLiked? : Function
+    setLoading? : Function
+    setNewsEnd? : Function
+    setLoginStatus? : Function
+    setUserId? : Function
+    setCookieLoad? : Function
+    setErrorExist? : Function
+}
+
 
 const initialState: StateTypes ={
     isLoading: false,

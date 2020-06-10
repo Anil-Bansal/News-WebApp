@@ -14,7 +14,7 @@ export function setCountry(newCode:string) {
   return { type: CHANGE_COUNTRY, val: newCode }
 }
 
-export function setPage(page: Number) {
+export function setPage(page: number) {
   return { type: CUR_PAGE, val: page }
 }
 

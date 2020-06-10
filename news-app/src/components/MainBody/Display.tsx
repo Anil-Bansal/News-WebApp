@@ -4,14 +4,13 @@ import {connect} from 'react-redux';
 import {StateTypes} from '../Redux/Reducers'
 import {NewsPost} from '../Card/Post'
 
-interface DisplayProps{
+interface DisplayProps extends StateTypes{
     show: string;
     cookies: Object;
 }
 
 class Display extends React.Component<DisplayProps>{
-    public props: any;
-    
+   
     render(){
         const array: Array<NewsPost> = this.props.show==='likedOnly' ? this.props.liked : this.props.articles;
         let content:Array<Object> = [];

@@ -4,12 +4,20 @@ import {connect} from 'react-redux';
 import Head from '../Header/head'
 import ClipLoader from 'react-spinners/ClipLoader';
 import {StateTypes} from '../Redux/Reducers'
-import {NewsPost} from '../Card/Post'
+import { NewsPost } from '../Card/Post';
+
 interface SourcesProps{
     country: string;
 }
 
+interface State{
+    isLoading: boolean
+    sources: Array<NewsPost>
+    newsEnd: boolean
+}
+
 class Sources extends Component<SourcesProps>{
+    public state: State
 
     constructor(props: SourcesProps){
         super(props);
@@ -24,8 +32,8 @@ class Sources extends Component<SourcesProps>{
     fetchSources(country=this.props.country){
         const url: string=`https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country=${country}`;
         fetch(url)
-        .then((response:Object)=>response.json())
-        .then((result:Object)=>result.sources)
+        .then((response:{json: Function})=>response.json())
+        .then((result:{sources: Array<NewsPost>})=>result.sources)
         .then((sources: Object)=> {
           this.setState({sources: sources});
           this.setState({isLoading: false});

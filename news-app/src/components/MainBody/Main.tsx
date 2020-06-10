@@ -8,17 +8,21 @@ import {fetchNews,fetchLiked} from '../NewsFetch/Fetch'
 import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import {withFirebase} from '../Firebase'
-import {StateTypes} from '../Redux/Reducers'
+import {StateTypes,DispatchTypes} from '../Redux/Reducers'
+import { NewsPost } from '../Card/Post';
 
-interface MainProps{
-  cookies: Object;
+interface MainProps extends DispatchTypes,StateTypes{
+  cookies: {get: Function, set:Function};
 }
 
 class Main extends React.Component<MainProps>{
+    public fetchNews: () => void
+    public fetchLiked: () => void
+    
     constructor(props:MainProps ){
         super(props);
-        this.fetchNews=fetchNews.bind(this);
-        this.fetchLiked=fetchLiked.bind(this);
+        this.fetchNews = fetchNews.bind(this);
+        this.fetchLiked =fetchLiked.bind(this);
         if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
         	(this.props.cookies).set('testing',[],{path: '/'})
       }    
@@ -63,29 +67,27 @@ class Main extends React.Component<MainProps>{
       }
 }
 
-const mapStateToProps=(state:StateTypes,ownProps: Object)=>{
+const mapStateToProps=(state:StateTypes,ownProps: {cookies: {get: Function, set: Function}})=>{
     return{
-      page: state.page,
-      country: state.country ,
-      articles: state.articles,
       newsEnd: state.newsEnd,
+      country: state.country,
+      page: state.page,
       errorExist: state.errorExist,
-      cookieLoaded: state.cookieLoaded,
       cookies: ownProps.cookies,
-      uid: state.uid,
-      liked: state.liked
+      isLoading: state.isLoading,
+      articles: state.articles,
     };
   }
   
-const mapDispatchToProps=dispatch=>{
+const mapDispatchToProps=(dispatch: any)=>{
   return{
     setLoading: (val: Boolean)=>dispatch(actiontypes.setLoading(val)),
     setNewsEnd: (val: Boolean)=>dispatch(actiontypes.setNewsEnd(val)),
     setArticles: (val: Array<Object>)=>dispatch(actiontypes.setArticles(val)),
     setErrorExist: (val: Boolean)=>dispatch(actiontypes.setErrorExist(val)),
     setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
-    setPage: (val: Number)=>dispatch(actiontypes.setPage(val)),
-    setLiked: (val: Number)=>dispatch(actiontypes.setLiked(val))
+    setPage: (val: number)=>dispatch(actiontypes.setPage(val)),
+    setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val))
   };
 }
   

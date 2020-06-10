@@ -1,34 +1,44 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 
-class SourceCard extends React.Component{
-	public state: Object;
-	public props: any;
+interface State{
+    backgroundColor: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light'
+    textColor: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'white' | 'muted'
+}
+interface SourceCardProps{
+    key: number
+    url: string
+    name: string
+    description: string
+}
 
-    constructor(props: any) {
+class SourceCard extends React.Component<SourceCardProps>{
+    public state: State
+
+    constructor(props: SourceCardProps) {
         super(props);
         this.state = {
-          BackgroundColor: "light",
+          backgroundColor: "light",
           textColor: 'dark'
         };
       }
 
     enter = () =>{
         this.setState({
-            BackgroundColor: "info",
+            backgroundColor: "info",
             textColor: 'white'
     })
     }  
     leave = () =>{
         this.setState({
-            BackgroundColor: "light",
+            backgroundColor: "light",
             textColor: 'dark'
         })
     }  
     render(){
         return(
             <div>
-                <Card bg={this.state.BackgroundColor}
+                <Card bg={this.state.backgroundColor}
                     onMouseEnter={this.enter}
                     onMouseLeave={this.leave}
                     style={{width: '24rem'}}

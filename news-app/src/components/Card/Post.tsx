@@ -40,7 +40,7 @@ class Post extends React.Component<Props>{
           backgroundColor: "light",
           textColor: 'dark',
           modalShow: false,
-          isLiked: ((this.props.cookies).get('testing')).includes(this.props.url),
+          isLiked: ((this.props.cookies).get('testing')).includes(this.props.url) || this.props.show==='likedOnly',
           postData: {
             title: this.props.title,
             description: this.props.description,
@@ -67,23 +67,30 @@ class Post extends React.Component<Props>{
                     [...(this.props.cookies).get('testing'),this.props.url],[...(this.props.liked),this.state.postData]);
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
-        this.props.setLiked([...this.props.liked,this.state.postData])
+        this.props.setLiked([...this.props.liked,Object.assign({}, this.state.postData)])
     }
 
     unlikePost = () => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
         var likedPostsComplete = this.props.liked
-        const index: number = likedPosts.indexOf(this.props.url);
+        const urlCurrent = this.props.url
+        const index: number = likedPosts.indexOf(urlCurrent);
         if (index > -1) {
             likedPosts.splice(index, 1);
-            likedPostsComplete.splice(index, 1);
         }
-        (this.props.cookies).set('testing',likedPosts)
+        likedPostsComplete = likedPostsComplete.filter(function( obj ) {
+            return obj.url !== urlCurrent;
+        });
+        (this.props.cookies).set('testing',likedPosts,{path: '/'})
+        this.props.setLiked([...likedPostsComplete])
         this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts,likedPostsComplete)
-        this.setState({isLiked: false})        
+        this.setState({...this.state,
+                    isLiked: false})        
+        this.props.setLastPost(this.state.postData)
     }
 
     render(){
+        console.log('render post',this.props.url,this.state.isLiked)
     return(
         <div>
             <Card bg={this.state.backgroundColor}
@@ -107,7 +114,7 @@ class Post extends React.Component<Props>{
                 <Card.Footer>
                     <div className='row'>
                         <div align='left' style={{marginLeft:30}}>
-                            {this.state.isLiked ? 
+                            {this.state.isLiked|| this.props.show==='likedOnly' ? 
                                     <MdFavorite color='#C70039' size={30} onClick={()=> this.unlikePost()}/> : 
                                     <MdFavoriteBorder color='#C70039' size={30} onClick={()=> this.likePost()}/> }
                         </div>
@@ -130,7 +137,7 @@ const mapStateToProps=(state: StateTypes)=>{
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
-      liked: state.liked
+      liked: state.liked,
     };
   }
   
@@ -138,7 +145,8 @@ const mapDispatchToProps=dispatch=>{
     return{
         setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
         setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
-        setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val))
+        setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val)),
+        setLastPost: (val: NewsPost)=>dispatch(actiontypes.setLastPost(val))
     };
 }
   

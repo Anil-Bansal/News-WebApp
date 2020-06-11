@@ -96,13 +96,6 @@ class Firebase {
       }
     }
 
-    listenMessages(setMessage) {
-      this.messageReference
-        .limitToLast(50)
-        .on('value', message => setMessage(message))
-    }
-
-
 }
 
 export default Firebase

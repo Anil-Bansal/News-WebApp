@@ -36,7 +36,8 @@ class App extends Component{
 
   async checkPrevLogin(){
     var uid=await this.props.cookies.get('User');
-    if(uid){
+    if(uid!=='None'){
+      console.log("Hi", uid);
       this.signInSync(uid);
     }
   }

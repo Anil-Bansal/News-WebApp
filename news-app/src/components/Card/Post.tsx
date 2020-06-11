@@ -86,6 +86,8 @@ class Post extends React.Component<Props>{
         this.setState({...this.state,
                     isLiked: false})        
         this.props.setLastLiked(postData)
+        this.props.setToast(true)
+
     }
 
     render(){
@@ -152,7 +154,8 @@ const mapDispatchToProps=dispatch=>{
         setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
         setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
         setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val)),
-        setLastLiked: (val: NewsPost)=>dispatch(actiontypes.setLastLiked(val))
+        setLastLiked: (val: NewsPost)=>dispatch(actiontypes.setLastLiked(val)),
+        setToast: (val: NewsPost)=>dispatch(actiontypes.setToast(val))
     };
 }
   

@@ -1,5 +1,5 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,
-        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES } from './Actions'
+        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES,SET_TOAST } from './Actions'
 import {NewsPost} from '../Card/Post'
 
 export interface StateTypes{
@@ -41,7 +41,8 @@ const initialState: StateTypes ={
     uid: "",
     cookieLoaded: false,
     messages: [],
-    lastLiked: ''
+    lastLiked: '',
+    showToast: false
 }
 
 function newsApp(state: StateTypes = initialState, action: any) {
@@ -77,6 +78,10 @@ function newsApp(state: StateTypes = initialState, action: any) {
         case SET_LOGIN:
             return Object.assign({}, state,{
                 isLoggedIn: action.val,
+            })
+        case SET_TOAST:
+            return Object.assign({}, state,{
+                showToast: action.val,
             })
         case SET_UID:
             return Object.assign({}, state,{

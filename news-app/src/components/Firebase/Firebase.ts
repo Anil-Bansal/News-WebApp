@@ -3,8 +3,6 @@ import firebase from 'firebase'
 import 'firebase/auth';
 import 'firebase/firestore';
 import { NewsPost } from '../Card/Post';
-import {connect} from 'react-redux';
-import * as actiontypes from '../Redux/Actions';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMaY68-cCUJVGn9U_waEydkzQrAl1Xc1M",

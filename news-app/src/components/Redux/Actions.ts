@@ -12,6 +12,7 @@ export const SET_COOKIE_LOAD='SET_COOKIE_LOAD'
 export const SET_MESSAGES='SET_MESSAGES'
 export const SET_LAST_LIKED='SET_LAST_LIKED'
 export const SET_TOAST='SET_TOAST'
+export const SET_NAME='SET_NAME'
 
 
 export function setCountry(newCode:string) {
@@ -64,4 +65,8 @@ export function setLastLiked(post: NewsPost) {
 
 export function setToast(status: Boolean) {
   return { type: SET_TOAST, val: status }
+}
+
+export function setName(status: string) {
+  return { type: SET_NAME, val: status }
 }

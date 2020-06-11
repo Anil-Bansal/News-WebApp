@@ -41,22 +41,19 @@ class Firebase {
     doGoogleSignIn = () =>
       this.auth.signInWithPopup(this.prov)
 
-    addName = (name) =>
-    {
+    addName = (name) =>{
       var user = this.auth.currentUser;
       console.log(user)
       user.updateProfile({
         displayName: name
       })
-      user = this.auth.currentUser;
+    }
 
-      if (user != null) {
-        user.providerData.forEach(function (profile) {
-          console.log("  Provider-specific UID: " + profile.uid);
-          console.log("  Name: " + profile.displayName);
-          console.log("  Email: " + profile.email);
-        });
-      }
+    getUserName=()=>{
+      var user=this.auth.currentUser;
+      user.providerData.forEach(function (profile) {
+        return profile.displayName;
+      });
     }
 
     getUID = () =>{
@@ -101,10 +98,10 @@ class Firebase {
         return Promise.resolve([])
     }
 
-    sendMessage(message: string) {
+    sendMessage(message: string,name: string) {
       if (message) {
         var newMessage = {
-          userName: 'user1',
+          userName: name,
           message: message,
         }
         this.messageReference.push(newMessage);

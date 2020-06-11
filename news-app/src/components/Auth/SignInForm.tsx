@@ -25,6 +25,7 @@ interface Props{
   setUserId: Function,
   setCookieLoad: Function,
   setLoading: Function,
+  setName: Function,
   firebase: any,
   history: any,
   cookies: Object
@@ -60,6 +61,8 @@ class SignInForm extends Component<Props> {
         this.props.cookies.set('testing',cookies,{path: '/'});
         this.props.setCookieLoad(true);
         this.props.cookies.set('User',uid);
+        var name: string =await this.props.firebase.getName();
+        this.props.setName(name);
       }
 
     async guestLogin()
@@ -212,7 +215,7 @@ class SignInForm extends Component<Props> {
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
       setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
       setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
-
+      setName: (val: string)=>dispatch(actiontypes.setName(val))
     };
   }
   

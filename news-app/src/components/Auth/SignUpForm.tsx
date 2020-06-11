@@ -115,6 +115,7 @@ class SignUpForm extends Component<Props> {
         .then(() => {
           this.login();
           this.props.firebase.addName(name);
+          this.props.setName(name);
           this.setState({ ...INITIAL_STATE });
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
@@ -258,7 +259,8 @@ class SignUpForm extends Component<Props> {
       setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
       setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
-      setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val))
+      setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
+      setName: (val: string)=>dispatch(actiontypes.setName(val))
     };
   }
   

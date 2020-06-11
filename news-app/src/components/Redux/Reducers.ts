@@ -1,5 +1,5 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,
-        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES,SET_TOAST } from './Actions'
+        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES,SET_TOAST,SET_NAME } from './Actions'
 import {NewsPost} from '../Card/Post'
 
 export interface StateTypes{
@@ -13,6 +13,7 @@ export interface StateTypes{
     isLoggedIn?: Boolean
     uid?: string
     cookieLoaded?: Boolean
+    name?:string
 }
 
 export interface DispatchTypes{
@@ -42,7 +43,8 @@ const initialState: StateTypes ={
     cookieLoaded: false,
     messages: [],
     lastLiked: '',
-    showToast: false
+    showToast: false,
+    name: ''
 }
 
 function newsApp(state: StateTypes = initialState, action: any) {
@@ -98,6 +100,10 @@ function newsApp(state: StateTypes = initialState, action: any) {
         case SET_LAST_LIKED:
             return Object.assign({}, state,{
                 lastLiked: action.val,
+            })
+        case SET_NAME:
+            return Object.assign({},state,{
+                name: action.val
             })
         default:
           return state

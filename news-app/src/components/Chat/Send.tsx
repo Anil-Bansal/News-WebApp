@@ -16,7 +16,7 @@ class Send extends React.Component{
       }
 
     onSubmit = (event: any) => {
-        this.props.firebase.sendMessage(this.state.message)
+        this.props.firebase.sendMessage(this.state.message,this.props.name)
         event.preventDefault();
       };
 
@@ -53,6 +53,7 @@ const mapStateToProps=(state:StateTypes)=>{
     return{
       messages: state.messages,
       uid: state.uid,
+      name: state.name
     };
   }
 

@@ -117,6 +117,7 @@ class SignUpForm extends Component<Props> {
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
           this.props.cookies.set('testing',[],{path: '/'});
+          this.props.cookies.set('User',this.props.uid);
           this.props.history.push('/Main');
         })
         .catch((error: any) => {

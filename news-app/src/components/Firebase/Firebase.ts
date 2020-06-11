@@ -29,8 +29,8 @@ class Firebase {
       this.messageReference=this.realDatabase.ref().child('messages')
     }
 
-    doCreateUserWithEmailAndPassword = (email: string, password: string) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
+    doCreateUserWithEmailAndPassword =  (email: string, password: string) =>
+      this.auth.createUserWithEmailAndPassword(email, password);
 
     doSignInWithEmailAndPassword = (email: string, password: string) =>
     this.auth.signInWithEmailAndPassword(email, password);
@@ -40,6 +40,24 @@ class Firebase {
 
     doGoogleSignIn = () =>
       this.auth.signInWithPopup(this.prov)
+
+    addName = (name) =>
+    {
+      var user = this.auth.currentUser;
+      console.log(user)
+      user.updateProfile({
+        displayName: name
+      })
+      user = this.auth.currentUser;
+
+      if (user != null) {
+        user.providerData.forEach(function (profile) {
+          console.log("  Provider-specific UID: " + profile.uid);
+          console.log("  Name: " + profile.displayName);
+          console.log("  Email: " + profile.email);
+        });
+      }
+    }
 
     getUID = () =>{
       const user=this.auth.currentUser

@@ -77,7 +77,6 @@ const mapStateToProps=(state:StateTypes,ownProps: {cookies: {get: Function, set:
       isLoading: state.isLoading,
       articles: state.articles,
       uid: state.uid,
-
     };
   }
   

@@ -3,7 +3,6 @@ import {getNews,getNewsSearch} from './news';
 export function fetchNews(this: any) {
     getNews(this.props.country,this.props.page)
     .then((articles: Array<Object>)=> {
-      console.log(articles)
       this.props.setArticles([...this.props.articles,...articles]);
       this.props.setLoading(false);
       if(articles.length<10){

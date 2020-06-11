@@ -41,13 +41,12 @@ class Post extends React.Component<Props>{
           textColor: 'dark',
           modalShow: false,
           isLiked: ((this.props.cookies).get('testing')).includes(this.props.url) || this.props.show==='likedOnly',
-          postData: {
-            title: this.props.title,
-            description: this.props.description,
-            urlToImage: this.props.imageurl,
-            url: this.props.url
-          }
+          
         };
+        this.enter=this.enter.bind(this);
+        this.leave=this.leave.bind(this);
+        this.likePost=this.likePost.bind(this);
+        this.unlikePost=this.unlikePost.bind(this);
     }
 
     enter = () =>{
@@ -62,15 +61,15 @@ class Post extends React.Component<Props>{
         window.open(url,'_blank');
     }
 
-    likePost = () => {
+    likePost = (postData) => {
         this.props.firebase.addCookieToDatabase(this.props.uid,
-                    [...(this.props.cookies).get('testing'),this.props.url],[...(this.props.liked),this.state.postData]);
+                    [...(this.props.cookies).get('testing'),this.props.url],[...(this.props.liked),postData]);
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
-        this.props.setLiked([...this.props.liked,Object.assign({}, this.state.postData)])
+        this.props.setLiked([...this.props.liked,Object.assign({}, postData)])
     }
 
-    unlikePost = () => {
+    unlikePost = (postData) => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
         var likedPostsComplete = this.props.liked
         const urlCurrent = this.props.url
@@ -86,10 +85,17 @@ class Post extends React.Component<Props>{
         this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts,likedPostsComplete)
         this.setState({...this.state,
                     isLiked: false})        
-        this.props.setLastPost(this.state.postData)
+        this.props.setLastLiked(postData)
     }
 
     render(){
+        var postData= {
+            title: this.props.title,
+            description: this.props.description,
+            urlToImage: this.props.imageurl,
+            url: this.props.url
+          }
+
         console.log('render post',this.props.url,this.state.isLiked)
     return(
         <div>
@@ -115,8 +121,8 @@ class Post extends React.Component<Props>{
                     <div className='row'>
                         <div align='left' style={{marginLeft:30}}>
                             {this.state.isLiked|| this.props.show==='likedOnly' ? 
-                                    <MdFavorite color='#C70039' size={30} onClick={()=> this.unlikePost()}/> : 
-                                    <MdFavoriteBorder color='#C70039' size={30} onClick={()=> this.likePost()}/> }
+                                    <MdFavorite color='#C70039' size={30} onClick={()=> this.unlikePost(postData)}/> : 
+                                    <MdFavoriteBorder color='#C70039' size={30} onClick={()=> this.likePost(postData)}/> }
                         </div>
                         <div align='right' style={{marginLeft:180}}>
                             <Button variant='danger' onClick={()=>this.goToUrl(this.props.url)}>Go To News</Button>
@@ -146,7 +152,7 @@ const mapDispatchToProps=dispatch=>{
         setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
         setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
         setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val)),
-        setLastPost: (val: NewsPost)=>dispatch(actiontypes.setLastPost(val))
+        setLastLiked: (val: NewsPost)=>dispatch(actiontypes.setLastLiked(val))
     };
 }
   

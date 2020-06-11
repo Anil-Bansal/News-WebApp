@@ -1,5 +1,5 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,
-        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_POST, SET_MESSAGES } from './Actions'
+        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES } from './Actions'
 import {NewsPost} from '../Card/Post'
 
 export interface StateTypes{
@@ -90,7 +90,7 @@ function newsApp(state: StateTypes = initialState, action: any) {
             return Object.assign({}, state,{
                 messages: action.val,
             })
-        case SET_LAST_POST:
+        case SET_LAST_LIKED:
             return Object.assign({}, state,{
                 lastLiked: action.val,
             })

@@ -10,7 +10,7 @@ export const SET_UID='SET_UID'
 export const SET_LIKED_URL='SET_LIKED_URL'
 export const SET_COOKIE_LOAD='SET_COOKIE_LOAD'
 export const SET_MESSAGES='SET_MESSAGES'
-export const SET_LAST_POST='SET_LAST_POST'
+export const SET_LAST_LIKED='SET_LAST_LIKED'
 
 export function setCountry(newCode:string) {
   return { type: CHANGE_COUNTRY, val: newCode }
@@ -56,6 +56,6 @@ export function setMessages(messages: Array<String>) {
   return { type: SET_MESSAGES, val: messages }
 }
 
-export function setLastPost(post: NewsPost) {
-  return { type: SET_LAST_POST, val: post }
+export function setLastLiked(post: NewsPost) {
+  return { type: SET_LAST_LIKED, val: post }
 }

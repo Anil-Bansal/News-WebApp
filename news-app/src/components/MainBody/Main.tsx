@@ -49,22 +49,14 @@ class Main extends React.Component<MainProps>{
       }
 
     render(){
-      	if(this.props.newsEnd){
             return(
                 <div>
+                    {this.props.newsEnd ? 
+                        <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>:<div/>}
                     <Head cookies={this.props.cookies}/>
                     {this.SelectiveDisplay()}
                 </div>
             )}
-      	else{
-            return(
-                <div>
-                    <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>
-                    <Head cookies={this.props.cookies}/>
-                    {this.SelectiveDisplay()}
-                </div>
-            )}
-      }
 }
 
 const mapStateToProps=(state:StateTypes,ownProps: {cookies: {get: Function, set: Function}})=>{

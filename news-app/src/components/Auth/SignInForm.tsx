@@ -61,7 +61,7 @@ class SignInForm extends Component<Props> {
         this.props.cookies.set('testing',cookies,{path: '/'});
         this.props.setCookieLoad(true);
         this.props.cookies.set('User',uid);
-        var name: string =await this.props.firebase.getName();
+        var name: string =await this.props.firebase.getUserName();
         this.props.setName(name);
       }
 

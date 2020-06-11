@@ -24,7 +24,7 @@ class Receive extends React.Component{
         let newmessages=[]
         snapshot.forEach(child=>{
           var cur=child.val()
-          newmessages.push(cur.message)
+          newmessages.push({message: cur.message, user: cur.userName})
         })
         this.setState({messages: newmessages});
       })
@@ -33,7 +33,7 @@ class Receive extends React.Component{
     rendermessages=()=>{
       return this.state.messages.map(message=>(
         <ListItem>
-          <ListItemText style={{wordBreak: "break-word"}} primary={message}></ListItemText>
+          <ListItemText style={{wordBreak: "break-word"}} primary={message.user +' : ' + message.message}></ListItemText>
         </ListItem>
       ))
     }

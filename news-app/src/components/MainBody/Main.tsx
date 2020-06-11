@@ -52,7 +52,7 @@ class Main extends React.Component<MainProps>{
       	if(this.props.newsEnd){
             return(
                 <div>
-                    <Head />
+                    <Head cookies={this.props.cookies}/>
                     {this.SelectiveDisplay()}
                 </div>
             )}
@@ -60,7 +60,7 @@ class Main extends React.Component<MainProps>{
             return(
                 <div>
                     <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>
-                    <Head />
+                    <Head cookies={this.props.cookies}/>
                     {this.SelectiveDisplay()}
                 </div>
             )}

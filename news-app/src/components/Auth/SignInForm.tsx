@@ -47,25 +47,27 @@ class SignInForm extends Component<Props> {
 
       this.state = { ...INITIAL_STATE };
     }
-  
+
     login () {
      this.props.setLoginStatus(true);
     }
-   
+    
     async signInSync ()
       {
         var uid: string = await this.props.firebase.getUID()
         this.props.setUserId(uid);
         var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
         this.props.cookies.set('testing',cookies,{path: '/'});
-        this.props.setCookieLoad(true)
+        this.props.setCookieLoad(true);
+        this.props.cookies.set('User',uid);
       }
 
     async guestLogin()
     {
       var uid: string = await this.props.firebase.getUID()
       this.props.setUserId(uid);
-      this.props.setCookieLoad(true)
+      this.props.setCookieLoad(true);
+      this.props.cookies.set('User',uid);
     }
 
     guestSignIn = () => {

@@ -26,6 +26,7 @@ class SignOutButton extends React.Component<Props>{
     this.props.setLoginStatus(false);
     this.props.setUserId(null);
     this.props.setCookieLoad(false);
+    this.props.cookies.set('User','None');
     this.props.history.push('/SignIn');
   }
 

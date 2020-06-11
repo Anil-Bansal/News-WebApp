@@ -61,7 +61,8 @@ class SignUpForm extends Component<Props> {
       this.props.setUserId(uid);
       var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
       this.props.cookies.set('testing',cookies,{path: '/'});
-      this.props.setCookieLoad(true)
+      this.props.setCookieLoad(true);
+      this.props.cookies.set('User',uid);
     }
 
     guestSignIn = () => {
@@ -85,7 +86,8 @@ class SignUpForm extends Component<Props> {
     {
       var uid: string = await this.props.firebase.getUID()
       this.props.setUserId(uid);
-      this.props.setCookieLoad(true)
+      this.props.setCookieLoad(true);
+      this.props.cookies.set('User',uid);
     }
 
       googleSignIn = () => {
@@ -117,6 +119,7 @@ class SignUpForm extends Component<Props> {
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
           this.props.cookies.set('testing',[],{path: '/'});
+          this.props.cookies.set('User',this.props.uid);
           this.props.history.push('/Main');
         })
         .catch((error: any) => {

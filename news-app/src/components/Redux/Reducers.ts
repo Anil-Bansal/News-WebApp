@@ -37,7 +37,7 @@ const initialState: StateTypes ={
     liked:[],
     newsEnd: false,
     errorExist: false, 
-    isLoggedIn: true,
+    isLoggedIn: false,
     uid: "",
     cookieLoaded: false,
     messages: [],

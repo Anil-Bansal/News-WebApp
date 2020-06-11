@@ -1,8 +1,9 @@
 import React from 'react'
 import { withFirebase } from '../Firebase'
+import Receive from './Receive'
+import Send from './Send'
 
 class ChatBox extends React.Component{
-
 
     render(){
         return(

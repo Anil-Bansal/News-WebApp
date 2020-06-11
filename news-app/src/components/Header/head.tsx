@@ -85,7 +85,7 @@ class Head extends React.Component<Props>{
                             type='submit'>
                             Submit 
                           </Button>
-                          <SignOutButton />
+                          <SignOutButton cookies={this.props.cookies}/>
                         </form>
                     </div>
                 </div>
@@ -115,13 +115,14 @@ class Head extends React.Component<Props>{
     }
 }
 
-const mapStateToProps=(state: StateTypes)=>{
+const mapStateToProps=(state: StateTypes,ownprops)=>{
     return{
       isLoading: state.isLoading,
       country: state.country ,
       errorExist: state.errorExist,
       articles: state.articles,
-      page: state.page
+      page: state.page,
+      cookies: ownprops.cookies
     };
   }
   

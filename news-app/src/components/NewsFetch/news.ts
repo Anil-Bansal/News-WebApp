@@ -1,11 +1,11 @@
 export async function getNews(country: string,page_num: number){
-    const url=`https://newsapi.org/v2/top-headlines?country=${country}&apiKey=ed670e2fd04f475fa4b296d2085be2e3&page=${page_num}&pageSize=10`;
+    const url=`http://3.134.79.126:8002/news/?country=${country}&page=${page_num}`
     let result=await fetch(url).then(response=> response.json());
     return result.articles;
 }
 
 export async function getNewsSearch(search: string){
-    const url=`https://newsapi.org/v2/everything?q=${search}&apiKey=ed670e2fd04f475fa4b296d2085be2e3`;
+    const url=`http://3.134.79.126:8002/news/?search=${search}`
     let result=await fetch(url).then(response=> response.json());
     return result.articles;
 }

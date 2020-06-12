@@ -30,7 +30,7 @@ class Sources extends Component<SourcesProps>{
     }
 
     fetchSources(country=this.props.country){
-        const url: string=`https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country=${country}`;
+        const url: string=`http://3.134.79.126:8002/news/?source=${country}`
         fetch(url)
         .then((response:{json: Function})=>response.json())
         .then((result:{sources: Array<NewsPost>})=>result.sources)

@@ -7,7 +7,7 @@ import Main from './components/MainBody/Main'
 import {BrowserRouter,Link,Route, Switch,} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
 import Info from './components/TeamPage/TeamInfo';
-import { withCookies, Cookies } from 'react-cookie';
+import { withCookies} from 'react-cookie';
 import SignUpPage from './components/Auth/SignUpPage'
 import  SignInPage from './components/Auth/SignInPage';
 import Profile from './components/UserPage/Profile'
@@ -22,7 +22,7 @@ interface Cookie{
 interface Props{
   setUserId: Function,
   firebase: any,
-  cookies: Cookies,
+  cookies: Cookie,
   setCookieLoad: Function,
   setLoginStatus: Function,
   setName: Function,

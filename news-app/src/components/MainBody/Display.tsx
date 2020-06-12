@@ -36,7 +36,8 @@ class Display extends React.Component<DisplayProps>{
                 <div className='row' align='center'>
                     {content}
                 </div>
-            )}
+            )
+        }
     }
 }
 const mapStateToProps=(state: StateTypes)=>{

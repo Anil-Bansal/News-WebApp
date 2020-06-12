@@ -6,14 +6,24 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import {StateTypes} from '../Redux/Reducers'
 import { NewsPost } from '../Card/Post';
 
+interface Cookie{
+    get: Function,
+    set: Function
+}
+
 interface SourcesProps{
     country: string;
+    cookies: Cookie;
 }
 
 interface State{
     isLoading: boolean
     sources: Array<NewsPost>
     newsEnd: boolean
+}
+
+interface OwnProps{
+    cookies: Cookie
 }
 
 class Sources extends Component<SourcesProps>{
@@ -63,7 +73,7 @@ class Sources extends Component<SourcesProps>{
     render(){
         return(
             <div>
-                <Head /><br/>
+                <Head cookies={this.props.cookies}/><br/>
                 <DisplaySources loading={this.state.isLoading} array={this.state.sources} />
                 <div align='center'>
                     <ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>
@@ -74,9 +84,10 @@ class Sources extends Component<SourcesProps>{
     }
 }
 
-const mapStateToProps=(state: StateTypes)=>{
+const mapStateToProps=(state: StateTypes, ownProps: OwnProps)=>{
     return{
-        country: state.country
+        country: state.country,
+        cookies: ownProps.cookies
     };
 }
 

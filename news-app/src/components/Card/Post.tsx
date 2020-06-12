@@ -20,28 +20,50 @@ export interface NewsPost{
     name: string;
 }
 
+interface Cookie{
+    get: Function,
+    set: Function
+}
+
 interface Props{
-    cookies: Object,
+    cookies: Cookie,
     url: string,
     title: string,
     description: string,
     imageurl: string,
     uid: string,
     liked: Array<NewsPost>,
-    setLiked: Function
+    setLiked: Function,
+    show: string,
+    firebase: any,
+    setLastLiked: Function,
+    setToast: Function
+}
+
+interface State{
+    backgroundColor: string,
+    textColor: string,
+    modalShow: boolean,
+    isLiked: boolean
+}
+
+export interface PostData{
+    title: string,
+    description: string,
+    urlToImage: string,
+    url: string
 }
 
 class Post extends React.Component<Props>{
     public state: Object;
 
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props);
         this.state = {
           backgroundColor: "light",
           textColor: 'dark',
           modalShow: false,
           isLiked: ((this.props.cookies).get('testing')).includes(this.props.url) || this.props.show==='likedOnly',
-          
         };
         this.enter=this.enter.bind(this);
         this.leave=this.leave.bind(this);
@@ -61,15 +83,16 @@ class Post extends React.Component<Props>{
         window.open(url,'_blank');
     }
 
-    likePost = (postData) => {
+    likePost = (postData: PostData) => {
         this.props.firebase.addCookieToDatabase(this.props.uid,
                     [...(this.props.cookies).get('testing'),this.props.url],[...(this.props.liked),postData]);
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
-        this.props.setLiked([...this.props.liked,Object.assign({}, postData)])
+        this.props.setLiked([...this.props.liked,Object.assign({}, postData)]);
+        this.props.firebase.addEvent('Liked Post');
     }
 
-    unlikePost = (postData) => {
+    unlikePost = (postData: PostData) => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
         var likedPostsComplete = this.props.liked
         const urlCurrent = this.props.url
@@ -87,7 +110,7 @@ class Post extends React.Component<Props>{
                     isLiked: false})        
         this.props.setLastLiked(postData)
         this.props.setToast(true)
-
+        this.props.firebase.addEvent('Unlike Post');
     }
 
     render(){
@@ -147,13 +170,13 @@ const mapStateToProps=(state: StateTypes)=>{
     };
   }
   
-const mapDispatchToProps=dispatch=>{
+const mapDispatchToProps=(dispatch: any)=>{
     return{
         setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
         setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
         setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val)),
         setLastLiked: (val: NewsPost)=>dispatch(actiontypes.setLastLiked(val)),
-        setToast: (val: NewsPost)=>dispatch(actiontypes.setToast(val))
+        setToast: (val: boolean)=>dispatch(actiontypes.setToast(val))
     };
 }
   

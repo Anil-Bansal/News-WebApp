@@ -8,9 +8,14 @@ import './Chat.css';
 
 const INITIAL_STATE = {
     message: ''
-  };
+};
 
-class Send extends React.Component{
+interface Props{
+  firebase: any,
+  name: string,
+}
+
+class Send extends React.Component<Props>{
     constructor(props: Props) {
         super(props);
         this.state = { ...INITIAL_STATE };

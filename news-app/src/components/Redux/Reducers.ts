@@ -1,6 +1,7 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,
         SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES,SET_TOAST,SET_NAME } from './Actions'
 import {NewsPost} from '../Card/Post'
+import {PostData} from '../Card/Post';
 
 export interface StateTypes{
     isLoading?: Boolean
@@ -14,6 +15,9 @@ export interface StateTypes{
     uid?: string
     cookieLoaded?: Boolean
     name?:string
+    messages?: Array<Object>
+    lastLiked?: PostData
+    showToast?: Boolean
 }
 
 export interface DispatchTypes{
@@ -42,7 +46,7 @@ const initialState: StateTypes ={
     uid: "",
     cookieLoaded: false,
     messages: [],
-    lastLiked: '',
+    lastLiked: null,
     showToast: false,
     name: ''
 }

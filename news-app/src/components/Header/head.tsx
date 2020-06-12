@@ -8,6 +8,11 @@ import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
 import SignOutButton from '../Auth/Signout';
 import { StateTypes } from '../Redux/Reducers';
 
+interface Cookie{
+  get: Function,
+  set: Function
+}
+
 interface Props{
   setLoading: Function,
   setCountry: Function,
@@ -15,7 +20,12 @@ interface Props{
   setPage: Function,
   setNewsEnd: Function,
   setErrorExist: Function,
-  page: number
+  page: number,
+  cookies: Cookie
+}
+
+interface OwnProps{
+  cookies: Cookie
 }
 
 class Head extends React.Component<Props>{
@@ -115,7 +125,7 @@ class Head extends React.Component<Props>{
     }
 }
 
-const mapStateToProps=(state: StateTypes,ownprops)=>{
+const mapStateToProps=(state: StateTypes,ownprops: OwnProps)=>{
     return{
       isLoading: state.isLoading,
       country: state.country ,
@@ -126,7 +136,7 @@ const mapStateToProps=(state: StateTypes,ownprops)=>{
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
+  const mapDispatchToProps=(dispatch: any)=>{
     return{
       setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
       setNewsEnd: (val: boolean)=>dispatch(actiontypes.setNewsEnd(val)),

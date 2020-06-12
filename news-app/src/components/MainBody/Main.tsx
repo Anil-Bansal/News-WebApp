@@ -19,8 +19,8 @@ interface MainProps extends DispatchTypes,StateTypes{
 }
 
 class Main extends React.Component<MainProps>{
-    // public fetchNews: () => void
-    // public fetchLiked: () => void
+    public fetchNews: Function;
+    public fetchLiked: Function;
     
     constructor(props:MainProps ){
         super(props);

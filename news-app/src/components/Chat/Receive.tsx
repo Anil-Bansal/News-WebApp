@@ -4,10 +4,19 @@ import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import { StateTypes } from "../Redux/Reducers";
 import {List,ListItemText,ListItem} from '@material-ui/core';
-import './Chat.css'
-class Receive extends React.Component{
+import './Chat.css';
 
-    constructor(props){
+interface Props{
+  firebase: any,
+}
+
+interface Message{
+  message: string,
+  user: string
+}
+class Receive extends React.Component<Props>{
+
+    constructor(props: Props){
       super(props);
       this.state={
         messages: []
@@ -20,9 +29,9 @@ class Receive extends React.Component{
 
     getMessages=()=>{
       var ref=this.props.firebase.realDatabase.ref().child('messages').limitToLast(20);
-      ref.on('value',snapshot=>{
-        let newmessages=[]
-        snapshot.forEach(child=>{
+      ref.on('value',(snapshot: any)=>{
+        let newmessages: Array<Object>=[]
+        snapshot.forEach((child: any)=>{
           var cur=child.val()
           newmessages.push({message: cur.message, user: cur.userName})
         })
@@ -31,7 +40,7 @@ class Receive extends React.Component{
     }
 
     rendermessages=()=>{
-      return this.state.messages.map(message=>(
+      return this.state.messages.map((message: Message)=>(
         <ListItem>
           <ListItemText style={{wordBreak: "break-word"}} primary={message.user +' : ' + message.message}></ListItemText>
         </ListItem>

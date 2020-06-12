@@ -1,3 +1,5 @@
+import {NewsPost} from '../Card/Post';
+
 export const CHANGE_COUNTRY = 'CHANGE_COUNTRY'
 export const CUR_PAGE = 'CUR_PAGE'
 export const SET_ARTICLES = 'SET_ARTICLES'

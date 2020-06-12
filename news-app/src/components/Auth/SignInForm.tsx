@@ -20,6 +20,11 @@ const INITIAL_STATE = {
     error: null,
   };
 
+interface Cookie{
+  set: Function,
+  get: Function
+}
+
 interface Props{
   setLoginStatus: Function,
   setUserId: Function,
@@ -28,7 +33,9 @@ interface Props{
   setName: Function,
   firebase: any,
   history: any,
-  cookies: Object
+  cookies: Cookie,
+  name: string,
+  isLoading: boolean
 }
 
 class SignInForm extends Component<Props> {
@@ -72,7 +79,6 @@ class SignInForm extends Component<Props> {
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
       this.props.cookies.set('Name','Anonymous');
-
     }
 
     guestSignIn = () => {
@@ -212,7 +218,7 @@ class SignInForm extends Component<Props> {
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
+  const mapDispatchToProps=(dispatch: any)=>{
     return{
       setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),

@@ -12,17 +12,21 @@ import SignUpPage from './components/Auth/SignUpPage'
 import  SignInPage from './components/Auth/SignInPage';
 import Profile from './components/UserPage/Profile'
 import {withFirebase} from './components/Firebase';
+import { StateTypes } from './components/Redux/Reducers';
 
-class App extends Component{
+interface Props{
+
+}
+class App extends Component<Props>{
 	public fetchNews: any;
-	public props: any;
+	public props: Props;
 
-  constructor(props){
+  constructor(props: Props){
     super(props);
     this.fetchNews=fetchNews.bind(this);
   }
 
-  async signInSync (uid)
+  async signInSync (uid: string)
   {
       this.props.setUserId(uid);
       var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
@@ -39,7 +43,9 @@ class App extends Component{
     if(uid && uid!=='None'){
       this.signInSync(uid);
     }
-    if(!uid){this.props.cookies.set('User','None',{path: '/'})}
+    if(!uid){
+      this.props.cookies.set('User','None',{path: '/'})
+    }
   }
 
   componentDidMount(){
@@ -65,7 +71,7 @@ class App extends Component{
             {this.props.isLoggedIn &&(
               <div>
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
-                <Route exact path="/Sources" component={Sources}/>
+                <Route exact path="/Sources" render={() => (<Sources cookies={this.props.cookies}/>)}/>
                 <Route exact path="/Team" component={Info}/>
                 <Route exact path="/Profile" render={() => (<Profile content='likedOnly' cookies={this.props.cookies}/> )}/>
               </div>)
@@ -78,7 +84,7 @@ class App extends Component{
   }
 }
 
-const mapStateToProps=state=>{
+const mapStateToProps=(state: StateTypes)=>{
   return{
     isLoading: state.isLoading,
     page: state.page,
@@ -90,15 +96,14 @@ const mapStateToProps=state=>{
   };
 }
 
-const mapDispatchToProps=dispatch=>{
+const mapDispatchToProps=(dispatch: any)=>{
   return{
-    setLoading: (val)=>dispatch(actiontypes.setLoading(val)),
-    setNewsEnd: (val)=>dispatch(actiontypes.setNewsEnd(val)),
-    setArticles: (val)=>dispatch(actiontypes.setArticles(val)),
-    setErrorExist: (val)=>dispatch(actiontypes.setErrorExist(val)),
-    setCountry: (val)=>dispatch(actiontypes.setCountry(val)),
-    setPage: (val)=>dispatch(actiontypes.setPage(val)),
-    setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
+    setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
+    setNewsEnd: (val: boolean)=>dispatch(actiontypes.setNewsEnd(val)),
+    setErrorExist: (val: boolean)=>dispatch(actiontypes.setErrorExist(val)),
+    setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
+    setPage: (val: number)=>dispatch(actiontypes.setPage(val)),
+    setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
     setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
     setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
     setName: (val: string)=>dispatch(actiontypes.setName(val))

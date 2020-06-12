@@ -11,8 +11,6 @@ interface Props{
   currentCountry: string
 }
 class ButtonCountry extends React.Component<Props>{
-
-
     render(){
         return (
             <Button variant= {(this.props.currentCountry === this.props.code) ? "dark" : "light"} 
@@ -27,7 +25,7 @@ const mapStateToProps= (state: StateTypes) =>{
     return{
       currentCountry: state.country ,
     };
-  }
+}
   
 export default connect(mapStateToProps,)(ButtonCountry);
   

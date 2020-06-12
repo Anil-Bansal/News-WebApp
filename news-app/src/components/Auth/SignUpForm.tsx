@@ -15,22 +15,29 @@ import GoogleButton from 'react-google-button';
 import {StateTypes} from '../Redux/Reducers'
 
 const INITIAL_STATE = {
-    name: '',
-    email: '',
-    passwordOne: '',
-    passwordTwo: '',
-    error: null,
-  };
+  name: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  error: null,
+};
+
+interface Cookie{
+  get: Function,
+  set: Function
+}
 
 interface Props{
   setLoginStatus: Function,
   setUserId: Function,
   setCookieLoad: Function,
   setLoading: Function,
-  cookies: Object,
+  cookies: Cookie,
   history: any,
   firebase: any,
-  isLoading: boolean
+  isLoading: boolean,
+  setName: Function,
+  uid: string
 }
 
 class SignUpForm extends Component<Props> {
@@ -90,7 +97,7 @@ class SignUpForm extends Component<Props> {
       this.props.cookies.set('User',uid);
     }
 
-      googleSignIn = () => {
+    googleSignIn = () => {
       this.props.setLoading(true)
       this.props.firebase.doGoogleSignIn()
       .then(() => {
@@ -254,7 +261,7 @@ class SignUpForm extends Component<Props> {
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
+  const mapDispatchToProps=(dispatch: any)=>{
     return{
       setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),

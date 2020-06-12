@@ -18,7 +18,10 @@ const firebaseConfig = {
 class Firebase {
 	  public auth: any;
 	  public database: any;
-	  public prov: any;
+    public prov: any;
+    public realDatabase: any;
+    public messageReference: any;
+    public firebaseAnalytics: any;
 
     constructor() {
       app.initializeApp(firebaseConfig);
@@ -26,7 +29,8 @@ class Firebase {
       this.database=app.firestore();
       this.prov = new app.auth.GoogleAuthProvider();
       this.realDatabase=firebase.database(app);
-      this.messageReference=this.realDatabase.ref().child('messages')
+      this.messageReference=this.realDatabase.ref().child('messages');
+      this.firebaseAnalytics=app.analytics();
     }
 
     doCreateUserWithEmailAndPassword =  (email: string, password: string) =>
@@ -41,7 +45,7 @@ class Firebase {
     doGoogleSignIn = () =>
       this.auth.signInWithPopup(this.prov)
 
-    addName = (name) =>{
+    addName = (name: string) =>{
       var user = this.auth.currentUser;
       user.updateProfile({
         displayName: name
@@ -50,7 +54,7 @@ class Firebase {
 
     async getUserName(setName: Function){
       const user= await this.auth.currentUser;
-      user.providerData.forEach(function (profile) {
+      user.providerData.forEach(function (profile: any) {
         setName(profile.displayName)
         });
     }
@@ -107,6 +111,11 @@ class Firebase {
       }
     }
 
+    addEvent(event: string){
+      console.log(event);
+      this.firebaseAnalytics.logEvent(event);
+    }
+
 }
 
-export default Firebase
+export default Firebase;

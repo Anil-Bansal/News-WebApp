@@ -1,0 +1,17 @@
+.messageWindow {
+    width: 370px;
+    top: 0px;
+    height: 90%;
+    overflow-y: scroll;
+    z-index: 1;
+    padding-right: 1em;
+}
+
+.sendArea {
+    width: 370px;
+    position: bottom;
+    top: 0px;
+    z-index: 0;
+    padding-top: 94px;
+    padding-right: 1em;
+}

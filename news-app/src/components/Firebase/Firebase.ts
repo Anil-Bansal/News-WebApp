@@ -43,7 +43,6 @@ class Firebase {
 
     addName = (name) =>{
       var user = this.auth.currentUser;
-      console.log(user)
       user.updateProfile({
         displayName: name
       })
@@ -51,9 +50,7 @@ class Firebase {
 
     async getUserName(setName: Function){
       const user= await this.auth.currentUser;
-      console.log(user,user.displayName)
       user.providerData.forEach(function (profile) {
-        console.log(profile,profile.displayName)
         setName(profile.displayName)
         });
     }

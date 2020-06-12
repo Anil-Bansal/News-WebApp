@@ -4,7 +4,6 @@ import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import { StateTypes } from "../Redux/Reducers";
 import {List,ListItemText,ListItem} from '@material-ui/core';
-
 class Receive extends React.Component{
 
     constructor(props){
@@ -40,7 +39,7 @@ class Receive extends React.Component{
 
     render(){
         return(
-        <div>
+        <div >
             <List>
               {this.rendermessages()}
             </List>

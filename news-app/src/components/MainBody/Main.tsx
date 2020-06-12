@@ -11,8 +11,9 @@ import {withFirebase} from '../Firebase'
 import {StateTypes,DispatchTypes} from '../Redux/Reducers'
 import { NewsPost } from '../Card/Post';
 import ChatBox from '../Chat/ChatBox';
-import SplitPane,{Pane} from 'react-split-pane'
+import SplitPane from 'react-split-pane'
 import './Main.css'
+
 interface MainProps extends DispatchTypes,StateTypes{
   cookies: {get: Function, set:Function};
 }
@@ -57,7 +58,7 @@ class Main extends React.Component<MainProps>{
                         <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>:<div/>}
                     <div className='header'>
                     <Head  cookies={this.props.cookies}/></div>
-                    <SplitPane split="vertical" >
+                    <SplitPane split="vertical" minSize={50} defaultSize={10000}>
                       <div className='navigator'>
                         <ChatBox/>
                       </div>

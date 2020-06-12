@@ -11,7 +11,6 @@ import { withCookies } from 'react-cookie';
 import SignUpPage from './components/Auth/SignUpPage'
 import  SignInPage from './components/Auth/SignInPage';
 import Profile from './components/UserPage/Profile'
-import ChatBox from './components/Chat/ChatBox';
 import {withFirebase} from './components/Firebase';
 
 class App extends Component{
@@ -36,7 +35,6 @@ class App extends Component{
   async checkPrevLogin(){
     var uid=await this.props.cookies.get('User');
     if(uid && uid!=='None'){
-      console.log("Hi", uid);
       this.signInSync(uid);
     }
     if(!uid){this.props.cookies.set('User','None',{path: '/'})}
@@ -57,7 +55,6 @@ class App extends Component{
           <Link to="/Sources" className='Route'>Sources</Link>
           <Link to="/Team" className='Route'>Team Info</Link>
           <Link to="/Profile" className='Route'>Favourites</Link>
-          <Link to="/Chat" className='Route'>Chat</Link>
 
         </div>
           <Switch>
@@ -69,7 +66,6 @@ class App extends Component{
                 <Route exact path="/Sources" component={Sources}/>
                 <Route exact path="/Team" component={Info}/>
                 <Route exact path="/Profile" render={() => (<Profile content='likedOnly' cookies={this.props.cookies}/> )}/>
-                <Route exact path="/Chat" component={ChatBox}/>
               </div>)
             } 
 

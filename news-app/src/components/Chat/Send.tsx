@@ -4,6 +4,7 @@ import * as actiontypes from '../Redux/Actions';
 import {connect} from 'react-redux';
 import { StateTypes } from "../Redux/Reducers";
 import { TextField } from "@material-ui/core";
+import './Chat.css';
 
 const INITIAL_STATE = {
     message: ''
@@ -36,6 +37,8 @@ class Send extends React.Component{
                     onChange={this.onChange}
                     type="text"
                     placeholder="Enter Message"
+                    variant="outlined"
+                    style={{marginLeft:20}}
                 />
               <button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Send</button>
           </form>

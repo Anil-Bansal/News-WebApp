@@ -30,6 +30,8 @@ class App extends Component{
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
       this.props.setLoginStatus(true);
+      var name: string=await this.props.cookies.get('Name');
+      this.props.setName(name);
   }
 
   async checkPrevLogin(){
@@ -99,6 +101,7 @@ const mapDispatchToProps=dispatch=>{
     setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
     setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
     setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
+    setName: (val: string)=>dispatch(actiontypes.setName(val))
   };
 }
 

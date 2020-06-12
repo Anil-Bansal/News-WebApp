@@ -208,7 +208,7 @@ class SignInForm extends Component<Props> {
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
       isLoading: state.isLoading,
-      name: state.isLoading
+      name: state.name
     };
   }
   

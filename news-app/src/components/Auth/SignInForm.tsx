@@ -54,16 +54,16 @@ class SignInForm extends Component<Props> {
     }
     
     async signInSync ()
-      {
-        var uid: string = await this.props.firebase.getUID()
-        this.props.setUserId(uid);
-        var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
-        this.props.cookies.set('testing',cookies,{path: '/'});
-        this.props.setCookieLoad(true);
-        this.props.cookies.set('User',uid);
-        var name: string =await this.props.firebase.getUserName();
-        this.props.setName(name);
-      }
+    {
+      var uid: string = await this.props.firebase.getUID()
+      await this.props.firebase.getUserName(this.props.setName);
+      this.props.setUserId(uid);
+      var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
+      this.props.cookies.set('testing',cookies,{path: '/'});
+      this.props.setCookieLoad(true);
+      this.props.cookies.set('User',uid);
+      this.props.cookies.set('Name',this.props.name);
+    }
 
     async guestLogin()
     {
@@ -71,6 +71,8 @@ class SignInForm extends Component<Props> {
       this.props.setUserId(uid);
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
+      this.props.cookies.set('Name','Anonymous');
+
     }
 
     guestSignIn = () => {
@@ -205,7 +207,8 @@ class SignInForm extends Component<Props> {
     return{
       isLoggedIn: state.isLoggedIn,
       uid: state.uid,
-      isLoading: state.isLoading
+      isLoading: state.isLoading,
+      name: state.isLoading
     };
   }
   

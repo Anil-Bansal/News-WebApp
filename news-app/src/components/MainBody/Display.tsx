@@ -29,8 +29,6 @@ class Display extends React.Component<DisplayProps>{
             )
             if ((idx+1)%3===0) {content.push(<div key={array.length+idx} className="w-100"></div>)}
         })
-        console.log('array',content)
-
         if(this.props.isLoading || array===undefined)
             return <div></div>;
         else{

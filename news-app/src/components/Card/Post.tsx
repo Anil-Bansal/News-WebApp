@@ -97,9 +97,7 @@ class Post extends React.Component<Props>{
             urlToImage: this.props.imageurl,
             url: this.props.url
           }
-
-        console.log('render post',this.props.url,this.state.isLiked)
-    return(
+        return(
         <div>
             <Card bg={this.state.backgroundColor}
                 style={{width: '24rem', }}

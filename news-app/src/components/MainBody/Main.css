@@ -1,0 +1,25 @@
+.navigator {
+    width: 370px;
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    z-index: 1;
+    padding-top: 94px;
+    padding-right: 1em;
+}
+
+.content {
+    padding-right: 1em;
+    padding-bottom: 2em;
+    z-index: 2;
+    margin-left: 10px;
+    padding-top: 94px;
+}
+
+.header {
+    padding-top: 1em;
+    padding-bottom: 14px;
+    position: fixed;
+    z-index: 4;
+    width: 100%;
+}

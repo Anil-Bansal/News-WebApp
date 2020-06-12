@@ -27,6 +27,7 @@ class SignOutButton extends React.Component<Props>{
     this.props.setUserId(null);
     this.props.setCookieLoad(false);
     this.props.cookies.set('User','None');
+    this.props.cookies.set('Name','No Name');
     this.props.history.push('/SignIn');
   }
 
@@ -40,7 +41,6 @@ class SignOutButton extends React.Component<Props>{
   }
 
 }
-
 
 const mapStateToProps=(state: StateTypes)=>{
   return{

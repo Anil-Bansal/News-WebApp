@@ -13,6 +13,7 @@ import  SignInPage from './components/Auth/SignInPage';
 import Profile from './components/UserPage/Profile'
 import {withFirebase} from './components/Firebase';
 import { StateTypes } from './components/Redux/Reducers';
+import { NewsPost } from './components/Card/Post';
 
 interface Cookie{
   get: Function,
@@ -26,7 +27,8 @@ interface Props{
   setCookieLoad: Function,
   setLoginStatus: Function,
   setName: Function,
-  isLoggedIn: boolean
+  isLoggedIn: boolean,
+  setLiked: Function
 }
 class App extends Component<Props>{
 	public fetchNews: any;
@@ -47,6 +49,10 @@ class App extends Component<Props>{
       this.props.setLoginStatus(true);
       var name: string=await this.props.cookies.get('Name');
       this.props.setName(name);
+      await this.props.firebase.getDataFromDatabase(uid)
+      .then((result:any)=>{
+        this.props.setLiked(result);
+      })
   }
 
   async checkPrevLogin(){
@@ -118,7 +124,8 @@ const mapDispatchToProps=(dispatch: any)=>{
     setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
     setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
     setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
-    setName: (val: string)=>dispatch(actiontypes.setName(val))
+    setName: (val: string)=>dispatch(actiontypes.setName(val)),
+    setLiked: (val: Array<NewsPost>) =>dispatch(actiontypes.setLiked(val))
   };
 }
 

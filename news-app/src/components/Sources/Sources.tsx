@@ -72,9 +72,12 @@ class Sources extends Component<SourcesProps>{
 
     render(){
         return(
-            <div>
-                <Head cookies={this.props.cookies}/><br/>
-                <DisplaySources loading={this.state.isLoading} array={this.state.sources} />
+            <div >
+                <div className='header'>
+                <Head cookies={this.props.cookies}/><br/></div>
+                <div className='display'>
+                    <DisplaySources loading={this.state.isLoading} array={this.state.sources} />
+                </div>
                 <div align='center'>
                     <ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>
                 </div>

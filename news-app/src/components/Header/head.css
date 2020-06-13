@@ -3,10 +3,11 @@
     width: 100%;
     display: flex;
     justify-content: Center;
-    padding: 0em;
-    margin-bottom: 0em;
+    padding-top: 0.5em;
+    padding-left: 1em;
     background-color: rgb(17, 120, 180);
     color: #fff;
+    z-index:2;
   }
 
 .Select {
@@ -23,9 +24,8 @@
   display: flex;
 
   justify-content: right;
-  padding-top: 0.5em;
-  margin-left: 32em;
+  margin-left: 28em;
   padding-left: 5em;
   padding-right: 1em;
-
+  padding-top:0.5em;
 }

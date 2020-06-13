@@ -23,6 +23,7 @@ class Send extends React.Component<Props>{
 
     onSubmit = (event: any) => {
         this.props.firebase.sendMessage(this.state.message,this.props.name)
+        this.props.firebase.addEvent('SendMessage',{uid: this.props.uid});
         event.preventDefault();
       };
 

@@ -53,8 +53,8 @@ class Head extends React.Component<Props>{
       await this.props.setNewsEnd(false);
       await this.props.setErrorExist(false);
       this.fetchNewsSearch(search,this.props.page);
+      this.props.firebase.addEvent('changeCountry',{searchString: search} );
     }
-
 
     handleSubmit = (event: any) => {
       event.preventDefault();

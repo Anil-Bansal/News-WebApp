@@ -1,11 +1,10 @@
 .navigator {
     width: 370px;
-    position: fixed;
     top: 0px;
     height: 90%;
     z-index: 1;
-    padding-top: 94px;
     padding-right: 1em;
+
 }
 
 .content {
@@ -13,7 +12,14 @@
     padding-bottom: 2em;
     z-index: 2;
     margin-left: 10px;
-    padding-top: 94px;
+    
+}
+.container{
+    display: flex;
+    flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
 }
 
 .header {

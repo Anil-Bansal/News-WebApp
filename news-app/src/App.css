@@ -1,18 +1,18 @@
 .App {
   text-align: center;
+  position: absolute;
+  z-index:5
 }
 
 .Top {
-  box-sizing: border-box;
   width: 100%;
   display: flex;
   justify-content: Center;
   padding:0em;
-  margin-bottom: 3em;
   background-color: rgb(17, 120, 180);
   color: #fff;
   position: fixed;
-  z-index: 5;
+  z-index: 7;
 
 }
 
@@ -41,7 +41,6 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

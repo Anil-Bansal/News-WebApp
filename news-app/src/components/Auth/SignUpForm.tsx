@@ -240,7 +240,7 @@ class SignUpForm extends Component<Props> {
                 {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
             </form>
 
-            <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
+            <Button style={{paddingLeft:40, paddingRight:40, marginBottom:20}} size='lg' variant="warning" 
             onClick={() => this.guestSignIn()}>
                 Sign Up as Guest
             </Button>

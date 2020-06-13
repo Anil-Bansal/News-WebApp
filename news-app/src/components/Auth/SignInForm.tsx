@@ -128,6 +128,7 @@ class SignInForm extends Component<Props> {
           this.signInSync( )
           .then(()=>{
             this.props.history.push('/Main');
+            this.props.firebase.addEvent('UserSignIn',{email: email});
           })
         })
         .catch((error: any) => {
@@ -200,7 +201,7 @@ class SignInForm extends Component<Props> {
                                     
             {error && <h4>{error.message}</h4>}
           </form>
-          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
+          <Button style={{paddingLeft:40, paddingRight:40, marginBottom:20}} size='lg' variant="warning" 
             onClick={() => this.guestSignIn()}>
               Sign In as Guest
           </Button>

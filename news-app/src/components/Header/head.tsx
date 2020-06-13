@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
 import SignOutButton from '../Auth/Signout';
 import { StateTypes } from '../Redux/Reducers';
+import { withFirebase } from '../Firebase';
 
 interface Cookie{
   get: Function,
@@ -70,6 +71,7 @@ class Head extends React.Component<Props>{
       await this.props.setPage(1);
       await this.props.setNewsEnd(false);
       await this.props.setErrorExist(false);
+      this.props.firebase.addEvent('changeCountry',{newCode: code} );
       this.fetchNews();
     }
 
@@ -147,4 +149,4 @@ const mapStateToProps=(state: StateTypes,ownprops: OwnProps)=>{
     };
   }
   
-  export default connect(mapStateToProps,mapDispatchToProps)(Head);
+  export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Head));

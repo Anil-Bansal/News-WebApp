@@ -90,6 +90,7 @@ class SignInForm extends Component<Props> {
         this.guestLogin()
         .then(()=>{
           this.props.history.push('/Main');
+          this.props.firebase.addEvent('GuestSignIn',{} );
         })
       })
       .catch((error: any) => {
@@ -107,6 +108,7 @@ class SignInForm extends Component<Props> {
         this.signInSync()
         .then(()=>{
           this.props.history.push('/Main');
+          this.props.firebase.addEvent('GoogleSignIn',{} );
         })
       })
       .catch((error: any) => {

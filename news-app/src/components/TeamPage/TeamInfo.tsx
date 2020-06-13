@@ -3,9 +3,12 @@ import Person from './Person';
 import Vinayak from '../../assets/Vinayak.jpeg';
 import Anil from '../../assets/Anil.jpg';
 import './Team.css'
+import { withFirebase } from '../Firebase';
 
-const Info = () => {
+const Info = (props) => {
+    props.firebase.addEvent('viewDevelopers',{});
     return (
+        
         <div>
             <div className="container">
                 <h1 style={{marginTop: 10}}>Alone We Can Do So Little, Together We Can Do So Much.</h1>
@@ -19,4 +22,4 @@ const Info = () => {
     );
 }
 
-export default Info;
+export default withFirebase(Info);

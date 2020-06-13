@@ -3,6 +3,8 @@ import Modal from  'react-bootstrap/Modal'
 import Button from  'react-bootstrap/Button'
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from "react-share";
 import {FaFacebookF,FaTwitter, FaLinkedin} from 'react-icons/fa';
+import { withFirebase } from '../Firebase';
+import { connect } from 'react-redux';
 
 interface CardData{
     url: string;
@@ -20,10 +22,12 @@ interface PopupProps{
 class Popup extends React.Component<PopupProps>{
 
     goToUrl(url: string): void{
+        this.props.firebase.addEvent('visitNewsSite',{url: url});
         window.open(url,'_blank');
     }
 
     render(){
+        this.props.firebase.addEvent('viewModal',{url: this.props.cardData.url});
         return(
             <Modal
                 {...this.props}
@@ -78,4 +82,4 @@ class Popup extends React.Component<PopupProps>{
     }
 }
 
-export default Popup;
+export default connect(null,null)(withFirebase(Popup));

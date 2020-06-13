@@ -80,6 +80,7 @@ class Post extends React.Component<Props>{
     }
 
     goToUrl(url: string){
+        this.props.firebase.addEvent('visitNewsSite',{url: url});
         window.open(url,'_blank');
     }
 
@@ -89,7 +90,7 @@ class Post extends React.Component<Props>{
         (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
         this.setState({isLiked: true});
         this.props.setLiked([...this.props.liked,Object.assign({}, postData)]);
-        this.props.firebase.addEvent('Liked Post');
+        this.props.firebase.addEvent('likePost',{url: this.props.url} );
     }
 
     unlikePost = (postData: PostData) => {
@@ -110,7 +111,7 @@ class Post extends React.Component<Props>{
                     isLiked: false})        
         this.props.setLastLiked(postData)
         this.props.setToast(true)
-        this.props.firebase.addEvent('Unlike Post');
+        this.props.firebase.addEvent('unlikePost',{url: urlCurrent} );
     }
 
     render(){

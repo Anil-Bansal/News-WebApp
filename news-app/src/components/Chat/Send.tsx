@@ -13,6 +13,7 @@ const INITIAL_STATE = {
 interface Props{
   firebase: any,
   name: string,
+  isAnonymous: boolean
 }
 
 class Send extends React.Component<Props>{
@@ -46,7 +47,8 @@ class Send extends React.Component<Props>{
                     variant="outlined"
                     style={{marginLeft:20}}
                 />
-              <button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Send</button>
+                {this.props.isAnonymous? <button style={{marginBottom:20}} size='lg' variant="primary" type="submit" disabled>Send</button>:
+                <button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Send</button>}
           </form>
         </div>
 
@@ -62,7 +64,8 @@ const mapStateToProps=(state:StateTypes)=>{
     return{
       messages: state.messages,
       uid: state.uid,
-      name: state.name
+      name: state.name,
+      isAnonymous: state.isAnonymous
     };
   }
 

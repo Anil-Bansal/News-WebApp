@@ -37,7 +37,8 @@ interface Props{
   firebase: any,
   isLoading: boolean,
   setName: Function,
-  uid: string
+  uid: string,
+  setAnonymous: Function
 }
 
 class SignUpForm extends Component<Props> {
@@ -69,6 +70,7 @@ class SignUpForm extends Component<Props> {
       var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
       this.props.cookies.set('testing',cookies,{path: '/'});
       this.props.setCookieLoad(true);
+      this.props.setAnonymous(false);
       this.props.cookies.set('User',uid);
     }
 
@@ -95,6 +97,7 @@ class SignUpForm extends Component<Props> {
       this.props.setUserId(uid);
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
+      this.props.setAnonymous(true);
     }
 
     googleSignIn = () => {
@@ -124,6 +127,7 @@ class SignUpForm extends Component<Props> {
           this.props.firebase.addName(name);
           this.props.setName(name);
           this.setState({ ...INITIAL_STATE });
+          this.props.setAnonymous(false);
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
           this.props.cookies.set('testing',[],{path: '/'});
@@ -267,7 +271,8 @@ class SignUpForm extends Component<Props> {
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
       setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
       setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
-      setName: (val: string)=>dispatch(actiontypes.setName(val))
+      setName: (val: string)=>dispatch(actiontypes.setName(val)),
+      setAnonymous: (val: boolean)=>dispatch(actiontypes.setAnonymous(val))
     };
   }
   

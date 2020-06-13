@@ -5,6 +5,7 @@
   justify-content: Center;
   margin-top: 1.7em;
   margin-bottom: 0em;
+  padding-left: 3em;
   background-color: rgb(17, 120, 180);
   color: #fff;
 }
@@ -23,7 +24,7 @@ box-sizing: border-box;
 display: flex;
 padding-top: 0.5em;
 justify-content: right;
-margin-left: 32em;
+margin-left: 33%;
 padding-left: 5em;
 padding-right: 1em;
 

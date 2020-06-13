@@ -38,7 +38,7 @@ class Profile extends React.Component<ProfileProps>{
                         <Button variant='danger' size='sm' style={{marginLeft:20,marginRight:20}} 
                                 onClick={() => this.undoUnlike()}>Undo</Button>
                     </Toast.Header>
-                </Toast>
+                </Toast><br/>
                 <Display show='likedOnly' cookies={this.props.cookies}/>
             </div>
         )

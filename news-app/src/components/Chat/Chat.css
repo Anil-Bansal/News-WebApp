@@ -1,7 +1,7 @@
 .messageWindow {
     width: 370px;
     top: 0px;
-    height: 90%;
+    height: 100%;
     overflow-y: scroll;
     z-index: 1;
     padding-right: 1em;
@@ -9,8 +9,7 @@
 
 .sendArea {
     width: 370px;
-    position: bottom;
-    top: 0px;
+    margin-top: 10px;
     z-index: 0;
     padding-right: 1em;
 }
@@ -19,6 +18,5 @@
     border: 2px solid #dedede;
     background-color: #f1f1f1;
     border-radius: 5px;
-    padding: 10px;
     margin: 20px 10px 10px 10px;
 }

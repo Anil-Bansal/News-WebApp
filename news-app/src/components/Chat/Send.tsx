@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { StateTypes } from "../Redux/Reducers";
 import { TextField } from "@material-ui/core";
 import './Chat.css';
-
+import Button from 'react-bootstrap/Button'
 const INITIAL_STATE = {
     message: ''
 };
@@ -47,8 +47,8 @@ class Send extends React.Component<Props>{
                     variant="outlined"
                     style={{marginLeft:20}}
                 />
-                {this.props.isAnonymous? <button style={{marginBottom:20}} size='lg' variant="primary" type="submit" disabled>Send</button>:
-                <button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Send</button>}
+                {this.props.isAnonymous? <Button style={{marginTop:'3px',marginLeft:'3px'}}size='lg' variant="primary" type="submit" disabled>Send</Button>:
+                <Button style={{marginTop:'3px',marginLeft:'3px'}} size='lg' variant="primary" type="submit">Send</Button>}
           </form>
         </div>
 

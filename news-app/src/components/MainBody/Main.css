@@ -22,3 +22,7 @@
     z-index: 4;
     width: 100%;
 }
+.body {
+    z-index: 0;
+    width: 100%;
+}

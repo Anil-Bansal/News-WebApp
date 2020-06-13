@@ -11,7 +11,8 @@ import {withFirebase} from '../Firebase'
 import {StateTypes,DispatchTypes} from '../Redux/Reducers'
 import { NewsPost } from '../Card/Post';
 import ChatBox from '../Chat/ChatBox';
-import SplitPane from 'react-split-pane'
+import Splitter from 'm-react-splitters'
+import 'm-react-splitters/lib/splitters.css';
 import './Main.css'
 
 interface MainProps extends DispatchTypes,StateTypes{
@@ -57,15 +58,20 @@ class Main extends React.Component<MainProps>{
                     {!this.props.newsEnd ? 
                         <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>:<div/>}
                     <div className='header'>
-                    <Head  cookies={this.props.cookies}/></div>
-                    <SplitPane split="vertical" minSize={50} defaultSize={10000}>
-                      <div className='navigator'>
-                        <ChatBox/>
-                      </div>
-                      <div className='content'>
-                        {this.SelectiveDisplay()}
-                      </div>
-                    </SplitPane>
+                    <Head  cookies={this.props.cookies}/></div>                  
+                    <div className='body'>
+                      <Splitter position="vertical"
+                          primaryPaneMaxWidth='30%'
+                          primaryPaneWidth="26%"
+                          postPoned={true} >
+                        <div className='navigator'>
+                          <ChatBox/>
+                        </div>
+                        <div className='content'>
+                          {this.SelectiveDisplay()}
+                        </div>
+                      </Splitter>
+                    </div>
                 </div>
             )}
 }

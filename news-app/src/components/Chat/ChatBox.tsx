@@ -4,13 +4,15 @@ import Receive from './Receive'
 import Send from './Send'
 import './Chat.css'
 import Splitter from 'm-react-splitters'
+import 'm-react-splitters/lib/splitters.css';
 
 class ChatBox extends React.Component{
     render(){
         return(
             <Splitter position="horizontal"
-            primaryPaneHeight="80%"
-            dispatchResize={true}
+            primaryPaneMaxHeight='90%'
+            primaryPaneHeight="85%"
+            
             postPoned={true} >
                 <div className='messageWindow'>
                     <Receive/>     

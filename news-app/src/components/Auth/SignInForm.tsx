@@ -35,7 +35,8 @@ interface Props{
   history: any,
   cookies: Cookie,
   name: string,
-  isLoading: boolean
+  isLoading: boolean,
+  setAnonymous: Function
 }
 
 class SignInForm extends Component<Props> {
@@ -70,6 +71,7 @@ class SignInForm extends Component<Props> {
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
       this.props.cookies.set('Name',this.props.name);
+      this.props.setAnonymous(false);
     }
 
     async guestLogin()
@@ -79,6 +81,7 @@ class SignInForm extends Component<Props> {
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
       this.props.cookies.set('Name','Anonymous');
+      this.props.setAnonymous(true);
     }
 
     guestSignIn = () => {
@@ -226,7 +229,8 @@ class SignInForm extends Component<Props> {
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
       setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
       setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
-      setName: (val: string)=>dispatch(actiontypes.setName(val))
+      setName: (val: string)=>dispatch(actiontypes.setName(val)),
+      setAnonymous: (val: boolean)=>dispatch(actiontypes.setAnonymous(val))
     };
   }
   

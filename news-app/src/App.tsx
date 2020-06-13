@@ -68,7 +68,7 @@ class App extends Component<Props>{
       <BrowserRouter>
       <div className='App'>
         <div className='Top'>
-          <h8>
+          <h8 style={{padding:'0.2em'}}>
           <Link to="/" className='Route'>SignUp  </Link>
           <Link to="/SignIn" className='Route'>Sign In</Link>
           <Link to="/Main" className='Route'>NewsFetch</Link>

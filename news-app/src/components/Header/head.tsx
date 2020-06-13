@@ -56,6 +56,7 @@ class Head extends React.Component<Props>{
       this.props.firebase.addEvent('changeCountry',{searchString: search} );
     }
 
+
     handleSubmit = (event: any) => {
       event.preventDefault();
       this.searchNews(this.input.value);

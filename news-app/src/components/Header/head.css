@@ -1,31 +1,30 @@
 .Head {
-    box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    justify-content: Center;
-    padding-top: 0.5em;
-    padding-left: 1em;
-    background-color: rgb(17, 120, 180);
-    color: #fff;
-    z-index:2;
-  }
-
-.Select {
   box-sizing: border-box;
   width: 100%;
   display: flex;
-  justify-content: center;
-  padding: 0em;
+  justify-content: Center;
+  margin-top: 1.7em;
   margin-bottom: 0em;
+  background-color: rgb(17, 120, 180);
+  color: #fff;
+}
+
+.Select {
+box-sizing: border-box;
+width: 100%;
+display: flex;
+justify-content: center;
+padding: 0em;
+margin-bottom: 0em;
 }
 
 .Search {
-  box-sizing: border-box;
-  display: flex;
+box-sizing: border-box;
+display: flex;
+padding-top: 0.5em;
+justify-content: right;
+margin-left: 32em;
+padding-left: 5em;
+padding-right: 1em;
 
-  justify-content: right;
-  margin-left: 28em;
-  padding-left: 5em;
-  padding-right: 1em;
-  padding-top:0.5em;
 }

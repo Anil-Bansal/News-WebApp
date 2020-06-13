@@ -16,6 +16,8 @@ interface Message{
 }
 class Receive extends React.Component<Props>{
 
+    messageEndRef=React.createRef();
+
     constructor(props: Props){
       super(props);
       this.state={
@@ -24,7 +26,16 @@ class Receive extends React.Component<Props>{
     }
 
     componentDidMount(){
-      this.getMessages()
+      this.getMessages();
+      this.scrollToBottom();
+    }
+
+    componentDidUpdate(){
+      this.scrollToBottom();
+    }
+
+    scrollToBottom=()=>{
+      this.messageEndRef.current.scrollIntoView({ behavior: 'smooth' })
     }
 
     getMessages=()=>{
@@ -53,6 +64,7 @@ class Receive extends React.Component<Props>{
             <List>
               {this.rendermessages()}
             </List>
+            <div ref={this.messageEndRef}></div>
         </div>
         )
     }

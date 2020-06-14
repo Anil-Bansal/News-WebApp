@@ -45,7 +45,7 @@ class Main extends React.Component<MainProps>{
           return(
             <div>
               <Display show='all' cookies={this.props.cookies}/> 
-              <div align='center' style={{marginLeft:'35em',paddingTop:'2em'}}>
+              <div align='center' style={{paddingLeft:'35em',paddingTop:'2em'}}>
                 <Loader />
               </div>
             </div>
@@ -62,8 +62,8 @@ class Main extends React.Component<MainProps>{
                       <Head  cookies={this.props.cookies}/></div>                  
                     <div className='body'>
                       <Splitter position="vertical"
-                          primaryPaneMaxWidth='30%'
-                          primaryPaneWidth="26%"
+                          primaryPaneMaxWidth='27%'
+                          primaryPaneWidth="27%"
                           postPoned={true} >
                         <div className='navigator'>
                           <ChatBox/>

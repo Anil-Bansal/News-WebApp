@@ -2,7 +2,6 @@
     width: 27%;
     position: fixed;
     box-sizing: border-box;
-
     height: 100%;
     z-index: 1;
     padding-top: 94px;
@@ -11,13 +10,11 @@
 }
 
 .content {
+    position: relative;
     padding-right: 1em;
+    padding-top:7em;
     padding-bottom: 2em;
     z-index: 2;
-    display:flex;
-    box-sizing: border-box;
-    margin-left: 10px;
-    padding-top: 6.5em;
     width:100%
 }
 
@@ -25,7 +22,6 @@
     padding-bottom: 14px;
     position: fixed;
     z-index: 4;
-    display:flex;
     box-sizing: border-box;
     width: 100%;
 }

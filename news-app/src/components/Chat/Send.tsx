@@ -45,7 +45,7 @@ class Send extends React.Component<Props>{
                     type="text"
                     placeholder="Enter Message"
                     variant="outlined"
-                    style={{marginLeft:20}}
+                    style={{}}
                 />
                 {this.props.isAnonymous? <Button style={{marginTop:'3px',marginLeft:'3px'}}size='lg' variant="primary" type="submit" disabled>Send</Button>:
                 <Button style={{marginTop:'3px',marginLeft:'1px'}} size='lg' variant="primary" type="submit">Send</Button>}

@@ -68,14 +68,12 @@ class App extends Component<Props>{
       <BrowserRouter>
       <div className='App'>
         <div className='Top'>
-          <h8 style={{padding:'0.2em'}}>
           <Link to="/" className='Route'>SignUp  </Link>
           <Link to="/SignIn" className='Route'>Sign In</Link>
           <Link to="/Main" className='Route'>NewsFetch</Link>
           <Link to="/Sources" className='Route'>Sources</Link>
           <Link to="/Team" className='Route'>Team Info</Link>
           <Link to="/Profile" className='Route'>Favourites</Link>
-          </h8>
         </div>
           <Switch>
             <Route exact path="/" render={() => (<SignUpPage cookies={this.props.cookies}/>)}/>

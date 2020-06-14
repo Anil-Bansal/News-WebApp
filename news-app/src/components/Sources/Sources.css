@@ -1,0 +1,23 @@
+.headerSource {
+    padding-bottom: 14px;
+    position: fixed;
+    z-index: 4;
+    /* display: flex; */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.loading{
+    margin-left: 50%;
+    justify-content: center;
+    padding: 50em;
+}
+
+.contentSource {
+    padding-bottom: 2em;
+    z-index: 10;
+    width:90%;
+    padding-top: 9em;
+    
+    /* justify-content: center; */
+}

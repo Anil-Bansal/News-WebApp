@@ -43,7 +43,8 @@ class SourceCard extends React.Component<SourceCardProps>{
                     onMouseLeave={this.leave}
                     style={{width: '24rem'}}
                     text={this.state.textColor}
-                    onClick={()=>window.open(this.props.url,'_blank')  }>
+                    onClick={()=>window.open(this.props.url,'_blank')}
+                    style={{marginLeft: '3em'}}>
                     <Card.Body>
                         <Card.Title>{this.props.name}</Card.Title>
                         <Card.Text>{this.props.description}</Card.Text>

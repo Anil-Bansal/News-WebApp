@@ -1,11 +1,13 @@
 .Head {
-  width: 100%;
-  display: flex;
-  margin-top: 1.7em;
+  width: 130%;
+  display: inline-flex ;
+  margin-top: 1.2em;
   margin-bottom: 0em;
-  padding-left: 3em;
+  padding-left: 5%;
+  padding-top: 0.5em;
   background-color: rgb(17, 120, 180);
   color: #fff;
+  z-index: 4;
 }
 
 .Select {
@@ -22,8 +24,8 @@ box-sizing: border-box;
 display: flex;
 padding-top: 0.5em;
 justify-content: right;
-margin-left: 25%;
-padding-left: 5em;
+margin-left: 32%;
+/* padding-left: 5em; */
 padding-right: 1em;
 
 }

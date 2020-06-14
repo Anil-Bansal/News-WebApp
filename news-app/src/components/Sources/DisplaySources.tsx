@@ -14,7 +14,7 @@ const DisplaySources:React.FC<SourcesProps> =(props: SourcesProps )=>{
         return <div></div>;
     else{
         return(     
-            <CardColumns align="center"> 
+            <CardColumns align="center" > 
                 {array.map((source: NewsPost,idx: number) => (
                     <SourceCard key={idx}  name={source.name} description={source.description} url={source.url} />
                 ))}

@@ -14,10 +14,9 @@
     padding-right: 1em;
 }
 
-.container{
+.containerChat{
     width: 100%;
     justify-content: center;
     border: 2px solid #dedede;
     background-color: #f1f1f1;
-
 }

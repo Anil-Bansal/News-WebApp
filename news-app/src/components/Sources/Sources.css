@@ -1,5 +1,5 @@
 .headerSource {
-    padding-bottom: 14px;
+    padding-bottom: 0.8%;
     position: fixed;
     z-index: 4;
     box-sizing: border-box;
@@ -8,14 +8,14 @@
 
 .loading{
     align-items: center;
-    margin-left: 50em;
+    margin-left: 50%;
 }
 
 .contentSource {
-    padding-bottom: 2em;
+    padding-bottom: 2%;
     z-index: 10;
     width:100%;
     align-items: center;
-    padding-top: 9em;
+    padding-top: 10%;
     justify-content: center;
 }

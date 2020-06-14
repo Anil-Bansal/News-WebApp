@@ -44,7 +44,7 @@ class SignInForm extends Component<Props> {
 	public props: Props;
 	public email: string;
 	public password: string;
-	public error: any;
+	public error: string;
 
     constructor(props: Props) {
       super(props);

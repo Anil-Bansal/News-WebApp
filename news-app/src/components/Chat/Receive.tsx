@@ -60,7 +60,7 @@ class Receive extends React.Component<Props>{
 
     render(){
         return(
-        <div className='container'>
+        <div className='containerChat'>
             <List>
               {this.rendermessages()}
             </List>

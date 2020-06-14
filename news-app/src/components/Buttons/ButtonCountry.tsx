@@ -13,7 +13,7 @@ interface Props{
 class ButtonCountry extends React.Component<Props>{
     render(){
         return (
-            <Button variant= {(this.props.currentCountry === this.props.code) ? "dark" : "light"} 
+            <Button style={{width:'6%'}} variant= {(this.props.currentCountry === this.props.code) ? "dark" : "light"} 
               onClick={()=>this.props.onChange(this.props.code)}>
                 {this.props.country}
             </ Button>

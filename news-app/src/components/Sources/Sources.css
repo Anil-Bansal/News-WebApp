@@ -1,0 +1,21 @@
+.headerSource {
+    padding-bottom: 14px;
+    position: fixed;
+    z-index: 4;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.loading{
+    align-items: center;
+    margin-left: 50em;
+}
+
+.contentSource {
+    padding-bottom: 2em;
+    z-index: 10;
+    width:100%;
+    align-items: center;
+    padding-top: 9em;
+    justify-content: center;
+}

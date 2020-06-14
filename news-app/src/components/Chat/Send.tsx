@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { StateTypes } from "../Redux/Reducers";
 import { TextField } from "@material-ui/core";
 import './Chat.css';
-
+import Button from 'react-bootstrap/Button'
 const INITIAL_STATE = {
     message: ''
 };
@@ -26,6 +26,7 @@ class Send extends React.Component<Props>{
         this.props.firebase.sendMessage(this.state.message,this.props.name)
         this.props.firebase.addEvent('SendMessage',{uid: this.props.uid});
         event.preventDefault();
+        this.setState({message:''})
       };
 
     onChange = (event: any) => {
@@ -45,10 +46,14 @@ class Send extends React.Component<Props>{
                     type="text"
                     placeholder="Enter Message"
                     variant="outlined"
-                    style={{marginLeft:20}}
+                    style={{}}
                 />
-                {this.props.isAnonymous? <button style={{marginBottom:20}} size='lg' variant="primary" type="submit" disabled>Send</button>:
-                <button style={{marginBottom:20}} size='lg' variant="primary" type="submit">Send</button>}
+                {this.props.isAnonymous? <Button style={{marginTop:'3px',marginLeft:'3px'}}size='lg' variant="primary" type="submit" disabled>Send</Button>:
+                <Button style={{marginTop:'3px',marginLeft:'1px'}} 
+                        size='lg' 
+                        variant="primary" 
+                        type="submit"
+                        >Send</Button>}
           </form>
         </div>
 

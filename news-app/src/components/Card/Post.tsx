@@ -124,7 +124,7 @@ class Post extends React.Component<Props>{
         return(
         <div>
             <Card bg={this.state.backgroundColor}
-                style={{width: '24rem', }}
+                style={{width: '24rem' }}
                 text={this.state.textColor}
                 className='Card'
                 >
@@ -139,7 +139,7 @@ class Post extends React.Component<Props>{
                     onMouseLeave={this.leave}
                     onClick={()=>this.setState({modalShow: true})}>
                     <Card.Title>{this.props.title}</Card.Title>
-                    <Card.Text>{this.props.description}</Card.Text>
+                    <Card.Text><p className="card-text">{this.props.description}</p></Card.Text>
                 </Card.Body>   
                 <Card.Footer>
                     <div className='row'>
@@ -148,7 +148,7 @@ class Post extends React.Component<Props>{
                                     <MdFavorite color='#C70039' size={30} onClick={()=> this.unlikePost(postData)}/> : 
                                     <MdFavoriteBorder color='#C70039' size={30} onClick={()=> this.likePost(postData)}/> }
                         </div>
-                        <div align='right' style={{marginLeft:180}}>
+                        <div align='right' style={{marginLeft:'35%'}}>
                             <Button variant='danger' onClick={()=>this.goToUrl(this.props.url)}>Go To News</Button>
                         </div>
                     </div>

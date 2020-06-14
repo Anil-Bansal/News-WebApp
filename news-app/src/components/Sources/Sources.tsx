@@ -5,6 +5,7 @@ import Head from '../Header/head'
 import ClipLoader from 'react-spinners/ClipLoader';
 import {StateTypes} from '../Redux/Reducers'
 import { NewsPost } from '../Card/Post';
+import './Sources.css'
 
 interface Cookie{
     get: Function,
@@ -72,13 +73,16 @@ class Sources extends Component<SourcesProps>{
 
     render(){
         return(
-            <div>
-                <Head cookies={this.props.cookies}/><br/>
-                <DisplaySources loading={this.state.isLoading} array={this.state.sources} />
-                <div align='center'>
-                    <ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>
-                </div>
+            <div >
+                <div className='headerSource'>
+                <Head cookies={this.props.cookies}/></div>
+                <div className='contentSource' align='center'>
 
+                    <DisplaySources loading={this.state.isLoading} array={this.state.sources} />
+                    <div className='loading'>
+                    <ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>
+                    </div>
+                </div>
             </div>
         );
     }

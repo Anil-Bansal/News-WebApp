@@ -7,22 +7,39 @@ import Main from './components/MainBody/Main'
 import {BrowserRouter,Link,Route, Switch,} from 'react-router-dom';
 import Sources from './components/Sources/Sources';
 import Info from './components/TeamPage/TeamInfo';
-import { withCookies } from 'react-cookie';
+import { withCookies} from 'react-cookie';
 import SignUpPage from './components/Auth/SignUpPage'
 import  SignInPage from './components/Auth/SignInPage';
 import Profile from './components/UserPage/Profile'
 import {withFirebase} from './components/Firebase';
+import { StateTypes } from './components/Redux/Reducers';
+import { NewsPost } from './components/Card/Post';
 
-class App extends Component{
+interface Cookie{
+  get: Function,
+  set: Function
+}
+
+interface Props{
+  setUserId: Function,
+  firebase: any,
+  cookies: Cookie,
+  setCookieLoad: Function,
+  setLoginStatus: Function,
+  setName: Function,
+  isLoggedIn: boolean,
+  setLiked: Function
+}
+class App extends Component<Props>{
 	public fetchNews: any;
-	public props: any;
+	public props: Props;
 
-  constructor(props){
+  constructor(props: Props){
     super(props);
     this.fetchNews=fetchNews.bind(this);
   }
 
-  async signInSync (uid)
+  async signInSync (uid: string)
   {
       this.props.setUserId(uid);
       var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
@@ -32,14 +49,23 @@ class App extends Component{
       this.props.setLoginStatus(true);
       var name: string=await this.props.cookies.get('Name');
       this.props.setName(name);
+      await this.props.firebase.getDataFromDatabase(uid)
+      .then((result:any)=>{
+        this.props.setLiked(result);
+      })
   }
 
   async checkPrevLogin(){
     var uid=await this.props.cookies.get('User');
+    var name=await this.props.cookies.get('Name');
     if(uid && uid!=='None'){
+      if(name==='Anonymous'){this.props.setAnonymous(true);}
       this.signInSync(uid);
+      
     }
-    if(!uid){this.props.cookies.set('User','None',{path: '/'})}
+    if(!uid){
+      this.props.cookies.set('User','None',{path: '/'})
+    }
   }
 
   componentDidMount(){
@@ -49,7 +75,7 @@ class App extends Component{
   render(){
     return(
       <BrowserRouter>
-      <div>
+      <div className='App'>
         <div className='Top'>
           <Link to="/" className='Route'>SignUp  </Link>
           <Link to="/SignIn" className='Route'>Sign In</Link>
@@ -57,7 +83,6 @@ class App extends Component{
           <Link to="/Sources" className='Route'>Sources</Link>
           <Link to="/Team" className='Route'>Team Info</Link>
           <Link to="/Profile" className='Route'>Favourites</Link>
-
         </div>
           <Switch>
             <Route exact path="/" render={() => (<SignUpPage cookies={this.props.cookies}/>)}/>
@@ -65,7 +90,7 @@ class App extends Component{
             {this.props.isLoggedIn &&(
               <div>
                 <Route exact path="/Main" render={() => (<Main cookies={this.props.cookies}/>)}/>
-                <Route exact path="/Sources" component={Sources}/>
+                <Route exact path="/Sources" render={() => (<Sources cookies={this.props.cookies}/>)}/>
                 <Route exact path="/Team" component={Info}/>
                 <Route exact path="/Profile" render={() => (<Profile content='likedOnly' cookies={this.props.cookies}/> )}/>
               </div>)
@@ -78,7 +103,7 @@ class App extends Component{
   }
 }
 
-const mapStateToProps=state=>{
+const mapStateToProps=(state: StateTypes)=>{
   return{
     isLoading: state.isLoading,
     page: state.page,
@@ -90,18 +115,20 @@ const mapStateToProps=state=>{
   };
 }
 
-const mapDispatchToProps=dispatch=>{
+const mapDispatchToProps=(dispatch: any)=>{
   return{
-    setLoading: (val)=>dispatch(actiontypes.setLoading(val)),
-    setNewsEnd: (val)=>dispatch(actiontypes.setNewsEnd(val)),
-    setArticles: (val)=>dispatch(actiontypes.setArticles(val)),
-    setErrorExist: (val)=>dispatch(actiontypes.setErrorExist(val)),
-    setCountry: (val)=>dispatch(actiontypes.setCountry(val)),
-    setPage: (val)=>dispatch(actiontypes.setPage(val)),
-    setLoginStatus: (val)=>dispatch(actiontypes.setLoginStatus(val)),
+    setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
+    setNewsEnd: (val: boolean)=>dispatch(actiontypes.setNewsEnd(val)),
+    setErrorExist: (val: boolean)=>dispatch(actiontypes.setErrorExist(val)),
+    setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
+    setPage: (val: number)=>dispatch(actiontypes.setPage(val)),
+    setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
     setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
     setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
-    setName: (val: string)=>dispatch(actiontypes.setName(val))
+    setName: (val: string)=>dispatch(actiontypes.setName(val)),
+    setLiked: (val: Array<NewsPost>) =>dispatch(actiontypes.setLiked(val)),
+    setAnonymous: (val: boolean) =>dispatch(actiontypes.setAnonymous(val))
+    
   };
 }
 

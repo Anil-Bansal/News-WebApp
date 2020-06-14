@@ -20,6 +20,11 @@ const INITIAL_STATE = {
     error: null,
   };
 
+interface Cookie{
+  set: Function,
+  get: Function
+}
+
 interface Props{
   setLoginStatus: Function,
   setUserId: Function,
@@ -28,7 +33,10 @@ interface Props{
   setName: Function,
   firebase: any,
   history: any,
-  cookies: Object
+  cookies: Cookie,
+  name: string,
+  isLoading: boolean,
+  setAnonymous: Function
 }
 
 class SignInForm extends Component<Props> {
@@ -36,7 +44,7 @@ class SignInForm extends Component<Props> {
 	public props: Props;
 	public email: string;
 	public password: string;
-	public error: any;
+	public error: string;
 
     constructor(props: Props) {
       super(props);
@@ -63,6 +71,7 @@ class SignInForm extends Component<Props> {
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
       this.props.cookies.set('Name',this.props.name);
+      this.props.setAnonymous(false);
     }
 
     async guestLogin()
@@ -72,7 +81,7 @@ class SignInForm extends Component<Props> {
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
       this.props.cookies.set('Name','Anonymous');
-
+      this.props.setAnonymous(true);
     }
 
     guestSignIn = () => {
@@ -84,6 +93,7 @@ class SignInForm extends Component<Props> {
         this.guestLogin()
         .then(()=>{
           this.props.history.push('/Main');
+          this.props.firebase.addEvent('GuestSignIn',{} );
         })
       })
       .catch((error: any) => {
@@ -101,6 +111,7 @@ class SignInForm extends Component<Props> {
         this.signInSync()
         .then(()=>{
           this.props.history.push('/Main');
+          this.props.firebase.addEvent('GoogleSignIn',{} );
         })
       })
       .catch((error: any) => {
@@ -120,6 +131,7 @@ class SignInForm extends Component<Props> {
           this.signInSync( )
           .then(()=>{
             this.props.history.push('/Main');
+            this.props.firebase.addEvent('UserSignIn',{email: email});
           })
         })
         .catch((error: any) => {
@@ -192,7 +204,7 @@ class SignInForm extends Component<Props> {
                                     
             {error && <h4>{error.message}</h4>}
           </form>
-          <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
+          <Button style={{paddingLeft:40, paddingRight:40, marginBottom:20}} size='lg' variant="warning" 
             onClick={() => this.guestSignIn()}>
               Sign In as Guest
           </Button>
@@ -212,13 +224,14 @@ class SignInForm extends Component<Props> {
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
+  const mapDispatchToProps=(dispatch: any)=>{
     return{
       setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
       setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
       setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
-      setName: (val: string)=>dispatch(actiontypes.setName(val))
+      setName: (val: string)=>dispatch(actiontypes.setName(val)),
+      setAnonymous: (val: boolean)=>dispatch(actiontypes.setAnonymous(val))
     };
   }
   

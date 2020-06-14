@@ -1,17 +1,22 @@
 .messageWindow {
-    width: 370px;
+    width: 100%;
     top: 0px;
-    height: 90%;
+    height: 100%;
     overflow-y: scroll;
     z-index: 1;
-    padding-right: 1em;
 }
 
 .sendArea {
-    width: 370px;
-    position: bottom;
-    top: 0px;
+    width:100%;
+    margin-top: 3%;
     z-index: 0;
-    padding-top: 94px;
-    padding-right: 1em;
+    padding-right: 4.7%;
+}
+
+.containerChat{
+    width: 100%;
+    justify-content: center;
+    border: 2px solid #dedede;
+    background-color: rgb(211, 102, 0);
+    color: #ffffff;
 }

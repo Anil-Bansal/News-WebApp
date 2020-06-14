@@ -15,22 +15,30 @@ import GoogleButton from 'react-google-button';
 import {StateTypes} from '../Redux/Reducers'
 
 const INITIAL_STATE = {
-    name: '',
-    email: '',
-    passwordOne: '',
-    passwordTwo: '',
-    error: null,
-  };
+  name: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  error: null,
+};
+
+interface Cookie{
+  get: Function,
+  set: Function
+}
 
 interface Props{
   setLoginStatus: Function,
   setUserId: Function,
   setCookieLoad: Function,
   setLoading: Function,
-  cookies: Object,
+  cookies: Cookie,
   history: any,
   firebase: any,
-  isLoading: boolean
+  isLoading: boolean,
+  setName: Function,
+  uid: string,
+  setAnonymous: Function
 }
 
 class SignUpForm extends Component<Props> {
@@ -62,6 +70,7 @@ class SignUpForm extends Component<Props> {
       var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
       this.props.cookies.set('testing',cookies,{path: '/'});
       this.props.setCookieLoad(true);
+      this.props.setAnonymous(false);
       this.props.cookies.set('User',uid);
     }
 
@@ -88,9 +97,10 @@ class SignUpForm extends Component<Props> {
       this.props.setUserId(uid);
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
+      this.props.setAnonymous(true);
     }
 
-      googleSignIn = () => {
+    googleSignIn = () => {
       this.props.setLoading(true)
       this.props.firebase.doGoogleSignIn()
       .then(() => {
@@ -117,6 +127,7 @@ class SignUpForm extends Component<Props> {
           this.props.firebase.addName(name);
           this.props.setName(name);
           this.setState({ ...INITIAL_STATE });
+          this.props.setAnonymous(false);
           this.props.setUserId(this.props.firebase.getUID());
           this.props.firebase.addNewUser(this.props.firebase.getUID());
           this.props.cookies.set('testing',[],{path: '/'});
@@ -233,7 +244,7 @@ class SignUpForm extends Component<Props> {
                 {error && <h5 style={{marginTop:10}}>{error.message}</h5>}
             </form>
 
-            <Button style={{paddingLeft:44, paddingRight:44, marginBottom:20}} size='lg' variant="warning" 
+            <Button style={{paddingLeft:40, paddingRight:40, marginBottom:20}} size='lg' variant="warning" 
             onClick={() => this.guestSignIn()}>
                 Sign Up as Guest
             </Button>
@@ -254,13 +265,14 @@ class SignUpForm extends Component<Props> {
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
+  const mapDispatchToProps=(dispatch: any)=>{
     return{
       setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
       setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
       setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
       setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
-      setName: (val: string)=>dispatch(actiontypes.setName(val))
+      setName: (val: string)=>dispatch(actiontypes.setName(val)),
+      setAnonymous: (val: boolean)=>dispatch(actiontypes.setAnonymous(val))
     };
   }
   

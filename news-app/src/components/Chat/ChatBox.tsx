@@ -3,20 +3,23 @@ import { withFirebase } from '../Firebase'
 import Receive from './Receive'
 import Send from './Send'
 import './Chat.css'
-import SplitPane from 'react-split-pane'
+import Splitter from 'm-react-splitters'
+import 'm-react-splitters/lib/splitters.css';
 
 class ChatBox extends React.Component{
-
     render(){
         return(
-            <SplitPane split="horizontal" default={300}>
+            <Splitter position="horizontal"
+            primaryPaneMaxHeight='86%'
+            primaryPaneHeight="86%"
+            postPoned={true} >
                 <div className='messageWindow'>
                     <Receive/>     
                 </div>
                 <div className='sendArea'>
                     <Send/>
                 </div>
-            </SplitPane>
+            </Splitter>
         )
     }
 

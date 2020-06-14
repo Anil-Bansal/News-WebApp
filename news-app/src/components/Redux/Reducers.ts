@@ -1,6 +1,7 @@
 import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,
-        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES,SET_TOAST,SET_NAME } from './Actions'
+        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES,SET_TOAST,SET_NAME,SET_ANONYMOUS } from './Actions'
 import {NewsPost} from '../Card/Post'
+import {PostData} from '../Card/Post';
 
 export interface StateTypes{
     isLoading?: Boolean
@@ -14,6 +15,10 @@ export interface StateTypes{
     uid?: string
     cookieLoaded?: Boolean
     name?:string
+    messages?: Array<Object>
+    lastLiked?: PostData
+    showToast?: Boolean
+    isAnonymous?: Boolean
 }
 
 export interface DispatchTypes{
@@ -42,9 +47,10 @@ const initialState: StateTypes ={
     uid: "",
     cookieLoaded: false,
     messages: [],
-    lastLiked: '',
+    lastLiked: null,
     showToast: false,
-    name: ''
+    name: '',
+    isAnonymous: false
 }
 
 function newsApp(state: StateTypes = initialState, action: any) {
@@ -104,6 +110,10 @@ function newsApp(state: StateTypes = initialState, action: any) {
         case SET_NAME:
             return Object.assign({},state,{
                 name: action.val
+            })
+        case SET_ANONYMOUS:
+            return Object.assign({},state,{
+                isAnonymous: action.val
             })
         default:
           return state

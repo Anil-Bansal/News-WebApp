@@ -3,6 +3,7 @@ import SignInForm from './SignInForm'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { StateTypes } from '../Redux/Reducers';
+import './Auth.css'
 
 interface Props{
     cookies: Object
@@ -16,7 +17,7 @@ class SignInPage extends React.Component<Props>{
 
     render(){
         return(
-            <div>
+            <div className='Auth'>
                 <SignInForm cookies={this.props.cookies}/>
                 <h5 align='center' style={{marginTop:30}}>
                     Dont have an account? <Link to='/'>Sign Up</Link>

@@ -32,10 +32,10 @@ export function fetchNewsSearch(this: any,search: string){
     })
 }
 
- export function fetchLiked(this:any){
-        this.props.firebase.getDataFromDatabase(this.props.uid)
-        .then((response:Object)=>this.props.setLiked(response))
-        .catch((error: String)=>{
-          console.log(error);
-        })
-      }
+export function fetchLiked(this:any){
+    this.props.firebase.getDataFromDatabase(this.props.uid)
+    .then((response:Object)=>this.props.setLiked(response))
+    .catch((error: String)=>{
+      console.log(error);
+    })
+}

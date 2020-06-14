@@ -1,3 +1,5 @@
+import {NewsPost} from '../Card/Post';
+
 export const CHANGE_COUNTRY = 'CHANGE_COUNTRY'
 export const CUR_PAGE = 'CUR_PAGE'
 export const SET_ARTICLES = 'SET_ARTICLES'
@@ -13,6 +15,7 @@ export const SET_MESSAGES='SET_MESSAGES'
 export const SET_LAST_LIKED='SET_LAST_LIKED'
 export const SET_TOAST='SET_TOAST'
 export const SET_NAME='SET_NAME'
+export const SET_ANONYMOUS='SET_ANONYMOUS'
 
 
 export function setCountry(newCode:string) {
@@ -69,4 +72,8 @@ export function setToast(status: Boolean) {
 
 export function setName(status: string) {
   return { type: SET_NAME, val: status }
+}
+
+export function setAnonymous(status: Boolean){
+  return {type: SET_ANONYMOUS, val: status}
 }

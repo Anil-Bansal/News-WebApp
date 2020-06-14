@@ -7,6 +7,12 @@ import {connect} from 'react-redux';
 import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
 import SignOutButton from '../Auth/Signout';
 import { StateTypes } from '../Redux/Reducers';
+import { withFirebase } from '../Firebase';
+
+interface Cookie{
+  get: Function,
+  set: Function
+}
 
 interface Props{
   setLoading: Function,
@@ -15,7 +21,12 @@ interface Props{
   setPage: Function,
   setNewsEnd: Function,
   setErrorExist: Function,
-  page: number
+  page: number,
+  cookies: Cookie
+}
+
+interface OwnProps{
+  cookies: Cookie
 }
 
 class Head extends React.Component<Props>{
@@ -42,6 +53,7 @@ class Head extends React.Component<Props>{
       await this.props.setNewsEnd(false);
       await this.props.setErrorExist(false);
       this.fetchNewsSearch(search,this.props.page);
+      this.props.firebase.addEvent('changeCountry',{searchString: search} );
     }
 
 
@@ -60,6 +72,7 @@ class Head extends React.Component<Props>{
       await this.props.setPage(1);
       await this.props.setNewsEnd(false);
       await this.props.setErrorExist(false);
+      this.props.firebase.addEvent('changeCountry',{newCode: code} );
       this.fetchNews();
     }
 
@@ -115,7 +128,7 @@ class Head extends React.Component<Props>{
     }
 }
 
-const mapStateToProps=(state: StateTypes,ownprops)=>{
+const mapStateToProps=(state: StateTypes,ownprops: OwnProps)=>{
     return{
       isLoading: state.isLoading,
       country: state.country ,
@@ -126,7 +139,7 @@ const mapStateToProps=(state: StateTypes,ownprops)=>{
     };
   }
   
-  const mapDispatchToProps=dispatch=>{
+  const mapDispatchToProps=(dispatch: any)=>{
     return{
       setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
       setNewsEnd: (val: boolean)=>dispatch(actiontypes.setNewsEnd(val)),
@@ -137,4 +150,4 @@ const mapStateToProps=(state: StateTypes,ownprops)=>{
     };
   }
   
-  export default connect(mapStateToProps,mapDispatchToProps)(Head);
+  export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Head));

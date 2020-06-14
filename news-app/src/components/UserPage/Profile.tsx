@@ -6,17 +6,38 @@ import { withCookies } from 'react-cookie';
 import * as actiontypes from '../Redux/Actions';
 import Toast from 'react-bootstrap/Toast'
 import Button from 'react-bootstrap/Button'
+import {NewsPost} from '../Card/Post';
+import {StateTypes} from '../Redux/Reducers';
+import './Profile.css'
 
-interface ProfileProps{
-    cookies: Object
+interface Cookie{
+    get: Function,
+    set: Function
 }
 
-class Profile extends React.Component<ProfileProps>{
+interface Props{
+    setToast: Function,
+    cookies: Cookie,
+    setLiked: Function,
+    liked: Array<NewsPost>,
+    lastLiked: NewsPost,
+    firebase: any,
+    uid: string,
+    showToast: boolean,
+    name: string
+}
+
+class Profile extends React.Component<Props>{
 
     constructor(props: Props) {
         super(props);
         this.undoUnlike=this.undoUnlike.bind(this)
       }
+
+
+    componentDidMount(){
+        window.scrollTo(0, 0);
+    }
   
     undoUnlike () {
         var likedPosts: Array<string> = (this.props.cookies).get('testing');
@@ -31,35 +52,37 @@ class Profile extends React.Component<ProfileProps>{
 
     render(){
         return(
-            <div align='center'>                
-                <Toast show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
+            <div align='center' className='profileBody'>                
+                <Toast className='toastUndo' show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
                     <Toast.Header align='center'>
                         <h5>Undo Last UnLike???</h5>
                         <Button variant='danger' size='sm' style={{marginLeft:20,marginRight:20}} 
                                 onClick={() => this.undoUnlike()}>Undo</Button>
                     </Toast.Header>
                 </Toast>
+                <h3 className='showName'>Hello {this.props.name}</h3>
                 <Display show='likedOnly' cookies={this.props.cookies}/>
             </div>
         )
     }
 }
 
-const mapStateToProps=(state,ownProps)=>{
+const mapStateToProps=(state: StateTypes,ownProps: any)=>{
     return{
       lastLiked: state.lastLiked,
       liked: state.liked,
       uid: state.uid,
       cookie: ownProps.cookie,
-      showToast: state.showToast
+      showToast: state.showToast,
+      name: state.name
     };
   }
 
-const mapDispatchToProps=dispatch=>{
+const mapDispatchToProps=(dispatch: any)=>{
     return{
-        setLiked: (val)=>dispatch(actiontypes.setLiked(val)),
-        setLastLiked: (val)=>dispatch(actiontypes.setLastLiked(val)),
-        setToast: (val)=>dispatch(actiontypes.setToast(val)),
+        setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val)),
+        setLastLiked: (val: NewsPost)=>dispatch(actiontypes.setLastLiked(val)),
+        setToast: (val: boolean)=>dispatch(actiontypes.setToast(val)),
     };
 }
   

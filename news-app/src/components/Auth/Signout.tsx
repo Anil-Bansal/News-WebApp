@@ -6,13 +6,18 @@ import {connect} from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
 import { StateTypes } from '../Redux/Reducers';
 
+interface Cookie{
+  get: Function,
+  set: Function
+}
 
 interface Props{
   setLoginStatus: Function,
   setUserId: Function,
   setCookieLoad: Function,
   history: any,
-  firebase: any
+  firebase: any,
+  cookies: Cookie
 }
 
 class SignOutButton extends React.Component<Props>{
@@ -49,7 +54,7 @@ const mapStateToProps=(state: StateTypes)=>{
   };
 }
 
-const mapDispatchToProps=dispatch=>{
+const mapDispatchToProps=(dispatch: any)=>{
   return{
     setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
     setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),

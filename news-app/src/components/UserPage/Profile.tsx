@@ -23,7 +23,8 @@ interface Props{
     lastLiked: NewsPost,
     firebase: any,
     uid: string,
-    showToast: boolean
+    showToast: boolean,
+    name: string
 }
 
 class Profile extends React.Component<Props>{
@@ -59,6 +60,7 @@ class Profile extends React.Component<Props>{
                                 onClick={() => this.undoUnlike()}>Undo</Button>
                     </Toast.Header>
                 </Toast>
+                <h4 className='showName'>Hello {this.props.name}</h4>
                 <Display show='likedOnly' cookies={this.props.cookies}/>
             </div>
         )
@@ -71,7 +73,8 @@ const mapStateToProps=(state: StateTypes,ownProps: any)=>{
       liked: state.liked,
       uid: state.uid,
       cookie: ownProps.cookie,
-      showToast: state.showToast
+      showToast: state.showToast,
+      name: state.name
     };
   }
 

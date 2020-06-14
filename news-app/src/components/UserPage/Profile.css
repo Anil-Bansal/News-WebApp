@@ -1,6 +1,5 @@
 .toastUndo {
-    margin-left:35em;
-    padding-top: 2em;
+    padding-top: 1.5em;
 }
 
 .showName{
@@ -10,7 +9,6 @@
 .profileBody {
     margin-left: 10%;
     /* padding-right: 10em; */
-
     align-items: center;
     justify-content: center;
 }

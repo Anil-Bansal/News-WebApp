@@ -4,7 +4,6 @@
     height: 100%;
     overflow-y: scroll;
     z-index: 1;
-    
 }
 
 .sendArea {
@@ -18,5 +17,6 @@
     width: 100%;
     justify-content: center;
     border: 2px solid #dedede;
-    background-color: #f1f1f1;
+    background-color: rgb(211, 102, 0);
+    color: #ffffff;
 }

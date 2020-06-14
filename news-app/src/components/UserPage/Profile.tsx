@@ -60,7 +60,7 @@ class Profile extends React.Component<Props>{
                                 onClick={() => this.undoUnlike()}>Undo</Button>
                     </Toast.Header>
                 </Toast>
-                <h4 className='showName'>Hello {this.props.name}</h4>
+                <h3 className='showName'>Hello {this.props.name}</h3>
                 <Display show='likedOnly' cookies={this.props.cookies}/>
             </div>
         )

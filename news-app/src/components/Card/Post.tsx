@@ -143,7 +143,9 @@ class Post extends React.Component<Props>{
                         this.props.firebase.addEvent('viewModal',{url: this.props.url});
                         this.setState({modalShow: true})}} >
                     <Card.Title>{this.props.title}</Card.Title>
-                    <Card.Text><p className="card-text">{this.props.description.slice(0,125)}</p></Card.Text>
+                    <Card.Text><p className="card-text">
+                                    {this.props.description ? this.props.description.slice(0,125) : ""}
+                                </p></Card.Text>
                 </Card.Body>   
                 <Card.Footer>
                     <div className='row'>

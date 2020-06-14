@@ -57,8 +57,11 @@ class App extends Component<Props>{
 
   async checkPrevLogin(){
     var uid=await this.props.cookies.get('User');
+    var name=await this.props.cookies.get('Name');
     if(uid && uid!=='None'){
+      if(name==='Anonymous'){this.props.setAnonymous(true);}
       this.signInSync(uid);
+      
     }
     if(!uid){
       this.props.cookies.set('User','None',{path: '/'})
@@ -123,7 +126,9 @@ const mapDispatchToProps=(dispatch: any)=>{
     setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
     setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
     setName: (val: string)=>dispatch(actiontypes.setName(val)),
-    setLiked: (val: Array<NewsPost>) =>dispatch(actiontypes.setLiked(val))
+    setLiked: (val: Array<NewsPost>) =>dispatch(actiontypes.setLiked(val)),
+    setAnonymous: (val: boolean) =>dispatch(actiontypes.setAnonymous(val))
+    
   };
 }
 

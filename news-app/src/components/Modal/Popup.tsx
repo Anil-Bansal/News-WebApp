@@ -27,7 +27,6 @@ class Popup extends React.Component<PopupProps>{
     }
 
     render(){
-        this.props.firebase.addEvent('viewModal',{url: this.props.cardData.url});
         return(
             <Modal
                 {...this.props}

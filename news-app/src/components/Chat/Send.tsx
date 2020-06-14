@@ -44,12 +44,17 @@ class Send extends React.Component<Props>{
                     value={message}
                     onChange={this.onChange}
                     type="text"
-                    placeholder="Enter Message"
+                    placeholder={this.props.isAnonymous? "Guest users can't chat": "Enter Message"}
                     variant="outlined"
-                    style={{}}
+                    disabled={this.props.isAnonymous}
                 />
-                {this.props.isAnonymous? <Button style={{marginTop:'3px',marginLeft:'3px'}}size='lg' variant="primary" type="submit" disabled>Send</Button>:
-                <Button style={{marginTop:'3px',marginLeft:'1px'}} 
+                {this.props.isAnonymous? 
+                  <Button 
+                        style={{marginTop:'3px',marginLeft:'3px'}}
+                        size='lg' 
+                        variant="primary" 
+                        type="submit" disabled>Send</Button>:
+                  <Button style={{marginTop:'3px',marginLeft:'1px'}} 
                         size='lg' 
                         variant="primary" 
                         type="submit"

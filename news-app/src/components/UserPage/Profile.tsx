@@ -31,6 +31,11 @@ class Profile extends React.Component<Props>{
         super(props);
         this.undoUnlike=this.undoUnlike.bind(this)
       }
+
+
+    componentDidMount(){
+        window.scrollTo(0, 0);
+    }
   
     undoUnlike () {
         var likedPosts: Array<string> = (this.props.cookies).get('testing');

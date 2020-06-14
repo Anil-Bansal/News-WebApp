@@ -35,6 +35,7 @@ class Profile extends React.Component<Props>{
     undoUnlike () {
         var likedPosts: Array<string> = (this.props.cookies).get('testing');
         this.props.setToast(false);
+        // eslint-disable-next-line
         {this.props.setLiked([...this.props.liked,this.props.lastLiked])}
         (this.props.cookies).set('testing',[...likedPosts,this.props.lastLiked.url],{path: '/'})
         this.props.firebase.addCookieToDatabase(this.props.uid,[...likedPosts,this.props.lastLiked.url],[...this.props.liked,this.props.lastLiked])

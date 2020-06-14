@@ -9,6 +9,11 @@
 
 }
 
+.loader {
+    margin-left:40em;
+    padding-top:7em;
+}
+
 .content {
     position: relative;
     padding-right: 1.3%;

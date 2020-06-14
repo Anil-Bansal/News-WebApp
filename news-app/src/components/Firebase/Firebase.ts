@@ -112,7 +112,6 @@ class Firebase {
     }
 
     addEvent(event: string,parameter?: Object){
-      console.log(event);
       this.firebaseAnalytics.logEvent(event,parameter);
     }
 

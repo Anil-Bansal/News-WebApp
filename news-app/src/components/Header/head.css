@@ -1,9 +1,9 @@
 .Head {
   width: 130%;
   display: inline-flex ;
-  margin-top: 1.1%;
+  margin-top: 1.2em;
   margin-bottom: 0em;
-  padding-left: 5%;
+  padding-left: 4%;
   padding-top: 0.4%;
   background-color: rgb(17, 120, 180);
   color: #fff;
@@ -26,6 +26,6 @@ padding-top: 0.4%;
 justify-content: right;
 margin-left: 32%;
 /* padding-left: 5em; */
-padding-right: 0.8%;
+
 
 }

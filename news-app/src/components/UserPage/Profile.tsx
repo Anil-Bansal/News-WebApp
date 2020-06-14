@@ -8,6 +8,7 @@ import Toast from 'react-bootstrap/Toast'
 import Button from 'react-bootstrap/Button'
 import {NewsPost} from '../Card/Post';
 import {StateTypes} from '../Redux/Reducers';
+import './Profile.css'
 
 interface Cookie{
     get: Function,
@@ -50,14 +51,14 @@ class Profile extends React.Component<Props>{
 
     render(){
         return(
-            <div align='center'>                
-                <Toast style={{paddingTop:'3em'}} show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
+            <div align='center' className='profileBody'>                
+                <Toast className='toastUndo' show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
                     <Toast.Header align='center'>
                         <h5>Undo Last UnLike???</h5>
                         <Button variant='danger' size='sm' style={{marginLeft:20,marginRight:20}} 
                                 onClick={() => this.undoUnlike()}>Undo</Button>
                     </Toast.Header>
-                </Toast><br/>
+                </Toast>
                 <Display show='likedOnly' cookies={this.props.cookies}/>
             </div>
         )

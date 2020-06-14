@@ -10,7 +10,7 @@ const Info = (props) => {
     return (
         
         <div align='center'>
-            <div align='center' className="container">
+            <div className="containerInfo">
                 <h1 style={{marginTop: 10}}>Alone We Can Do So Little, Together We Can Do So Much.</h1>
                 <div  className='row'  >        
                     <Person  name='Anil Bansal' imageSrc = {Anil} title='SDE Intern'/>

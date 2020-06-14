@@ -1,8 +1,6 @@
 .Head {
-  box-sizing: border-box;
   width: 100%;
   display: flex;
-  justify-content: Center;
   margin-top: 1.7em;
   margin-bottom: 0em;
   padding-left: 3em;
@@ -24,7 +22,7 @@ box-sizing: border-box;
 display: flex;
 padding-top: 0.5em;
 justify-content: right;
-margin-left: 33%;
+margin-left: 25%;
 padding-left: 5em;
 padding-right: 1em;
 

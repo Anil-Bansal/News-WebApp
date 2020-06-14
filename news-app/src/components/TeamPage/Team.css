@@ -5,3 +5,11 @@
     margin-top: 2em;
 }
 
+.container{
+    justify-content: center;
+    margin-left:8em;
+    margin-right:8em;
+
+    margin-top:5em;
+
+}

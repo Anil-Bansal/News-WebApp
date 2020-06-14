@@ -32,7 +32,7 @@ class Profile extends React.Component<ProfileProps>{
     render(){
         return(
             <div align='center'>                
-                <Toast show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
+                <Toast style={{paddingTop:'3em'}} show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
                     <Toast.Header align='center'>
                         <h5>Undo Last UnLike???</h5>
                         <Button variant='danger' size='sm' style={{marginLeft:20,marginRight:20}} 

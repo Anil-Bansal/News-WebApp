@@ -12,7 +12,6 @@ import {StateTypes,DispatchTypes} from '../Redux/Reducers'
 import { NewsPost } from '../Card/Post';
 import ChatBox from '../Chat/ChatBox';
 import Splitter from 'm-react-splitters'
-import 'm-react-splitters/lib/splitters.css';
 import './Main.css'
 
 interface MainProps extends DispatchTypes,StateTypes{
@@ -46,7 +45,9 @@ class Main extends React.Component<MainProps>{
           return(
             <div>
               <Display show='all' cookies={this.props.cookies}/> 
-              <Loader />
+              <div align='center' style={{marginLeft:'35em',paddingTop:'2em'}}>
+                <Loader />
+              </div>
             </div>
           );
         }
@@ -58,7 +59,7 @@ class Main extends React.Component<MainProps>{
                     {!this.props.newsEnd ? 
                         <BottomScrollListener debounce={3000} offset={10} onBottom={this.fetchNews}/>:<div/>}
                     <div className='header'>
-                    <Head  cookies={this.props.cookies}/></div>                  
+                      <Head  cookies={this.props.cookies}/></div>                  
                     <div className='body'>
                       <Splitter position="vertical"
                           primaryPaneMaxWidth='30%'

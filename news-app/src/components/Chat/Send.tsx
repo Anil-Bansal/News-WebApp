@@ -48,7 +48,7 @@ class Send extends React.Component<Props>{
                     style={{marginLeft:20}}
                 />
                 {this.props.isAnonymous? <Button style={{marginTop:'3px',marginLeft:'3px'}}size='lg' variant="primary" type="submit" disabled>Send</Button>:
-                <Button style={{marginTop:'3px',marginLeft:'3px'}} size='lg' variant="primary" type="submit">Send</Button>}
+                <Button style={{marginTop:'3px',marginLeft:'1px'}} size='lg' variant="primary" type="submit">Send</Button>}
           </form>
         </div>
 

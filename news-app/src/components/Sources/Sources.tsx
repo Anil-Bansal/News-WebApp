@@ -6,7 +6,6 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import {StateTypes} from '../Redux/Reducers'
 import { NewsPost } from '../Card/Post';
 import './Sources.css'
-import {Container,Row} from 'react-bootstrap'
 
 interface Cookie{
     get: Function,

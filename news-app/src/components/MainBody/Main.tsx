@@ -62,8 +62,8 @@ class Main extends React.Component<MainProps>{
                       <Head  cookies={this.props.cookies}/></div>                  
                     <div className='body'>
                       <Splitter position="vertical"
-                          primaryPaneMaxWidth='27%'
-                          primaryPaneWidth="27%"
+                          primaryPaneMaxWidth='24%'
+                          primaryPaneWidth="24%"
                           postPoned={true} >
                         <div className='navigator'>
                           <ChatBox/>

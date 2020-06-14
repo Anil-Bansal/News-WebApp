@@ -26,6 +26,7 @@ class Send extends React.Component<Props>{
         this.props.firebase.sendMessage(this.state.message,this.props.name)
         this.props.firebase.addEvent('SendMessage',{uid: this.props.uid});
         event.preventDefault();
+        this.setState({message:''})
       };
 
     onChange = (event: any) => {
@@ -48,7 +49,11 @@ class Send extends React.Component<Props>{
                     style={{}}
                 />
                 {this.props.isAnonymous? <Button style={{marginTop:'3px',marginLeft:'3px'}}size='lg' variant="primary" type="submit" disabled>Send</Button>:
-                <Button style={{marginTop:'3px',marginLeft:'1px'}} size='lg' variant="primary" type="submit">Send</Button>}
+                <Button style={{marginTop:'3px',marginLeft:'1px'}} 
+                        size='lg' 
+                        variant="primary" 
+                        type="submit"
+                        >Send</Button>}
           </form>
         </div>
 

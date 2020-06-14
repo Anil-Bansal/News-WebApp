@@ -31,9 +31,10 @@ class Display extends React.Component<DisplayProps>{
         })
         if(this.props.isLoading || array===undefined)
             return <div></div>;
+        
         else{
             return(     
-                <div className='row' style={{marginTop:'1em'}} align='center'>
+                <div className='row' style={{marginTop:'1em', justifyContent: 'center'}} align='center'>
                     {content}
                 </div>
             )

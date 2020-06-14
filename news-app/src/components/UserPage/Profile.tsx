@@ -6,12 +6,26 @@ import { withCookies } from 'react-cookie';
 import * as actiontypes from '../Redux/Actions';
 import Toast from 'react-bootstrap/Toast'
 import Button from 'react-bootstrap/Button'
+import {NewsPost} from '../Card/Post';
+import {StateTypes} from '../Redux/Reducers';
 
-interface ProfileProps{
-    cookies: Object
+interface Cookie{
+    get: Function,
+    set: Function
 }
 
-class Profile extends React.Component<ProfileProps>{
+interface Props{
+    setToast: Function,
+    cookies: Cookie,
+    setLiked: Function,
+    liked: Array<NewsPost>,
+    lastLiked: NewsPost,
+    firebase: any,
+    uid: string,
+    showToast: boolean
+}
+
+class Profile extends React.Component<Props>{
 
     constructor(props: Props) {
         super(props);
@@ -21,7 +35,6 @@ class Profile extends React.Component<ProfileProps>{
     undoUnlike () {
         var likedPosts: Array<string> = (this.props.cookies).get('testing');
         this.props.setToast(false);
-        // eslint-disable-next-line
         {this.props.setLiked([...this.props.liked,this.props.lastLiked])}
         (this.props.cookies).set('testing',[...likedPosts,this.props.lastLiked.url],{path: '/'})
         this.props.firebase.addCookieToDatabase(this.props.uid,[...likedPosts,this.props.lastLiked.url],[...this.props.liked,this.props.lastLiked])
@@ -45,7 +58,7 @@ class Profile extends React.Component<ProfileProps>{
     }
 }
 
-const mapStateToProps=(state,ownProps)=>{
+const mapStateToProps=(state: StateTypes,ownProps: any)=>{
     return{
       lastLiked: state.lastLiked,
       liked: state.liked,
@@ -55,11 +68,11 @@ const mapStateToProps=(state,ownProps)=>{
     };
   }
 
-const mapDispatchToProps=dispatch=>{
+const mapDispatchToProps=(dispatch: any)=>{
     return{
-        setLiked: (val)=>dispatch(actiontypes.setLiked(val)),
-        setLastLiked: (val)=>dispatch(actiontypes.setLastLiked(val)),
-        setToast: (val)=>dispatch(actiontypes.setToast(val)),
+        setLiked: (val: Array<NewsPost>)=>dispatch(actiontypes.setLiked(val)),
+        setLastLiked: (val: NewsPost)=>dispatch(actiontypes.setLastLiked(val)),
+        setToast: (val: boolean)=>dispatch(actiontypes.setToast(val)),
     };
 }
   

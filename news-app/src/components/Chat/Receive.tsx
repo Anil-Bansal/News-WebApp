@@ -38,7 +38,7 @@ class Receive extends React.Component<Props>{
 	}
 
 	getMessages=()=>{
-		var ref=this.props.firebase.realDatabase.ref().child('messages').limitToLast(20);
+		var ref=this.props.firebase.realDatabase.ref().child('messages').limitToLast(30);
 		ref.on('value',(snapshot: any)=>{
 			let newmessages: Array<Object>=[]
 			snapshot.forEach((child: any)=>{

@@ -3,13 +3,12 @@
 }
 
 .showName{
-    padding-top: 2.4%;
+    margin-top:1.5em;
     margin-left: 20%;
 }
 
 .profileBody {
     margin-left: 6%;
-    /* padding-right: 10em; */
     align-items: center;
     justify-content: center;
 }

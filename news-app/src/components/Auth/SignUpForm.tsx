@@ -178,7 +178,8 @@ class SignUpForm extends Component<Props> {
       	const isInvalid = 
 			passwordOne !== passwordTwo || 
 			passwordOne === '' || 
-			email === '';
+			email === ''||
+			name === '';
   
         return (
 			<Container component="main" maxWidth="xs" style={{marginTop:50}}>

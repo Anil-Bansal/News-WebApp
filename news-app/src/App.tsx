@@ -43,12 +43,16 @@ class App extends Component<Props>{
 	async signInSync (uid: string)
 	{
 		this.props.setUserId(uid);
+		var name: string=await this.props.cookies.get('Name');
+		if(name && name!==null && name!=='undefined' && name!=='' ){
+			this.props.setLoginStatus(true)}
 		var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
+		
 		this.props.cookies.set('testing',cookies,{path: '/'});
 		this.props.setCookieLoad(true);
 		this.props.cookies.set('User',uid);
-		this.props.setLoginStatus(true);
-		var name: string=await this.props.cookies.get('Name');
+		if(name && name!==null && name!=='undefined' && name!=='' ){
+			this.props.setLoginStatus(true)}
 		this.props.setName(name);
 		await this.props.firebase.getDataFromDatabase(uid)
 			.then((result:any)=>{
@@ -60,7 +64,8 @@ class App extends Component<Props>{
 		var uid=await this.props.cookies.get('User');
 		var name=await this.props.cookies.get('Name');
 		if(uid && uid!=='None'){
-			if(name==='Anonymous') {this.props.setAnonymous(true);}
+			if(name==='Anonymous'){
+				this.props.setAnonymous(true);}
 			this.signInSync(uid);
 		}
 		if(!uid){

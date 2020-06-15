@@ -55,8 +55,9 @@ class Firebase {
     async getUserName(setName: Function){
       const user= await this.auth.currentUser;
       user.providerData.forEach(function (profile: any) {
+        console.log(profile.displayName);
         setName(profile.displayName)
-        });
+      });
     }
 
     getUID = () =>{

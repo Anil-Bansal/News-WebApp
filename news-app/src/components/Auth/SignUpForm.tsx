@@ -38,7 +38,8 @@ interface Props{
   isLoading: boolean,
   setName: Function,
   uid: string,
-  setAnonymous: Function
+  setAnonymous: Function,
+  name: string
 }
 
 class SignUpForm extends Component<Props> {
@@ -65,13 +66,15 @@ class SignUpForm extends Component<Props> {
 
     async signInSync ()
     {
-      var uid: string = await this.props.firebase.getUID()
+      var uid: string = await this.props.firebase.getUID();
+      await this.props.firebase.getUserName(this.props.setName);
       this.props.setUserId(uid);
       var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
       this.props.cookies.set('testing',cookies,{path: '/'});
       this.props.setCookieLoad(true);
       this.props.setAnonymous(false);
       this.props.cookies.set('User',uid);
+      this.props.cookies.set('Name',this.props.name);
     }
 
     guestSignIn = () => {
@@ -98,6 +101,8 @@ class SignUpForm extends Component<Props> {
       this.props.setCookieLoad(true);
       this.props.cookies.set('User',uid);
       this.props.setAnonymous(true);
+      this.props.setName('Anonymous');
+      this.props.cookies.set('Name','Anonymous');
     }
 
     googleSignIn = () => {

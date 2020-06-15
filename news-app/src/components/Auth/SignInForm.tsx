@@ -72,6 +72,7 @@ class SignInForm extends Component<Props> {
       this.props.cookies.set('User',uid);
       this.props.cookies.set('Name',this.props.name);
       this.props.setAnonymous(false);
+      console.log(this.props.name);
     }
 
     async guestLogin()

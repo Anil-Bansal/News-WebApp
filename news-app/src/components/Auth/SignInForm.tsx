@@ -65,6 +65,7 @@ class SignInForm extends Component<Props> {
 		await this.props.firebase.getUserName(this.props.setName);
 		this.props.setUserId(uid);
 		var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
+		console.log(this.props.cookies.get('testing'))
 		this.props.cookies.set('testing',cookies,{path: '/'});
 		this.props.setCookieLoad(true);
 		this.props.cookies.set('User',uid);
@@ -218,7 +219,6 @@ class SignInForm extends Component<Props> {
 			</Container>
 		);
     }
-  }
 }
 
 const mapStateToProps=(state: StateTypes)=>{

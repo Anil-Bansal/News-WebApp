@@ -1,7 +1,6 @@
 import React from 'react';
 import SignInForm from './SignInForm'
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
 import './Auth.css'
 
 interface Props {
@@ -25,11 +24,5 @@ class SignInPage extends React.Component<Props> {
         )
     }
 }
-
-const mapStateToProps=(ownProps: OwnProps)=>{
-    return{
-        cookies: ownProps.cookies,
-    };
-}
   
-export default connect(mapStateToProps)(SignInPage);
+export default (SignInPage);

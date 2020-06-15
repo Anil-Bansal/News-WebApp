@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {withFirebase} from '../Firebase';
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { withFirebase } from '../Firebase';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import * as actiontypes from '../Redux/Actions';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
 import BeatLoader from 'react-spinners/BeatLoader';
-import {StateTypes} from '../Redux/Reducers';
+import { StateTypes } from '../Redux/Reducers';
 
 const INITIAL_STATE = {
 	email: '',
@@ -79,6 +79,7 @@ class SignInForm extends Component<Props> {
 		this.props.cookies.set('User',uid);
 		this.props.cookies.set('Name','Anonymous');
 		this.props.setAnonymous(true);
+		this.props.setName('Anonymous');
     }
 
     guestSignIn = () => {
@@ -162,7 +163,9 @@ class SignInForm extends Component<Props> {
 					<Avatar >
 						<LockOutlinedIcon />
 					</Avatar>
-					<Typography component="h1" variant="h4" style={{marginBottom:20}}>
+					<Typography component="h1" 
+							variant="h4" 
+							style={{marginBottom:20}}>
 						Sign In
 					</Typography>
 					<BeatLoader color={"#123abc"} size={20} loading={this.props.isLoading} />
@@ -216,25 +219,26 @@ class SignInForm extends Component<Props> {
 		);
     }
   }
+}
 
-  const mapStateToProps=(state: StateTypes)=>{
-    return{
+const mapStateToProps=(state: StateTypes)=>{
+	return{
 		isLoggedIn: state.isLoggedIn,
 		uid: state.uid,
 		isLoading: state.isLoading,
 		name: state.name
-    };
-  }
-  
-  const mapDispatchToProps=(dispatch: any)=>{
-    return{
+	};
+}
+
+const mapDispatchToProps=(dispatch: any)=>{
+	return{
 		setLoginStatus: (val: boolean)=>dispatch(actiontypes.setLoginStatus(val)),
 		setUserId: (val: string)=>dispatch(actiontypes.setUserId(val)),
 		setCookieLoad: (val: boolean)=>dispatch(actiontypes.setCookieLoad(val)),
 		setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
 		setName: (val: string)=>dispatch(actiontypes.setName(val)),
 		setAnonymous: (val: boolean)=>dispatch(actiontypes.setAnonymous(val))
-    };
-  }
+	};
+}
   
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(withFirebase(SignInForm)))

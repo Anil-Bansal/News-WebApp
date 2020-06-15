@@ -63,6 +63,7 @@ class Post extends React.Component<Props>{
           backgroundColor: "light",
           textColor: 'dark',
           modalShow: false,
+          code: 0,
           isLiked: ((this.props.cookies).get('testing')).includes(this.props.url) || this.props.show==='likedOnly',
         };
         this.enter=this.enter.bind(this);
@@ -114,6 +115,21 @@ class Post extends React.Component<Props>{
         this.props.firebase.addEvent('unlikePost',{url: urlCurrent} );
     }
 
+    renderModal(){
+        switch(this.state.code){
+            case 1:
+            {
+                return (
+                    <Popup show={this.state.modalShow} 
+                        onHide={()=> this.setState({modalShow: false})}
+                        cardData={this.props}/>
+                )
+            }
+            default:
+                return <div />
+        }
+    }
+
     render(){
         var postData= {
             title: this.props.title,
@@ -135,13 +151,15 @@ class Post extends React.Component<Props>{
                     src={this.props.imageurl}
                     onClick={()=>{
                         this.props.firebase.addEvent('viewModal',{url: this.props.url});
-                        this.setState({modalShow: true})}} />
+                        this.setState({modalShow: true});
+                        this.setState({code: 1})}} />
                 <Card.Body 
                     onMouseEnter={this.enter}
                     onMouseLeave={this.leave}
                     onClick={()=>{
                         this.props.firebase.addEvent('viewModal',{url: this.props.url});
-                        this.setState({modalShow: true})}} >
+                        this.setState({modalShow: true});
+                        this.setState({code: 1})}} >
                     <Card.Title>{this.props.title}</Card.Title>
                     <Card.Text><p className="card-text">
                                     {this.props.description ? this.props.description.slice(0,125) : ""}
@@ -161,9 +179,7 @@ class Post extends React.Component<Props>{
                 </Card.Footer> 
 
             </Card>
-            <Popup show={this.state.modalShow} 
-                    onHide={()=> this.setState({modalShow: false})}
-                    cardData={this.props}/>
+            {this.renderModal()}
         </div>    
     )}
 }

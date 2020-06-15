@@ -3,6 +3,7 @@ import Post from '../Card/Post';
 import {connect} from 'react-redux';
 import {StateTypes} from '../Redux/Reducers'
 import {NewsPost} from '../Card/Post'
+import CardColumns from 'react-bootstrap/CardColumns';
 
 interface DisplayProps extends StateTypes{
     show: string;
@@ -10,11 +11,10 @@ interface DisplayProps extends StateTypes{
 }
 
 class Display extends React.Component<DisplayProps>{
-   
-    render(){
-        const array: Array<NewsPost> = this.props.show==='likedOnly' ? this.props.liked : this.props.articles;
+
+    reorderPosts(newsPosts){
         let content:Array<Object> = [];
-        array.forEach((post: NewsPost,idx: number) => {
+        newsPosts.forEach((post: NewsPost,idx: number) => {
             content.push(
                 <div className="col-sm py-3" key={idx}>
                     <Post key={idx} 
@@ -28,15 +28,43 @@ class Display extends React.Component<DisplayProps>{
                 </div>
             )
             if ((idx+1)%3===0) {
-                content.push(<div key={array.length+idx} className="w-100"></div>)
+                content.push(<div key={newsPosts.length+idx} className="w-100"></div>)
             }
         })
+        return content;
+    }    
+
+    columnOrder(newsPosts){
+        let content:Array<Object> = [];
+        newsPosts.forEach((post: NewsPost,idx: number) => {
+            content.push(
+                    <Post key={idx} 
+                        title={post.title} 
+                        imageurl={post.urlToImage} 
+                        description={post.description} 
+                        url={post.url} 
+                        content={post.content} 
+                        cookies={this.props.cookies}
+                        show={this.props.show}/>
+            )
+        })
+        return (
+            <CardColumns className='favDisplay'>
+                {content}
+            </CardColumns>
+        )
+    }
+    
+    render(){
+        const array: Array<NewsPost> = this.props.show==='likedOnly' ? 
+                                    this.columnOrder(this.props.liked): 
+                                    this.reorderPosts(this.props.articles);
         if(this.props.isLoading || array===undefined)
             return <div/>;
         else{
-            return(     
+            return(
                 <div className='row' style={{marginTop:'1em', justifyContent: 'center'}} align='center'>
-                    {content}
+                    {array}
                 </div>
             )
         }

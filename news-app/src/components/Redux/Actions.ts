@@ -17,63 +17,62 @@ export const SET_TOAST='SET_TOAST'
 export const SET_NAME='SET_NAME'
 export const SET_ANONYMOUS='SET_ANONYMOUS'
 
-
 export function setCountry(newCode:string) {
-  return { type: CHANGE_COUNTRY, val: newCode }
+  	return { type: CHANGE_COUNTRY, val: newCode }
 }
 
 export function setPage(page: number) {
-  return { type: CUR_PAGE, val: page }
+ 	return { type: CUR_PAGE, val: page }
 }
 
 export function setArticles(articles: Array<Object>) {
-  return { type: SET_ARTICLES, val: articles }
+	  return { type: SET_ARTICLES, val: articles }
 }
 
 export function setLiked(articles: Array<Object>) {
-  return { type: SET_LIKED, val: articles }
+  	return { type: SET_LIKED, val: articles }
 }
 
 export function setLoading(status: Boolean) {
-    return { type: LOADING, val: status }
+	return { type: LOADING, val: status }
 }
 
 export function setNewsEnd(status: Boolean) {
-  return { type: SET_NEWSEND, val: status }
+  	return { type: SET_NEWSEND, val: status }
 }
 
 export function setErrorExist(status: Boolean) {
-  return { type: SET_ERROREXIST, val: status }
+  	return { type: SET_ERROREXIST, val: status }
 }
 
 export function setLoginStatus(status: Boolean) {
-  return { type: SET_LOGIN, val: status }
+  	return { type: SET_LOGIN, val: status }
 }
 
 export function setUserId(uid: string) {
-  return { type: SET_UID, val: uid }
+  	return { type: SET_UID, val: uid }
 }
 
 export function setCookieLoad(status: Boolean) {
-  return { type: SET_COOKIE_LOAD, val: status }
+  	return { type: SET_COOKIE_LOAD, val: status }
 }
 
 export function setMessages(messages: Array<String>) {
-  return { type: SET_MESSAGES, val: messages }
+  	return { type: SET_MESSAGES, val: messages }
 }
 
 export function setLastLiked(post: NewsPost) {
-  return { type: SET_LAST_LIKED, val: post }
+  	return { type: SET_LAST_LIKED, val: post }
 }
 
 export function setToast(status: Boolean) {
-  return { type: SET_TOAST, val: status }
+  	return { type: SET_TOAST, val: status }
 }
 
 export function setName(status: string) {
-  return { type: SET_NAME, val: status }
+  	return { type: SET_NAME, val: status }
 }
 
 export function setAnonymous(status: Boolean){
-  return {type: SET_ANONYMOUS, val: status}
+  	return {type: SET_ANONYMOUS, val: status}
 }

@@ -14,7 +14,6 @@ interface OwnProps{
 }
 
 class SignUpPage extends React.Component<Props>{
-
     render(){
         return(
             <div className='Auth'>
@@ -29,8 +28,8 @@ class SignUpPage extends React.Component<Props>{
 
 const mapStateToProps=(state: StateTypes,ownProps: OwnProps)=>{
     return{
-     cookies: ownProps.cookies,
+        cookies: ownProps.cookies,
     };
-  }
+}
   
 export default connect(mapStateToProps)(SignUpPage);

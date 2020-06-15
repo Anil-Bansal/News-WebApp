@@ -8,91 +8,91 @@ import { NewsPost } from '../Card/Post';
 import './Sources.css'
 
 interface Cookie{
-    get: Function,
-    set: Function
+	get: Function,
+	set: Function
 }
 
 interface SourcesProps{
-    country: string;
-    cookies: Cookie;
+	country: string;
+	cookies: Cookie;
 }
 
 interface State{
-    isLoading: boolean
-    sources: Array<NewsPost>
-    newsEnd: boolean
+	isLoading: boolean
+	sources: Array<NewsPost>
+	newsEnd: boolean
 }
 
 interface OwnProps{
-    cookies: Cookie
+	cookies: Cookie
 }
 
 class Sources extends Component<SourcesProps>{
-    public state: State
+	public state: State
 
-    constructor(props: SourcesProps){
-        super(props);
-        this.state={
-            isLoading: true,
-            sources: [],
-            newsEnd: false
-        }
-        this.fetchSources=this.fetchSources.bind(this);
-    }
+	constructor(props: SourcesProps){
+		super(props);
+		this.state={
+			isLoading: true,
+			sources: [],
+			newsEnd: false
+		}
+		this.fetchSources=this.fetchSources.bind(this);
+	}
 
-    fetchSources(country=this.props.country){
-        const url: string=`https://amazekart.tech/news/?source=${country}`
-        fetch(url)
-        .then((response:{json: Function})=>response.json())
-        .then((result:{sources: Array<NewsPost>})=>result.sources)
-        .then((sources: Object)=> {
-          this.setState({sources: sources});
-          this.setState({isLoading: false});
-          this.setState({newsEnd: true});
-        })
-        .catch(error=>{
-          console.log(error);
-          this.setState({isLoading: false});
-          this.setState({newsEnd: true});
-        })
-    }
+	fetchSources(country=this.props.country){
+		const url: string=`https://amazekart.tech/news/?source=${country}`
+		fetch(url)
+		.then((response:{json: Function})=>response.json())
+		.then((result:{sources: Array<NewsPost>})=>result.sources)
+		.then((sources: Object)=> {
+			this.setState({sources: sources});
+			this.setState({isLoading: false});
+			this.setState({newsEnd: true});
+		})
+		.catch(error=>{
+			console.log(error);
+			this.setState({isLoading: false});
+			this.setState({newsEnd: true});
+		})
+	}
 
-    componentDidMount(){
-        this.fetchSources();
-    }
+	componentDidMount(){
+		this.fetchSources();
+	}
 
-    shouldComponentUpdate(nextProps: any) {
-        if( this.props.country !== nextProps.country)
-        {   
-            this.setState({isLoading: true})
-            this.setState({sources: []})
-            this.fetchSources(nextProps.country)
-        }
-        return true ;
-    }
+	shouldComponentUpdate(nextProps: any) {
+		if( this.props.country !== nextProps.country)
+		{   
+			this.setState({isLoading: true})
+			this.setState({sources: []})
+			this.fetchSources(nextProps.country)
+		}
+		return true ;
+	}
 
-    render(){
-        return(
-            <div >
-                <div className='headerSource'>
-                <Head cookies={this.props.cookies}/></div>
-                <div className='contentSource' align='center'>
-
-                    <DisplaySources loading={this.state.isLoading} array={this.state.sources} />
-                    <div className='loading'>
-                    <ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+	render(){
+		return(
+			<div >
+				<div className='headerSource'>
+					<Head cookies={this.props.cookies}/>
+				</div>
+				<div className='contentSource' align='center'>
+					<DisplaySources loading={this.state.isLoading} array={this.state.sources} />
+					<div className='loading'>
+						<ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps=(state: StateTypes, ownProps: OwnProps)=>{
-    return{
-        country: state.country,
-        cookies: ownProps.cookies
-    };
+	return{
+		country: state.country,
+		cookies: ownProps.cookies
+	};
 }
 
 export default connect(mapStateToProps)(Sources);

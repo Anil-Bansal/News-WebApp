@@ -6,6 +6,7 @@ import { StateTypes } from '../Redux/Reducers';
 interface Props{
     newsEnd: boolean;
 }
+
 class Loader extends React.Component{
 	public props: Object;
 
@@ -20,8 +21,8 @@ class Loader extends React.Component{
 
 const mapStateToProps=(state: StateTypes)=>{
     return{
-      newsEnd: state.newsEnd,
+          newsEnd: state.newsEnd,
     };
-  }
+}
   
 export default connect(mapStateToProps)(Loader);

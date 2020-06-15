@@ -2,18 +2,17 @@ import React from 'react';
 import SignInForm from './SignInForm'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import { StateTypes } from '../Redux/Reducers';
 import './Auth.css'
 
-interface Props{
+interface Props {
     cookies: Object
 }
 
-interface OwnProps{
+interface OwnProps {
     cookies: Object
 }
 
-class SignInPage extends React.Component<Props>{
+class SignInPage extends React.Component<Props> {
 
     render(){
         return(
@@ -27,9 +26,9 @@ class SignInPage extends React.Component<Props>{
     }
 }
 
-const mapStateToProps=(state: StateTypes,ownProps: OwnProps)=>{
+const mapStateToProps=(ownProps: OwnProps)=>{
     return{
-     cookies: ownProps.cookies,
+        cookies: ownProps.cookies,
     };
 }
   

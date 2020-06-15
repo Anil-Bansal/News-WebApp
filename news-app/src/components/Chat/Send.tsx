@@ -11,78 +11,74 @@ const INITIAL_STATE = {
 };
 
 interface Props{
-  firebase: any,
-  name: string,
-  isAnonymous: boolean
+	firebase: any,
+	name: string,
+	isAnonymous: boolean
 }
 
 class Send extends React.Component<Props>{
     constructor(props: Props) {
         super(props);
         this.state = { ...INITIAL_STATE };
-      }
+    }
 
     onSubmit = (event: any) => {
         this.props.firebase.sendMessage(this.state.message,this.props.name)
         this.props.firebase.addEvent('SendMessage',{uid: this.props.uid});
         event.preventDefault();
         this.setState({message:''})
-      };
+    };
 
     onChange = (event: any) => {
-      this.setState({ [event.target.name]: event.target.value });
+    	this.setState({ [event.target.name]: event.target.value });
     };
 
     render(){
-      const{ message } = this.state;
+	    const{ message } = this.state;
         return(
-        <div>
-            <form id="form" onSubmit={this.onSubmit}>
-                <TextField
-                    id="text-field"
-                    name="message"
-                    value={message}
-                    onChange={this.onChange}
-                    type="text"
-                    placeholder={this.props.isAnonymous? "Guest users can't chat": "Enter Message"}
-                    variant="outlined"
-                    disabled={this.props.isAnonymous}
-                />
-                {this.props.isAnonymous? 
-                  <Button 
-                        style={{marginTop:'3px',marginLeft:'3px'}}
-                        size='lg' 
-                        variant="primary" 
-                        type="submit" disabled>Send</Button>:
-                  <Button style={{marginTop:'3px',marginLeft:'1px'}} 
-                        size='lg' 
-                        variant="primary" 
-                        type="submit"
-                        >Send</Button>}
-          </form>
-        </div>
-
+			<div>
+				<form id="form" onSubmit={this.onSubmit}>
+					<TextField
+						id="text-field"
+						name="message"
+						value={message}
+						onChange={this.onChange}
+						type="text"
+						placeholder={this.props.isAnonymous? "Guest users can't chat": "Enter Message"}
+						variant="outlined"
+						disabled={this.props.isAnonymous}/>
+					{this.props.isAnonymous? 
+						<Button style={{marginTop:'3px',marginLeft:'3px'}}
+								size='lg' 
+								variant="primary" 
+								type="submit" disabled>
+							Send
+						</Button>:
+						<Button style={{marginTop:'3px',marginLeft:'1px'}} 
+								size='lg' 
+								variant="primary" 
+								type="submit">
+							Send
+						</Button>}
+				</form>
+			</div>
         )
     }
 }
 
-
-
-
-
 const mapStateToProps=(state:StateTypes)=>{
     return{
-      messages: state.messages,
-      uid: state.uid,
-      name: state.name,
-      isAnonymous: state.isAnonymous
+		messages: state.messages,
+		uid: state.uid,
+		name: state.name,
+		isAnonymous: state.isAnonymous
     };
-  }
+}
 
 const mapDispatchToProps=(dispatch: any)=>{
-  return{
-    setMessages: (val: Array<string>)=>dispatch(actiontypes.setMessages(val))
-  };
+  	return{
+	    setMessages: (val: Array<string>)=>dispatch(actiontypes.setMessages(val))
+  	};
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Send));

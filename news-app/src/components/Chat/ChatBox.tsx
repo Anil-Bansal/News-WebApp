@@ -10,9 +10,9 @@ class ChatBox extends React.Component{
     render(){
         return(
             <Splitter position="horizontal"
-            primaryPaneMaxHeight='86%'
-            primaryPaneHeight="86%"
-            postPoned={true} >
+                    primaryPaneMaxHeight='86%'
+                    primaryPaneHeight="86%"
+                    postPoned={true} >
                 <div className='messageWindow'>
                     <Receive/>     
                 </div>

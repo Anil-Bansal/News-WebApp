@@ -5,16 +5,18 @@ import {connect} from 'react-redux';
 import { StateTypes } from '../Redux/Reducers';
 
 interface Props{
-  code: string,
-  onChange: Function,
-  country: string,
-  currentCountry: string
+    code: string,
+    onChange: Function,
+    country: string,
+    currentCountry: string
 }
+
 class ButtonCountry extends React.Component<Props>{
     render(){
         return (
-            <Button style={{width:'6%'}} variant= {(this.props.currentCountry === this.props.code) ? "dark" : "light"} 
-              onClick={()=>this.props.onChange(this.props.code)}>
+			<Button style={{width:'6%'}} 
+					variant= {(this.props.currentCountry === this.props.code) ? "dark" : "light"} 
+					onClick={()=>this.props.onChange(this.props.code)}>
                 {this.props.country}
             </ Button>
         )
@@ -23,9 +25,9 @@ class ButtonCountry extends React.Component<Props>{
 
 const mapStateToProps= (state: StateTypes) =>{
     return{
-      currentCountry: state.country ,
+      	currentCountry: state.country
     };
 }
   
-export default connect(mapStateToProps,)(ButtonCountry);
+export default connect(mapStateToProps,null)(ButtonCountry);
   

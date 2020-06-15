@@ -1,5 +1,6 @@
-import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,SET_NEWSEND,
-        SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,SET_LAST_LIKED, SET_MESSAGES,SET_TOAST,SET_NAME,SET_ANONYMOUS } from './Actions'
+import {CHANGE_COUNTRY,SET_ARTICLES,CUR_PAGE,LOADING,SET_ERROREXIST,
+        SET_NEWSEND,SET_LOGIN,SET_UID,SET_COOKIE_LOAD,SET_LIKED,
+        SET_LAST_LIKED, SET_MESSAGES,SET_TOAST,SET_NAME,SET_ANONYMOUS } from './Actions'
 import {NewsPost} from '../Card/Post'
 import {PostData} from '../Card/Post';
 
@@ -33,7 +34,6 @@ export interface DispatchTypes{
     setCookieLoad? : Function
     setErrorExist? : Function
 }
-
 
 const initialState: StateTypes ={
     isLoading: false,
@@ -116,8 +116,8 @@ function newsApp(state: StateTypes = initialState, action: any) {
                 isAnonymous: action.val
             })
         default:
-          return state
-      }
-  }
+            return state
+    }
+}
 
 export default newsApp

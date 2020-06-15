@@ -8,7 +8,6 @@ import { withFirebase } from '../Firebase';
 const Info = (props) => {
     props.firebase.addEvent('viewDevelopers',{});
     return (
-        
         <div align='center'>
             <div className="containerInfo">
                 <h1 style={{marginTop: 10}}>Alone We Can Do So Little, Together We Can Do So Much.</h1>
@@ -17,7 +16,6 @@ const Info = (props) => {
                     <Person name='Vinayak Aggarwal' imageSrc = {Vinayak} title='SDE Intern'/>
                 </div>
             </div>
-
         </div>
     );
 }

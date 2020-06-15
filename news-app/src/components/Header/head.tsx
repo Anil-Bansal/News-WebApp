@@ -10,23 +10,23 @@ import { StateTypes } from '../Redux/Reducers';
 import { withFirebase } from '../Firebase';
 
 interface Cookie{
-  get: Function,
-  set: Function
+	get: Function,
+	set: Function
 }
 
 interface Props{
-  setLoading: Function,
-  setCountry: Function,
-  setArticles: Function,
-  setPage: Function,
-  setNewsEnd: Function,
-  setErrorExist: Function,
-  page: number,
-  cookies: Cookie
+	setLoading: Function,
+	setCountry: Function,
+	setArticles: Function,
+	setPage: Function,
+	setNewsEnd: Function,
+	setErrorExist: Function,
+	page: number,
+	cookies: Cookie
 }
 
 interface OwnProps{
-  cookies: Cookie
+  	cookies: Cookie
 }
 
 class Head extends React.Component<Props>{
@@ -43,7 +43,7 @@ class Head extends React.Component<Props>{
 		this.searchNews=this.searchNews.bind(this);
 	}
 
-    async searchNews (search: string){
+	async searchNews (search: string){
 		await this.props.setLoading(true);
 		await this.props.setCountry("");
 		await this.props.setArticles([]);
@@ -52,15 +52,15 @@ class Head extends React.Component<Props>{
 		await this.props.setErrorExist(false);
 		this.fetchNewsSearch(search,this.props.page);
 		this.props.firebase.addEvent('changeCountry',{searchString: search} );
-    }
+	}
 
-    handleSubmit = (event: any) => {
+	handleSubmit = (event: any) => {
 		event.preventDefault();
 		this.searchNews(this.input.value);
 		event.target.reset();
-    };
-    
-    async onChange(code: string){
+	};
+	
+	async onChange(code: string){
 		await this.props.setLoading(true);
 		await this.props.setCountry(code);
 		await this.props.setArticles([]);
@@ -71,31 +71,33 @@ class Head extends React.Component<Props>{
 		this.fetchNews();
 	}
 
-    render(){
-        return (
-            <div>
-                <div className='Head'>
+	render(){
+		return (
+			<div>
+				<div className='Head'>
 					<div className='row'>
 						<div className='column'>
 							<h1 align="center"> Simple News App</h1>
 						</div>
-                  	</div>
-                    <div className='Search' align = "center">
-                        <form id="Search-form" onSubmit={this.handleSubmit}>
-							<label htmlFor="search"><h6>Search for News : </h6> </label>
+				  	</div>
+					<div className='Search' align = "center">
+						<form id="Search-form" onSubmit={this.handleSubmit}>
+							<label htmlFor="search">
+								<h6>Search for News : </h6> 
+							</label>
 							<input
 								type="text"
 								name="search"
 								ref={(input) => this.input = input}/>
 							<Button variant='outline-light'
-								type='submit'>
-							Submit 
+									type='submit'>
+								Submit 
 							</Button>
 							<SignOutButton cookies={this.props.cookies}/>
-                        </form>
-                    </div>
-                </div>
-                <div className='Select'>
+						</form>
+					</div>
+				</div>
+				<div className='Select'>
 					<ButtonCountry  onChange={this.onChange} country="Australia" code="au"/>
 					<ButtonCountry  onChange={this.onChange} country="Argentina" code="ar"/>
 					<ButtonCountry  onChange={this.onChange} country="Belgium" code="be"/>
@@ -114,32 +116,32 @@ class Head extends React.Component<Props>{
 					<ButtonCountry  onChange={this.onChange} country="Switzerland" code="ch"/>
 					<ButtonCountry  onChange={this.onChange} country="UK" code="gb"/>
 					<ButtonCountry  onChange={this.onChange} country="USA" code="us"/>
-                </div>
-            </div>
-        )
-    }
+				</div>
+			</div>
+		)
+	}
 }
 
 const mapStateToProps=(state: StateTypes,ownprops: OwnProps)=>{
-    return{
-      isLoading: state.isLoading,
-      country: state.country ,
-      errorExist: state.errorExist,
-      articles: state.articles,
-      page: state.page,
-      cookies: ownprops.cookies
-    };
-  }
+	return{
+		isLoading: state.isLoading,
+		country: state.country ,
+		errorExist: state.errorExist,
+		articles: state.articles,
+		page: state.page,
+		cookies: ownprops.cookies
+	};
+}
   
-  const mapDispatchToProps=(dispatch: any)=>{
-    return{
-      setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
-      setNewsEnd: (val: boolean)=>dispatch(actiontypes.setNewsEnd(val)),
-      setArticles: (val: Array<string>)=>dispatch(actiontypes.setArticles(val)),
-      setErrorExist: (val: boolean)=>dispatch(actiontypes.setErrorExist(val)),
-      setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
-      setPage: (val: number)=>dispatch(actiontypes.setPage(val))
-    };
-  }
+const mapDispatchToProps=(dispatch: any)=>{
+	return{
+		setLoading: (val: boolean)=>dispatch(actiontypes.setLoading(val)),
+		setNewsEnd: (val: boolean)=>dispatch(actiontypes.setNewsEnd(val)),
+		setArticles: (val: Array<string>)=>dispatch(actiontypes.setArticles(val)),
+		setErrorExist: (val: boolean)=>dispatch(actiontypes.setErrorExist(val)),
+		setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
+		setPage: (val: number)=>dispatch(actiontypes.setPage(val))
+	};
+}
   
-  export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Head));
+export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Head));

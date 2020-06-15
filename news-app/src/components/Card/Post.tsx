@@ -60,11 +60,11 @@ class Post extends React.Component<Props>{
     constructor(props: Props) {
         super(props);
         this.state = {
-          backgroundColor: "light",
-          textColor: 'dark',
-          modalShow: false,
-          code: 0,
-          isLiked: ((this.props.cookies).get('testing')).includes(this.props.url) || this.props.show==='likedOnly',
+            backgroundColor: "light",
+            textColor: 'dark',
+            modalShow: false,
+            code: 0,
+            isLiked: ((this.props.cookies).get('testing')).includes(this.props.url) || this.props.show==='likedOnly',
         };
         this.enter=this.enter.bind(this);
         this.leave=this.leave.bind(this);
@@ -87,8 +87,11 @@ class Post extends React.Component<Props>{
 
     likePost = (postData: PostData) => {
         this.props.firebase.addCookieToDatabase(this.props.uid,
-                    [...(this.props.cookies).get('testing'),this.props.url],[...(this.props.liked),postData]);
-        (this.props.cookies).set('testing',[...(this.props.cookies).get('testing'),this.props.url]);
+                    [...(this.props.cookies).get('testing'),this.props.url],
+                    [...(this.props.liked),postData]);
+        this.props.cookies.set('testing',
+                    [...(this.props.cookies).get('testing'),
+                    this.props.url]);
         this.setState({isLiked: true});
         this.props.setLiked([...this.props.liked,Object.assign({}, postData)]);
         this.props.firebase.addEvent('likePost',{url: this.props.url} );
@@ -136,62 +139,73 @@ class Post extends React.Component<Props>{
             description: this.props.description,
             urlToImage: this.props.imageurl,
             url: this.props.url
-          }
+        }
         return(
-        <div>
-            <Card bg={this.state.backgroundColor}
-                style={{width: '24rem' }}
-                text={this.state.textColor}
-                className='Card'
-                >
-                <Card.Img 
-                    onMouseEnter={this.enter}
-                    onMouseLeave={this.leave}
-                    variant="top" 
-                    src={this.props.imageurl}
-                    onClick={()=>{
-                        this.props.firebase.addEvent('viewModal',{url: this.props.url});
-                        this.setState({modalShow: true});
-                        this.setState({code: 1})}} />
-                <Card.Body 
-                    onMouseEnter={this.enter}
-                    onMouseLeave={this.leave}
-                    onClick={()=>{
-                        this.props.firebase.addEvent('viewModal',{url: this.props.url});
-                        this.setState({modalShow: true});
-                        this.setState({code: 1})}} >
-                    <Card.Title>{this.props.title}</Card.Title>
-                    <Card.Text><p className="card-text">
-                                    {this.props.description ? this.props.description.slice(0,125) : ""}
-                            </p></Card.Text>
-                </Card.Body>   
-                <Card.Footer>
-                    <div className='row'>
-                        <div align='left' style={{marginLeft:30}}>
-                            {this.state.isLiked|| this.props.show==='likedOnly' ? 
-                                    <MdFavorite color='#C70039' size={30} onClick={()=> this.unlikePost(postData)}/> : 
-                                    <MdFavoriteBorder color='#C70039' size={30} onClick={()=> this.likePost(postData)}/> }
+            <div>
+                <Card bg={this.state.backgroundColor}
+                    style={{width: '24rem' }}
+                    text={this.state.textColor}
+                    className='Card'>
+                    <Card.Img 
+                        onMouseEnter={this.enter}
+                        onMouseLeave={this.leave}
+                        variant="top" 
+                        src={this.props.imageurl}
+                        onClick={()=>{
+                            this.props.firebase.addEvent('viewModal',{url: this.props.url});
+                            this.setState({modalShow: true});
+                            this.setState({code: 1})}} />
+                    <Card.Body 
+                        onMouseEnter={this.enter}
+                        onMouseLeave={this.leave}
+                        onClick={()=>{
+                            this.props.firebase.addEvent('viewModal',{url: this.props.url});
+                            this.setState({modalShow: true});
+                            this.setState({code: 1})}} >
+                        <Card.Title>
+                            {this.props.title}
+                        </Card.Title>
+                        <Card.Text>
+                            <p className="card-text">
+                                {this.props.description ? this.props.description.slice(0,125) : ""}
+                            </p>
+                        </Card.Text>
+                    </Card.Body>   
+                    <Card.Footer>
+                        <div className='row'>
+                            <div align='left' style={{marginLeft:30}}>
+                                {this.state.isLiked || this.props.show==='likedOnly' ? 
+                                        <MdFavorite color='#C70039' 
+                                                    size={30} 
+                                                    onClick={()=> this.unlikePost(postData)}/> : 
+                                        <MdFavoriteBorder color='#C70039' 
+                                                    size={30} 
+                                                    onClick={()=> this.likePost(postData)}/> }
+                            </div>
+                            <div align='right' 
+                                style={{marginLeft:'35%'}}>
+                                <Button variant='danger' 
+                                        onClick={()=>this.goToUrl(this.props.url)}>
+                                            Go To News
+                                </Button>
+                            </div>
                         </div>
-                        <div align='right' style={{marginLeft:'35%'}}>
-                            <Button variant='danger' onClick={()=>this.goToUrl(this.props.url)}>Go To News</Button>
-                        </div>
-                    </div>
-                </Card.Footer> 
-
-            </Card>
-            {this.renderModal()}
-        </div>    
-    )}
+                    </Card.Footer> 
+                </Card>
+                {this.renderModal()}
+            </div>    
+        )
+    }
 }
 
 
 const mapStateToProps=(state: StateTypes)=>{
     return{
-      isLoggedIn: state.isLoggedIn,
-      uid: state.uid,
-      liked: state.liked,
+        isLoggedIn: state.isLoggedIn,
+        uid: state.uid,
+        liked: state.liked,
     };
-  }
+}
   
 const mapDispatchToProps=(dispatch: any)=>{
     return{

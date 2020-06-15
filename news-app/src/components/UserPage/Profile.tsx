@@ -28,12 +28,10 @@ interface Props{
 }
 
 class Profile extends React.Component<Props>{
-
     constructor(props: Props) {
         super(props);
         this.undoUnlike=this.undoUnlike.bind(this)
-      }
-
+    }
 
     componentDidMount(){
         window.scrollTo(0, 0);
@@ -56,11 +54,17 @@ class Profile extends React.Component<Props>{
                 <Toast className='toastUndo' show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
                     <Toast.Header align='center'>
                         <h5>Undo Last UnLike???</h5>
-                        <Button variant='danger' size='sm' style={{marginLeft:20,marginRight:20}} 
-                                onClick={() => this.undoUnlike()}>Undo</Button>
+                        <Button variant='danger' 
+                                size='sm' 
+                                style={{marginLeft:20,marginRight:20}} 
+                                onClick={() => this.undoUnlike()}>
+                            Undo
+                        </Button>
                     </Toast.Header>
                 </Toast>
-                <h3 className='showName'>Hello {this.props.name}</h3>
+                <h3 className='showName'>
+                    Hello {this.props.name}
+                </h3>
                 <Display show='likedOnly' cookies={this.props.cookies}/>
             </div>
         )
@@ -69,12 +73,12 @@ class Profile extends React.Component<Props>{
 
 const mapStateToProps=(state: StateTypes,ownProps: any)=>{
     return{
-      lastLiked: state.lastLiked,
-      liked: state.liked,
-      uid: state.uid,
-      cookie: ownProps.cookie,
-      showToast: state.showToast,
-      name: state.name
+        lastLiked: state.lastLiked,
+        liked: state.liked,
+        uid: state.uid,
+        cookie: ownProps.cookie,
+        showToast: state.showToast,
+        name: state.name
     };
   }
 

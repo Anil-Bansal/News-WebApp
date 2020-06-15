@@ -27,14 +27,16 @@ class SourceCard extends React.Component<SourceCardProps>{
         this.setState({
             backgroundColor: "info",
             textColor: 'white'
-    })
+        })
     }  
+
     leave = () =>{
         this.setState({
             backgroundColor: "light",
             textColor: 'dark'
         })
-    }  
+    }
+
     render(){
         return(
             <div>
@@ -50,7 +52,8 @@ class SourceCard extends React.Component<SourceCardProps>{
                     </Card.Body>    
                 </Card>
             </div>    
-        )}
+        )
+    }
 }
 
 export default SourceCard;

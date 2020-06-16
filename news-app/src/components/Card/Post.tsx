@@ -78,18 +78,28 @@ class Post extends React.Component<Props>{
         this.unlikePost=this.unlikePost.bind(this);
     }
 
+    //Function called on Card Enter setting the background and text color
+
     enter = () =>{
         this.setState({backgroundColor: "info",textColor: 'white'})
     }  
+
+    //Function called on Card Leave setting the background and text color
     
     leave = () =>{
         this.setState({backgroundColor: "light",textColor: 'dark'})
     }
 
+    //Opens the Url in new window
+
     goToUrl(url: string){
         this.props.firebase.addEvent('visitNewsSite',{url: url});
         window.open(url,'_blank');
     }
+
+    /*Like the corresponding post and 
+    set the required values and
+    update the database*/
 
     likePost = (postData: PostData) => {
         this.props.firebase.addCookieToDatabase(this.props.uid,
@@ -102,6 +112,10 @@ class Post extends React.Component<Props>{
         this.props.setLiked([...this.props.liked,Object.assign({}, postData)]);
         this.props.firebase.addEvent('likePost',{url: this.props.url} );
     }
+
+    /*Unlike the corresponding post and 
+    unset the required values and 
+    update the database*/
 
     unlikePost = (postData: PostData) => {
         var likedPosts: Array<string> = (this.props.cookies).get('testing')
@@ -124,6 +138,7 @@ class Post extends React.Component<Props>{
         this.props.firebase.addEvent('unlikePost',{url: urlCurrent} );
     }
 
+    //Modal Wrapper to Display Wrapper according to code
     renderModal(){
         switch(this.state.code){
             case 1:

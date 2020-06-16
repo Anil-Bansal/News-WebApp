@@ -48,6 +48,8 @@ class Head extends React.Component<Props>{
 		this.searchNews=this.searchNews.bind(this);
 	}
 
+	//Search News and set values accordingly
+
 	async searchNews (search: string){
 		this.props.history.push('/Main');
 		await this.props.setLoading(true);
@@ -60,11 +62,15 @@ class Head extends React.Component<Props>{
 		this.props.firebase.addEvent('changeCountry',{searchString: search} );
 	}
 
+	//Search News Submit
+
 	handleSubmit = (event: any) => {
 		event.preventDefault();
 		this.searchNews(this.input.value);
 		event.target.reset();
 	};
+
+	//Change Country
 	
 	async onChange(code: string){
 		await this.props.setLoading(true);

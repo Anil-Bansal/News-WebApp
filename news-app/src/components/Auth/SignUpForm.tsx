@@ -60,11 +60,15 @@ class SignUpForm extends Component<Props> {
 		this.guestSignIn=this.guestSignIn.bind(this)
 		this.guestLogin=this.guestLogin.bind(this)
 		this.state = {...INITIAL_STATE};
-    }
+	}
+	
+	//Setting the Login Status
 
     login () {
       	this.props.setLoginStatus(true);
     }
+
+	//Utility Function to Set Required Values for signed in users
 
     async signInSync ()
     {
@@ -77,7 +81,9 @@ class SignUpForm extends Component<Props> {
 		this.props.setAnonymous(false);
 		this.props.cookies.set('User',uid);
 		this.props.cookies.set('Name',this.props.name);
-    }
+	}
+		
+	//Guest Sign In
 
     guestSignIn = () => {
 		this.props.setLoading(true) 
@@ -94,7 +100,9 @@ class SignUpForm extends Component<Props> {
 			this.props.setLoading(false)
 			this.setState({ error });
 		});
-    }
+	}
+	
+	//Utility Function to set values for guest users
 
     async guestLogin()
     {
@@ -105,7 +113,9 @@ class SignUpForm extends Component<Props> {
 		this.props.setAnonymous(true);
 		this.props.setName('Anonymous');
 		this.props.cookies.set('Name','Anonymous');
-    }
+	}
+	
+	//Google Sign In
 
     googleSignIn = () => {
 		this.props.setLoading(true)
@@ -122,7 +132,9 @@ class SignUpForm extends Component<Props> {
 			this.props.setLoading(false)
 			this.setState({ error });
 		});
-    }
+	}
+	
+	//Function called on submit and authenticating the user
 
     onSubmit = (event: any) => {
 		const { name, email, passwordOne } = this.state;
@@ -145,11 +157,15 @@ class SignUpForm extends Component<Props> {
 			this.setState({ error });
 		});
 		event.preventDefault();
-    }
+	}
+	
+	//Set state values
    
     onChange = (event: any) => {
       	this.setState({ [event.target.name]: event.target.value });
-    };
+	};
+	
+	//Show Password on Click Checkbox
 
     showPassword = () => {
 		var passwordComponent:{type: string} = document.getElementById('password');

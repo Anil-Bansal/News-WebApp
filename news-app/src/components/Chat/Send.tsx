@@ -6,6 +6,7 @@ import { StateTypes } from "../Redux/Reducers";
 import { TextField } from "@material-ui/core";
 import './Chat.css';
 import Button from 'react-bootstrap/Button'
+
 const INITIAL_STATE = {
     message: ''
 };
@@ -13,10 +14,15 @@ const INITIAL_STATE = {
 interface Props{
 	firebase: any,
 	name: string,
-	isAnonymous: boolean
+	isAnonymous: boolean,
+	uid: string,
 }
 
 class Send extends React.Component<Props>{
+	public state:{
+		message: string
+	}
+
     constructor(props: Props) {
         super(props);
         this.state = { ...INITIAL_STATE };

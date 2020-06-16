@@ -19,7 +19,7 @@ interface MainProps extends DispatchTypes,StateTypes{
 }
 
 class Main extends React.Component<MainProps>{
-	public fetchNews: Function;
+	public fetchNews: () => void;
 	public fetchLiked: Function;
 	
 	constructor(props:MainProps ){
@@ -31,7 +31,7 @@ class Main extends React.Component<MainProps>{
 	}    
 
 	async componentDidMount(){
-		await this.props.setCountry('in');
+		if(!this.props.country){this.props.setCountry('in')}
 		await this.props.setPage(1);
 		await this.props.setArticles([]);
 		this.fetchNews();

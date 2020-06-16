@@ -55,7 +55,13 @@ export interface PostData{
 }
 
 class Post extends React.Component<Props>{
-    public state: Object;
+    public state: {
+        code: number,
+        modalShow: boolean,
+        isLiked: boolean,
+        backgroundColor: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light'
+        textColor: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'white' | 'muted'
+    };
 
     constructor(props: Props) {
         super(props);

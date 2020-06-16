@@ -144,7 +144,7 @@ class SignInForm extends Component<Props> {
     };
 
     showPassword = () => {
-		var passwordComponent = document.getElementById('pass');
+		var passwordComponent :{type: string} = document.getElementById('pass');
 		if(passwordComponent.type === 'password') {
 			passwordComponent.type = 'text';
 		}

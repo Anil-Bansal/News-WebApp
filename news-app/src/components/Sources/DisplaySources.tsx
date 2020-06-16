@@ -10,7 +10,7 @@ interface SourcesProps{
 
 const DisplaySources:React.FC<SourcesProps> =(props: SourcesProps )=>{
     const array: Array<NewsPost> =props.array;
-    if(props.loading)
+    if(props.loading || !array)
         return <div></div>;
     else{
         return(     

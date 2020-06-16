@@ -43,12 +43,14 @@ interface Props{
 }
 
 class SignUpForm extends Component<Props> {
-	public state: any;
 	public props: Props;
-	public email: string;
-	public passwordOne: string;
-	public passwordTwo: string;
-	public error: any;
+	public state: {
+		name: string,
+		email: string,
+		error: any,
+		passwordOne: string,
+		passwordTwo: string
+	}
 
     constructor(props: Props) {
 		super(props);
@@ -150,7 +152,7 @@ class SignUpForm extends Component<Props> {
     };
 
     showPassword = () => {
-		var passwordComponent = document.getElementById('password');
+		var passwordComponent:{type: string} = document.getElementById('password');
 		if(passwordComponent.type === 'password') {
 			passwordComponent.type = 'text';
 		}
@@ -158,7 +160,7 @@ class SignUpForm extends Component<Props> {
 			passwordComponent.type = 'password';
 		}
 
-		var confirmpasswordComponent=document.getElementById('confirmpassword');
+		var confirmpasswordComponent:{type: string} = document.getElementById('confirmpassword');
 		if(confirmpasswordComponent.type === 'password') {
 			confirmpasswordComponent.type = 'text';
 		}
@@ -242,7 +244,7 @@ class SignUpForm extends Component<Props> {
 						size='lg' 
 						variant="warning" 
 						onClick={() => this.guestSignIn()}>
-					Sign Up as Guest
+						Sign Up as Guest
 					</Button>
 					<GoogleButton onClick={this.googleSignIn} />
          		</div>

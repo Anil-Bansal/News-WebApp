@@ -5,7 +5,13 @@ import Anil from '../../assets/Anil.jpg';
 import './Team.css'
 import { withFirebase } from '../Firebase';
 
-const Info = (props) => {
+interface TeamProps{
+    firebase: {
+        addEvent : Function
+    }
+}
+
+const Info:React.FC<TeamProps> =(props: TeamProps ) => {
     props.firebase.addEvent('viewDevelopers',{});
     return (
         <div align='center'>

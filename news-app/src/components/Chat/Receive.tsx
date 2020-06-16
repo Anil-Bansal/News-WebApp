@@ -6,16 +6,20 @@ import { StateTypes } from "../Redux/Reducers";
 import {List,ListItemText,ListItem} from '@material-ui/core';
 import './Chat.css';
 
-interface Props{
-	firebase: any,
-}
-
 interface Message{
 	message: string,
 	user: string
 }
 
+interface Props{
+	firebase: any,
+}
+
 class Receive extends React.Component<Props>{
+	public state:{
+		messages: Array<string>
+	}
+
 	messageEndRef=React.createRef();
 	constructor(props: Props){
 		super(props);
@@ -50,7 +54,7 @@ class Receive extends React.Component<Props>{
 	}
 
 	rendermessages=()=>{
-		return this.state.messages.map((message: Message)=>(
+		return this.state.messages.map((message: any)=>(
 			<ListItem>
 				<ListItemText style={{wordBreak: "break-word"}} primary={message.user +' : ' + message.message}></ListItemText>
 			</ListItem>

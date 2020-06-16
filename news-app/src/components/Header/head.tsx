@@ -8,6 +8,7 @@ import {fetchNews,fetchNewsSearch} from '../NewsFetch/Fetch';
 import SignOutButton from '../Auth/Signout';
 import { StateTypes } from '../Redux/Reducers';
 import { withFirebase } from '../Firebase';
+import { withRouter } from 'react-router-dom';
 
 interface Cookie{
 	get: Function,
@@ -22,7 +23,11 @@ interface Props{
 	setNewsEnd: Function,
 	setErrorExist: Function,
 	page: number,
-	cookies: Cookie
+	cookies: Cookie,
+	history: any,
+	firebase: {
+		addEvent: Function
+	}
 }
 
 interface OwnProps{
@@ -44,6 +49,7 @@ class Head extends React.Component<Props>{
 	}
 
 	async searchNews (search: string){
+		this.props.history.push('/Main');
 		await this.props.setLoading(true);
 		await this.props.setCountry("");
 		await this.props.setArticles([]);
@@ -144,4 +150,4 @@ const mapDispatchToProps=(dispatch: any)=>{
 	};
 }
   
-export default connect(mapStateToProps,mapDispatchToProps)(withFirebase(Head));
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(withFirebase(Head)));

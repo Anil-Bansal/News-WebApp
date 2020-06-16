@@ -28,7 +28,7 @@ class Firebase {
 		this.auth=app.auth();
 		this.database=app.firestore();
 		this.prov = new app.auth.GoogleAuthProvider();
-		this.realDatabase=firebase.database(app);
+		this.realDatabase=firebase.database();
 		this.messageReference=this.realDatabase.ref().child('messages');
 		this.firebaseAnalytics=app.analytics();
 	}

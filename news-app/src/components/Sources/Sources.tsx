@@ -6,6 +6,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import {StateTypes} from '../Redux/Reducers'
 import { NewsPost } from '../Card/Post';
 import './Sources.css'
+import * as actiontypes from '../Redux/Actions';
 
 interface Cookie{
 	get: Function,
@@ -15,6 +16,7 @@ interface Cookie{
 interface SourcesProps{
 	country: string;
 	cookies: Cookie;
+	setCountry: Function;
 }
 
 interface State{
@@ -58,6 +60,7 @@ class Sources extends Component<SourcesProps>{
 	}
 
 	componentDidMount(){
+		if(!this.props.country){this.props.setCountry('in')}
 		this.fetchSources();
 	}
 
@@ -95,4 +98,10 @@ const mapStateToProps=(state: StateTypes, ownProps: OwnProps)=>{
 	};
 }
 
-export default connect(mapStateToProps)(Sources);
+const mapDispatchToProps=(dispatch: any)=>{
+	return{
+		setCountry: (val: string)=>dispatch(actiontypes.setCountry(val)),
+	};
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Sources);

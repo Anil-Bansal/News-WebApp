@@ -2,8 +2,8 @@ import React from 'react';
 import Post from '../Card/Post';
 import {connect} from 'react-redux';
 import {StateTypes} from '../Redux/Reducers'
-import {NewsPost} from '../Card/Post'
 import CardColumns from 'react-bootstrap/CardColumns';
+import { NewsPost } from '../Card/Post';
 
 interface DisplayProps extends StateTypes{
     show: string;
@@ -12,7 +12,7 @@ interface DisplayProps extends StateTypes{
 
 class Display extends React.Component<DisplayProps>{
 
-    reorderPosts(newsPosts){
+    horizontalOrder(newsPosts: Array<NewsPost>){
         let content:Array<Object> = [];
         newsPosts.forEach((post: NewsPost,idx: number) => {
             content.push(
@@ -34,8 +34,9 @@ class Display extends React.Component<DisplayProps>{
         return content;
     }    
 
-    columnOrder(newsPosts){
-        let content:Array<Object> = [];
+    reverseOrder(newsPosts: Array<NewsPost>){
+        newsPosts = newsPosts.reverse()
+        let content:Array<any> = [];
         newsPosts.forEach((post: NewsPost,idx: number) => {
             content.push(
                     <Post key={idx} 
@@ -54,11 +55,11 @@ class Display extends React.Component<DisplayProps>{
             </CardColumns>
         )
     }
-    
+
     render(){
         const array: Array<NewsPost> = this.props.show==='likedOnly' ? 
-                                    this.columnOrder(this.props.liked): 
-                                    this.reorderPosts(this.props.articles);
+                                    this.reverseOrder(this.props.liked): 
+                                    this.horizontalOrder(this.props.articles);
         if(this.props.isLoading || array===undefined)
             return <div/>;
         else{

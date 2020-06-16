@@ -17,6 +17,9 @@ interface CardData{
 interface PopupProps{
     cardData: CardData;
     onHide: () => void;
+    firebase : {
+        addEvent: Function
+    }
 }  
 
 class Popup extends React.Component<PopupProps>{

@@ -1,5 +1,6 @@
 import {getNews,getNewsSearch} from './news';
 
+//Fetch News and Set Values
 export function fetchNews(this: any) {
     getNews(this.props.country,this.props.page)
     .then((articles: Array<Object>)=> {
@@ -17,6 +18,8 @@ export function fetchNews(this: any) {
     this.props.setPage(this.props.page+1);
 };
 
+//Fetch News acoording to Search Results
+
 export function fetchNewsSearch(this: any,search: string){
     getNewsSearch(search)
     .then((articles: Array<Object>)=> {
@@ -31,6 +34,8 @@ export function fetchNewsSearch(this: any,search: string){
 		this.props.setErrorExist(true);
     })
 }
+
+//Fetch Liked Posts
 
 export function fetchLiked(this:any){
     this.props.firebase.getDataFromDatabase(this.props.uid)

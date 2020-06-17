@@ -12,6 +12,8 @@ interface DisplayProps extends StateTypes{
 
 class Display extends React.Component<DisplayProps>{
 
+    //Display Posts Horizontally
+
     horizontalOrder(newsPosts: Array<NewsPost>){
         let content:Array<Object> = [];
         newsPosts.forEach((post: NewsPost,idx: number) => {
@@ -34,6 +36,7 @@ class Display extends React.Component<DisplayProps>{
         return content;
     }    
 
+    //Display Posts in reverse Order
     reverseOrder(newsPosts: Array<NewsPost>){
         newsPosts = newsPosts.reverse()
         let content:Array<any> = [];

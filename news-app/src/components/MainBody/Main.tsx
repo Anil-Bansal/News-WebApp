@@ -30,6 +30,8 @@ class Main extends React.Component<MainProps>{
 			(this.props.cookies).set('testing',[],{path: '/'})
 	}    
 
+	//Fetch News and Fetch Liked Posts On Mounting
+
 	async componentDidMount(){
 		if(!this.props.country){this.props.setCountry('in')}
 		await this.props.setPage(1);
@@ -38,6 +40,8 @@ class Main extends React.Component<MainProps>{
 		this.fetchLiked();
 	}
 
+
+	//Display Posts Utility Function
 	SelectiveDisplay(){
 		if(this.props.errorExist)
 			return <ErrorHandler />

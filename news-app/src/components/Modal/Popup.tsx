@@ -24,6 +24,8 @@ interface PopupProps{
 
 class Popup extends React.Component<PopupProps>{
 
+    //Open Url in new Window
+
     goToUrl(url: string): void{
         this.props.firebase.addEvent('visitNewsSite',{url: url});
         window.open(url,'_blank');

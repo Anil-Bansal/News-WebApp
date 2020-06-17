@@ -28,12 +28,16 @@ class Send extends React.Component<Props>{
         this.state = { ...INITIAL_STATE };
     }
 
+	//Add the current Chat to the database
+
     onSubmit = (event: any) => {
         this.props.firebase.sendMessage(this.state.message,this.props.name)
         this.props.firebase.addEvent('SendMessage',{uid: this.props.uid});
         event.preventDefault();
         this.setState({message:''})
-    };
+	};
+	
+	//Set state values
 
     onChange = (event: any) => {
     	this.setState({ [event.target.name]: event.target.value });

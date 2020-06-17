@@ -28,7 +28,8 @@ interface Props{
 	setLoginStatus: Function,
 	setName: Function,
 	isLoggedIn: boolean,
-	setLiked: Function
+	setLiked: Function,
+	setAnonymous: Function
 }
 
 class App extends Component<Props>{
@@ -39,6 +40,8 @@ class App extends Component<Props>{
 		super(props);
 		this.fetchNews=fetchNews.bind(this);
 	}
+
+	//Utility function to set values on Previous Login
 
 	async signInSync (uid: string)
 	{
@@ -59,6 +62,7 @@ class App extends Component<Props>{
 			})
 	}
 
+	//Check If user is previously logged in using Cookies
 	async checkPrevLogin(){
 		var uid=await this.props.cookies.get('User');
 		var name=await this.props.cookies.get('Name');
@@ -71,6 +75,8 @@ class App extends Component<Props>{
 			this.props.cookies.set('User','None',{path: '/'})
 		}
 	}
+
+	//Check Previous Login
 
 	componentDidMount(){
 		this.checkPrevLogin();

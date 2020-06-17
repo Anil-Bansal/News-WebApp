@@ -33,9 +33,13 @@ class Profile extends React.Component<Props>{
         this.undoUnlike=this.undoUnlike.bind(this)
     }
 
+    //Scroll To Top on Mounting
+
     componentDidMount(){
         window.scrollTo(0, 0);
     }
+
+    //Undo Unlike Action and Adding to Database
   
     undoUnlike () {
         var likedPosts: Array<string> = (this.props.cookies).get('testing');
@@ -45,6 +49,8 @@ class Profile extends React.Component<Props>{
         (this.props.cookies).set('testing',[...likedPosts,this.props.lastLiked.url],{path: '/'})
         this.props.firebase.addCookieToDatabase(this.props.uid,[...likedPosts,this.props.lastLiked.url],[...this.props.liked,this.props.lastLiked])
     }
+
+    //Utility Function to Remove Toast
     
     removeToast = () => this.props.setToast(false)
 

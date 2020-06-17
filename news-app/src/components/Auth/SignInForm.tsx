@@ -56,9 +56,13 @@ class SignInForm extends Component<Props> {
 		this.state = { ...INITIAL_STATE };
     }
 
+	//Setting the Login Status
+
     login () {
      	this.props.setLoginStatus(true);
-    }
+	}
+	
+	//Utility Function to Set Required Values for signed in users
     
     async signInSync () {
 		var uid: string = await this.props.firebase.getUID()
@@ -71,7 +75,9 @@ class SignInForm extends Component<Props> {
 		this.props.cookies.set('User',uid);
 		this.props.cookies.set('Name',this.props.name);
 		this.props.setAnonymous(false);
-    }
+	}
+	
+	//Utility Function to set values for guest users
 
     async guestLogin(){
 		var uid: string = await this.props.firebase.getUID()
@@ -83,6 +89,7 @@ class SignInForm extends Component<Props> {
 		this.props.setName('Anonymous');
     }
 
+	//Guest Sign In
     guestSignIn = () => {
 		this.props.setLoading(true)
 		this.props.firebase.doGuestSignIn()
@@ -99,7 +106,9 @@ class SignInForm extends Component<Props> {
 			this.props.setLoading(false)
 			this.setState({ error });
 		});
-    }
+	}
+	
+	//Google Sign In
 
     googleSignIn = () => {
 		this.props.setLoading(true)
@@ -118,6 +127,8 @@ class SignInForm extends Component<Props> {
 			this.setState({ error });
 		});
     }
+
+	//Function called on submit and authenticating the user
 
     onSubmit = (event: any) => {
 		this.props.setLoading(true)
@@ -139,9 +150,13 @@ class SignInForm extends Component<Props> {
 		event.preventDefault();
     };
    
+	//Set state values
+
     onChange = (event: any) => {
       	this.setState({ [event.target.name]: event.target.value });
-    };
+	};
+	
+	//Show Password on Click Checkbox
 
     showPassword = () => {
 		var passwordComponent :{type: string} = document.getElementById('pass');

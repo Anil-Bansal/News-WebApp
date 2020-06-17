@@ -19,7 +19,6 @@ export function fetchNews(this: any) {
 };
 
 //Fetch News acoording to Search Results
-
 export function fetchNewsSearch(this: any,search: string){
     getNewsSearch(search)
     .then((articles: Array<Object>)=> {
@@ -36,7 +35,6 @@ export function fetchNewsSearch(this: any,search: string){
 }
 
 //Fetch Liked Posts
-
 export function fetchLiked(this:any){
     this.props.firebase.getDataFromDatabase(this.props.uid)
 	.then((response:Object)=>

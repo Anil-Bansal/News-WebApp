@@ -13,7 +13,6 @@ interface DisplayProps extends StateTypes{
 class Display extends React.Component<DisplayProps>{
 
     //Display Posts Horizontally
-
     horizontalOrder(newsPosts: Array<NewsPost>){
         let content:Array<Object> = [];
         newsPosts.forEach((post: NewsPost,idx: number) => {

@@ -70,7 +70,7 @@ class Post extends React.Component<Props>{
             textColor: 'dark',
             modalShow: false,
             code: 0,
-            isLiked: ((this.props.cookies).get('testing')).includes(this.props.url) || this.props.show==='likedOnly',
+            isLiked: ((this.props.cookies).get('likedPost')).includes(this.props.url) || this.props.show==='likedOnly',
         };
         this.enter=this.enter.bind(this);
         this.leave=this.leave.bind(this);
@@ -79,46 +79,39 @@ class Post extends React.Component<Props>{
     }
 
     //Function called on Card Enter setting the background and text color
-
     enter = () =>{
         this.setState({backgroundColor: "info",textColor: 'white'})
     }  
 
-    //Function called on Card Leave setting the background and text color
-    
+    //Function called on Card Leave setting the background and text color  
     leave = () =>{
         this.setState({backgroundColor: "light",textColor: 'dark'})
     }
 
     //Opens the Url in new window
-
     goToUrl(url: string){
         this.props.firebase.addEvent('visitNewsSite',{url: url});
         window.open(url,'_blank');
     }
 
-    /*Like the corresponding post and 
-    set the required values and
-    update the database*/
-
+    /*Like the corresponding post and set the 
+    required values and update the database*/
     likePost = (postData: PostData) => {
         this.props.firebase.addCookieToDatabase(this.props.uid,
-                    [...(this.props.cookies).get('testing'),this.props.url],
+                    [...(this.props.cookies).get('likedPost'),this.props.url],
                     [...(this.props.liked),postData]);
-        this.props.cookies.set('testing',
-                    [...(this.props.cookies).get('testing'),
+        this.props.cookies.set('likedPost',
+                    [...(this.props.cookies).get('likedPost'),
                     this.props.url]);
         this.setState({isLiked: true});
         this.props.setLiked([...this.props.liked,Object.assign({}, postData)]);
         this.props.firebase.addEvent('likePost',{url: this.props.url} );
     }
 
-    /*Unlike the corresponding post and 
-    unset the required values and 
-    update the database*/
-
+    /*Unlike the corresponding post and unset 
+    the required values and update the database*/
     unlikePost = (postData: PostData) => {
-        var likedPosts: Array<string> = (this.props.cookies).get('testing')
+        var likedPosts: Array<string> = (this.props.cookies).get('likedPost')
         var likedPostsComplete = this.props.liked
         const urlCurrent = this.props.url
         const index: number = likedPosts.indexOf(urlCurrent);
@@ -128,7 +121,7 @@ class Post extends React.Component<Props>{
         likedPostsComplete = likedPostsComplete.filter(function( obj ) {
             return obj.url !== urlCurrent;
         });
-        (this.props.cookies).set('testing',likedPosts,{path: '/'})
+        (this.props.cookies).set('likedPost',likedPosts,{path: '/'})
         this.props.setLiked([...likedPostsComplete])
         this.props.firebase.addCookieToDatabase(this.props.uid,likedPosts,likedPostsComplete)
         this.setState({...this.state,
@@ -218,7 +211,6 @@ class Post extends React.Component<Props>{
         )
     }
 }
-
 
 const mapStateToProps=(state: StateTypes)=>{
     return{

@@ -34,31 +34,28 @@ class Profile extends React.Component<Props>{
     }
 
     //Scroll To Top on Mounting
-
     componentDidMount(){
         window.scrollTo(0, 0);
     }
 
     //Undo Unlike Action and Adding to Database
-  
     undoUnlike () {
-        var likedPosts: Array<string> = (this.props.cookies).get('testing');
+        var likedPosts: Array<string> = (this.props.cookies).get('likedPost');
         this.props.setToast(false);
         // eslint-disable-next-line
         {this.props.setLiked([...this.props.liked,this.props.lastLiked])}
-        (this.props.cookies).set('testing',[...likedPosts,this.props.lastLiked.url],{path: '/'})
+        (this.props.cookies).set('likedPost',[...likedPosts,this.props.lastLiked.url],{path: '/'})
         this.props.firebase.addCookieToDatabase(this.props.uid,[...likedPosts,this.props.lastLiked.url],[...this.props.liked,this.props.lastLiked])
     }
 
-    //Utility Function to Remove Toast
-    
+    //Utility Function to Remove Toast 
     removeToast = () => this.props.setToast(false)
 
     render(){
         return(
-            <div data-align='center' className='profileBody'>                
+            <div align='center' className='profileBody'>                
                 <Toast className='toastUndo' show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
-                    <Toast.Header data-align='center'>
+                    <Toast.Header align='center'>
                         <h5>Undo Last UnLike???</h5>
                         <Button variant='danger' 
                                 size='sm' 

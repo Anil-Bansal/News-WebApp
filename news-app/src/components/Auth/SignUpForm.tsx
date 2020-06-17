@@ -63,20 +63,18 @@ class SignUpForm extends Component<Props> {
 	}
 	
 	//Setting the Login Status
-
     login () {
       	this.props.setLoginStatus(true);
     }
 
 	//Utility Function to Set Required Values for signed in users
-
     async signInSync ()
     {
 		var uid: string = await this.props.firebase.getUID();
 		await this.props.firebase.getUserName(this.props.setName);
 		this.props.setUserId(uid);
 		var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
-		this.props.cookies.set('testing',cookies,{path: '/'});
+		this.props.cookies.set('likedPost',cookies,{path: '/'});
 		this.props.setCookieLoad(true);
 		this.props.setAnonymous(false);
 		this.props.cookies.set('User',uid);
@@ -84,7 +82,6 @@ class SignUpForm extends Component<Props> {
 	}
 		
 	//Guest Sign In
-
     guestSignIn = () => {
 		this.props.setLoading(true) 
 		this.props.firebase.doGuestSignIn()
@@ -103,7 +100,6 @@ class SignUpForm extends Component<Props> {
 	}
 	
 	//Utility Function to set values for guest users
-
     async guestLogin()
     {
 		var uid: string = await this.props.firebase.getUID()
@@ -116,7 +112,6 @@ class SignUpForm extends Component<Props> {
 	}
 	
 	//Google Sign In
-
     googleSignIn = () => {
 		this.props.setLoading(true)
 		this.props.firebase.doGoogleSignIn()
@@ -135,7 +130,6 @@ class SignUpForm extends Component<Props> {
 	}
 	
 	//Function called on submit and authenticating the user
-
     onSubmit = (event: any) => {
 		const { name, email, passwordOne } = this.state;
 		this.props.setLoading(true)
@@ -148,7 +142,7 @@ class SignUpForm extends Component<Props> {
 			this.props.setAnonymous(false);
 			this.props.setUserId(this.props.firebase.getUID());
 			this.props.firebase.addNewUser(this.props.firebase.getUID());
-			this.props.cookies.set('testing',[],{path: '/'});
+			this.props.cookies.set('likedPost',[],{path: '/'});
 			this.props.cookies.set('User',this.props.uid);
 			this.props.history.push('/Main');
 		})
@@ -160,13 +154,11 @@ class SignUpForm extends Component<Props> {
 	}
 	
 	//Set state values
-   
     onChange = (event: any) => {
       	this.setState({ [event.target.name]: event.target.value });
 	};
 	
 	//Show Password on Click Checkbox
-
     showPassword = () => {
 		var passwordComponent:{type: string} = document.getElementById('password');
 		if(passwordComponent.type === 'password') {
@@ -202,7 +194,7 @@ class SignUpForm extends Component<Props> {
         return (
 			<Container component="main" maxWidth="xs" style={{marginTop:50}}>
 			<CssBaseline />
-			<div data-align='center'>
+			<div align='center'>
 				<Avatar >
 					<LockOutlinedIcon />
 				</Avatar>
@@ -212,7 +204,7 @@ class SignUpForm extends Component<Props> {
 				<BeatLoader color={"#123abc"} size={20} loading={this.props.isLoading} />
 				<div>
 					<form onSubmit={this.onSubmit}>
-						<div data-align='center'>
+						<div align='center'>
 							<TextField
 								name="name"
 								value={name}

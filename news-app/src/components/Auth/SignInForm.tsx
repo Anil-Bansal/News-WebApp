@@ -57,20 +57,18 @@ class SignInForm extends Component<Props> {
     }
 
 	//Setting the Login Status
-
     login () {
      	this.props.setLoginStatus(true);
 	}
 	
 	//Utility Function to Set Required Values for signed in users
-    
     async signInSync () {
 		var uid: string = await this.props.firebase.getUID()
 		await this.props.firebase.getUserName(this.props.setName);
 		this.props.setUserId(uid);
 		var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
-		console.log(this.props.cookies.get('testing'))
-		this.props.cookies.set('testing',cookies,{path: '/'});
+		console.log(this.props.cookies.get('likedPost'))
+		this.props.cookies.set('likedPost',cookies,{path: '/'});
 		this.props.setCookieLoad(true);
 		this.props.cookies.set('User',uid);
 		this.props.cookies.set('Name',this.props.name);
@@ -78,7 +76,6 @@ class SignInForm extends Component<Props> {
 	}
 	
 	//Utility Function to set values for guest users
-
     async guestLogin(){
 		var uid: string = await this.props.firebase.getUID()
 		this.props.setUserId(uid);
@@ -109,7 +106,6 @@ class SignInForm extends Component<Props> {
 	}
 	
 	//Google Sign In
-
     googleSignIn = () => {
 		this.props.setLoading(true)
 		this.props.firebase.doGoogleSignIn()
@@ -129,7 +125,6 @@ class SignInForm extends Component<Props> {
     }
 
 	//Function called on submit and authenticating the user
-
     onSubmit = (event: any) => {
 		this.props.setLoading(true)
 		const { email, password } = this.state;    
@@ -151,13 +146,11 @@ class SignInForm extends Component<Props> {
     };
    
 	//Set state values
-
     onChange = (event: any) => {
       	this.setState({ [event.target.name]: event.target.value });
 	};
 	
 	//Show Password on Click Checkbox
-
     showPassword = () => {
 		var passwordComponent :{type: string} = document.getElementById('pass');
 		if(passwordComponent.type === 'password') {
@@ -175,7 +168,7 @@ class SignInForm extends Component<Props> {
 		return (
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
-				<div data-align='center' style={{marginTop:50}}>
+				<div align='center' style={{marginTop:50}}>
 					<Avatar >
 						<LockOutlinedIcon />
 					</Avatar>
@@ -186,7 +179,7 @@ class SignInForm extends Component<Props> {
 					</Typography>
 					<BeatLoader color={"#123abc"} size={20} loading={this.props.isLoading} />
 					<form onSubmit={this.onSubmit} style={{marginTop:10}}>
-						<div data-align='center'>
+						<div align='center'>
 							<TextField
 								name="email"
 								value={email}

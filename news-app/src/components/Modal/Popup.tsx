@@ -25,7 +25,6 @@ interface PopupProps{
 class Popup extends React.Component<PopupProps>{
 
     //Open Url in new Window
-
     goToUrl(url: string): void{
         this.props.firebase.addEvent('visitNewsSite',{url: url});
         window.open(url,'_blank');
@@ -40,13 +39,13 @@ class Popup extends React.Component<PopupProps>{
                 centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    <div data-align = 'center'>
+                    <div align = 'center'>
                         {this.props.cardData.title}
                     </div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div data-align='center'>
+                    <div align='center'>
                         <img alt='' style={{height:250, marginBottom:10}} src={this.props.cardData.imageurl}/>
                         <p>
                             {this.props.cardData.content ? 

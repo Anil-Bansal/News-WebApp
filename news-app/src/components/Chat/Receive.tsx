@@ -29,26 +29,22 @@ class Receive extends React.Component<Props>{
 	}
 
 	//Getting the messages from database and scrolling to bottom of chat
-
 	componentDidMount(){	
 		this.getMessages();
 		this.scrollToBottom();
 	}
 
 	//Scrolling to Bottom on Chat Update
-
 	componentDidUpdate(){
 		this.scrollToBottom();
 	}
 
 	//Utility Function for Sscroll To Bottom
-
 	scrollToBottom=()=>{
 		this.messageEndRef.current.scrollIntoView({ behavior: 'smooth' })
 	}
 
 	//Function which gets called everytime there is a change in chat database
-
 	getMessages=()=>{
 		var ref=this.props.firebase.realDatabase.ref().child('messages').limitToLast(30);
 		ref.on('value',(snapshot: any)=>{

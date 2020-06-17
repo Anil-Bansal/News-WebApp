@@ -25,7 +25,6 @@ class SourceCard extends React.Component<SourceCardProps>{
 
     
     //Set Background and Text Color on Post Enter
-
     enter = () =>{
         this.setState({
             backgroundColor: "info",
@@ -34,7 +33,6 @@ class SourceCard extends React.Component<SourceCardProps>{
     }  
 
     //Set Background and Text Color on Post Leave
-
     leave = () =>{
         this.setState({
             backgroundColor: "light",

@@ -49,7 +49,6 @@ class Head extends React.Component<Props>{
 	}
 
 	//Search News and set values accordingly
-
 	async searchNews (search: string){
 		this.props.history.push('/Main');
 		await this.props.setLoading(true);
@@ -63,7 +62,6 @@ class Head extends React.Component<Props>{
 	}
 
 	//Search News Submit
-
 	handleSubmit = (event: any) => {
 		event.preventDefault();
 		this.searchNews(this.input.value);
@@ -71,7 +69,6 @@ class Head extends React.Component<Props>{
 	};
 
 	//Change Country
-	
 	async onChange(code: string){
 		await this.props.setLoading(true);
 		await this.props.setCountry(code);

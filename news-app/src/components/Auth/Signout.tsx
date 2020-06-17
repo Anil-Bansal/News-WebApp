@@ -27,7 +27,6 @@ class SignOutButton extends React.Component<Props>{
 	}
 
 	//Utility Signout Function to reset the values and Redirect
-
 	signOut(){
 		this.props.firebase.doSignOut();
 		this.props.setLoginStatus(false);

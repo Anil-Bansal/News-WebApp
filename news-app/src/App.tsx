@@ -42,7 +42,6 @@ class App extends Component<Props>{
 	}
 
 	//Utility function to set values on Previous Login
-
 	async signInSync (uid: string)
 	{
 		this.props.setUserId(uid);
@@ -50,7 +49,7 @@ class App extends Component<Props>{
 		if(name && name!==null && name!=='undefined' && name!=='' ){
 			this.props.setLoginStatus(true)}
 		var cookies: Array<string> = await this.props.firebase.getCookieFromDatabase(uid)
-		this.props.cookies.set('testing',cookies,{path: '/'});
+		this.props.cookies.set('likedPost',cookies,{path: '/'});
 		this.props.setCookieLoad(true);
 		this.props.cookies.set('User',uid);
 		if(name && name!==null && name!=='undefined' && name!=='' ){
@@ -77,7 +76,6 @@ class App extends Component<Props>{
 	}
 
 	//Check Previous Login
-
 	componentDidMount(){
 		this.checkPrevLogin();
 	}

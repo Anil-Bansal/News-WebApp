@@ -34,27 +34,22 @@ class Firebase {
 	}
 
 	//Authenticate Using Email Password (SignUp)
-
 	doCreateUserWithEmailAndPassword =  (email: string, password: string) =>
 		this.auth.createUserWithEmailAndPassword(email, password);
 
 	//Authenticate Using Email Password(SignIn)
-
 	doSignInWithEmailAndPassword = (email: string, password: string) =>
 		this.auth.signInWithEmailAndPassword(email, password);
 
 	//Guest Authentication
-
 	doGuestSignIn = () =>
 		this.auth.signInAnonymously()
 
 	//Google Authentication
-
 	doGoogleSignIn = () =>
 		this.auth.signInWithPopup(this.prov)
 
 	//Add UserName to Database
-
 	addName = (name: string) =>{
 		var user = this.auth.currentUser;
 		user.updateProfile({
@@ -63,7 +58,6 @@ class Firebase {
 	}
 
 	//Get UserName from Database
-
 	async getUserName(setName: Function){
 		const user= await this.auth.currentUser;
 		user.providerData.forEach(function (profile: any) {
@@ -72,20 +66,17 @@ class Firebase {
 	}
 	
 	//Get User Id
-
 	getUID = () =>{
 		const user=this.auth.currentUser
 		return user.uid
 	}
 
 	//Sign Out
-
 	doSignOut = () => {
 		this.auth.signOut();
 	}
 
 	//Add Cookies and Liked Data to Database
-
 	addCookieToDatabase = (uid: string,cookie: Array<string>=[],data: Array<NewsPost>=[]) =>{
 		this.database.collection('users').doc(uid).set({
 			cookie: cookie,
@@ -94,7 +85,6 @@ class Firebase {
 	}
 
 	//Add New User to Database and set Initial values
-
 	addNewUser=(uid: string)=>{
 		this.database.collection("users").doc(uid).set({
 			cookie: [],
@@ -103,7 +93,6 @@ class Firebase {
 	}
 
 	//Get User Liked Data from Database
-
 	async getCookieFromDatabase(uid: string)
 	{
 		var curdoc = await this.database.collection("users").doc(uid).get()
@@ -114,7 +103,6 @@ class Firebase {
 	}
 
 	//Get Liked Post Data from Database
-
 	async getDataFromDatabase(uid: string)
 	{
 		var curdoc = await this.database.collection("users").doc(uid).get()
@@ -125,7 +113,6 @@ class Firebase {
 	}
 
 	//Send Message and Add to database
-
 	sendMessage(message: string,name: string) {
 		if (message) {
 			var newMessage = {
@@ -137,7 +124,6 @@ class Firebase {
 	}
 
 	//Add Event to Analytics
-
 	addEvent(event: string,parameter?: Object){
 		this.firebaseAnalytics.logEvent(event,parameter);
 	}

@@ -26,12 +26,11 @@ class Main extends React.Component<MainProps>{
 		super(props);
 		this.fetchNews = fetchNews.bind(this);
 		this.fetchLiked =fetchLiked.bind(this);
-		if((this.props.cookies).get('testing') === null || (this.props.cookies).get('testing') === undefined )
-			(this.props.cookies).set('testing',[],{path: '/'})
+		if((this.props.cookies).get('likedPost') === null || (this.props.cookies).get('likedPost') === undefined )
+			(this.props.cookies).set('likedPost',[],{path: '/'})
 	}    
 
 	//Fetch News and Fetch Liked Posts On Mounting
-
 	async componentDidMount(){
 		if(!this.props.country){this.props.setCountry('in')}
 		await this.props.setPage(1);

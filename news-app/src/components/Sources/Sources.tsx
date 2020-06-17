@@ -43,7 +43,6 @@ class Sources extends Component<SourcesProps>{
 	}
 
 	//Utility Function To Fetch Sources and Set the Database
-
 	fetchSources(country=this.props.country){
 		const url: string=`https://amazekart.tech/news/?source=${country}`
 		fetch(url)
@@ -62,7 +61,6 @@ class Sources extends Component<SourcesProps>{
 	}
 
 	//Set Country If not set and Fetch Sources
-
 	componentDidMount(){
 		if(!this.props.country){this.props.setCountry('in')}
 		this.fetchSources();

@@ -127,6 +127,11 @@ class Firebase {
 	addEvent(event: string,parameter?: Object){
 		this.firebaseAnalytics.logEvent(event,parameter);
 	}
+
+	//Reset Password for User Account
+	resetPassword(email: String){
+		this.auth.sendPasswordResetEmail(email)
+	}
 }
 
 export default Firebase;

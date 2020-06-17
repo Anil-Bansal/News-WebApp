@@ -13,11 +13,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import GoogleButton from 'react-google-button';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { StateTypes } from '../Redux/Reducers';
+import Toast from 'react-bootstrap/Toast';
 
 const INITIAL_STATE = {
 	email: '',
 	password: '',
 	error: null,
+	showToast: false
 };
 
 interface Cookie{
@@ -159,15 +161,30 @@ class SignInForm extends Component<Props> {
 		else if(passwordComponent.type === 'text') {
 			passwordComponent.type = 'password';
 		}
-    }
-   
+	}
+	
+	//Reset password
+	resetPassword = () => {
+		this.props.firebase.resetPassword(this.state.email);
+		this.toggleToast();
+	}
+	toggleToast = () => {
+		this.setState({showToast: !this.state.showToast})
+	}
+
     render() {
 		const { email, password, error } = this.state;
 		const isInvalid = password === '' || email === '';
 
 		return (
 			<Container component="main" maxWidth="xs">
+				
 				<CssBaseline />
+				<Toast style={{marginTop: '2em'}} show={this.state.showToast} onClose={this.toggleToast} delay={2000} autohide>
+                    <Toast.Header align='center'>
+                        <h5>A Password reset mail has been sent</h5>
+                    </Toast.Header>
+                </Toast>
 				<div align='center' style={{marginTop:50}}>
 					<Avatar >
 						<LockOutlinedIcon />
@@ -223,6 +240,12 @@ class SignInForm extends Component<Props> {
 						Sign In as Guest
 					</Button>
 					<GoogleButton onClick={this.googleSignIn} /> 
+					<Button style={{paddingLeft:15, paddingRight:15, marginTop:20}} 
+							size='sm' 
+							variant="danger" 
+							onClick={() => this.resetPassword()}>
+						Reset Password for above email
+					</Button>
 				</div>
 			</Container>
 		);

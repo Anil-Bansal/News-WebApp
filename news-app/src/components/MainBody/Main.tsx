@@ -45,7 +45,7 @@ class Main extends React.Component<MainProps>{
 			return(
 				<div>
 					<Display show='all' cookies={this.props.cookies}/> 
-					<div align='center' className='loader'>
+					<div data-align='center' className='loader'>
 						<Loader />
 					</div>
 				</div>

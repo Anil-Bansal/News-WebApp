@@ -64,7 +64,7 @@ class Display extends React.Component<DisplayProps>{
             return <div/>;
         else{
             return(
-                <div className='row' style={{marginTop:'1em', justifyContent: 'center'}} align='center'>
+                <div className='row' style={{marginTop:'1em', justifyContent: 'center'}} data-align='center'>
                     {array}
                 </div>
             )

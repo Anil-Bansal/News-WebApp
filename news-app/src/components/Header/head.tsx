@@ -83,10 +83,10 @@ class Head extends React.Component<Props>{
 				<div className='Head'>
 					<div className='row'>
 						<div className='column'>
-							<h1 align="center"> Simple News App</h1>
+							<h1 data-align="center"> Simple News App</h1>
 						</div>
 				  	</div>
-					<div className='Search' align = "center">
+					<div className='Search' data-align = "center">
 						<form id="Search-form" onSubmit={this.handleSubmit}>
 							<label htmlFor="search">
 								<h6>Search for News : </h6> 

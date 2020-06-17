@@ -160,7 +160,7 @@ class SignInForm extends Component<Props> {
 		return (
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
-				<div align='center' style={{marginTop:50}}>
+				<div data-align='center' style={{marginTop:50}}>
 					<Avatar >
 						<LockOutlinedIcon />
 					</Avatar>
@@ -171,7 +171,7 @@ class SignInForm extends Component<Props> {
 					</Typography>
 					<BeatLoader color={"#123abc"} size={20} loading={this.props.isLoading} />
 					<form onSubmit={this.onSubmit} style={{marginTop:10}}>
-						<div  align='center'>
+						<div data-align='center'>
 							<TextField
 								name="email"
 								value={email}

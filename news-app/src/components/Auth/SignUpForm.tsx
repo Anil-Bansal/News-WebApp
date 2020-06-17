@@ -186,7 +186,7 @@ class SignUpForm extends Component<Props> {
         return (
 			<Container component="main" maxWidth="xs" style={{marginTop:50}}>
 			<CssBaseline />
-			<div align='center'>
+			<div data-align='center'>
 				<Avatar >
 					<LockOutlinedIcon />
 				</Avatar>
@@ -196,7 +196,7 @@ class SignUpForm extends Component<Props> {
 				<BeatLoader color={"#123abc"} size={20} loading={this.props.isLoading} />
 				<div>
 					<form onSubmit={this.onSubmit}>
-						<div align='center'>
+						<div data-align='center'>
 							<TextField
 								name="name"
 								value={name}

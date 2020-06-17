@@ -8,11 +8,11 @@ interface Props{
 }
 
 class Loader extends React.Component{
-	public props: Object;
+	public props: Props;
 
     render(){
         return (
-            <div align='center'>
+            <div data-align='center'>
                 <ClipLoader color={"#123abc"} size={50} loading={!this.props.newsEnd}/>
             </div>
         );

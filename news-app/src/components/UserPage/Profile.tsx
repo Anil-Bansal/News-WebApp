@@ -50,9 +50,9 @@ class Profile extends React.Component<Props>{
 
     render(){
         return(
-            <div align='center' className='profileBody'>                
+            <div data-align='center' className='profileBody'>                
                 <Toast className='toastUndo' show={this.props.showToast} onClose={this.removeToast} delay={3000} autohide>
-                    <Toast.Header align='center'>
+                    <Toast.Header data-align='center'>
                         <h5>Undo Last UnLike???</h5>
                         <Button variant='danger' 
                                 size='sm' 

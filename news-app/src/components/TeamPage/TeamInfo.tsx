@@ -14,7 +14,7 @@ interface TeamProps{
 const Info:React.FC<TeamProps> =(props: TeamProps ) => {
     props.firebase.addEvent('viewDevelopers',{});
     return (
-        <div align='center'>
+        <div data-align='center'>
             <div className="containerInfo">
                 <h1 style={{marginTop: 10}}>Alone We Can Do So Little, Together We Can Do So Much.</h1>
                 <div  className='row'  >        

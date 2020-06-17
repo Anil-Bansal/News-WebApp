@@ -80,7 +80,7 @@ class Sources extends Component<SourcesProps>{
 				<div className='headerSource'>
 					<Head cookies={this.props.cookies}/>
 				</div>
-				<div className='contentSource' align='center'>
+				<div className='contentSource' data-align='center'>
 					<DisplaySources loading={this.state.isLoading} array={this.state.sources} />
 					<div className='loading'>
 						<ClipLoader color={"#123abc"} size={50} loading={this.state.isLoading}/>

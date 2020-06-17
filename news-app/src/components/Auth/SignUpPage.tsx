@@ -16,7 +16,7 @@ class SignUpPage extends React.Component<Props>{
         return(
             <div className='Auth'>
                 <SignUpForm cookies={this.props.cookies}/>
-                <h5 align='center' style={{marginTop:30}}>
+                <h5 data-align='center' style={{marginTop:30}}>
                     Already have an account? <Link to='/Signin'>Sign In</Link>
                 </h5>
             </div>

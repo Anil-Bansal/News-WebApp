@@ -179,7 +179,7 @@ class Post extends React.Component<Props>{
                     </Card.Body>   
                     <Card.Footer>
                         <div className='row'>
-                            <div align='left' style={{marginLeft:30}}>
+                            <div data-align='left' style={{marginLeft:30}}>
                                 {this.state.isLiked || this.props.show==='likedOnly' ? 
                                         <MdFavorite color='#C70039' 
                                                     size={30} 
@@ -188,7 +188,7 @@ class Post extends React.Component<Props>{
                                                     size={30} 
                                                     onClick={()=> this.likePost(postData)}/> }
                             </div>
-                            <div align='right' 
+                            <div data-align='right' 
                                 style={{marginLeft:'35%'}}>
                                 <Button variant='danger' 
                                         onClick={()=>this.goToUrl(this.props.url)}>

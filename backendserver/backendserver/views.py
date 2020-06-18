@@ -12,13 +12,13 @@ class api_news(APIView):
 		source = request.GET.get('source')
 
 		if(search):
-			x=requests.get("https://newsapi.org/v2/everything?q="+search+"&apiKey=ed670e2fd04f475fa4b296d2085be2e3")
+			x=requests.get("https://newsapi.org/v2/everything?q="+search+"&apiKey=ad23c45e8dbf4c418fc72871384d9ec5")
 		elif(source):
-			x=requests.get("https://newsapi.org/v2/sources?apiKey=ed670e2fd04f475fa4b296d2085be2e3&country="+source)
+			x=requests.get("https://newsapi.org/v2/sources?apiKey=ad23c45e8dbf4c418fc72871384d9ec5&country="+source)
 		elif(country):
-			x=requests.get("https://newsapi.org/v2/top-headlines?country="+country+"&apiKey=ed670e2fd04f475fa4b296d2085be2e3&page="+pageNumber+"&pageSize=11")
+			x=requests.get("https://newsapi.org/v2/top-headlines?country="+country+"&apiKey=ad23c45e8dbf4c418fc72871384d9ec5&page="+pageNumber+"&pageSize=11")
 		else:
-			x=requests.get("https://newsapi.org/v2/top-headlines?country=in&apiKey=ed670e2fd04f475fa4b296d2085be2e3&page=1&pageSize=11")
+			x=requests.get("https://newsapi.org/v2/top-headlines?country=in&apiKey=ad23c45e8dbf4c418fc72871384d9ec5&page=1&pageSize=11")
 
 		return HttpResponse(x)
 

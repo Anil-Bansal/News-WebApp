@@ -25,7 +25,7 @@ SECRET_KEY = '08q!m=$#9o@x==qo@9di*u%def&o_d!t&ls*uf7pmygt&gbm8&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.134.79.126','10.3.9.174','10.3.9.199','10.3.9.49','10.3.9.62','localhost','127.0.0.1','18.222.65.138','ec2-18-222-65-138.us-east-2.compute.amazonaws.com','amazekart.tech','ec2-3-20-217-170.us-east-2.compute.amazonaws.com','3.20.217.170']
+ALLOWED_HOSTS = ['3.22.112.83','3.134.79.126','10.3.9.174','10.3.9.199','10.3.9.49','10.3.9.62','localhost','127.0.0.1','18.222.65.138','ec2-18-222-65-138.us-east-2.compute.amazonaws.com','amazekart.tech','ec2-3-20-217-170.us-east-2.compute.amazonaws.com','3.20.217.170']
 
 
 # Application definition

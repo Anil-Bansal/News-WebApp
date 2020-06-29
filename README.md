@@ -27,4 +27,4 @@ Small project to test News Api with React in form of an WebApp
   Run the django ssl server `python manage.py runsslserver 0.0.0.0:443`
   
   
-  ![Image of UI Wireframe](https://drive.google.com/file/d/1LWmXxmw8YdNRCR9n4XA775hIKDuvqRa7/view)
+  ![Image of UI Wireframe](https://raw.githubusercontent.com/aggarwalvinayak/News-WebApp/master/ui-designs/Wireframe.png)

@@ -1,5 +1,5 @@
 # News-WebApp
-Small project to test News Api with React in form of an WebApp
+Project to test News Api with React in form of an WebApp
 
   -- Contains country wise latest news & sources. Also search for any news topic
   
